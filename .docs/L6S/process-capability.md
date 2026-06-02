@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Process Capability (Cp, Cpk)
 
 ## TL;DR

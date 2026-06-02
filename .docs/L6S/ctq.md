@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Critical to Quality (CTQ)
 
 ## TL;DR

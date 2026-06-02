@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Control Charts (SPC)
 
 ## TL;DR

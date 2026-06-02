@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Intro to Continuous Improvement
 
 ## TL;DR

@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Hoshin Kanri (X-Matrix)
 
 ## TL;DR

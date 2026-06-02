@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Continuous Improvement @ Microsoft
 
 ## TL;DR

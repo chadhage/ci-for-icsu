@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # 8 Types of Waste
 
 ## TL;DR

@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # 5 Whys
 
 ## TL;DR

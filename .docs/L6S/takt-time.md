@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Takt Time
 
 ## TL;DR

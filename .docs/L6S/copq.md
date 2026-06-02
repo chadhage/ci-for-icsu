@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Cost of Poor Quality (COPQ)
 
 ## TL;DR

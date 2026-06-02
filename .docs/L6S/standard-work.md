@@ -1,3 +1,7 @@
+[← Back to Index](./index.md)
+
+---
+
 # Standard Work
 
 ## TL;DR
