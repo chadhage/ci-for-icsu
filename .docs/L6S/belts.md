@@ -17,6 +17,7 @@ Lean / Six Sigma certifications use a martial-arts belt metaphor (White → Yell
 - [Where the belts show up](#where-the-belts-show-up)
 - [Who should pursue which belt](#who-should-pursue-which-belt)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/belts.html)
 
 ## Why belts and certification
 
@@ -35,6 +36,24 @@ Concretely, the belt model supports:
 ## What the belt levels are
 
 The belt metaphor originates in Six Sigma but is widely used across Lean, TPS, and CI generally. There is no single global standards body — ASQ, IASSC, and many universities and consultancies all certify — so specifics vary. The level *concepts* are consistent:
+
+```mermaid
+flowchart LR
+	A[0\nNo CI practice yet] --> B[White Belt\nVocabulary and awareness]
+	B --> C[Yellow Belt\nBasic tools in real work]
+	C --> D[Green Belt\nLeads a project end to end]
+	D --> E[Black Belt\nRuns cross-functional programs]
+	E --> F[Master Black Belt\nDesigns and teaches the system]
+	F --> G[Champion / Sponsor\nFunds and removes blockers]
+
+	classDef start fill:#F8F8F8,stroke:#666,color:#111;
+	classDef belt fill:#E8F4FF,stroke:#2B6CB0,color:#111;
+	classDef exec fill:#FFF4E5,stroke:#C05621,color:#111;
+
+	class A start;
+	class B,C,D,E,F belt;
+	class G exec;
+```
 
 - **White Belt (~8 hours).** Awareness. Vocabulary. Understands what CI is, recognizes the canonical tools (Pareto, Ishikawa, 5 Whys, Kaizen, value stream), but does not run them. Useful baseline for any engineer or stakeholder.
 - **Yellow Belt (~20–40 hours).** Practitioner of basic tools. Can participate meaningfully in a Kaizen event, run a 5 Whys on a confirmed problem, and contribute to an Ishikawa. Often the target for individual contributors on customer engineering teams.

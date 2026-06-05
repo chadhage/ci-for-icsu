@@ -17,6 +17,7 @@ PDCA — **P**lan, **D**o, **C**heck, **A**ct — is the foundational improvemen
 - [Where PDCA shows up](#where-pdca-shows-up)
 - [Who uses PDCA](#who-uses-pdca)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/pdca.html)
 
 ## Why PDCA
 

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — 5S</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; 5S
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "5S",
+      subtitle: "Visual workplace organization &mdash; Sort, Set in order, Shine, Standardize, Sustain &mdash; applied to repos, subscriptions, dashboards, and runbooks.",
+      sourceFile: "../5s.md",
+      sourceLabel: "5s.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What are the five steps of 5S in the correct order?",
+          options: [
+            "Organize, Clean, Define, Audit, Refresh",
+            "Sort, Set in order, Shine, Standardize, Sustain",
+            "Set in order, Sort, Shine, Sustain, Standardize",
+            "Clean, Organize, Check, Codify, Maintain"
+          ],
+          correctIndex: 1,
+          explanation: "The sequence matters. Sort removes what isn&rsquo;t needed, Set puts the rest in conventional order, Shine automates upkeep, Standardize codifies convention, and Sustain creates the <strong>audit cadence</strong>."
+        },
+        {
+          prompt: "Why is the sequence of the 5S steps critical rather than a flexible checklist?",
+          options: [
+            "Each step depends on prior steps being complete; skipping sequence breaks the discipline.",
+            "The order doesn&rsquo;t matter &mdash; the same result occurs either way.",
+            "It speeds up the process and shortens the overall timeline.",
+            "It exists for branding reasons only."
+          ],
+          correctIndex: 0,
+          explanation: "Skip Sort and you organize trash; skip Standardize and Sustain collapses. The <strong>sequence</strong> is the mechanism that works."
+        },
+        {
+          prompt: "What is the most common anti-pattern that prevents 5S from delivering lasting results?",
+          options: [
+            "Monthly cleanup cycles that are too frequent.",
+            "Quarterly audits that don&rsquo;t include new team members.",
+            "A one-time cleanup (e.g., a &ldquo;5S Saturday&rdquo;) with no Sustain phase.",
+            "Insufficient documentation of the cleanup decisions."
+          ],
+          correctIndex: 2,
+          explanation: "A one-time cleanup without <strong>Standardize and Sustain</strong> returns the mess within a quarter. The method requires recurring audit cadence to hold order."
+        },
+        {
+          prompt: "Which engineering surface is a proper target for 5S methodology?",
+          options: [
+            "Individual developers&rsquo; personal desk arrangements.",
+            "IaC monorepos, subscription estates, dashboards, and runbook libraries.",
+            "Personal email inboxes and note-taking systems.",
+            "Spreadsheets used for manual project tracking."
+          ],
+          correctIndex: 1,
+          explanation: "5S applies anywhere engineering artifacts live &mdash; repos, subscriptions, dashboards, runbooks. These surfaces leak invisible <strong>waste</strong> when disorganized."
+        },
+        {
+          prompt: "After completing a 5S sweep on a repo, which step is most critical for sustaining results?",
+          options: [
+            "Documenting all changes in a wiki or handbook.",
+            "Notifying the entire team in a mandatory meeting.",
+            "Creating a metric and audit cadence as part of Sustain.",
+            "Holding a celebration to recognize the cleanup effort."
+          ],
+          correctIndex: 2,
+          explanation: "Sustain is the fifth S &mdash; without a named owner, audit cadence, and a <strong>metric on a dashboard</strong>, entropy returns. Audit cadence is what makes order last."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

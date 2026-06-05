@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Gemba Walk</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Gemba Walk
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Gemba Walk",
+      subtitle: "Gemba means &ldquo;the actual place&rdquo; &mdash; going where the work happens, observing directly, and asking respectful questions instead of relying on reports.",
+      sourceFile: "../gemba.md",
+      sourceLabel: "gemba.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does &ldquo;gemba&rdquo; mean?",
+          options: [
+            "A scheduled management review meeting.",
+            "The actual place where work happens.",
+            "A formal audit or inspection process.",
+            "A retrospective discussion of past events."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Gemba</strong> is Japanese for &ldquo;the actual place.&rdquo; It means going where work is done, observing it directly, and asking respectful questions &mdash; not relying on dashboards or hearsay."
+        },
+        {
+          prompt: "What are the three Ohno principles of a gemba walk?",
+          options: [
+            "Listen, Learn, Lead.",
+            "Plan, Observe, Report.",
+            "Go see, Ask why, Show respect.",
+            "Find facts, Analyze data, Recommend action."
+          ],
+          correctIndex: 2,
+          explanation: "The three principles are <strong>Go see, Ask why, Show respect</strong> &mdash; go where work happens, ask why repeatedly, and respect that the practitioners know things the observer doesn&rsquo;t."
+        },
+        {
+          prompt: "What is gemba NOT?",
+          options: [
+            "A way to discover undocumented workarounds.",
+            "An audit conducted with the team&rsquo;s consent.",
+            "A 30-minute visit with a 6-person executive entourage that disrupts the work being observed.",
+            "An observation of the real incident-response process."
+          ],
+          correctIndex: 2,
+          explanation: "Gemba is NOT &ldquo;executive gemba&rdquo; &mdash; a <strong>large entourage visit</strong> where nobody works naturally. Genuine gemba is small, scheduled with consent, and conducted with a notebook, not a laptop."
+        },
+        {
+          prompt: "What does a gemba walk surface that dashboards and reports typically miss?",
+          options: [
+            "High-level trends and aggregated metrics.",
+            "Silent friction and undocumented workarounds.",
+            "Formal process documentation and standards.",
+            "Historical baseline data from past months."
+          ],
+          correctIndex: 1,
+          explanation: "Gemba walks surface <strong>silent friction</strong> &mdash; workarounds everyone uses but nobody documents, manual steps that metrics average away. Dashboards lie by omission; gemba reveals texture."
+        },
+        {
+          prompt: "In which DMAIC phases is gemba walking especially valuable?",
+          options: [
+            "Define and Improve only.",
+            "Measure and Analyze.",
+            "Control and Improve.",
+            "All phases equally."
+          ],
+          correctIndex: 1,
+          explanation: "Gemba is especially valuable in <strong>Measure and Analyze</strong> to anchor the baseline in reality, validate or invalidate team narratives, and discover what reports systematically miss."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

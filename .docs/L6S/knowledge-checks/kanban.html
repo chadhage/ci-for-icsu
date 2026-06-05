@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Kanban</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Kanban
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Kanban",
+      subtitle: "Visual workflow system that limits work-in-progress to expose bottlenecks and pull work through a value stream at a sustainable pace.",
+      sourceFile: "../kanban.md",
+      sourceLabel: "kanban.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "A team has 14 initiatives in flight across 5 engineers; nothing has shipped in 11 weeks. You set a WIP limit of 5 on the Doing column. What is the fundamental mechanism that should improve throughput?",
+          options: [
+            "The team gains visibility into the backlog, so motivation increases.",
+            "Limiting WIP forces the team to finish work instead of context-switching &mdash; reducing lead time and increasing actual throughput.",
+            "Engineers will work faster because they see the board during standups.",
+            "The board automatically prioritizes which work is most important."
+          ],
+          correctIndex: 1,
+          explanation: "By Little&rsquo;s Law, lead time scales with WIP. A <strong>WIP limit</strong> removes contention and forces focus. The team doesn&rsquo;t work harder &mdash; they finish what they start, so throughput improves."
+        },
+        {
+          prompt: "A team proposes six columns for an incident board. Which approach is correct?",
+          options: [
+            "All six stages, because they are all important.",
+            "Only the stages that represent real handoffs and bottlenecks in the workflow.",
+            "Just Open and Closed, to keep the board simple.",
+            "Five stages, excluding &ldquo;waiting for customer input&rdquo; because that&rsquo;s external."
+          ],
+          correctIndex: 1,
+          explanation: "Columns map to <strong>real workflow stages</strong>, not every status variation. &ldquo;Waiting for customer&rdquo; belongs in a Blocked lane &mdash; it&rsquo;s not active work. Extra columns hide flow problems instead of exposing them."
+        },
+        {
+          prompt: "A VP asks to push a 5th item into a Doing column with a WIP limit of 4. What is the correct response?",
+          options: [
+            "Break the WIP limit this once because the VP&rsquo;s request is urgent.",
+            "Quietly add the new work to a separate &ldquo;Expedite&rdquo; lane outside the WIP limit.",
+            "Surface the conflict on the board, make the tradeoff explicit, and let the VP choose what to pause or stop.",
+            "Reject the VP&rsquo;s request because the Kanban policy forbids it."
+          ],
+          correctIndex: 2,
+          explanation: "The WIP limit&rsquo;s point is to <strong>force a visible tradeoff</strong>. When the VP sees the actual list of current work, they often choose differently than they would if the conflict was invisible."
+        },
+        {
+          prompt: "A customer asks how to decide which of 40 modernization apps to pull into the pipeline. What&rsquo;s the right answer?",
+          options: [
+            "Kanban decides priority automatically based on app complexity.",
+            "Use Pareto to rank applications by business value, then use Kanban to flow them through the migration pipeline.",
+            "Pull applications in the order they were requested, without prioritization.",
+            "The Kanban board replaces the need for any other planning tool."
+          ],
+          correctIndex: 1,
+          explanation: "Kanban is an <strong>execution engine</strong>, not a decision engine. Pareto answers &ldquo;what&rdquo;; Kanban answers &ldquo;how do we move it.&rdquo;"
+        },
+        {
+          prompt: "A board shows a rising count of cards aging past the expected cycle time, even though the team feels &ldquo;just as busy as ever.&rdquo; What does this indicate?",
+          options: [
+            "The team needs to hire more engineers.",
+            "The WIP limit is too low and should be raised.",
+            "Something is blocking work or causing stalls; aging WIP is a leading indicator of trouble that needs investigation.",
+            "The cycle-time metric is unreliable; switch to utilization."
+          ],
+          correctIndex: 2,
+          explanation: "Aging WIP is the <strong>leading indicator</strong>. High utilization can hide bottlenecks &mdash; waiting on approvals, dependencies, or skills. Aging is the signal to stop and investigate, not to raise WIP."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — 8 Types of Waste</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; 8 Types of Waste
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "8 Types of Waste",
+      subtitle: "Lean&rsquo;s DOWNTIME checklist for spotting non-value-add activity across cost, reliability, and modernization engagements.",
+      sourceFile: "../waste.md",
+      sourceLabel: "waste.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does the DOWNTIME mnemonic stand for?",
+          options: [
+            "Defects, Operations, Workload, Networking, Time, Inventory, Money, Energy.",
+            "Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion, Extra-processing.",
+            "Delivery, Outcomes, Workflow, Notifications, Tickets, Issues, Metrics, Errors.",
+            "Detection, Observation, Wait-states, Notes, Triage, Incidents, Mitigation, Escalation."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>D</strong>efects, <strong>O</strong>verproduction, <strong>W</strong>aiting, <strong>N</strong>on-utilized talent, <strong>T</strong>ransportation, <strong>I</strong>nventory, <strong>M</strong>otion, <strong>E</strong>xtra-processing. Each category surfaces a different class of opportunity."
+        },
+        {
+          prompt: "Over-provisioned Cosmos RU/s, idle VMs, and oversized App Service plans are examples of which waste?",
+          options: [
+            "Defects.",
+            "Overproduction &mdash; producing more capacity than is needed.",
+            "Motion.",
+            "Inventory."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Overproduction</strong> is producing more than demand calls for. Rightsizing engagements typically target this waste &mdash; but it&rsquo;s only 1 of 8, which is why pure rightsizing misses larger opportunities."
+        },
+        {
+          prompt: "A CSA was asked to find $200K/yr in savings. Rightsizing found $90K. A structured 8 Wastes walk found another $260K (idle subs, redundant observability, egress, toil). What&rsquo;s the lesson?",
+          options: [
+            "Rightsizing always misses most of the savings.",
+            "Looking at only one waste (Overproduction) misses Inventory, Extra-processing, Transportation, and Non-utilized talent &mdash; the framework unlocks 3&times; the ask.",
+            "The CSA should have done a WAF assessment instead.",
+            "The customer should have requested $500K from the start."
+          ],
+          correctIndex: 1,
+          explanation: "Most engagements look at <strong>one or two wastes</strong> and miss the rest. The 8-Waste lens provides a 360&deg; structured walk &mdash; every category typically surfaces a different opportunity."
+        },
+        {
+          prompt: "Engineers swiveling between Jira, GitHub, Teams, and Azure DevOps to track one work item is an example of which waste?",
+          options: [
+            "Transportation (movement of things).",
+            "Motion (unnecessary movement of people / context-switching).",
+            "Defects.",
+            "Inventory."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Motion</strong> is unnecessary movement of <em>people</em>: context-switching between portals or tools. Transportation, by contrast, is unnecessary movement of <em>things</em> (data egress, log shipping)."
+        },
+        {
+          prompt: "What is the anti-pattern to avoid when using the 8 Wastes?",
+          options: [
+            "Tying each finding to a specific hypothesis.",
+            "Quantifying each finding in $ or hours.",
+            "Treating waste-hunting as &ldquo;find as many as possible&rdquo; &mdash; a list of 80 wastes is not actionable.",
+            "Pareto-ranking findings before acting."
+          ],
+          correctIndex: 2,
+          explanation: "A list of 80 wastes paralyzes action. <strong>5 well-quantified, well-Pareto&rsquo;d wastes drive change.</strong> The 8 Wastes is a structured walk, not a brainstorm-everything exercise."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

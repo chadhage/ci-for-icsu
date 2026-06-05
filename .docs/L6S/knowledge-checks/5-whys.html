@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — 5 Whys</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; 5 Whys
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "5 Whys",
+      subtitle: "Iterative root-cause technique to reach systemic causes, not symptoms or individual blame.",
+      sourceFile: "../5-whys.md",
+      sourceLabel: "5-whys.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What is the primary benefit of using 5 Whys over stopping at the first plausible cause?",
+          options: [
+            "Find symptoms faster and resolve incidents quicker.",
+            "Change the system, not the individual; reach systemic causes you can actually act on.",
+            "Document who was at fault during the incident.",
+            "Speed up postmortems by skipping detailed investigation."
+          ],
+          correctIndex: 1,
+          explanation: "5 Whys drills to <strong>systemic causes</strong> that can be changed via IaC, policy, or process &mdash; not individual actions. This prevents recurrence rather than repeating the same incident."
+        },
+        {
+          prompt: "How many times should you iteratively ask &ldquo;why&rdquo; when using 5 Whys?",
+          options: [
+            "Always exactly five times, no more and no less.",
+            "As many as needed until you reach an actionable system property.",
+            "Never more than three times to keep the postmortem short.",
+            "Only during critical incidents, not routine ones."
+          ],
+          correctIndex: 1,
+          explanation: "The number 5 is approximate. Stop when the answer is an <strong>actionable system property</strong> like &ldquo;no standard work&rdquo; or &ldquo;unfunded capability&rdquo; &mdash; not at an arbitrary count."
+        },
+        {
+          prompt: "Which terminal answer represents a true root cause in 5 Whys?",
+          options: [
+            "The engineer made a mistake during deployment.",
+            "The alert didn&rsquo;t fire when the threshold was breached.",
+            "No standard work exists for updating canary alerting when SLOs change.",
+            "The code contained a subtle bug in the parser."
+          ],
+          correctIndex: 2,
+          explanation: "The terminal answer must be a <strong>system change</strong> you can actually make &mdash; through IaC, policy, process, or funding. Personal blame is not a root cause."
+        },
+        {
+          prompt: "What requirement does 5 Whys place on each answer in the chain?",
+          options: [
+            "It should be plausible and agreed upon by the team.",
+            "Each step must be evidence-backed: logs, traces, configs, or interviews.",
+            "It should reference previous postmortems on similar issues.",
+            "It must identify a person responsible for the failure."
+          ],
+          correctIndex: 1,
+          explanation: "Each why must be supported by <strong>evidence</strong>. Unverified answers propagate error down the chain, misleading the remaining steps and contaminating the entire analysis."
+        },
+        {
+          prompt: "When is the best time to run 5 Whys in a postmortem?",
+          options: [
+            "In real time during active incident response while emotions are fresh.",
+            "After the incident is resolved, when complete data is available.",
+            "Before any logs are collected, to avoid confirmation bias.",
+            "Weeks later, after the team has moved on to other work."
+          ],
+          correctIndex: 1,
+          explanation: "5 Whys requires <strong>evidence</strong> at each step. Running it during active triage with incomplete data contaminates the chain with speculation."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

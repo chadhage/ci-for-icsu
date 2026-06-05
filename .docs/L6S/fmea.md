@@ -17,6 +17,7 @@ FMEA — **F**ailure **M**ode and **E**ffects **A**nalysis — systematically an
 - [Where FMEA shows up](#where-fmea-shows-up)
 - [Who runs FMEA](#who-runs-fmea)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/fmea.html)
 
 ## Why FMEA
 

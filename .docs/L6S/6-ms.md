@@ -17,6 +17,7 @@ The 6Ms — Man, Machine, Method, Material, Measurement, Mother Nature — are t
 - [Where the 6Ms show up](#where-the-6ms-show-up)
 - [Who should use the 6Ms](#who-should-use-the-6ms)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/6-ms.html)
 
 ## Why the 6Ms
 

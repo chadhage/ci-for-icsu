@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Ishikawa Diagram</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Ishikawa Diagram
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Ishikawa Diagram",
+      subtitle: "Structured brainstorming tool that maps potential causes of a problem into named categories to force breadth before depth.",
+      sourceFile: "../ishikawa.md",
+      sourceLabel: "ishikawa.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "Your team is investigating slow Azure SQL queries. Engineering suspects indexes, the DBA suspects schema, the platform lead suspects sizing. What is the primary value of an Ishikawa diagram here?",
+          options: [
+            "It makes the final decision about which factor is the true root cause.",
+            "It forces the team to explore causes across all categories before fixating on one.",
+            "It measures which hypothesis generates the fastest query improvement.",
+            "It eliminates all low-probability causes immediately."
+          ],
+          correctIndex: 1,
+          explanation: "An Ishikawa is a <strong>divergent</strong> tool that broadens the search space before narrowing it. It prevents fixating on the first hypothesis by forcing systematic exploration across categories. It generates hypotheses; data confirms them later."
+        },
+        {
+          prompt: "When is an Ishikawa most valuable during a postmortem?",
+          options: [
+            "Only when the incident cause is already known and you need to document it.",
+            "When a symptom has multiple plausible causes across different domains and the team risks premature commitment.",
+            "As a replacement for writing down the incident timeline and impact.",
+            "Only if the team has more than 10 engineers available to attend."
+          ],
+          correctIndex: 1,
+          explanation: "Ishikawa shines when <strong>multiple domains</strong> are involved. It ensures the team walks every category &mdash; Man, Machine, Method, Material, Measurement, Mother Nature &mdash; rather than defaulting to the loudest voice&rsquo;s pet theory."
+        },
+        {
+          prompt: "A customer says the Ishikawa diagram is the deliverable for their recent Cosmos DB 429 fix. What should you clarify?",
+          options: [
+            "The diagram is the final output and no further action is needed.",
+            "Ishikawa generated hypotheses; the actual deliverables are the tested root cause, the implemented fix, and the measured before/after.",
+            "They should repeat the Ishikawa weekly to ensure the cause stays fixed.",
+            "The diagram should have included budget approval from leadership."
+          ],
+          correctIndex: 1,
+          explanation: "An Ishikawa is a <strong>hypothesis-generation</strong> tool, not a decision tool. The real deliverables are the tested hypotheses, the implemented changes, and the before/after measurements that validate the fix."
+        },
+        {
+          prompt: "A teammate insists the only category to explore is &ldquo;Method&rdquo; for a deployment-failure investigation. What should you do first?",
+          options: [
+            "Agree and start drilling into Method with 5 Whys.",
+            "Walk the team through every remaining category before drilling deep into any single branch.",
+            "Ask engineering to test the Method hypothesis immediately.",
+            "Reshape the problem statement because it&rsquo;s too vague."
+          ],
+          correctIndex: 1,
+          explanation: "Ishikawa is a <strong>de-fixation</strong> tool. The team should walk Man, Machine, Method, Material, Measurement, and Mother Nature before drilling depth. Breadth-first exposes causes that single disciplines miss."
+        },
+        {
+          prompt: "Which statement best captures what NOT to do with an Ishikawa?",
+          options: [
+            "Don&rsquo;t use it with cross-functional teams because they disagree too much.",
+            "Don&rsquo;t treat it as a decision tool &mdash; use Pareto to choose among findings to fund.",
+            "Don&rsquo;t include more than three categories because the diagram becomes too complex.",
+            "Don&rsquo;t reference it in postmortems because it takes too much time to explain."
+          ],
+          correctIndex: 1,
+          explanation: "Ishikawa generates <strong>candidates</strong>, not decisions. To choose which finding to fund, use Pareto-by-weighted-impact. Ishikawa answers &ldquo;what are the possible causes?&rdquo;; Pareto answers &ldquo;which one to fix first?&rdquo;"
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

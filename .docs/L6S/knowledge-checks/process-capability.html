@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Process Capability (Cp, Cpk)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Process Capability (Cp, Cpk)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Process Capability (Cp, Cpk)",
+      subtitle: "Quantifies how well a stable process meets its specification limits &mdash; whether you&rsquo;ll continue to hit the SLO or you&rsquo;re hitting it by luck.",
+      sourceFile: "../process-capability.md",
+      sourceLabel: "process-capability.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does Cpk measure that Cp does not?",
+          options: [
+            "Long-term variation rather than short-term variation.",
+            "Process centering &mdash; the actual capability accounting for whether the mean sits midway between spec limits.",
+            "The total number of opportunities per million.",
+            "Customer satisfaction scores against the spec."
+          ],
+          correctIndex: 1,
+          explanation: "Cp = (USL &minus; LSL) / 6&sigma; assumes the process is centered. <strong>Cpk</strong> = min((USL &minus; &mu;)/3&sigma;, (&mu; &minus; LSL)/3&sigma;) penalizes off-center processes, so it reflects real-world capability."
+        },
+        {
+          prompt: "A customer says &ldquo;we hit our P99 latency SLO last quarter.&rdquo; Capability analysis shows Cpk = 0.33. What does that tell you?",
+          options: [
+            "The SLO is being achieved with plenty of headroom.",
+            "The process is not capable &mdash; recent compliance is luck and breaches are predictable as load grows.",
+            "Cpk doesn&rsquo;t apply to latency metrics.",
+            "The customer should tighten the spec immediately."
+          ],
+          correctIndex: 1,
+          explanation: "Cpk &lt; 1.0 means the process is <strong>not capable</strong>. Hitting the spec is luck, not capability. The CSA&rsquo;s job is to translate the number into &ldquo;trouble ahead&rdquo; before the next load increase causes a breach."
+        },
+        {
+          prompt: "What rule-of-thumb Cpk value is the standard target for &ldquo;capable&rdquo;?",
+          options: [
+            "Cpk &ge; 0.5",
+            "Cpk &ge; 1.0",
+            "Cpk &ge; 1.33",
+            "Cpk &ge; 3.0"
+          ],
+          correctIndex: 2,
+          explanation: "Convention is <strong>Cpk &ge; 1.33 = capable</strong>; &ge; 1.67 = highly capable; &ge; 2.0 is the Six Sigma target (~3.4 defects per million opportunities with shift)."
+        },
+        {
+          prompt: "What is the key prerequisite for a Cpk calculation to be meaningful?",
+          options: [
+            "The team must have at least one Black Belt member.",
+            "The process must be stable &mdash; an in-control control chart is required first.",
+            "The dataset must have at least 1,000 observations.",
+            "The customer must have explicitly requested a Cpk number."
+          ],
+          correctIndex: 1,
+          explanation: "Capability of an <strong>out-of-control process is meaningless</strong>. You need a stable process (via control charts) and defined CTQ spec limits before Cpk has any signal."
+        },
+        {
+          prompt: "Cpk is low because the variation is wide and the mean sits near a spec limit. Which two improvement levers does this point to?",
+          options: [
+            "Hire more engineers and run more tests.",
+            "Reduce variation (&sigma;) and center the mean (&mu;).",
+            "Loosen the spec and accept the variation.",
+            "Increase sample size and recalculate."
+          ],
+          correctIndex: 1,
+          explanation: "Cpk gains come from two levers: <strong>reduce variation</strong> (process improvement, narrow &sigma;) and <strong>center the mean</strong> (move &mu; away from the nearer spec limit). Both deliver real capability gain."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

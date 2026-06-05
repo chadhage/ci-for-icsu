@@ -17,6 +17,7 @@ A control chart is a time-series plot of a process metric with statistical contr
 - [Where Control Charts show up](#where-control-charts-show-up)
 - [Who reads Control Charts](#who-reads-control-charts)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/control-charts.html)
 
 ## Why Control Charts
 

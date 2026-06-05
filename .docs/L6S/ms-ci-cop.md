@@ -12,11 +12,13 @@ Continuous Improvement at Microsoft is the connective tissue between the custome
 
 - [Why CI at Microsoft](#why-ci-at-microsoft)
 - [What CI at Microsoft Looks Like](#what-ci-at-microsoft-looks-like)
+- [Belt accreditation at Microsoft](#belt-accreditation-at-microsoft)
 - [How to engage with CI at Microsoft](#how-to-engage-with-ci-at-microsoft)
 - [When to lean on CI at Microsoft](#when-to-lean-on-ci-at-microsoft)
 - [Where CI at Microsoft shows up](#where-ci-at-microsoft-shows-up)
 - [Who participates](#who-participates)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/ms-ci-cop.html)
 
 ## Why CI at Microsoft
 
@@ -53,6 +55,23 @@ What distinguishes CI@MS from "internal Wiki of tips":
 - **Reusable.** Patterns are written for the next CSA to apply, not as a war story.
 
 **Real example:** The CSA team's "first 30 days of a new strategic account" playbook started as a one-pager from a single engagement. Over 2 years and ~40 contributing CSAs, it became a 60-page versioned guide with branch-specific paths for AKS-heavy, data-heavy, and AI-heavy accounts. New CSAs onboard to engagements in weeks, not quarters.
+
+## Belt accreditation at Microsoft
+
+Microsoft's Lean Six Sigma program recognizes the **American Society for Quality (ASQ)** as the credentialing body for the belt ladder described in [belts.md](belts.md) — Yellow, Green, and Black Belt. The FY26 DFSS / Lean Six Sigma Rhythm of Business (run out of the Devices Lean Six Sigma program) tracks **ASQ certification progress** alongside project graduation and mentorship as one of the standing community-cadence metrics. In other words, ASQ is what shows up on the scoreboard the program reviews each cycle.
+
+What that means in practice for a CSA:
+
+- When you scope a belt, default to an **ASQ-aligned curriculum and exam path**. It is the credential the program is set up to recognize and report on.
+- The credential is paired with **a real project and a mentor** — the program tracks all three together. Passing the exam alone is not the deliverable; the graduated, measured project is.
+- Plan your belt journey on the same cadence the ROB uses: certification progress, project status, and mentor engagement reviewed quarterly. Treat your own progress as a CI loop.
+
+A couple of caveats worth surfacing up front so you do not overreach:
+
+- The explicit ASQ tracking lives in the **Devices DFSS / Lean Six Sigma ROB**. Other Microsoft orgs run their own CI programs and may also accept **IASSC** or **CSSC** credentials, particularly for tuition reimbursement or career-framework crediting.
+- For company-wide questions — reimbursement, career ladder credit, or which provider HR will fund — confirm with your **HR business partner** or the **iCSU CI CoP lead** before committing to a program. The accredited-body landscape ([belts.md](belts.md#what-the-belt-levels-are)) is broader than what any single org tracks.
+
+The short version: if you do not have a reason to choose otherwise, **pick ASQ**. It is the credential Microsoft's Lean Six Sigma cadence already speaks the language of.
 
 ## How to engage with CI at Microsoft
 
@@ -105,6 +124,7 @@ In practical CSA surfaces:
 - **GitHub repos under microsoft / Azure / Azure-Samples** — many CSA-contributed IaC and code patterns live here.
 - **Internal Teams channels per technology area** — fast-cycle Q&A and pattern sharing.
 - **Quarterly CSA TechCon / skilling weeks** — the high-bandwidth retrospective venue.
+- **DFSS / Lean Six Sigma ROB** — the rhythm of business where belt progress (ASQ certification, projects, mentorship) is reviewed alongside other CI metrics. See [Belt accreditation at Microsoft](#belt-accreditation-at-microsoft).
 
 **Real example:** A CSA preparing an EBR for a Tier-1 customer pulled the WAF reliability template (CI@MS standard work), the cross-account AKS incident Pareto (CI@MS dashboard), and the customer's Advisor export (Azure surface). Assembly time dropped from 2 days to 3 hours; the resulting deck was peer-reviewed against the CoP's EBR template before delivery.
 

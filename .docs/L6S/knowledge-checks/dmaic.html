@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — DMAIC</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; DMAIC
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "DMAIC",
+      subtitle: "The Six Sigma methodology for fixing underperforming processes through Define, Measure, Analyze, Improve, and Control phases with tollgates.",
+      sourceFile: "../dmaic.md",
+      sourceLabel: "dmaic.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does DMAIC stand for?",
+          options: [
+            "Design, Measurement, Analysis, Implementation, Control.",
+            "Define, Measure, Analyze, Improve, Control.",
+            "Deploy, Monitor, Assess, Improve, Correct.",
+            "Decision, Metrics, Assessment, Implementation, Closure."
+          ],
+          correctIndex: 1,
+          explanation: "DMAIC stands for <strong>Define, Measure, Analyze, Improve, Control</strong> &mdash; five sequential phases, each with a tollgate preventing advancement without sufficient evidence."
+        },
+        {
+          prompt: "What is the primary purpose of tollgates in DMAIC?",
+          options: [
+            "To schedule meetings with project stakeholders.",
+            "To prevent jumping to solutions before the problem is understood.",
+            "To assign budget to each phase of the project.",
+            "To document lessons learned at phase boundaries."
+          ],
+          correctIndex: 1,
+          explanation: "Tollgates stop the most expensive engineering mistake: <strong>solving the wrong problem confidently</strong>. Each gate ensures evidence is sufficient before the next phase begins."
+        },
+        {
+          prompt: "When should you use DMAIC instead of PDCA or Kaizen?",
+          options: [
+            "For any quick fix or same-day problem resolution.",
+            "When the problem is significant enough to merit weeks-to-months of structured work.",
+            "For designing brand-new processes that don&rsquo;t yet exist.",
+            "Only when you have a Green Belt project certification candidate."
+          ],
+          correctIndex: 1,
+          explanation: "DMAIC fits problems big enough to merit weeks-to-months of structured, data-driven work. For shorter cycles use PDCA or Kaizen; for <strong>new process design</strong> use DMADV."
+        },
+        {
+          prompt: "What happens during the Control phase of DMAIC?",
+          options: [
+            "The team identifies which hypotheses to test next.",
+            "Measurement systems are validated for accuracy.",
+            "The gain is standardized and sustained through standard work and monitoring.",
+            "Root causes are identified and ranked by impact."
+          ],
+          correctIndex: 2,
+          explanation: "The Control phase <strong>sustains the gain</strong> through standardization via IaC, Policy, runbooks, dashboards, and alerts &mdash; so improvements do not regress after the project ends."
+        },
+        {
+          prompt: "Which is an anti-pattern to avoid in DMAIC execution?",
+          options: [
+            "Collecting more data than absolutely required during Measure.",
+            "Running all five phases in a week with no meaningful tollgates.",
+            "Involving the process owner too early in Define.",
+            "Using statistical tools like hypothesis testing in Analyze."
+          ],
+          correctIndex: 1,
+          explanation: "Running all phases in a week without real gates is not DMAIC &mdash; it&rsquo;s a <strong>Kaizen event</strong>. DMAIC requires phases to have real gates and adequate evidence per phase."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

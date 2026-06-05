@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — FMEA</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; FMEA
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "FMEA",
+      subtitle: "Failure Mode and Effects Analysis: systematically anticipate failures, score them by Severity &times; Occurrence &times; Detection, and mitigate the highest-risk first.",
+      sourceFile: "../fmea.md",
+      sourceLabel: "fmea.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does RPN stand for in FMEA?",
+          options: [
+            "Risk Planning Number.",
+            "Risk Priority Number.",
+            "Ranked Priority Number.",
+            "Risk Process Notation."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Risk Priority Number</strong> (RPN) is Severity &times; Occurrence &times; Detection, producing a score that prioritizes which failure modes to address first."
+        },
+        {
+          prompt: "How is RPN calculated?",
+          options: [
+            "Severity + Occurrence + Detection.",
+            "Severity &minus; Occurrence + Detection.",
+            "Severity &times; Occurrence &times; Detection.",
+            "(Severity &times; Occurrence) &divide; Detection."
+          ],
+          correctIndex: 2,
+          explanation: "RPN = <strong>Severity &times; Occurrence &times; Detection</strong>. Multiplication means a single dimension at the worst score drives a high RPN, focusing attention on the most consequential modes."
+        },
+        {
+          prompt: "What should you establish BEFORE starting an FMEA workshop?",
+          options: [
+            "A list of every conceivable failure mode.",
+            "Pre-agreed 1&ndash;10 scoring scales for Severity, Occurrence, and Detection.",
+            "The budget for mitigating the top-RPN items.",
+            "Two years of historical incident data."
+          ],
+          correctIndex: 1,
+          explanation: "Teams must agree on the <strong>1&ndash;10 scales</strong> before brainstorming. Otherwise the workshop is spent debating whether something is a 7 or an 8 instead of analyzing risk."
+        },
+        {
+          prompt: "What are the three main variants of FMEA?",
+          options: [
+            "Hardware, Software, and Process.",
+            "Design, System, and Architecture.",
+            "Process, Design, and System.",
+            "Preventive, Detective, and Corrective."
+          ],
+          correctIndex: 2,
+          explanation: "The variants are <strong>Process FMEA</strong> (manufacturing/processes), <strong>Design FMEA</strong> (product pre-release), and <strong>System FMEA</strong> (architecture-level risks across services)."
+        },
+        {
+          prompt: "What is the key anti-pattern to avoid in FMEA management?",
+          options: [
+            "Scoring a failure mode as Severity 10 when it should be 9.",
+            "Creating a one-time FMEA document that is never updated again.",
+            "Involving too many people in the workshop.",
+            "Addressing the lowest-RPN items first to build momentum."
+          ],
+          correctIndex: 1,
+          explanation: "The <strong>one-time FMEA</strong> ships with the project and never updates. Risk models decay; FMEA must be a living document refreshed after incidents and architecture changes."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

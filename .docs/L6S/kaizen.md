@@ -17,6 +17,7 @@ Kaizen — Japanese for "change for the better" — is the practice of focused, 
 - [Where Kaizen shows up](#where-kaizen-shows-up)
 - [Who should run Kaizen](#who-should-run-kaizen)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/kaizen.html)
 
 ## Why Kaizen
 

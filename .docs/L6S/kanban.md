@@ -17,6 +17,7 @@ Kanban — Japanese for "signboard" — is a visual workflow management system t
 - [Where Kanban shows up](#where-kanban-shows-up)
 - [Who should use Kanban](#who-should-use-kanban)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/kanban.html)
 
 ## Why Kanban
 

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Kaizen</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Kaizen
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Kaizen",
+      subtitle: "A focused, time-boxed improvement event where the people doing the work design and implement a change end-to-end within 3&ndash;5 days.",
+      sourceFile: "../kaizen.md",
+      sourceLabel: "kaizen.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "A customer is 8 months into a &ldquo;digital transformation&rdquo; with no shipped improvements. What is the strategic value of running a Kaizen now?",
+          options: [
+            "It extends the transformation program timeline so more planning can occur.",
+            "It ships a measured, working improvement in 5 days, rebuilding customer trust and justifying further engagement.",
+            "It produces a comprehensive strategy document that aligns all stakeholders.",
+            "It eliminates the need to do any other improvement work."
+          ],
+          correctIndex: 1,
+          explanation: "A Kaizen breaks the cycle of stalled transformation by shipping real, <strong>measured results</strong> in days. The visible win &mdash; often demoed to leadership on day 5 &mdash; rebuilds momentum faster than any roadmap."
+        },
+        {
+          prompt: "Which is a non-negotiable requirement for Kaizen success?",
+          options: [
+            "The customer&rsquo;s CEO must attend all five days.",
+            "Cross-functional team members have calendars cleared, and decision authority is present in the room.",
+            "All 47 engineers in the department should attend so everyone is trained.",
+            "Code must ship by day 2 with days 3&ndash;5 reserved for other activities."
+          ],
+          correctIndex: 1,
+          explanation: "Kaizen depends on <strong>full participant commitment</strong> and someone in the room with authority to approve changes. Half-attended teams fail because context-switching kills focus."
+        },
+        {
+          prompt: "On day 2, the team designs a change that requires tooling approval from a committee meeting in 4 weeks. What should you do?",
+          options: [
+            "Redesign the improvement to avoid the tooling cost so the team can ship it by day 5.",
+            "Pause the Kaizen and reschedule it after the budget committee meets.",
+            "If the required decision-maker isn&rsquo;t in the room (or one text away), the scope was misframed &mdash; reframe to what current authority can approve in 5 days.",
+            "Have the team implement a partial workaround and commit to the full change later."
+          ],
+          correctIndex: 2,
+          explanation: "The <strong>decision authority</strong> requirement is non-negotiable. A Kaizen that ends with &ldquo;we&rsquo;ll need approval next month&rdquo; is a planning meeting, not a Kaizen."
+        },
+        {
+          prompt: "Pre-work for a Kaizen reveals the team hasn&rsquo;t defined a baseline metric or success target. How should you proceed?",
+          options: [
+            "Start the event anyway and define the metric on day 1 during kickoff.",
+            "Go back and lock down a specific, measurable baseline and a target before day 1.",
+            "Skip pre-work and use workshop time to brainstorm possible metrics.",
+            "Focus on process improvements instead since reliability metrics are hard to define."
+          ],
+          correctIndex: 1,
+          explanation: "A Kaizen without a predefined <strong>baseline and success metric</strong> cannot declare victory at the end. Pre-work must lock this in; it protects the event&rsquo;s credibility."
+        },
+        {
+          prompt: "A customer asks for a Kaizen on &ldquo;redesigning our multi-region active-active database topology.&rdquo; The work genuinely needs months of design. Is this the right scope?",
+          options: [
+            "Yes, because Kaizen compresses any timeline into 5 days.",
+            "Yes, as long as you extend it to 10 days instead of 5.",
+            "No &mdash; Kaizen only works when the diagnosis exists and the fix can ship in days. Respect the format&rsquo;s limits.",
+            "Yes, but only if all senior architects attend full-time."
+          ],
+          correctIndex: 2,
+          explanation: "Kaizen is a <strong>format for execution</strong>, not a magic timeline compressor. For work that genuinely needs months of architecture, Kaizen will fail."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

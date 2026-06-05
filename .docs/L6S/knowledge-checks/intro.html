@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Intro to Continuous Improvement</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Intro to Continuous Improvement
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Intro to Continuous Improvement",
+      subtitle: "The disciplined practice of making small, evidence-based changes on a repeatable cadence so capability, quality, and speed compound over time.",
+      sourceFile: "../intro.md",
+      sourceLabel: "intro.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does PDCA stand for?",
+          options: [
+            "Process Design, Capability Assessment.",
+            "Plan, Do, Check, Act.",
+            "Prioritize, Develop, Confirm, Approve.",
+            "Problem, Data, Cause, Action."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>PDCA</strong> is Deming&rsquo;s loop: <strong>Plan</strong> a change at a specific gap, <strong>Do</strong> it at small scale, <strong>Check</strong> the data, <strong>Act</strong> by standardizing or discarding. It is the core engine of CI."
+        },
+        {
+          prompt: "What is the primary goal of Continuous Improvement?",
+          options: [
+            "To complete one large transformation project per year.",
+            "To make small, evidence-based changes on a repeatable cadence so gains compound.",
+            "To eliminate all problems immediately upon discovery.",
+            "To maximize utilization of engineering resources."
+          ],
+          correctIndex: 1,
+          explanation: "CI achieves <strong>compounding gains</strong> through many small, deliberate, measured changes &mdash; not rare large ones. Each cycle&rsquo;s baseline is the previous cycle&rsquo;s outcome."
+        },
+        {
+          prompt: "Before you can run Check in PDCA, what must already exist?",
+          options: [
+            "Executive approval and budget allocation.",
+            "A measurable baseline from the Plan phase.",
+            "A list of all possible causes of the problem.",
+            "Agreement on which metric to optimize."
+          ],
+          correctIndex: 1,
+          explanation: "Without a <strong>baseline measurement</strong>, the Check phase is opinion. You must know today&rsquo;s state with data the team trusts before applying a change and measuring the delta."
+        },
+        {
+          prompt: "What is the CSA&rsquo;s exit criterion for a successful CI engagement?",
+          options: [
+            "The customer has completed three PDCA cycles.",
+            "All recommendations from the initial assessment have been implemented.",
+            "The customer is running the loop without the CSA.",
+            "The customer has achieved the largest possible improvement."
+          ],
+          correctIndex: 2,
+          explanation: "Success in CI means <strong>the customer is running the cadence independently</strong>. The CSA coaches the loop; success is when the customer owns it and the CSA can exit without regression."
+        },
+        {
+          prompt: "Which of these is NOT a component of Continuous Improvement?",
+          options: [
+            "Standard work that captures validated changes.",
+            "A one-time transformation or tool purchase.",
+            "Gemba walks to observe real work.",
+            "Respect for the people operating the system."
+          ],
+          correctIndex: 1,
+          explanation: "CI is <strong>not</strong> a one-time transformation, a tool purchase, a certification, or a slide template. It is a repeating cadence that produces durable gains through small, systematic changes."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

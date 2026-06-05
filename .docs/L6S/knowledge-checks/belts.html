@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Learning, Belts, and Certification</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Learning, Belts, and Certification
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Learning, Belts, and Certification",
+      subtitle: "Check your understanding of the Lean Six Sigma belt ladder and how CSAs should use it.",
+      sourceFile: "../belts.md",
+      sourceLabel: "belts.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does the Lean Six Sigma belt ladder primarily signal about a practitioner?",
+          options: [
+            "Years of CSA experience at Microsoft.",
+            "Depth of continuous-improvement capability, from knowing the vocabulary to leading org-wide CI strategy.",
+            "How many customer engagements they have closed in the last quarter.",
+            "Their internal performance rating."
+          ],
+          correctIndex: 1,
+          explanation: "The belt ladder is a shared way to talk about <strong>how deep</strong> CI capability runs &mdash; from White (vocabulary and awareness) to Master Black (designs an organization's CI strategy). It is a capability signal, not a tenure or performance metric."
+        },
+        {
+          prompt: "How should a CSA decide which belt to pursue next?",
+          options: [
+            "Always pursue the highest belt the organization will fund.",
+            "Match whichever belt the customer's most senior CI lead holds.",
+            "Pick the belt that formalizes the next capability gap they should be demonstrating in real engagements.",
+            "Pursue belts in strict order on a fixed annual cadence regardless of work."
+          ],
+          correctIndex: 2,
+          explanation: "The guidance is to <strong>pick the belt that formalizes the next gap</strong> &mdash; not the highest available. A CSA who has never run a real Kaizen should pursue Yellow, not Black. Credentials should trail the work, not the other way around."
+        },
+        {
+          prompt: "For Green Belt and Black Belt certifications, what is the &ldquo;point&rdquo; of the certification?",
+          options: [
+            "Passing the multiple-choice exam.",
+            "Completing the required classroom training hours.",
+            "Delivering a real, measured improvement project &mdash; the project is the credential and the exam is the formality.",
+            "Joining the certifying body&rsquo;s alumni network."
+          ],
+          correctIndex: 2,
+          explanation: "Green/Black Belt programs require a real improvement project with measured outcomes. The advice is to pick that project from <strong>real customer work</strong>, not a contrived case, so the same engagement produces both customer value and the credential."
+        },
+        {
+          prompt: "What is the &ldquo;belt-collecting&rdquo; anti-pattern described in the guide?",
+          options: [
+            "Holding belts from more than one accreditation body.",
+            "Accumulating belts without validated engagement outcomes to back them up.",
+            "Re-certifying belts every year.",
+            "Listing belt credentials on internal playbooks."
+          ],
+          correctIndex: 1,
+          explanation: "A CSA with five belts and no validated engagement outcomes is <strong>less effective</strong> than one with a Green Belt and a track record of measured customer wins. The credential is corroborating evidence, not a substitute for the work."
+        },
+        {
+          prompt: "How does Master Black Belt differ from Black Belt?",
+          options: [
+            "It is the same scope but with a longer exam.",
+            "It is a leadership-only credential with no technical content.",
+            "It trains and certifies Black Belts and designs the organization&rsquo;s CI strategy &mdash; a teaching credential as much as a doing one.",
+            "It is awarded automatically after holding Black Belt for five years."
+          ],
+          correctIndex: 2,
+          explanation: "Master Black Belt is rare and usually held by the head of a CI / operational-excellence function. They <strong>train and certify Black Belts</strong> and shape the organization&rsquo;s CI program design."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

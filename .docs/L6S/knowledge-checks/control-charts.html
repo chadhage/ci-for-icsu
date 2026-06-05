@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Control Charts (SPC)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Control Charts (SPC)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Control Charts (SPC)",
+      subtitle: "Time-series plots with statistical control limits to distinguish common-cause from special-cause variation.",
+      sourceFile: "../control-charts.md",
+      sourceLabel: "control-charts.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What is the primary purpose of drawing control limits (typically &plusmn;3&sigma;) on a process metric chart?",
+          options: [
+            "To set production targets the team must meet.",
+            "To distinguish common-cause from special-cause variation.",
+            "To predict future metric values with statistical certainty.",
+            "To replace traditional statistical hypothesis testing."
+          ],
+          correctIndex: 1,
+          explanation: "Control limits separate noise (common-cause &mdash; the process is what it is) from signal (special-cause &mdash; something has changed). This prevents over-reacting to normal <strong>variation</strong>."
+        },
+        {
+          prompt: "How should you respond when a single metric point falls outside the upper control limit?",
+          options: [
+            "Immediately adjust process settings to bring it back in.",
+            "Recompute the control limits to accommodate the new data.",
+            "Investigate for a special cause per Western Electric rules.",
+            "Tighten the SLO by 10% to prevent recurrence."
+          ],
+          correctIndex: 2,
+          explanation: "One point outside &plusmn;3&sigma; is a <strong>special-cause signal</strong> per Western Electric rules. Investigate the cause; don&rsquo;t tweak the process for common-cause variation."
+        },
+        {
+          prompt: "When should you recalculate and re-baseline control chart limits?",
+          options: [
+            "Every week to keep limits current with the latest data.",
+            "Only after a deliberate, documented process change.",
+            "Never once the baseline is established and locked.",
+            "Whenever the metric looks out of control or concerning."
+          ],
+          correctIndex: 1,
+          explanation: "Lock the baseline on 20&ndash;25 stable subgroups. Do not recompute each period &mdash; that destroys signal capability. <strong>Re-baseline only</strong> after intentional process change."
+        },
+        {
+          prompt: "Which control chart type would you use to monitor P99 latency measured at 5-minute intervals?",
+          options: [
+            "I-MR (individuals and moving range) for single values.",
+            "p-chart (proportion defective) for pass/fail outcomes.",
+            "c-chart (count of defects) for defect counts per period.",
+            "X-R (subgroup means and range) for aggregated metrics."
+          ],
+          correctIndex: 3,
+          explanation: "P99 latency by 5-minute window is subgroup data. X-R plots the mean and range of each subgroup &mdash; ideal for <strong>percentile metrics</strong> over time windows."
+        },
+        {
+          prompt: "What does a run of nine consecutive points below the center line indicate?",
+          options: [
+            "The process is improving and will stay improved automatically.",
+            "A special-cause signal per Western Electric rule 2.",
+            "Normal common-cause variation; no action required.",
+            "Control limits are too tight and need widening."
+          ],
+          correctIndex: 1,
+          explanation: "Nine consecutive points on one side of the center line is a <strong>special-cause signal</strong> (Western Electric rule 2). In a Kaizen context, this confirms sustained gain statistically."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

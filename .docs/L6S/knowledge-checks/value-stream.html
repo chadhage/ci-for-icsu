@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Value Stream Mapping</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Value Stream Mapping
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Value Stream Mapping",
+      subtitle: "End-to-end view of the flow that produces customer value &mdash; making process time, lead time, handoffs, waits, and rework visible as data.",
+      sourceFile: "../value-stream.md",
+      sourceLabel: "value-stream.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "A customer is 8 months into a &ldquo;DevOps transformation&rdquo; with no measurable improvement in deployment frequency. End-to-end deploy time is 6 hours. What is VSM&rsquo;s likely contribution?",
+          options: [
+            "Recommend a new deployment tool to replace the current one.",
+            "Make visible that most of the 6 hours is spent Waiting on approvals and queued scans &mdash; not in active work.",
+            "Suggest hiring more engineers to parallelize the work.",
+            "Refactor the application architecture into microservices."
+          ],
+          correctIndex: 1,
+          explanation: "VSM exposes <strong>where time is waited vs. spent</strong>. Customers often optimize the active work (e.g., the 1 hour of build) while ignoring the 5 hours of waiting that dominate end-to-end lead time."
+        },
+        {
+          prompt: "What is the value-add ratio?",
+          options: [
+            "The dollars saved per CSA hour.",
+            "Process Time / Lead Time &mdash; the fraction of end-to-end time spent on active value-adding work.",
+            "The number of approvers divided by the number of steps.",
+            "Cycle time multiplied by WIP."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Value-add ratio = PT / LT</strong>. On un-improved streams it&rsquo;s often a horrifying single-digit percentage. It&rsquo;s the headline number leadership remembers from a VSM."
+        },
+        {
+          prompt: "What is %C/A (Percent Complete and Accurate) and why does it matter?",
+          options: [
+            "The percentage of process automation; high values mean less waste.",
+            "The fraction of work passing each handoff without rework; multiplied across all handoffs (Rolled %C/A) it surfaces silent rework chains.",
+            "Compliance audit pass rate; required for regulated industries only.",
+            "The percentage of engineers attending the workshop."
+          ],
+          correctIndex: 1,
+          explanation: "%C/A measures <strong>rework leakage at each handoff</strong>. Rolled %C/A (the product across all handoffs) typically reveals huge hidden rework no single team owns &mdash; a classic VSM insight."
+        },
+        {
+          prompt: "When is VSM the WRONG tool to reach for?",
+          options: [
+            "DevOps assessments with end-to-end symptoms.",
+            "A &ldquo;Cosmos is slow&rdquo; engagement where the problem is a hot partition key inside a single system &mdash; use Pareto + Ishikawa instead.",
+            "Tenant onboarding flow optimization across multiple teams.",
+            "Modernization business cases that need a credible &ldquo;why.&rdquo;"
+          ],
+          correctIndex: 1,
+          explanation: "VSM is for <strong>multi-team / multi-system flows</strong>. For single-system issues, reach for Pareto + Ishikawa. Reflexively pulling out VSM for the wrong problem wastes the tool&rsquo;s credibility."
+        },
+        {
+          prompt: "What is the key anti-pattern to avoid when running a VSM workshop?",
+          options: [
+            "Drawing the current state before the future state.",
+            "Producing a wall-sized poster you never look at again &mdash; the VSM must be a working artifact during the engagement.",
+            "Including process owners in the walk.",
+            "Calculating the value-add ratio."
+          ],
+          correctIndex: 1,
+          explanation: "A VSM is a <strong>working artifact</strong>, not a one-time poster. If it isn&rsquo;t open during the next 6 weeks of engagement to guide PDCA cycles and decisions, the workshop didn&rsquo;t land."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

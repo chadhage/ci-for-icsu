@@ -17,6 +17,7 @@ A Project Charter is a one-page document that authorizes an improvement project 
 - [Where Project Charters show up](#where-project-charters-show-up)
 - [Who writes Project Charters](#who-writes-project-charters)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/project-charter.html)
 
 ## Why Project Charters
 

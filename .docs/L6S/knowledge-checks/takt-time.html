@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Takt Time</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Takt Time
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Takt Time",
+      subtitle: "The rate at which a process must produce to meet customer demand &mdash; the &ldquo;pulse&rdquo; that paces capacity, SLOs, and standard work.",
+      sourceFile: "../takt-time.md",
+      sourceLabel: "takt-time.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What is the formula for takt time?",
+          options: [
+            "Available time &divide; customer demand.",
+            "Customer demand &times; cycle time.",
+            "Total cost &divide; throughput.",
+            "Process time + queue time."
+          ],
+          correctIndex: 0,
+          explanation: "<strong>Takt = available time / customer demand.</strong> If demand is 480 requests per 8-hour day, takt is 1 minute per request. It&rsquo;s the demand-set pace the process must match."
+        },
+        {
+          prompt: "A CI build farm processes 800 builds per 8-hour day with a measured per-build cycle of 4 minutes. What does the math show?",
+          options: [
+            "The farm is sized correctly because builds are completing.",
+            "Takt is 36 seconds; cycle is 4 minutes &mdash; the farm cannot possibly meet demand and queueing is inevitable.",
+            "The team should optimize for individual build speed, not capacity.",
+            "Cycle being longer than takt is fine because builds are async."
+          ],
+          correctIndex: 1,
+          explanation: "Takt = 8h / 800 = 36s; cycle = 240s. <strong>Cycle &gt; takt</strong> means under-capacity and growing queues. Adding runners until cycle drops below takt is the fix &mdash; not optimizing individual builds."
+        },
+        {
+          prompt: "Cycle time is significantly less than takt. What does this indicate?",
+          options: [
+            "The team is doing great &mdash; this is the goal.",
+            "Over-capacity &mdash; the process risks overproduction waste unless paced down.",
+            "The takt calculation is wrong.",
+            "Customers are about to complain about slow service."
+          ],
+          correctIndex: 1,
+          explanation: "Cycle &lt; takt = <strong>over-capacity / overproduction</strong>. Producing faster than demand creates inventory waste unless deliberately paced down (the Heijunka discipline). Faster is not always better."
+        },
+        {
+          prompt: "How tightly should individual steps be balanced relative to takt?",
+          options: [
+            "Each step can take any duration; only total cycle matters.",
+            "Within roughly &plusmn;10% of takt &mdash; one step at 2&times; takt becomes the bottleneck regardless of the others.",
+            "Each step should take exactly 1 second.",
+            "Steps should be 5&times; takt to allow safety margin."
+          ],
+          correctIndex: 1,
+          explanation: "Line balancing aims for step times within <strong>~10% of takt</strong>. A 4-step process where one step takes 2&times; takt is the bottleneck and limits the entire flow."
+        },
+        {
+          prompt: "What is the anti-pattern to avoid when computing takt for capacity planning?",
+          options: [
+            "Using real telemetry to measure demand.",
+            "Computing takt against peak-of-peak demand, which over-provisions permanently.",
+            "Re-measuring takt when demand shifts.",
+            "Comparing takt to current cycle time."
+          ],
+          correctIndex: 1,
+          explanation: "Sizing to absolute peak wastes money; sizing to average misses peak. Use a <strong>defensible busy-window definition</strong> (peak hour for capacity planning, daily for steady-state) instead of peak-of-peak."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

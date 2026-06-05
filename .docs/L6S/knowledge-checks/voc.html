@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Voice of the Customer (VOC)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Voice of the Customer (VOC)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Voice of the Customer (VOC)",
+      subtitle: "Structured capture of what customers actually need in their own words, then translation into measurable requirements (CTQs).",
+      sourceFile: "../voc.md",
+      sourceLabel: "voc.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "An SRE team has improved P50 latency for 8 months. VOC interviews reveal downstream consumers only care about P99 and TTFB. What does this teach about VOC?",
+          options: [
+            "P50 improvements are always wasted effort.",
+            "Without VOC, teams optimize what is convenient to measure rather than what customers value &mdash; 8 months of real work was irrelevant to the actual need.",
+            "P99 work should always start before P50 work.",
+            "The SRE team should have refused the project."
+          ],
+          correctIndex: 1,
+          explanation: "Engineers optimize what&rsquo;s measurable; what&rsquo;s measurable is rarely what customers value. <strong>VOC closes that gap</strong> &mdash; without it, technical excellence and customer value drift apart."
+        },
+        {
+          prompt: "What are the three stages of a VOC effort?",
+          options: [
+            "Survey, Analyze, Report.",
+            "Capture (verbatim quotes), Translate (to need statements), Specify (to CTQs with metrics).",
+            "Plan, Do, Check.",
+            "Detect, Triage, Mitigate."
+          ],
+          correctIndex: 1,
+          explanation: "VOC moves from <strong>Capture &rarr; Translate &rarr; Specify</strong>. Verbatim quotes preserve nuance, need statements group themes, and CTQs convert needs into measurable specs with targets."
+        },
+        {
+          prompt: "In the Kano model, what is a &ldquo;Basic / Must-be&rdquo; requirement?",
+          options: [
+            "An enhancement customers actively request and love.",
+            "Something customers expect &mdash; absence kills satisfaction, but presence is invisible (taken for granted).",
+            "An optional delighter the team may add when capacity allows.",
+            "A regulatory item only relevant in audits."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Basic / Must-be</strong> requirements are unspoken expectations &mdash; like &ldquo;logs must persist 90 days for audit.&rdquo; Their absence breaks trust; their presence earns no credit. VOC is the way to surface them."
+        },
+        {
+          prompt: "What is the recommended way to capture VOC?",
+          options: [
+            "A 4-question multiple-choice survey designed by engineers.",
+            "Open questions (&ldquo;Tell me about your last bad day with X&rdquo;), observe as well as ask, and capture verbatim quotes.",
+            "A leadership-only interview sample.",
+            "Use only support tickets and skip direct contact."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Open questions and direct observation</strong> with verbatim capture. A survey designed by engineers captures the team&rsquo;s hypotheses, not the customer&rsquo;s voice &mdash; that&rsquo;s the anti-pattern to avoid."
+        },
+        {
+          prompt: "Why should VOC be refreshed on a cadence rather than treated as a one-shot?",
+          options: [
+            "Because regulations require quarterly customer interviews.",
+            "Customer needs evolve and undocumented assumptions decay; stale VOC drives optimization toward what used to matter.",
+            "Because metrics teams demand recurring data input.",
+            "Because the Kano model resets every quarter."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Customer needs evolve.</strong> Yesterday&rsquo;s delighter becomes today&rsquo;s basic; today&rsquo;s pain becomes tomorrow&rsquo;s solved problem. Recurring VOC keeps the engagement aimed at what matters now."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

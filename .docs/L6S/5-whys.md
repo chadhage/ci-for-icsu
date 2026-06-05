@@ -17,6 +17,7 @@
 - [Where to use 5 Whys](#where-to-use-5-whys)
 - [Who should use 5 Whys](#who-should-use-5-whys)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/5-whys.html)
 
 ## Why 5 Whys
 

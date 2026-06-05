@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — 6Ms</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; 6Ms
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "6Ms",
+      subtitle: "Canonical category set for structuring Ishikawa diagrams: Man, Machine, Method, Material, Measurement, Mother Nature.",
+      sourceFile: "../6-ms.md",
+      sourceLabel: "6-ms.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What do the 6Ms represent in structured root-cause analysis?",
+          options: [
+            "Manufacturing, Materials, Marketing, Methods, Management, Money.",
+            "Man, Machine, Method, Material, Measurement, Mother Nature.",
+            "Metrics, Models, Mechanization, Maintenance, Mindset, Motivation.",
+            "Market, Money, Mindset, Maintenance, Maturity, Momentum."
+          ],
+          correctIndex: 1,
+          explanation: "The 6Ms force the cause search beyond <strong>code and config</strong> &mdash; covering people/skills, service/runtime, process/logic, config/data, observability/SLOs, and demand/environment."
+        },
+        {
+          prompt: "Why is the 6Ms framework more effective than single-discipline analysis?",
+          options: [
+            "It takes less time and reduces the need for meetings.",
+            "It prevents single-discipline fixation and surfaces cross-category causes.",
+            "It simplifies documentation and reduces rework.",
+            "It replaces detailed investigation with a checklist."
+          ],
+          correctIndex: 1,
+          explanation: "Without a category checklist, engineers blame config, SREs blame process, on-call blames telemetry. The 6Ms give every reviewer the same <strong>prompt</strong>, surfacing multi-category causes."
+        },
+        {
+          prompt: "In the Cosmos 429 throttling example, which three Ms were primary contributors?",
+          options: [
+            "Man, Machine, Mother Nature.",
+            "Method, Measurement, Material.",
+            "Method, Material, Mother Nature.",
+            "Man, Measurement, Mother Nature."
+          ],
+          correctIndex: 2,
+          explanation: "Hot partition (Method), manual RU/s without autoscale (Material), and EMEA peak plus marketing campaign (Mother Nature) were primary. Other Ms were contributing but remediated <strong>opportunistically</strong>."
+        },
+        {
+          prompt: "When is it NOT appropriate to use the 6Ms framework?",
+          options: [
+            "During routine postmortems with the engineering team.",
+            "When the cause is a known platform issue confirmed by Service Health.",
+            "During WAF reliability reviews with the customer.",
+            "On your first engagement with a new customer."
+          ],
+          correctIndex: 1,
+          explanation: "The 6Ms are for broad exploration. If the cause is a <strong>known platform issue</strong> confirmed by Service Health, the framework is unnecessary overhead."
+        },
+        {
+          prompt: "&ldquo;An engineer left a VM on over a holiday.&rdquo; Which 6M represents the systemic root cause, not the blame?",
+          options: [
+            "Man &mdash; the engineer&rsquo;s carelessness.",
+            "Measurement &mdash; no budget alert at 80% spend.",
+            "Mother Nature &mdash; the unexpected holiday timing.",
+            "Material &mdash; the VM&rsquo;s retention settings."
+          ],
+          correctIndex: 1,
+          explanation: "Blaming the engineer is not a root cause. The systemic cause is the absence of an alert. <strong>Measurement</strong> discipline reveals preventable gaps."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

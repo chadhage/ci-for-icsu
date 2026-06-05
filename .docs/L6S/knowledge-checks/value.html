@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Value</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Value
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Value",
+      subtitle: "Anything the customer is willing to fund &mdash; stated in the customer&rsquo;s terms. Every other activity is overhead, rework, or waste.",
+      sourceFile: "../value.md",
+      sourceLabel: "value.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "Who defines value in a Lean engagement?",
+          options: [
+            "The CSA, based on technical excellence.",
+            "The customer &mdash; in their own terms (revenue, downtime, $ saved, time-to-market, engineers unblocked).",
+            "Microsoft leadership, based on strategic priorities.",
+            "The account team, based on consumption targets."
+          ],
+          correctIndex: 1,
+          explanation: "Value is always stated in <strong>the customer&rsquo;s vocabulary</strong>. If the customer doesn&rsquo;t see it, hear about it, or measure it, it isn&rsquo;t value to them &mdash; regardless of how virtuous the activity feels internally."
+        },
+        {
+          prompt: "What are the three Lean buckets for classifying activities?",
+          options: [
+            "High, Medium, Low priority.",
+            "Value-add (VA), Non-value-add (NVA), and Necessary non-value-add (NNVA).",
+            "Strategic, Tactical, Operational.",
+            "Plan, Do, Check."
+          ],
+          correctIndex: 1,
+          explanation: "VA transforms the product in a way the customer would pay for; <strong>NVA is pure waste</strong> to eliminate; NNVA (e.g., SOC 2 evidence) is required but doesn&rsquo;t directly create value &mdash; minimize it."
+        },
+        {
+          prompt: "A CSA classifies the last 90 days as 38% VA, 22% NNVA, 40% NVA. What does this signal?",
+          options: [
+            "The engagement is healthy because more than a third is VA.",
+            "40% NVA is the recovery opportunity &mdash; consolidate meetings, kill duplicate decks, automate the rest.",
+            "The CSA should request more budget to absorb the overhead.",
+            "NNVA must be reduced to zero before anything else."
+          ],
+          correctIndex: 1,
+          explanation: "A healthy engagement is mostly VA with deliberately small NNVA. <strong>40% NVA is the opportunity</strong>; that&rsquo;s where calendar time can be reclaimed and redirected to value-add work the customer will defend at renewal."
+        },
+        {
+          prompt: "How should value be measured?",
+          options: [
+            "By number of meetings attended and tickets closed.",
+            "In customer currency &mdash; $ saved, downtime avoided, engineer-hours unblocked, time-to-market shortened, secure-score gained.",
+            "By total CSA hours billed to the account.",
+            "By the number of slides produced for QBR."
+          ],
+          correctIndex: 1,
+          explanation: "Activity is not value. Measure in <strong>customer currency</strong>: $ impact, minutes of downtime avoided, RU/s recovered, NSAT delta. &ldquo;Hours delivered&rdquo; and &ldquo;decks produced&rdquo; are inputs, not outcomes."
+        },
+        {
+          prompt: "A customer&rsquo;s CFO uses a Power BI spend dashboard the CSA built to approve $1.2M in modernization. Is this dashboard VA, NVA, or NNVA?",
+          options: [
+            "NVA &mdash; reporting that doesn&rsquo;t directly change anything.",
+            "High-value NNVA &mdash; required for the decision but not directly transforming the product, and clearly upstream of funded value.",
+            "VA only if it&rsquo;s automated.",
+            "Pure overhead that should be eliminated."
+          ],
+          correctIndex: 1,
+          explanation: "Value thinking is <strong>context-sensitive</strong>. A dashboard that unlocks $1.2M of funded modernization isn&rsquo;t waste even though it&rsquo;s not directly transforming a service. The dashboard is the means; the funding is the value."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

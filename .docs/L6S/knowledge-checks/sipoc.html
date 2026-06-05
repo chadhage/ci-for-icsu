@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — SIPOC</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; SIPOC
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "SIPOC",
+      subtitle: "One-page, high-level process map &mdash; Suppliers, Inputs, Process, Outputs, Customers &mdash; that pins scope down before drilling into detail.",
+      sourceFile: "../sipoc.md",
+      sourceLabel: "sipoc.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does SIPOC stand for?",
+          options: [
+            "Sources, Items, Procedure, Owners, Customers.",
+            "Suppliers, Inputs, Process, Outputs, Customers.",
+            "Sponsors, Issues, Plan, Outcomes, Controls.",
+            "Stakeholders, Inputs, Phases, Outputs, Constraints."
+          ],
+          correctIndex: 1,
+          explanation: "SIPOC &mdash; <strong>Suppliers, Inputs, Process, Outputs, Customers</strong> &mdash; reads left-to-right and is the first artifact built when a team can&rsquo;t yet agree on what they&rsquo;re improving."
+        },
+        {
+          prompt: "How many steps should the Process column contain?",
+          options: [
+            "1 to 3, to keep things simple.",
+            "5 to 7 maximum &mdash; more means too low-level, fewer usually means hidden steps.",
+            "Exactly 10, one per phase.",
+            "As many as needed to capture every detail."
+          ],
+          correctIndex: 1,
+          explanation: "The <strong>5&ndash;7 step rule</strong> keeps SIPOC at the right altitude. More steps belong in a value stream map or detailed process map; fewer usually hide important handoffs."
+        },
+        {
+          prompt: "What is the primary failure mode that SIPOC prevents?",
+          options: [
+            "Slow approvals from leadership.",
+            "Stalled improvement efforts caused by ambiguous scope.",
+            "Insufficient automation coverage.",
+            "Engineering burnout from too many meetings."
+          ],
+          correctIndex: 1,
+          explanation: "Most stalled improvement efforts fail not from bad analysis but from <strong>ambiguous scope</strong>. SIPOC pins scope down in a single page everyone can read and sign off on."
+        },
+        {
+          prompt: "When facilitating a SIPOC, what should you do BEFORE drawing the process steps?",
+          options: [
+            "List every possible supplier and customer.",
+            "Define the start trigger and the done state &mdash; the boundaries &mdash; first.",
+            "Have leadership pre-approve the steps.",
+            "Pick a software tool to capture the diagram."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Boundaries first.</strong> Write the trigger event and success criterion above the board before sticky-noting steps. Without explicit boundaries, the process column drifts and the SIPOC loses focus."
+        },
+        {
+          prompt: "When is SIPOC the wrong tool to use?",
+          options: [
+            "DMAIC Define phase.",
+            "Pre-work for a Kaizen event.",
+            "A detailed VSM already exists and the team agrees on scope &mdash; SIPOC would be duplicative.",
+            "Resolving scope disputes between teams."
+          ],
+          correctIndex: 2,
+          explanation: "Don&rsquo;t use SIPOC when a detailed VSM already exists and scope is agreed, when the work is genuinely one-step, or when it becomes a <strong>substitute for actually walking the process</strong> (Gemba)."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

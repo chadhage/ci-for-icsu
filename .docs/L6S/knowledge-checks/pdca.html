@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — PDCA / PDSA</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; PDCA / PDSA
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "PDCA / PDSA",
+      subtitle: "The foundational improvement cycle: Plan a hypothesis, Do a small experiment, Check/Study results, Act to standardize, adapt, or abandon.",
+      sourceFile: "../pdca.md",
+      sourceLabel: "pdca.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "A team says &ldquo;we improved alerting last Friday &mdash; we adjusted thresholds.&rdquo; A month later MTTR hasn&rsquo;t changed. What would PDCA discipline have prevented?",
+          options: [
+            "It would have prevented the team from ever changing the alerting thresholds.",
+            "It would have required a hypothesis before the change, a measurement window after, and a decision to standardize or revert.",
+            "It would have made the change happen faster.",
+            "It ensures the entire team uses the same monitoring tools."
+          ],
+          correctIndex: 1,
+          explanation: "PDCA enforces minimum discipline on every change. Without a <strong>hypothesis, measurement, and decision</strong>, changes are invisible experiments. PDCA would have surfaced that this change had no effect."
+        },
+        {
+          prompt: "You&rsquo;re coaching a team to reduce AKS cluster-autoscaler latency. What should the Plan phase include?",
+          options: [
+            "Just the metric you want to improve; details emerge during Do.",
+            "A falsifiable hypothesis: &ldquo;If we [change], then [metric] will improve from [baseline] to [target] within [window], because [theory].&rdquo;",
+            "A commitment to roll out the change to all clusters immediately when early signs look good.",
+            "A survey asking engineers if they think the change will work."
+          ],
+          correctIndex: 1,
+          explanation: "Plan must include a <strong>falsifiable hypothesis</strong> and a success metric. This prevents solution-first thinking and lets Check make an honest yes/no decision."
+        },
+        {
+          prompt: "A retry-policy test shows throughput went down, not up. What is the correct Act decision?",
+          options: [
+            "Ignore the result because it conflicts with the hypothesis.",
+            "Roll out the change to all systems and hope throughput improves with scale.",
+            "Revert the change and document the learning that this approach doesn&rsquo;t work as theorized.",
+            "Claim the measurement was wrong and run the test again."
+          ],
+          correctIndex: 2,
+          explanation: "Negative results are <strong>data, not failure</strong>. If the hypothesis is disconfirmed, revert and document. The learning is valuable for future cycles."
+        },
+        {
+          prompt: "A team ran 6 PDCA cycles in a quarter. Five resulted in standardized improvements; one was reverted. What does this tell you?",
+          options: [
+            "The team is experimenting without discipline because not all changes succeeded.",
+            "The team is practicing CI with scientific honesty &mdash; some changes work, some don&rsquo;t, and all results inform the next cycle.",
+            "They should stop running PDCA because 83% isn&rsquo;t high enough.",
+            "One failed cycle proves the entire program is broken."
+          ],
+          correctIndex: 1,
+          explanation: "A mixed success rate is <strong>exactly what good PDCA looks like</strong>. A 100% success rate would suggest the hypotheses were too safe. Continuous improvement compounds from chains of cycles."
+        },
+        {
+          prompt: "A customer says: &ldquo;We&rsquo;re doing PDCA &mdash; we added a Friday &lsquo;PDCA meeting&rsquo; to the calendar.&rdquo; What should you clarify?",
+          options: [
+            "Perfect &mdash; a Friday meeting will ensure consistent discipline.",
+            "PDCA is a cycle applied to specific changes, not a meeting format. The discipline is hypothesis &rarr; experiment &rarr; measurement &rarr; decision.",
+            "PDCA meetings should be held twice per week to improve velocity.",
+            "The calendar invitation validates the team is doing PDCA correctly."
+          ],
+          correctIndex: 1,
+          explanation: "PDCA is not a meeting; it&rsquo;s a <strong>cycle applied to a change</strong>. A calendar event is meaningless without a real hypothesis, measurement, and honest decision on real work."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

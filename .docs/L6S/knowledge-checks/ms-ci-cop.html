@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Continuous Improvement @ Microsoft</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Continuous Improvement @ Microsoft
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Continuous Improvement @ Microsoft",
+      subtitle: "Check your understanding of how CI works across the CSA practice, the CoP, and PG.",
+      sourceFile: "../ms-ci-cop.md",
+      sourceLabel: "ms-ci-cop.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What is the primary purpose of Continuous Improvement at Microsoft (CI@MS)?",
+          options: [
+            "To replace customer-specific engagement plans with a single corporate template.",
+            "To aggregate learnings across CSAs and provide a data-driven feedback loop from the field to product groups.",
+            "To certify CSAs in Azure services.",
+            "To provide a centralized time-tracking system for the CSA practice."
+          ],
+          correctIndex: 1,
+          explanation: "CI@MS is the connective tissue between the field and engineering. It <strong>aggregates patterns</strong> so PG can prioritize fixes, codifies validated engagement patterns into shared playbooks, and turns one CSA&rsquo;s observation into a product-level improvement."
+        },
+        {
+          prompt: "What distinguishes a CI@MS playbook from a generic &ldquo;internal Wiki of tips&rdquo;?",
+          options: [
+            "Playbooks are only accessible to senior CSAs.",
+            "Playbooks are auto-generated from Azure telemetry.",
+            "Playbooks are measured, versioned, owned by a named maintainer with a refresh cadence, and written to be reusable.",
+            "Playbooks are written exclusively by product groups."
+          ],
+          correctIndex: 2,
+          explanation: "Each published pattern carries the <strong>evidence that it worked</strong>, evolves cycle over cycle, has a named owner, and is written for the next CSA to apply &mdash; not as a war story."
+        },
+        {
+          prompt: "A CSA spots the same product limitation showing up across three or more of their accounts. What does CI@MS recommend they do?",
+          options: [
+            "Build a private workaround per account and move on.",
+            "Wait until the next quarterly review to mention it.",
+            "Aggregate the evidence as a cross-account Pareto and escalate via the ACR blocker or ICM signature channel to PG.",
+            "File a Sev A incident on each affected subscription."
+          ],
+          correctIndex: 2,
+          explanation: "When the same root cause appears across multiple accounts, that&rsquo;s a <strong>PG conversation, not a CSA workaround</strong>. The field-to-PG signal channels (ACR blocker tracker, ICM signature analysis) exist to turn aggregated evidence into product-level CI."
+        },
+        {
+          prompt: "According to the FY26 DFSS / Lean Six Sigma Rhythm of Business, which credentialing body does Microsoft&rsquo;s Lean Six Sigma program track for belt progress?",
+          options: [
+            "IASSC (International Association for Six Sigma Certification).",
+            "CSSC (Council for Six Sigma Certification).",
+            "ASQ (American Society for Quality).",
+            "Shingo Institute."
+          ],
+          correctIndex: 2,
+          explanation: "The FY26 DFSS / Lean Six Sigma ROB tracks <strong>ASQ certification progress</strong> alongside project graduation and mentorship. ASQ is the default when scoping a belt, though other Microsoft orgs may also accept IASSC or CSSC &mdash; confirm with your HR business partner before committing."
+        },
+        {
+          prompt: "What is the &ldquo;lone genius&rdquo; anti-pattern in CI@MS?",
+          options: [
+            "A CSA who escalates every issue directly to PG without trying to resolve it first.",
+            "A CSA who only consumes playbooks but never contributes back.",
+            "A CSA who validates many patterns across their accounts but never publishes them &mdash; forcing every other CSA to re-discover the same lessons.",
+            "A CSA who works without a manager or peer reviewer."
+          ],
+          correctIndex: 2,
+          explanation: "CI@MS is a many-to-many practice. The lone-genius CSA validates 30 patterns and never publishes &mdash; <strong>the org pays the cost of every other CSA re-discovering them</strong>. Contribution is the entry fee for the loop to compound."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Standard Work</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Standard Work
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Standard Work",
+      subtitle: "The current best-known way to perform a task &mdash; documented, taught, followed, and replaced by its better self via PDCA.",
+      sourceFile: "../standard-work.md",
+      sourceLabel: "standard-work.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "Why is standard work essential as a baseline for improvement?",
+          options: [
+            "It enforces compliance with corporate policy.",
+            "Without a standard, you can&rsquo;t tell whether a change actually improved or just varied.",
+            "It eliminates the need for runbooks and onboarding.",
+            "It locks in best practices permanently."
+          ],
+          correctIndex: 1,
+          explanation: "Improvement requires a <strong>comparator</strong>. Without a standard, every engineer reinvents the procedure, variation explodes, and there&rsquo;s no baseline to measure change against."
+        },
+        {
+          prompt: "What are the three components of standard work in Toyota&rsquo;s formulation?",
+          options: [
+            "Documentation, Training, Audit.",
+            "Takt time, Work sequence, Standard WIP.",
+            "Define, Measure, Control.",
+            "Policy, Process, Procedure."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Takt</strong> (demand pace), <strong>Work sequence</strong> (the step-by-step procedure), and <strong>Standard WIP</strong> (items / state required to perform the procedure smoothly)."
+        },
+        {
+          prompt: "When establishing standard work, where should you start?",
+          options: [
+            "Write the standard from scratch based on industry best practices.",
+            "Observe current variations and document what your best engineers do well; pick the variant with the best measured outcome.",
+            "Buy a commercial standard from a consultancy.",
+            "Have leadership define the standard top-down."
+          ],
+          correctIndex: 1,
+          explanation: "Don&rsquo;t write from scratch &mdash; <strong>observe and codify the best-known variant</strong>. Standards built from real practice survive contact with the work; standards written in a vacuum die in the field."
+        },
+        {
+          prompt: "Where should standard work live to actually be followed?",
+          options: [
+            "In a binder in the team room.",
+            "In a wiki page nobody opens.",
+            "Where the work happens &mdash; in the IaC module, the pipeline, the IDE, the ChatOps payload.",
+            "In an annual training course."
+          ],
+          correctIndex: 2,
+          explanation: "The anti-pattern is the <strong>binder of standards nobody opens</strong>. Standards must be embedded where the work happens &mdash; IaC defaults, pipeline templates, Policy, runbooks &mdash; not in a separate document."
+        },
+        {
+          prompt: "Should standard work ever change?",
+          options: [
+            "No &mdash; once standardized, the standard is locked permanently.",
+            "Yes &mdash; a standard is a living artifact, owned and versioned, replaced by a better version through a PDCA cycle.",
+            "Only every 5 years during major reviews.",
+            "Only if leadership signs off in writing."
+          ],
+          correctIndex: 1,
+          explanation: "A standard is the <strong>current best-known way</strong>, not the final word. Every PR that updates the standard is a PDCA cycle made permanent. Without a refresh cadence, the standard ossifies."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Poka-Yoke (Mistake-Proofing)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Poka-Yoke (Mistake-Proofing)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Poka-Yoke (Mistake-Proofing)",
+      subtitle: "Design systems so errors are impossible &mdash; or immediately detected. Prevention beats detection; mechanism beats memo.",
+      sourceFile: "../poka-yoke.md",
+      sourceLabel: "poka-yoke.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What are the two classes of poka-yoke per Shingo&rsquo;s original distinction?",
+          options: [
+            "Manual and Automated.",
+            "Prevention (error physically/logically impossible) and Detection (error caught at the moment it happens).",
+            "Hardware and Software.",
+            "Pre-commit and Post-deploy."
+          ],
+          correctIndex: 1,
+          explanation: "Prevention makes the error <strong>impossible</strong> (Policy denies the action); detection catches it the moment it happens (schema validation rejects malformed config). Prevention is preferred when feasible."
+        },
+        {
+          prompt: "A customer&rsquo;s prod database has been deleted three times in 18 months despite training. What is the right next step?",
+          options: [
+            "Add a fourth round of training and a checklist.",
+            "Apply a mechanism: resource lock (CanNotDelete), Policy deny, and block --no-prompt in CI runners.",
+            "Document the issue in a wiki and move on.",
+            "Issue a strongly worded memo from leadership."
+          ],
+          correctIndex: 1,
+          explanation: "Training and reminders fail at scale. The poka-yoke principle is &ldquo;<strong>memos cannot beat mechanism</strong>.&rdquo; Lock the resource and deny the action in policy &mdash; the deletion becomes impossible."
+        },
+        {
+          prompt: "Which is generally the strongest control level for a poka-yoke?",
+          options: [
+            "Warning &mdash; alert the operator on a dashboard.",
+            "Shutdown / refusal &mdash; the system refuses the action.",
+            "Self-correcting &mdash; quietly fix and proceed.",
+            "Audit &mdash; record the action for later review."
+          ],
+          correctIndex: 1,
+          explanation: "Refusal is harder to design than a warning but stops the error from occurring. <strong>Refusal &gt; Warning</strong> in the Shingo control hierarchy."
+        },
+        {
+          prompt: "Where should you place a poka-yoke for maximum effect?",
+          options: [
+            "As far downstream as possible to avoid blocking developers.",
+            "Closest to the error source &mdash; pre-commit beats CI; CI beats runtime; runtime beats audit.",
+            "Only in production, never in dev or test environments.",
+            "Wherever it&rsquo;s easiest to implement, regardless of source."
+          ],
+          correctIndex: 1,
+          explanation: "Catch errors as close to the source as possible. A <strong>pre-commit hook</strong> beats a CI gate beats a runtime check beats post-hoc audit. The earlier, the cheaper."
+        },
+        {
+          prompt: "Which is the key anti-pattern to avoid when designing poka-yoke?",
+          options: [
+            "Using Azure Policy in deny mode for prod resources.",
+            "Treating &ldquo;training plus a checklist&rdquo; as a poka-yoke when only a mechanism qualifies.",
+            "Locking down RBAC to least privilege.",
+            "Using managed identity instead of secrets in code."
+          ],
+          correctIndex: 1,
+          explanation: "Training is not poka-yoke; <strong>only mechanism is</strong>. A checklist that depends on human attention will fail at scale &mdash; that&rsquo;s precisely what poka-yoke exists to remove."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

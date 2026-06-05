@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Hoshin Kanri (X-Matrix)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Hoshin Kanri (X-Matrix)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Hoshin Kanri (X-Matrix)",
+      subtitle: "Translates a small number of strategic objectives into cascading annual and quarterly improvement projects, with explicit ownership and measurable progress at every level.",
+      sourceFile: "../hoshin-kanri.md",
+      sourceLabel: "hoshin-kanri.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What does the X-Matrix link together in Hoshin Kanri?",
+          options: [
+            "Budget, timeline, resources, and constraints.",
+            "Long-term objectives, annual breakthroughs, improvement projects, and KPIs with owners.",
+            "Departmental goals, team targets, individual tasks, and performance ratings.",
+            "Historical data, current baseline, improvement targets, and forecast."
+          ],
+          correctIndex: 1,
+          explanation: "The X-Matrix is a one-page diamond linking <strong>long-term objectives (north), annual breakthroughs (south), priority projects (west), and KPIs / owners (east)</strong>, with correlation marks showing which project supports which objective."
+        },
+        {
+          prompt: "How many long-term objectives should a Hoshin plan typically hold?",
+          options: [
+            "10 to 15 to ensure comprehensive coverage.",
+            "25 to 30 for a portfolio approach.",
+            "3 to 5 to enforce focus over portfolio.",
+            "1 to 2 to simplify decision making."
+          ],
+          correctIndex: 2,
+          explanation: "Hoshin limits strategic objectives to <strong>3&ndash;5 per cycle</strong> &mdash; focus over portfolio. Too many objectives make the strategy incoherent."
+        },
+        {
+          prompt: "What is the catchball process in Hoshin Kanri?",
+          options: [
+            "Marketing slogans for the strategy.",
+            "The iterative negotiation of objectives up and down the organization until alignment is reached.",
+            "The final approval meeting where leadership signs off on the plan.",
+            "The implementation phase where teams execute their assigned projects."
+          ],
+          correctIndex: 1,
+          explanation: "Catchball is the <strong>negotiation process</strong> &mdash; objectives proposed downward, feasibility concerns returned upward, iterating until aligned. The cascade is not top-down dictation."
+        },
+        {
+          prompt: "What is the bowler chart in Hoshin Kanri?",
+          options: [
+            "A chart showing team rotation and on-call schedules.",
+            "A simple table tracking planned vs. actual performance per month for each KPI.",
+            "A ranking of employees by performance ratings.",
+            "A visualization of resource allocation across projects."
+          ],
+          correctIndex: 1,
+          explanation: "The <strong>bowler chart</strong> is a per-KPI table of planned vs. actual each month with red/green status. It&rsquo;s Hoshin&rsquo;s operational dashboard, updated in quarterly reviews."
+        },
+        {
+          prompt: "When is Hoshin Kanri the right approach to use?",
+          options: [
+            "When you are in the early stages of establishing CI discipline.",
+            "When a mature customer wants strategic CI tied to measurable outcomes &mdash; not scattered tactical initiatives.",
+            "When deploying a single improvement project to one team.",
+            "When you need to respond quickly to urgent operational issues."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>Hoshin is for mature CI programs</strong> where leadership wants strategic focus. Early-stage programs should establish PDCA discipline and run a few Kaizens first; Hoshin formalizes what&rsquo;s already happening."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

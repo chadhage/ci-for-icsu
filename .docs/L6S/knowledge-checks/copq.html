@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Cost of Poor Quality (COPQ)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Cost of Poor Quality (COPQ)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Cost of Poor Quality (COPQ)",
+      subtitle: "Quantifies the cost of defects, rework, escapes, and missed prevention &mdash; across internal failure, external failure, appraisal, and prevention.",
+      sourceFile: "../copq.md",
+      sourceLabel: "copq.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What are the four traditional buckets that make up COPQ?",
+          options: [
+            "Labor, Materials, Overhead, Profit.",
+            "Internal failure, External failure, Appraisal, Prevention.",
+            "Design, Build, Test, Deploy.",
+            "Rework, Failures, Audits, Automation."
+          ],
+          correctIndex: 1,
+          explanation: "COPQ captures <strong>all costs</strong> of poor quality: internal rework, customer-found defects, inspection/testing, and prevention work to avoid defects."
+        },
+        {
+          prompt: "Which COPQ bucket is typically the most expensive per defect?",
+          options: [
+            "Prevention (training, automation, design reviews).",
+            "Appraisal (inspection, manual testing, audits).",
+            "Internal failure (rework, rolled-back deploys).",
+            "External failure (incidents, SLA credits, churn)."
+          ],
+          correctIndex: 3,
+          explanation: "Customer-found defects &mdash; incident response, SLA credits, and churn &mdash; are the most expensive. <strong>Prevention</strong> is the cheapest lever per dollar of COPQ reduced."
+        },
+        {
+          prompt: "What is the most effective role for COPQ when proposing a new CI or Kaizen program?",
+          options: [
+            "Show leadership how much the program will cost.",
+            "Document the current quality baseline for auditing.",
+            "Justify the program as an investment that reduces larger hidden costs.",
+            "Replace traditional budgeting processes."
+          ],
+          correctIndex: 2,
+          explanation: "COPQ flips the framing from &ldquo;CI is a cost&rdquo; to &ldquo;poor quality is a larger cost.&rdquo; Showing COPQ at 15&ndash;40% of unmeasured spend justifies <strong>prevention investment</strong>."
+        },
+        {
+          prompt: "Which of these items should NOT be included in a COPQ calculation?",
+          options: [
+            "Rolled-back deploys and emergency rework.",
+            "Incident hours and firefighting labor.",
+            "Estimated revenue churn from quality-related customer departures.",
+            "Normal engineering salaries for feature development work."
+          ],
+          correctIndex: 3,
+          explanation: "COPQ includes defect-related rework and escalations. It does NOT include the baseline cost of <strong>value-adding work</strong> &mdash; only waste and failure costs."
+        },
+        {
+          prompt: "Why is expressing COPQ as a percentage of total spend more useful than reporting an absolute dollar amount?",
+          options: [
+            "Percentages are simpler to calculate without a finance partner.",
+            "It makes COPQ portable and comparable across teams of different sizes.",
+            "It reduces the absolute number reported to leadership.",
+            "It complies with accounting standards and audit requirements."
+          ],
+          correctIndex: 1,
+          explanation: "A $2M COPQ is hard to contextualize without total spend. Expressing it as a percentage (22% vs. 5%) makes the <strong>true business impact</strong> visible and comparable."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

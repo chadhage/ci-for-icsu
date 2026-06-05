@@ -17,6 +17,7 @@ Process capability quantifies *how well a stable process meets its specification
 - [Where Process Capability shows up](#where-process-capability-shows-up)
 - [Who uses Process Capability](#who-uses-process-capability)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/process-capability.html)
 
 ## Why Process Capability
 

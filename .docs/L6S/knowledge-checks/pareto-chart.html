@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Pareto Chart</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Pareto Chart
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Pareto Chart",
+      subtitle: "Prioritization tool that ranks categories in descending order to make the &ldquo;vital few&rdquo; causes driving 80% of impact immediately visible.",
+      sourceFile: "../pareto-chart.md",
+      sourceLabel: "pareto-chart.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "A customer has 4,200 Azure Advisor alerts. How should you build the Pareto to prioritize CSA effort?",
+          options: [
+            "Rank alerts in the order they appear in the Advisor list.",
+            "Rank alerts by severity level alone, without considering business impact.",
+            "Rank by weighted business impact ($ at risk, downtime minutes, secure-score gain) so the vital few high-impact alerts receive focus.",
+            "Treat all alerts equally and work through them randomly."
+          ],
+          correctIndex: 2,
+          explanation: "Raw alert count is misleading. A useful Pareto weights by <strong>business impact</strong>, not frequency. One $50K/month rightsizing matters more than 200 minor hardening tweaks."
+        },
+        {
+          prompt: "Two Paretos: one ranked by incident frequency, one by downtime minutes. Why is the downtime-weighted version more useful?",
+          options: [
+            "Because incident count is always wrong and should never be used.",
+            "Because downtime-weighted Pareto reveals which failures actually impact SLA, not which occur most often.",
+            "Because downtime is always more important than frequency.",
+            "Because the downtime version requires less data."
+          ],
+          correctIndex: 1,
+          explanation: "Frequency and impact are different dimensions. The <strong>downtime-weighted Pareto</strong> shows which failures drive SLA risk. A rare but catastrophic outage may matter more than 200 brief glitches."
+        },
+        {
+          prompt: "A customer hands you 87 WAF findings to analyze. What should you push back on?",
+          options: [
+            "Accept all 87 findings and treat them equally in the Pareto.",
+            "Weight findings by severity &times; blast radius &times; business impact before charting, so the vital few driving 80% of risk are visible.",
+            "Refuse to use Pareto because it oversimplifies complex findings.",
+            "Recommend analyzing findings one at a time instead of charting."
+          ],
+          correctIndex: 1,
+          explanation: "An 87-finding Pareto is a flat list disguised as prioritization. <strong>Weight each finding</strong> before charting to transform 87 items into a few vital findings that justify focused engagement."
+        },
+        {
+          prompt: "A teammate says a service-cost Pareto must be wrong because monthly costs are still trending up. What should you explain?",
+          options: [
+            "The Pareto is definitely wrong if costs are trending upward.",
+            "A Pareto is a snapshot at a point in time. Use a run chart for trends; use Pareto to identify which services are worth optimizing.",
+            "Cost growth proves no Pareto shape exists in the data.",
+            "Rebuild the chart weekly to capture the upward trend."
+          ],
+          correctIndex: 1,
+          explanation: "A Pareto is a <strong>snapshot of categorical impact at one time</strong>, not a time-series. For trends, use a run chart. For prioritizing, use Pareto. Different tools, different questions."
+        },
+        {
+          prompt: "After completing a Pareto-guided Kaizen, how do you validate success?",
+          options: [
+            "Check that all 87 findings have been closed.",
+            "Re-run the same Pareto query 30&ndash;90 days later to see if the top bars have shrunk and new patterns emerge.",
+            "Count how many team members participated in the remediation.",
+            "Measure total CSA hours and compare to original estimate."
+          ],
+          correctIndex: 1,
+          explanation: "Validation is <strong>re-measurement</strong>. Re-run the same query post-remediation. If the top bars shrink and the curve flattens earlier, the work is validated. Pareto &rarr; engagement &rarr; re-measure is the repeatable pattern."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

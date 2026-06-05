@@ -17,6 +17,7 @@ Cost of Poor Quality (COPQ) quantifies what defects, rework, escapes, and missed
 - [Where COPQ shows up](#where-copq-shows-up)
 - [Who calculates COPQ](#who-calculates-copq)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/copq.html)
 
 ## Why COPQ
 

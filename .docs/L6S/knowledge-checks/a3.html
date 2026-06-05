@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — A3 Thinking</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; A3 Thinking
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "A3 Thinking",
+      subtitle: "One-page structured problem-solving report covering background, current state, goal, root cause, countermeasures, plan, and follow-up.",
+      sourceFile: "../a3.md",
+      sourceLabel: "a3.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What are the seven sections of a standard problem-solving A3, in order?",
+          options: [
+            "Intro, Problem Statement, Analysis, Solution, Timeline, Review, Approval.",
+            "Background, Current State, Goal, Root Cause, Countermeasures, Plan, Follow-up.",
+            "Title, Summary, Methods, Results, Actions, Owner, Sign-off.",
+            "Opening, Issue, Investigation, Fix, Test, Close, Notes."
+          ],
+          correctIndex: 1,
+          explanation: "The A3 captures the entire problem-solving arc on one page: where we started, where we are, where we want to go, why the gap exists, what to do, the plan, and how to verify &mdash; a <strong>complete narrative</strong>."
+        },
+        {
+          prompt: "Why is the one-page constraint of an A3 a strength rather than a limitation?",
+          options: [
+            "It&rsquo;s cheaper to print and distribute to the team.",
+            "It forces sharp problem statements and clarity &mdash; nobody re-reads 40-slide decks.",
+            "It simplifies email delivery and reduces file sizes.",
+            "It reduces editing time and accelerates approvals."
+          ],
+          correctIndex: 1,
+          explanation: "The physical <strong>constraint</strong> of one page eliminates fluff, forces prioritization, and creates a durable artifact that future teams re-read. Clarity and reuse are the product."
+        },
+        {
+          prompt: "What is the role of an A3 coach in the development process?",
+          options: [
+            "To write the A3 for the author so the project moves faster.",
+            "To review and challenge &mdash; the redrafts ARE the training, not the final A3.",
+            "To collect data from team members and assemble it into slides.",
+            "To get signatures from stakeholders and archive the document."
+          ],
+          correctIndex: 1,
+          explanation: "A3 development is a <strong>coaching mechanism</strong>. The author redrafts multiple times under mentor guidance; the learning happens in the iteration, not in the final document."
+        },
+        {
+          prompt: "When is an A3 the appropriate artifact instead of a quick runbook entry?",
+          options: [
+            "For every incident, regardless of severity or frequency.",
+            "For routine one-time incidents &mdash; an A3 is overkill there.",
+            "For repeated or systemic incidents where root cause and countermeasures matter.",
+            "Only for Sev A incidents that cause customer impact."
+          ],
+          correctIndex: 2,
+          explanation: "A two-line runbook entry handles one-time incidents. An A3 with root-cause analysis is appropriate when the incident <strong>recurs</strong> or reveals systemic gaps."
+        },
+        {
+          prompt: "What is a sign that an &ldquo;A3&rdquo; has failed as a thinking tool?",
+          options: [
+            "It has too much white space and visual elements.",
+            "It compresses neatly into a multi-slide PowerPoint deck.",
+            "It&rsquo;s readable by a busy leader in five minutes.",
+            "It documents a failed initiative with disconfirming evidence."
+          ],
+          correctIndex: 1,
+          explanation: "If your A3 fits a slide deck, it&rsquo;s not an A3 &mdash; it&rsquo;s a <strong>status report wearing the label</strong>. The one-page form factor is the mechanism that forces thinking rigor."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

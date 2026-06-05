@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge check — Critical to Quality (CTQ)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="./index.html">All knowledge checks</a> &rsaquo; Critical to Quality (CTQ)
+    </nav>
+    <h1 class="page-title" id="kc-title">Knowledge check</h1>
+    <p class="page-subtitle" id="kc-subtitle"></p>
+    <div class="meta-row">
+      <span id="kc-source"></span>
+      <span id="kc-count"></span>
+      <span id="kc-passing"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-bar__fill" id="kc-progress-fill"></div></div>
+    <div id="kc-questions"></div>
+    <footer class="page-footer">iCSU Smart CI Tools &middot; Knowledge check</footer>
+  </main>
+
+  <script>
+    window.KC_DATA = {
+      title: "Critical to Quality (CTQ)",
+      subtitle: "CTQ trees translate qualitative customer needs into specific, measurable specifications with targets and limits.",
+      sourceFile: "../ctq.md",
+      sourceLabel: "ctq.md",
+      passingScore: 80,
+      questions: [
+        {
+          prompt: "What are the three levels of a CTQ tree?",
+          options: [
+            "Need, Driver, and Requirement.",
+            "Define, Measure, and Control.",
+            "Specification, Baseline, and Target.",
+            "Customer, Engineering, and Operations."
+          ],
+          correctIndex: 0,
+          explanation: "A CTQ tree has three levels: <strong>Need</strong> (what the customer wants), <strong>Driver</strong> (dimensions of that need), and <strong>Requirement</strong> (target + spec limits). This structure turns customer expectations into testable contracts."
+        },
+        {
+          prompt: "In which DMAIC phase are CTQs primarily developed?",
+          options: [
+            "Measure phase.",
+            "Define phase.",
+            "Analyze phase.",
+            "Control phase."
+          ],
+          correctIndex: 1,
+          explanation: "CTQs are developed in the <strong>Define phase</strong>, translating Voice of Customer and problem statements into measurable specifications that guide the rest of the project."
+        },
+        {
+          prompt: "What does SMART mean when writing a CTQ requirement?",
+          options: [
+            "Stakeholder, Measurement, Achievable, Relevant, Timely.",
+            "Specific, Measurable, Achievable, Relevant, Time-bounded.",
+            "Service, Metrics, Acceptable, Result, Targeted.",
+            "Stakeholder, Manager-approved, Auditable, Realistic, Tracked."
+          ],
+          correctIndex: 1,
+          explanation: "<strong>SMART</strong> CTQs are Specific, Measurable, Achievable, Relevant, and Time-bounded. Each property makes the requirement actionable."
+        },
+        {
+          prompt: "What anti-pattern should you avoid when setting CTQs?",
+          options: [
+            "Setting multiple drivers per need.",
+            "Including both USL and LSL in requirements.",
+            "Writing engineer-specified limits tighter than the true customer need.",
+            "Changing CTQs during the Measure phase."
+          ],
+          correctIndex: 2,
+          explanation: "The engineer-written CTQ above customer need is the key anti-pattern. For example, setting P99 &le; 50&nbsp;ms when the customer would accept 500&nbsp;ms <strong>wastes capacity</strong> and misaligns the project from reality."
+        },
+        {
+          prompt: "How do CTQs relate to process capability analysis?",
+          options: [
+            "CTQs are inputs that define which processes to analyze.",
+            "CTQs become the specification limits used in Cpk calculations.",
+            "CTQs are only used after capability analysis is complete.",
+            "CTQs replace the need for capability analysis entirely."
+          ],
+          correctIndex: 1,
+          explanation: "CTQs come paired with process capability work &mdash; they are the <strong>specification limits</strong> (USL and LSL) the Cp/Cpk calculation uses to evaluate process fit."
+        }
+      ]
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -17,6 +17,7 @@ Poka-Yoke (Japanese for "mistake-proofing") is the discipline of designing syste
 - [Where Poka-Yoke shows up](#where-poka-yoke-shows-up)
 - [Who designs Poka-Yoke](#who-designs-poka-yoke)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/poka-yoke.html)
 
 ## Why Poka-Yoke
 

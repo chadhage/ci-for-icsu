@@ -17,6 +17,7 @@ DMAIC — **D**efine, **M**easure, **A**nalyze, **I**mprove, **C**ontrol — is 
 - [Where DMAIC shows up](#where-dmaic-shows-up)
 - [Who runs DMAIC](#who-runs-dmaic)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/dmaic.html)
 
 ## Why DMAIC
 

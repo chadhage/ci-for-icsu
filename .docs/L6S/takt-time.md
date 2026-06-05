@@ -17,6 +17,7 @@ Takt time (German *Takt*, "beat" or "pulse") is the rate at which a process must
 - [Where Takt Time shows up](#where-takt-time-shows-up)
 - [Who uses Takt Time](#who-uses-takt-time)
 - [Examples](#examples)
+- [Knowledge check](./knowledge-checks/takt-time.html)
 
 ## Why Takt Time
 
