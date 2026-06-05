@@ -12,8 +12,8 @@ Continuous Improvement (CI) is the disciplined practice of making small, evidenc
 
 - [Why Continuous Improvement](#why-continuous-improvement)
 - [What is Continuous Improvement](#what-is-continuous-improvement)
-- [How to use Continuous Improvement](#how-to-use-continuous-improvement)
 - [When to use Continuous Improvement](#when-to-use-continuous-improvement)
+- [How to use Continuous Improvement](#how-to-use-continuous-improvement)
 - [Where to use Continuous Improvement](#where-to-use-continuous-improvement)
 - [Who should use Continuous Improvement](#who-should-use-continuous-improvement)
 - [Examples](#examples)
@@ -48,22 +48,6 @@ CI is *not*: a one-time transformation, a tool purchase, a certification, or a s
 
 **Real example:** A CSA was asked to "modernize" a customer's 80-app estate. Instead of proposing a 12-month migration program, the CSA framed it as a CI cadence: every 2 weeks, pick one app from the Pareto top, run a 5-day improvement cycle (containerize, add health probes, move to ACA), measure cost and reliability deltas, and standardize the pattern. After 6 months, 14 apps were modernized, the standard work pattern was reusable for the remaining 66, and the customer's own team owned the cadence.
 
-## How to use Continuous Improvement
-
-CI is a loop, not a checklist. The CSA's job is to instrument the loop and coach the customer through it.
-
-1. **Establish a baseline.** Measure today's state with data the customer trusts — incident counts, downtime minutes, $ spend, deployment frequency, MTTR, RU/s, secure score. Without a baseline, "improvement" is opinion.
-2. **Pick one theme.** Use a Pareto chart, Ishikawa, or 5 Whys to narrow to the highest-impact gap. Resist multi-theme cycles — CI compounds because each cycle is small.
-3. **Plan the change (P).** Define the hypothesis: "If we add a private endpoint to ACR, ImagePullBackOff incidents drop by >50%." State the metric, the target, and the time window.
-4. **Do at small scale (D).** Apply the change in one environment, one workload, one resource group. Capture the IaC diff so the change is reversible and repeatable.
-5. **Check the data (C).** Re-run the baseline query at the end of the window. The chart either moves or it does not. Resist the urge to "explain away" a flat result.
-6. **Act — standardize or discard (A).** If the change worked, fold it into the customer's reference architecture, IaC modules, Azure Policy, or runbooks. If it didn't, document why and pick the next hypothesis.
-7. **Restart the loop.** The next baseline is today's outcome. New top of the Pareto, new hypothesis, new cycle.
-
-Cadence matters more than ceremony. A 6-week cycle that ships one validated change beats a 6-month "transformation program" that ships nothing.
-
-**Anti-pattern to avoid:** the "perpetual planning" CSA who never gets to Do. Plan-Plan-Plan-Plan is not PDCA.
-
 ## When to use Continuous Improvement
 
 Use a CI cadence when **all** of these are true:
@@ -88,6 +72,22 @@ Do **not** use CI framing for:
 - One-off workshops with no follow-up engagement model — there is nothing to compound.
 
 **Real example:** A CSA was pulled into a 48-hour outage. They did not open a Pareto chart. They ran incident command, restored service, and then — in the postmortem two weeks later — used Ishikawa + 5 Whys to feed the next CI cycle. CI is the steady state, not the emergency response.
+
+## How to use Continuous Improvement
+
+CI is a loop, not a checklist. The CSA's job is to instrument the loop and coach the customer through it.
+
+1. **Establish a baseline.** Measure today's state with data the customer trusts — incident counts, downtime minutes, $ spend, deployment frequency, MTTR, RU/s, secure score. Without a baseline, "improvement" is opinion.
+2. **Pick one theme.** Use a Pareto chart, Ishikawa, or 5 Whys to narrow to the highest-impact gap. Resist multi-theme cycles — CI compounds because each cycle is small.
+3. **Plan the change (P).** Define the hypothesis: "If we add a private endpoint to ACR, ImagePullBackOff incidents drop by >50%." State the metric, the target, and the time window.
+4. **Do at small scale (D).** Apply the change in one environment, one workload, one resource group. Capture the IaC diff so the change is reversible and repeatable.
+5. **Check the data (C).** Re-run the baseline query at the end of the window. The chart either moves or it does not. Resist the urge to "explain away" a flat result.
+6. **Act — standardize or discard (A).** If the change worked, fold it into the customer's reference architecture, IaC modules, Azure Policy, or runbooks. If it didn't, document why and pick the next hypothesis.
+7. **Restart the loop.** The next baseline is today's outcome. New top of the Pareto, new hypothesis, new cycle.
+
+Cadence matters more than ceremony. A 6-week cycle that ships one validated change beats a 6-month "transformation program" that ships nothing.
+
+**Anti-pattern to avoid:** the "perpetual planning" CSA who never gets to Do. Plan-Plan-Plan-Plan is not PDCA.
 
 ## Where to use Continuous Improvement
 
