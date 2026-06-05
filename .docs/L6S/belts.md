@@ -17,7 +17,7 @@ Lean / Six Sigma certifications use a martial-arts belt metaphor (White → Yell
 - [Where the belts show up](#where-the-belts-show-up)
 - [Who should pursue which belt](#who-should-pursue-which-belt)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/belts.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/belts.html)
 
 ## Why belts and certification
 

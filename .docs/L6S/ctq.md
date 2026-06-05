@@ -17,7 +17,7 @@ Critical to Quality (CTQ) trees translate qualitative customer needs (from [VOC]
 - [Where CTQ shows up](#where-ctq-shows-up)
 - [Who writes CTQs](#who-writes-ctqs)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/ctq.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/ctq.html)
 
 ## Why CTQ
 

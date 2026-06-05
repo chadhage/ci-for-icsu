@@ -17,7 +17,7 @@ Voice of the Customer (VOC) is the structured capture of what customers actually
 - [Where VOC shows up](#where-voc-shows-up)
 - [Who runs VOC](#who-runs-voc)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/voc.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/voc.html)
 
 ## Why VOC
 

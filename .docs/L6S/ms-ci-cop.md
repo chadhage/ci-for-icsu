@@ -18,7 +18,7 @@ Continuous Improvement at Microsoft is the connective tissue between the custome
 - [Where CI at Microsoft shows up](#where-ci-at-microsoft-shows-up)
 - [Who participates](#who-participates)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/ms-ci-cop.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/ms-ci-cop.html)
 
 ## Why CI at Microsoft
 

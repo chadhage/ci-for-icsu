@@ -99,7 +99,7 @@
     ]));
     var retry = el("button", { className: "btn btn--primary", type: "button" }, ["Retry knowledge check"]);
     retry.addEventListener("click", function () { window.location.reload(); });
-    var back = el("a", { className: "btn btn--secondary", href: window.KC_DATA.sourceFile || "../index.md" }, ["Back to topic"]);
+    var back = el("a", { className: "btn btn--secondary", href: window.KC_DATA.sourceFile || "https://github.com/chadhage/ci-for-icsu/blob/main/.docs/L6S/index.md" }, ["Back to topic"]);
     var actions = el("div", { className: "summary__actions" }, [retry, back]);
     summary.appendChild(actions);
     summary.style.display = "block";

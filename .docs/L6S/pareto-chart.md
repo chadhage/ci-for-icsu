@@ -17,7 +17,7 @@ A Pareto chart ranks categories (incident signatures, error codes, resource type
 - [Where to use Pareto Charts](#where-to-use-pareto-charts)
 - [Who should use Pareto Charts](#who-should-use-pareto-charts)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/pareto-chart.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/pareto-chart.html)
 
 ## Why Pareto Charts
 

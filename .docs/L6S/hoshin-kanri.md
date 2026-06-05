@@ -17,7 +17,7 @@ Hoshin Kanri (Japanese: *hōshin* "compass," *kanri* "management") — also call
 - [Where Hoshin Kanri shows up](#where-hoshin-kanri-shows-up)
 - [Who runs Hoshin Kanri](#who-runs-hoshin-kanri)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/hoshin-kanri.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/hoshin-kanri.html)
 
 ## Why Hoshin Kanri
 

@@ -17,7 +17,7 @@ Continuous Improvement (CI) is the disciplined practice of making small, evidenc
 - [Where to use Continuous Improvement](#where-to-use-continuous-improvement)
 - [Who should use Continuous Improvement](#who-should-use-continuous-improvement)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/intro.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/intro.html)
 
 ## Why Continuous Improvement
 

@@ -17,7 +17,7 @@ The 8 Wastes (DOWNTIME — Defects, Overproduction, Waiting, Non-utilized talent
 - [Where the 8 Wastes show up](#where-the-8-wastes-show-up)
 - [Who should hunt waste](#who-should-hunt-waste)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/waste.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/waste.html)
 
 ## Why the 8 Wastes
 

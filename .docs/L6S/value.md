@@ -17,7 +17,7 @@ Value is anything the *customer* is willing to fund — and crucially, anything 
 - [Where Value shows up](#where-value-shows-up)
 - [Who should own Value](#who-should-own-value)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/value.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/value.html)
 
 ## Why Value matters
 

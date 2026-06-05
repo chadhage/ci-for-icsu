@@ -17,7 +17,7 @@ A value stream is the end-to-end sequence of activities — from customer reques
 - [Where Value Streams show up](#where-value-streams-show-up)
 - [Who should map the Value Stream](#who-should-map-the-value-stream)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/value-stream.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/value-stream.html)
 
 ## Why Value Stream Mapping
 

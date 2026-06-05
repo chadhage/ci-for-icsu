@@ -17,7 +17,7 @@ An Ishikawa (a.k.a. fishbone or cause-and-effect) diagram is a structured brains
 - [Where to use Ishikawa diagrams](#where-to-use-ishikawa-diagrams)
 - [Who should use Ishikawa diagrams](#who-should-use-ishikawa-diagrams)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/ishikawa.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/ishikawa.html)
 
 ## Why Ishikawa diagrams
 

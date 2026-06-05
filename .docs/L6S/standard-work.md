@@ -17,7 +17,7 @@ Standard Work is the *current best-known* way to perform a task — documented, 
 - [Where Standard Work shows up](#where-standard-work-shows-up)
 - [Who owns Standard Work](#who-owns-standard-work)
 - [Examples](#examples)
-- [Knowledge check](./knowledge-checks/standard-work.html)
+- [Knowledge check](https://chadhage.github.io/ci-for-icsu/standard-work.html)
 
 ## Why Standard Work
 
