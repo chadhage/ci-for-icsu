@@ -73,6 +73,66 @@ Do **not** use CI framing for:
 
 **Real example:** A CSA was pulled into a 48-hour outage. They did not open a Pareto chart. They ran incident command, restored service, and then — in the postmortem two weeks later — used Ishikawa + 5 Whys to feed the next CI cycle. CI is the steady state, not the emergency response.
 
+### When skilling — not CI — is the right intervention
+
+CI assumes a baseline of competence: operators know the standard work and can execute it. When the data shows that assumption is false, **training is the prerequisite improvement** — running a PDCA cycle on a process the team can't yet perform just produces noise. Skill the team first, *then* apply CI on top of a stable baseline.
+
+The signal is in the control chart. A process in statistical control oscillates around the mean with occasional special-cause points. A process that needs training looks different: it sits *entirely* on one side of — or *outside* — the control limits, with a stable shape. That pattern is not a process defect; it is a capability defect.
+
+**Decide which intervention applies:**
+
+```mermaid
+flowchart TD
+    A[Performance gap observed] --> B{Does standard work<br/>exist and is it correct?}
+    B -- No --> C[Define standard work first<br/>then revisit]
+    B -- Yes --> D{Can the team<br/>execute it today?}
+    D -- No --> E[Skill / Train<br/>before CI]
+    D -- Yes --> F{Is the process<br/>in statistical control?}
+    F -- No, special causes --> G[Remove special causes<br/>then CI]
+    F -- Yes, but missing target --> H[Run CI / PDCA cycle]
+
+    style E fill:#fde68a,stroke:#b45309,color:#1f2937
+    style H fill:#bbf7d0,stroke:#15803d,color:#1f2937
+    style C fill:#e5e7eb,stroke:#4b5563,color:#1f2937
+    style G fill:#fecaca,stroke:#b91c1c,color:#1f2937
+```
+
+**The control-chart signature of a skilling gap:**
+
+The chart below shows a process where every observation falls below the Lower Control Limit. The variation is small (the process is *stable*) and the mean is shifted (the operators are *consistently* under-performing the standard). That is a textbook training signal — no amount of PDCA on the process design will move it; the people running it need to be skilled up to the standard first.
+
+```mermaid
+xychart-beta
+    title "Deployment success rate — entire run below LCL (skilling gap)"
+    x-axis "Week" [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    y-axis "Success rate (%)" 50 --> 100
+    line "Process mean (90%)" [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90]
+    line "UCL (97%)" [97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97]
+    line "LCL (83%)" [83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83]
+    line "Observed" [72, 70, 74, 71, 73, 69, 72, 70, 73, 71, 72, 70]
+```
+
+The mirror pattern — every observation *above* the UCL on a "bad" metric such as failed deployments, escaped defects, or MTTR — has the same diagnosis: the work isn't being done to standard, and CI on the process won't fix a people-capability gap.
+
+**Skill first, then CI, when you see:**
+
+- A new Azure service or pattern was introduced and adoption metrics flat-line outside the limits — the team doesn't know how to use it yet.
+- A WAF / Advisor recommendation has been delivered repeatedly but never appears in IaC — the gap is fluency, not awareness.
+- A specific squad or region's metrics sit entirely below the portfolio's LCL while everyone else is in control — local capability gap, not a process gap.
+- An on-call rotation's MTTR is consistently above UCL for a runbook that exists and is correct — the runbook isn't the problem, the practice is.
+- Post-incident reviews keep producing the same "human error" root cause — that is almost never carelessness; it is a missing skill or missing standard work.
+
+**Skilling interventions that pair with CI:**
+
+- A focused 1.5–2 day workshop on the specific gap (not a generic "Azure 101").
+- Pair-programming or shadow-on-call rotations with a more experienced engineer.
+- A Microsoft Learn collection assigned with completion + a hands-on lab gate.
+- Standard work captured as a runnable artifact — a script, an IaC module, a copilot prompt — so the skill is encoded, not just taught.
+
+**Then return to CI.** Re-baseline after the training cycle. If the control chart now sits inside the limits but still misses the business target, *that* is when PDCA earns its keep. See the *Skilling cadence* example below — it is itself a CI loop wrapped around training delivery.
+
+**Real example:** A CSA was asked to run a reliability CI cadence on a customer's Bicep deployment pipeline. Three weeks of data showed deployment success at 68–74% — the *entire* run below the team's own 85% LCL. Rather than open a PDCA cycle on the pipeline, the CSA ran a 2-day Bicep + GitHub Actions workshop and pair-deployed the next two releases. Success moved to 92% and inside the control limits within a sprint. *Only then* did the CSA start a PDCA cycle to chase the remaining 8% — and the first cycle had a clean baseline to measure against.
+
 ## How to use Continuous Improvement
 
 CI is a loop, not a checklist. The CSA's job is to instrument the loop and coach the customer through it.
