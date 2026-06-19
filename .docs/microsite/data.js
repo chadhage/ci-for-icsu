@@ -227,6 +227,63 @@ window.MODULES = {
     }
   ]
 },
+"convergent-divergent": {
+  id: "convergent-divergent",
+  title: "Convergent vs Divergent Thinking",
+  group: "Foundations",
+  duration: "30 min",
+  executiveSummary: "Continuous Improvement depends on two opposite thinking modes used in the right order: divergent thinking opens a problem up by generating many possible causes, hypotheses, and solutions, and convergent thinking closes it down by using evidence to select the best-supported one. The single most common reason CI cycles fail is collapsing these two modes into one—jumping to a conclusion before the divergent search and the data are done. When a team anchors on the first plausible cause, it fixes the wrong thing, the problem recurs, and the cycle is wasted along with the stakeholder trust that funds the next one. This module gives CSAs the discipline to separate diverge from converge, recognize the biases that cause premature convergence, and use CI tools and tollgates to force evidence before commitment.",
+  whatYouGain: [
+    "Define divergent and convergent thinking and know which CI activities belong to each mode",
+    "Separate idea generation from evaluation in time so you don't strangle good options at birth",
+    "Recognize the biases—anchoring, confirmation, availability—that make teams jump to conclusions",
+    "Trace how premature convergence produces failed CI cycles, recurring problems, and lost credibility",
+    "Use Ishikawa, Pareto, 5 Whys, DMAIC tollgates, and A3 to enforce a deliberate diverge-then-converge rhythm"
+  ],
+  explanation: "<p>Every improvement requires two opposite cognitive modes. <strong>Divergent thinking</strong> is generative: you deliberately widen the field, producing many candidate causes, hypotheses, and solutions without judging them yet—a full Ishikawa across the 6 Ms, an unfiltered brainstorm of countermeasures, several competing explanations for a defect. <strong>Convergent thinking</strong> is reductive: you apply data, criteria, and judgment to narrow that field to the best-supported answer—ranking causes with a Pareto, confirming a root cause with 5 Whys and direct measurement, choosing a countermeasure by impact and effort. Good CI needs both, and it needs them <em>in sequence</em>.</p><p>The defining error is <strong>premature convergence</strong>—collapsing the two modes into one by latching onto the first plausible answer. It feels efficient (&lsquo;it's obviously the database&rsquo;) but it quietly skips the divergent search, so the real cause never gets a chance to surface. Three biases drive it: <strong>anchoring</strong> (the first idea dominates everything that follows), <strong>confirmation bias</strong> (you then gather only the data that supports it, feeling data-driven while looking at half the picture), and the <strong>availability heuristic</strong> (the cause you saw most recently feels most likely). Solution-first &lsquo;ready-fire-aim&rsquo; behavior is the same error one step downstream—converging on a fix before you have converged on a cause.</p><p>Why does this wreck a CI cycle? A PDCA or DMAIC loop is only as good as the cause it targets. Converge prematurely and you run the whole loop—plan, build, deploy, measure—against the wrong root cause. The improvement shows no effect or regresses, the problem recurs, and you have spent a cycle's time and budget to learn nothing you trust. Worse, each failed cycle erodes the stakeholder confidence that funds the next one, so premature convergence doesn't just waste one attempt—it shortens the runway for the whole engagement. &lsquo;Go slow to go fast&rsquo; is literal here: a deliberate divergent pass is far cheaper than a failed cycle plus the recurrence it guarantees.</p><p>CI methods are built to force the discipline. <strong>Ishikawa</strong> and brainstorming are explicitly divergent—capture every plausible cause before judging any. <strong>Pareto, 5 Whys, and hypothesis testing</strong> are convergent—use data to eliminate candidates down to the vital few. <strong>DMAIC tollgates</strong> exist precisely to block premature convergence: you cannot leave Analyze without evidence for the root cause. <strong>A3</strong> structures a diverge-then-converge pass on one page, and the design world's <em>Double Diamond</em> names the same alternation—diverge to explore the problem, converge to define it, diverge to explore solutions, converge to deliver one. The throughline connects to data literacy: diverge widely across qualitative and circumstantial signal, but converge only on <strong>direct, empirical</strong> proof before you commit.</p>",
+  csamExample: "<p>A renewal is wobbling and the account team's first instinct is unanimous: &lsquo;The customer thinks we're too expensive—let's offer a discount.&rsquo; That is premature convergence. The CSAM forces a divergent pass on churn drivers instead: VOC themes from recent reviews, the product-usage trend, support sentiment, executive-relationship health, onboarding friction, and competitor activity all go on the board before any of them is judged. Only then does the team converge—using data—and the evidence points not to price but to a stalled onboarding that left two business units never activated. A discount would have burned margin and still lost the renewal, because it answered a cause that wasn't real. By separating generate-from-evaluate, the CSAM spends the cycle fixing activation, retention recovers, and the next QBR is grounded in a cause the data actually supports.</p>",
+  csaExample: "<p>During the Analyze phase of a reliability DMAIC, a customer SRE reacts to a single latency spike with &lsquo;It's the database—let's re-index.&rsquo; The CSA holds the team in divergent mode first, building an Ishikawa across the 6 Ms: AKS scale-in cold starts, Cosmos RU throttling, DNS resolution, network egress, client-side retry storms, and GC pauses all become candidate causes. The team then converges with direct, empirical data—correlating the latency control chart against deploy and scale events—and finds the breaches cluster after scale-in cold starts, with the database never implicated. Had they jumped to the database conclusion, they would have run a full cycle re-indexing a healthy database: no improvement, the spikes recur, and the SRE team loses confidence in the CI process. The disciplined diverge-then-converge pass cost an extra day and saved a failed cycle.</p>",
+  recap: [
+    "Divergent thinking generates options without judging; convergent thinking narrows them with evidence—use both, in that order",
+    "Premature convergence (jumping to conclusions) is the most common cause of failed CI cycles: you fix the wrong thing and the problem recurs",
+    "Name the biases behind it—anchoring, confirmation bias, and the availability heuristic—so you can catch them in the room",
+    "A failed cycle costs more than the wasted work: it erodes the stakeholder trust that funds the next cycle",
+    "CI tools enforce the rhythm: Ishikawa and brainstorming diverge; Pareto, 5 Whys, and hypothesis testing converge; DMAIC tollgates gate it",
+    "Diverge across all signal, but converge only on direct, empirical proof of the root cause before committing a countermeasure"
+  ],
+  questions: [
+    {
+      prompt: "What best describes divergent thinking in a continuous-improvement context?",
+      options: ["Narrowing a list of causes down to the single most likely one using data.", "Generating a wide range of possible causes, hypotheses, or solutions without judging them yet.", "Implementing the first reasonable solution as quickly as possible.", "Selecting the countermeasure with the best impact-to-effort ratio."],
+      correctIndex: 1,
+      explanation: "Divergent thinking is the <strong>generative</strong> mode—cast a wide net (for example, a full Ishikawa across the 6 Ms) and defer judgment. Narrowing with data is convergent thinking; the two work best when separated in time."
+    },
+    {
+      prompt: "Why is jumping to conclusions (premature convergence) so dangerous in a CI cycle?",
+      options: ["It makes brainstorming sessions run longer than scheduled.", "It commits the team to a cause or solution before evidence confirms it, so the cycle often fixes the wrong thing and the problem recurs.", "It always violates the project charter.", "It produces too many candidate solutions to evaluate."],
+      correctIndex: 1,
+      explanation: "Converging before the divergent search and data validation are done means acting on an unverified guess. The improvement fails or regresses, the problem returns, and the stakeholder trust that funds future cycles erodes."
+    },
+    {
+      prompt: "During DMAIC Analyze, an engineer declares after one latency spike, 'It's obviously the database.' What is the disciplined next step?",
+      options: ["Begin re-indexing the database immediately to save time.", "Generate the full set of plausible causes (e.g., an Ishikawa across the 6 Ms), then converge on the root cause with data and hypothesis testing.", "Escalate it to the product group as a confirmed database defect.", "Close Analyze and move directly to Control."],
+      correctIndex: 1,
+      explanation: "One observation is circumstantial. Stay in divergent mode to surface all candidate causes, then converge by testing them against direct, empirical data. Acting on the first guess risks a failed cycle that re-indexes a database that was never the cause."
+    },
+    {
+      prompt: "A team forms an early theory and then gathers only the telemetry that supports it, ignoring contradicting data. Which bias is this?",
+      options: ["Anchoring bias.", "Confirmation bias.", "Availability heuristic.", "Survivorship bias."],
+      correctIndex: 1,
+      explanation: "<strong>Confirmation bias</strong> is seeking or over-weighting evidence that confirms a pre-existing belief. It is a primary way premature convergence hides itself—the team feels data-driven while looking only at supporting data. (Anchoring, over-relying on the first information, pushes teams the same direction.)"
+    },
+    {
+      prompt: "What is the main reason CI methods separate idea generation from evaluation and place tollgates between DMAIC phases?",
+      options: ["To create more documentation for audits.", "To prevent premature convergence by forcing sufficient evidence before the team commits to a cause or advances a phase.", "To slow projects down so they cost more.", "To ensure every team member contributes an equal number of ideas."],
+      correctIndex: 1,
+      explanation: "Tollgates and the diverge-then-converge rhythm exist to stop teams locking onto an unverified answer. Each gate requires enough evidence to proceed—this is how CI 'goes slow to go fast' and avoids failed cycles."
+    }
+  ]
+},
 "dmaic": {
   id: "dmaic",
   title: "DMAIC",
