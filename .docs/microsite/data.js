@@ -170,6 +170,63 @@ window.MODULES = {
     }
   ]
 },
+"data-types": {
+  id: "data-types",
+  title: "Understanding Data in CI",
+  group: "Foundations",
+  duration: "30 min",
+  executiveSummary: "Continuous Improvement runs on data, but not all data is the same kind—and using the wrong kind produces confident, wrong decisions. This module gives CSAs a working vocabulary for four data distinctions that appear in every engagement: empirical vs. theoretical (measured reality vs. modeled expectation), qualitative vs. quantitative (descriptive vs. numeric), continuous vs. discrete (measured on a continuum vs. counted), and direct vs. circumstantial (evidence of the thing itself vs. a correlated proxy). Knowing which kind of data you hold tells you which statistical tool is valid, how large a sample you need, and how much weight a finding can bear. The core discipline: anchor every CI decision in empirical, direct measurement of the metric that matters, and treat models, proxies, and sentiment as inputs that point you there—not as proof.",
+  whatYouGain: [
+    "Distinguish empirical (measured) from theoretical (modeled) data and know when each can be trusted",
+    "Tell quantitative from qualitative data, and turn qualitative signal into something you can measure",
+    "Classify data as continuous or discrete and pick the control chart and sample size that fit",
+    "Separate direct evidence of a problem from circumstantial proxies, and avoid correlation-as-causation traps",
+    "Choose the right data type for a CTQ so your baseline, analysis, and Control phase stay statistically valid"
+  ],
+  explanation: "<p>Continuous Improvement is only as good as the data feeding it. The trap is not missing data—it is using the <strong>wrong kind</strong> of data with the wrong tool and reaching a confident but wrong conclusion. Every measurement carries four attributes at once, and naming them keeps your analysis honest.</p><p><strong>Empirical vs. theoretical.</strong> Empirical data is obtained by observation, measurement, or experiment—the actual values the real system produced (four weeks of logged P95 latency, the real incident count last month). Theoretical data is produced by a model, assumption, or first-principles calculation—the values a system <em>should</em> produce (a queuing model's predicted latency, a normal-curve DPMO estimate, a renewal forecast). Theory is invaluable for planning, but in CI you <strong>validate theory against empirics</strong> and never standardize a change on a model alone.</p><p><strong>Qualitative vs. quantitative.</strong> Quantitative data is numeric and measurable (latency in ms, RU/s, cost, counts) and supports statistical analysis. Qualitative data is descriptive or categorical (VOC verbatims, incident categories, root-cause themes, sentiment). Qualitative is not second-class: you <strong>code it into nominal or ordinal categories and count it</strong>, turning sentiment into a Pareto of themes. The two work together—qualitative data tells you <em>what</em> to measure; quantitative data tells you <em>how much</em>.</p><p><strong>Continuous vs. discrete.</strong> Continuous data can take any value on a continuum (latency, CPU %, cost, temperature) and is infinitely divisible. Discrete data is counted in whole units (number of incidents, failed deployments, defects per release)—you cannot have 2.5 failed deployments. The distinction is practical: continuous data uses I-MR or X-bar/R charts and detects a shift with relatively few samples; discrete <strong>attribute</strong> data uses p-, np-, c-, or u-charts and needs a far larger sample to detect the same change, because each pass/fail outcome carries less information than a measurement.</p><p><strong>Direct vs. circumstantial.</strong> Direct data measures the metric of interest itself (actual P95 latency when latency is the CTQ). Circumstantial—indirect—data measures a correlated proxy you reason from (CPU %, support-ticket volume, portal sign-ins). Circumstantial evidence is excellent for forming hypotheses and triaging where to look, but a correlation is not proof: <strong>correlation is not causation</strong>. Gather direct measurement of the CTQ before you treat a cause as confirmed or standardize a fix.</p><p>A single metric carries all four attributes simultaneously. &lsquo;Measured P95 latency in ms&rsquo; is empirical, quantitative, continuous, and direct—about as trustworthy as data gets. &lsquo;Twelve Sev-B incidents tagged networking this quarter&rsquo; is empirical, the count is quantitative and discrete, the tag is qualitative, and using incident count to judge reliability is partly circumstantial. Naming the attributes tells you exactly how much that number can be asked to prove.</p>",
+  csamExample: "<p>A CSAM is preparing an EBR for a strategic account and has four very different inputs on the table: a qualitative VOC theme (&lsquo;the platform team feels deployments are risky&rsquo;), a quantitative consumption trend (AKS and ACR spend), a circumstantial signal (portal sign-ins dipped 20% last month), and a theoretical renewal forecast projecting 12% growth. A weaker readout would react to the forecast or the sign-in dip in isolation. Instead the CSAM anchors on <strong>empirical, direct</strong> data—pulls actual consumption and incident history—and codes the VOC verbatims into categories so the dominant concern (deployment confidence) becomes a counted, quantified theme rather than an anecdote. The forecast is presented as a model to pressure-test, not a fact; the sign-in dip is flagged as a hypothesis to investigate, not a conclusion. The renewal conversation lands because it rests on measured reality, and the one qualitative theme that mattered becomes a measurable CTQ for the next CI cycle.</p>",
+  csaExample: "<p>A CSA on an AKS reliability engagement hears the customer assert, &lsquo;CPU spikes are causing our latency SLO breaches,&rsquo; pointing to a chart where CPU and latency rise together. CPU is <strong>circumstantial</strong>—a proxy, not the CTQ. The CSA gathers <strong>direct, empirical</strong> data: actual P95/P99 latency percentiles (continuous) and the count of SLO-breaching releases (discrete). Because latency is continuous, an I-MR / X-bar-R chart on ~20–25 subgroups is enough to see the pattern; because deployment outcome is attribute data, the CSA knows a p-chart would need a much larger sample to confirm a real shift. The latency control chart shows breaches cluster after scale-in cold starts—not with CPU at all. The CSA rejects the theoretical assumption, fixes the actual cause (warm pool / minimum replica count), and standardizes it in IaC. Treating the CPU correlation as proof would have sent the team down the wrong path entirely.</p>",
+  recap: [
+    "Every metric carries four attributes at once—empirical/theoretical, qualitative/quantitative, continuous/discrete, direct/circumstantial—name them to keep analysis honest",
+    "Empirical (measured) data validates theoretical (modeled) expectations; never standardize a change on a model alone",
+    "Qualitative signal is not second-class—code it into categories and count it so VOC drives a measurable CTQ",
+    "Continuous data uses I-MR / X-bar-R charts and needs fewer samples; discrete attribute data uses p-/c-/u-charts and needs far larger samples",
+    "Direct measurement of the CTQ is proof; circumstantial proxies (CPU, tickets, sign-ins) form hypotheses—correlation is not causation",
+    "Pick the data type deliberately in Define/Measure so your baseline, chart, and Control phase stay statistically valid"
+  ],
+  questions: [
+    {
+      prompt: "A CSA pulls four weeks of actual P95 latency readings from Azure Monitor to baseline a process. What kind of data is this?",
+      options: ["Theoretical, because percentiles are statistical estimates.", "Empirical, because it is observed measurement of the real system.", "Qualitative, because latency describes user experience.", "Circumstantial, because latency is only a proxy for reliability."],
+      correctIndex: 1,
+      explanation: "<strong>Empirical</strong> data is obtained by observation or measurement of the real world. Actual logged latency readings are empirical; a model that <em>predicts</em> latency would be theoretical. Even though a percentile is a computed summary, it is computed from observed measurements, so the data is empirical."
+    },
+    {
+      prompt: "Which of these metrics is discrete (attribute) data rather than continuous?",
+      options: ["Average request latency in milliseconds.", "CPU utilization percentage.", "The number of failed deployments per release.", "Monthly Azure spend in dollars."],
+      correctIndex: 2,
+      explanation: "Discrete data is counted in whole units—you cannot have 2.5 failed deployments. Latency, CPU %, and cost are <strong>continuous</strong> (any value on a continuum). The distinction drives chart choice: counts use p-/c-/u-charts, while continuous values use I-MR or X-bar/R."
+    },
+    {
+      prompt: "A customer's VOC interviews produce dozens of free-text comments about deployment pain. What is the best way to make this qualitative data usable in a CI baseline?",
+      options: ["Discard it, because only numeric data belongs in a baseline.", "Treat every individual comment as its own separate root cause.", "Code the comments into categories and count them so the dominant theme can be quantified.", "Forward it to the product group without further analysis."],
+      correctIndex: 2,
+      explanation: "Qualitative data becomes actionable when it is <strong>coded into categories and counted</strong>—turning sentiment into a Pareto of themes. Qualitative signal tells you what to measure; quantifying it lets it drive a measurable CTQ rather than staying an anecdote."
+    },
+    {
+      prompt: "A team asserts CPU spikes are the root cause of latency breaches, citing a chart where CPU and latency both rise. Before standardizing a fix, what should a CSA do?",
+      options: ["Accept it—two correlated lines on a chart are sufficient proof of causation.", "Gather direct measurement of the latency CTQ to test the hypothesis, since CPU is circumstantial evidence.", "Raise CPU limits immediately and close the investigation.", "Replace the measurements with a theoretical queuing model."],
+      correctIndex: 1,
+      explanation: "CPU is a <strong>circumstantial</strong> (indirect) proxy, and a correlation is a hypothesis, not proof. Direct measurement of the metric that matters—the latency CTQ—is required before a cause is treated as confirmed. Correlation is not causation."
+    },
+    {
+      prompt: "Why does attribute (discrete) data generally require a much larger sample than continuous data to detect the same process change?",
+      options: ["Because attribute data cannot be plotted on a control chart.", "Because each continuous measurement carries more information than a single pass/fail outcome.", "Because discrete data is always theoretical rather than empirical.", "Because continuous data is inherently qualitative."],
+      correctIndex: 1,
+      explanation: "Each continuous measurement conveys more information than a single discrete pass/fail result, so continuous data detects a shift with fewer samples. Attribute/count data (proportion defective, defect counts) needs substantially larger samples for equivalent sensitivity—an important sample-size consideration when choosing a metric."
+    }
+  ]
+},
 "dmaic": {
   id: "dmaic",
   title: "DMAIC",
