@@ -125,6 +125,9 @@
       "onb.flow.belt.desc": "Pursue a Lean Six Sigma belt. Pick your target belt and we filter the library to that belt\u2019s learning plan.",
       "onb.q.belt": "4. Which belt are you pursuing?",
       "onb.start": "Start learning",
+      "onb.next": "Next",
+      "onb.back": "Back",
+      "onb.step": "Step {n} of {total}",
       "onb.aria": "Set up your path",
 
       /* prefbar */
@@ -313,7 +316,32 @@
       "domain.mapping": "Map and analyze processes and root causes",
       "domain.flow": "Optimize workplace, flow, and standardization",
       "domain.measure": "Measure and control processes statistically",
-      "domain.govern": "Lead CI strategy and governance"
+      "domain.govern": "Lead CI strategy and governance",
+
+      /* feedback (Voice of Customer) */
+      "voc.button": "Feedback",
+      "voc.aria": "Share your feedback",
+      "voc.title": "Share your feedback",
+      "voc.lede": "Help us improve the 30-Minute Delivery Series. Your feedback is collected as a Voice-of-Customer issue in the project&rsquo;s GitHub repository.",
+      "voc.github.note": "Submitting opens a pre-filled GitHub issue in a new tab &mdash; review it, then click <strong>Submit new issue</strong> to send. A GitHub account with access to the repository is required.",
+      "voc.type.label": "What kind of feedback is this?",
+      "voc.type.content": "Content accuracy",
+      "voc.type.suggestion": "Suggestion or improvement",
+      "voc.type.bug": "Bug or broken link",
+      "voc.type.question": "Question",
+      "voc.type.praise": "Praise",
+      "voc.type.other": "Other",
+      "voc.rating.label": "Overall rating (optional)",
+      "voc.rating.clear": "Clear rating",
+      "voc.subject.label": "Summary",
+      "voc.subject.ph": "A short title for your feedback",
+      "voc.details.label": "Details",
+      "voc.details.ph": "What worked, what didn\u2019t, and any suggestions\u2026",
+      "voc.name.label": "Your name (optional)",
+      "voc.name.ph": "So we can follow up, if needed",
+      "voc.required": "Please add a summary and some details before submitting.",
+      "voc.submit": "Open GitHub issue",
+      "voc.cancel": "Cancel"
     },
 
     "pt-BR": {
@@ -376,6 +404,9 @@
       "onb.flow.belt.desc": "Busque uma faixa de Lean Six Sigma. Escolha sua faixa-alvo e filtramos a biblioteca para o plano de aprendizado dela.",
       "onb.q.belt": "4. Qual faixa voc\u00ea est\u00e1 buscando?",
       "onb.start": "Come\u00e7ar a aprender",
+      "onb.next": "Avan\u00e7ar",
+      "onb.back": "Voltar",
+      "onb.step": "Etapa {n} de {total}",
       "onb.aria": "Configure seu caminho",
 
       /* prefbar */
@@ -562,7 +593,32 @@
       "domain.mapping": "Mapear e analisar processos e causas raiz",
       "domain.flow": "Otimizar ambiente, fluxo e padroniza\u00e7\u00e3o",
       "domain.measure": "Medir e controlar processos estatisticamente",
-      "domain.govern": "Liderar estrat\u00e9gia e governan\u00e7a de MC"
+      "domain.govern": "Liderar estrat\u00e9gia e governan\u00e7a de MC",
+
+      /* feedback (Voice of Customer) */
+      "voc.button": "Coment\u00e1rios",
+      "voc.aria": "Envie seu feedback",
+      "voc.title": "Envie seu feedback",
+      "voc.lede": "Ajude-nos a melhorar a S\u00e9rie de Entregas de 30 Minutos. Seu feedback \u00e9 coletado como uma issue de Voz do Cliente (VOC) no reposit\u00f3rio GitHub do projeto.",
+      "voc.github.note": "Ao enviar, abrimos uma issue do GitHub j\u00e1 preenchida em uma nova aba &mdash; revise e clique em <strong>Submit new issue</strong> para enviar. \u00c9 necess\u00e1rio ter uma conta do GitHub com acesso ao reposit\u00f3rio.",
+      "voc.type.label": "Que tipo de feedback \u00e9 este?",
+      "voc.type.content": "Precis\u00e3o do conte\u00fado",
+      "voc.type.suggestion": "Sugest\u00e3o ou melhoria",
+      "voc.type.bug": "Erro ou link quebrado",
+      "voc.type.question": "D\u00favida",
+      "voc.type.praise": "Elogio",
+      "voc.type.other": "Outro",
+      "voc.rating.label": "Avalia\u00e7\u00e3o geral (opcional)",
+      "voc.rating.clear": "Limpar avalia\u00e7\u00e3o",
+      "voc.subject.label": "Resumo",
+      "voc.subject.ph": "Um t\u00edtulo curto para seu feedback",
+      "voc.details.label": "Detalhes",
+      "voc.details.ph": "O que funcionou, o que n\u00e3o funcionou e suas sugest\u00f5es\u2026",
+      "voc.name.label": "Seu nome (opcional)",
+      "voc.name.ph": "Para retornarmos, se necess\u00e1rio",
+      "voc.required": "Adicione um resumo e alguns detalhes antes de enviar.",
+      "voc.submit": "Abrir issue no GitHub",
+      "voc.cancel": "Cancelar"
     }
   };
 

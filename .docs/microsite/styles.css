@@ -537,6 +537,15 @@ footer.page-footer {
   .hero__title { font-size: 26px; }
   .module-title { font-size: 25px; }
   .section { padding: 20px; }
+  .onboarding { padding: 0; }
+  .onboarding__card { max-width: none; max-height: 100vh; border-radius: 0; }
+  .onboarding__head { padding: 18px 18px 14px; }
+  .onboarding__body { padding: 18px 18px 20px; }
+  .onboarding__foot { padding: 14px 18px; }
+  .choice-grid,
+  .choice-grid--belts { grid-template-columns: 1fr; }
+  .onboarding__back { padding: 10px 16px; }
+  .onboarding__next { padding: 10px 18px; }
 }
 
 /* ---------- Onboarding overlay ---------- */
@@ -546,19 +555,27 @@ footer.page-footer {
   z-index: 1000;
   background: rgba(32, 31, 30, 0.55);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 40px 16px;
-  overflow-y: auto;
+  padding: 24px 16px;
 }
+/* Wizard shell: a fixed-height card with a sticky header, scrollable body, and a
+   sticky footer so the primary action is always visible without scrolling. */
 .onboarding__card {
   background: var(--ms-surface);
   border-radius: var(--ms-radius);
   box-shadow: var(--ms-shadow-lg);
   width: 100%;
-  max-width: 680px;
-  margin: auto;
-  padding: 32px 32px 28px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+}
+.onboarding__head {
+  flex: none;
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--ms-border);
 }
 .onboarding__eyebrow {
   text-transform: uppercase;
@@ -566,12 +583,58 @@ footer.page-footer {
   font-size: 12.5px;
   font-weight: 700;
   color: var(--ms-accent);
-  margin: 0 0 8px;
+  margin: 0 0 12px;
 }
-.onboarding__title { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0 0 8px; }
+.onboarding__progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.onboarding__dots { display: flex; align-items: center; gap: 7px; }
+.onboarding__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--ms-border-strong);
+  transition: background 150ms ease, transform 150ms ease, width 150ms ease;
+}
+.onboarding__dot.is-done { background: var(--ms-accent); }
+.onboarding__dot.is-current {
+  background: var(--ms-accent);
+  width: 22px;
+}
+.onboarding__steplabel {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ms-text-muted);
+}
+.onboarding__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 22px 28px 24px;
+}
+.onboarding__welcome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ms-text-muted);
+  margin: 0 0 6px;
+}
+.onboarding__foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 28px;
+  border-top: 1px solid var(--ms-border);
+  background: var(--ms-surface);
+}
+.onboarding__back { padding: 10px 22px; }
+.onboarding__next { padding: 10px 26px; font-size: 15px; }
+.onboarding__title { font-size: 22px; font-weight: 700; line-height: 1.25; margin: 0 0 6px; }
 .onboarding__lede { font-size: 15px; color: var(--ms-text-muted); margin: 0 0 18px; }
 .onboarding__q { font-size: 15px; font-weight: 600; margin: 18px 0 10px; }
-.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
 .choice {
   text-align: left;
   font-family: inherit;
@@ -605,8 +668,6 @@ footer.page-footer {
   box-shadow: inset 0 0 0 1px var(--ms-csa);
 }
 .choice--role[data-val="csa"].is-selected .choice__title { color: var(--ms-csa); }
-.onboarding__actions { margin-top: 24px; display: flex; justify-content: flex-end; }
-.onboarding__start { padding: 11px 28px; font-size: 15px; }
 
 /* ---------- Preferences bar (index) ---------- */
 .prefbar {
@@ -693,9 +754,7 @@ footer.page-footer {
 .belt-chip--green { background: #107c10; }
 .belt-chip--black { background: #323130; }
 
-/* Onboarding belt sub-selector */
-.onboarding__belts { display: none; margin-top: 6px; }
-.onboarding__belts.is-active { display: block; }
+/* Onboarding belt selector (its own wizard step) */
 .choice-grid--belts { grid-template-columns: 1fr 1fr; }
 .choice--belt .choice__title { display: flex; align-items: center; }
 .choice--belt.is-selected { border-color: var(--ms-text); background: var(--ms-surface-alt); box-shadow: inset 0 0 0 1px var(--ms-border-strong); }
@@ -1193,4 +1252,144 @@ footer.page-footer {
   .exam-bar__timer { font-size: 17px; }
   .exam-nav__right { width: 100%; }
   .score-banner__result { font-size: 30px; }
+}
+
+/* ---------- Feedback (Voice of Customer) ---------- */
+.voc-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ms-accent);
+  border: none;
+  border-radius: 999px;
+  box-shadow: var(--ms-shadow-lg);
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+}
+.voc-fab:hover { background: var(--ms-accent-hover); transform: translateY(-1px); }
+.voc-fab:focus-visible { outline: 2px solid var(--ms-accent); outline-offset: 2px; }
+.voc-fab__icon-wrap { display: inline-flex; }
+.voc-fab__icon { display: block; }
+
+.voc {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(32, 31, 30, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.voc__card {
+  background: var(--ms-surface);
+  border-radius: var(--ms-radius);
+  box-shadow: var(--ms-shadow-lg);
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+}
+.voc__head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--ms-border);
+}
+.voc__title { font-size: 20px; font-weight: 700; margin: 0; }
+.voc__close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--ms-text-muted);
+  font-size: 22px;
+  line-height: 1;
+  border-radius: var(--ms-radius);
+  cursor: pointer;
+}
+.voc__close:hover { background: var(--ms-surface-alt); color: var(--ms-text); }
+.voc__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 18px 22px 6px;
+}
+.voc__lede { font-size: 14px; color: var(--ms-text-muted); margin: 0 0 16px; }
+.voc__field { margin-bottom: 16px; }
+.voc__label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.voc__select,
+.voc__input,
+.voc__textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ms-text);
+  background: var(--ms-surface);
+  border: 1.5px solid var(--ms-border-strong);
+  border-radius: var(--ms-radius);
+  padding: 9px 11px;
+}
+.voc__textarea { resize: vertical; min-height: 92px; line-height: 1.5; }
+.voc__select:focus,
+.voc__input:focus,
+.voc__textarea:focus {
+  outline: none;
+  border-color: var(--ms-accent);
+  box-shadow: 0 0 0 1px var(--ms-accent);
+}
+.voc__stars { display: inline-flex; gap: 4px; }
+.voc__star {
+  border: none;
+  background: transparent;
+  color: var(--ms-border-strong);
+  font-size: 26px;
+  line-height: 1;
+  padding: 2px;
+  cursor: pointer;
+  transition: color 100ms ease, transform 100ms ease;
+}
+.voc__star:hover { transform: scale(1.1); }
+.voc__star.is-on { color: var(--ms-warning); }
+.voc__note {
+  font-size: 12.5px;
+  color: var(--ms-text-muted);
+  line-height: 1.5;
+  background: var(--ms-surface-alt);
+  border-radius: var(--ms-radius);
+  padding: 10px 12px;
+  margin: 4px 0 10px;
+}
+.voc__error { font-size: 13px; font-weight: 600; color: var(--ms-error); margin: 0 0 10px; }
+.voc__foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--ms-border);
+  background: var(--ms-surface);
+}
+@media (max-width: 600px) {
+  .voc-fab { right: 14px; bottom: 14px; padding: 10px 16px; }
+  .voc { padding: 0; }
+  .voc__card { max-width: none; max-height: 100vh; border-radius: 0; }
+  .voc__head { padding: 16px 18px 12px; }
+  .voc__body { padding: 16px 18px 4px; }
+  .voc__foot { padding: 12px 18px; }
 }

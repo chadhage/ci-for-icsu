@@ -165,7 +165,10 @@
     return (d.textContent || "").trim();
   }
 
-  /* ---------------- Onboarding (language + role + flow) ---------------- */
+  /* ---------------- Onboarding wizard (language + role + flow + belt) ---------------- */
+  // A guided, one-question-per-step flow. The primary action is always visible in a
+  // sticky footer (no scrolling to find it), and new settings can be added simply by
+  // adding another step — the layout scales without growing a single long form.
   function openOnboarding(initial, onDone) {
     var sel = {
       lang: (initial && normLang(initial.lang)) || (window.SmartCI ? window.SmartCI.getLang() : DEFAULT_PREFS.lang),
@@ -174,130 +177,172 @@
       belt: (initial && normBelt(initial.belt)) || DEFAULT_PREFS.belt
     };
 
+    // The belt step only exists when the "Follow a belt" flow is chosen, so the step
+    // list is computed on demand rather than fixed.
+    function steps() {
+      var list = ["lang", "role", "flow"];
+      if (sel.flow === "belt") list.push("belt");
+      return list;
+    }
+    var stepIndex = 0;
+
     var overlay = el("div", { className: "onboarding", role: "dialog", "aria-modal": "true", "aria-label": t("onb.aria") });
-    var card = el("div", { className: "onboarding__card" });
+    var card = el("div", { className: "onboarding__card onboarding__card--wizard" });
 
-    card.appendChild(el("p", { className: "onboarding__eyebrow" }, [t("onb.eyebrow")]));
-    card.appendChild(el("h2", { className: "onboarding__title" }, [t("onb.title")]));
-    card.appendChild(el("p", { className: "onboarding__lede" }, [t("onb.lede")]));
+    // Persistent header: eyebrow + progress indicator.
+    var eyebrow = el("p", { className: "onboarding__eyebrow" }, [t("onb.eyebrow")]);
+    var dots = el("div", { className: "onboarding__dots", "aria-hidden": "true" });
+    var stepLabel = el("span", { className: "onboarding__steplabel" });
+    var head = el("div", { className: "onboarding__head" }, [
+      eyebrow,
+      el("div", { className: "onboarding__progress" }, [dots, stepLabel])
+    ]);
 
-    // 1. Language — selecting a language re-opens the dialog translated (live preview).
-    var langCards = {};
-    card.appendChild(el("p", { className: "onboarding__q" }, [t("onb.q.lang")]));
-    var langGrid = el("div", { className: "choice-grid" });
-    [
-      { val: "en", title: t("onb.lang.en.title"), desc: t("onb.lang.en.desc") },
-      { val: "pt-BR", title: t("onb.lang.pt.title"), desc: t("onb.lang.pt.desc") }
-    ].forEach(function (c) {
-      var ch = el("button", { className: "choice choice--lang", "data-val": c.val, type: "button" }, [
-        el("span", { className: "choice__title" }, [c.title]),
-        el("span", { className: "choice__desc" }, [c.desc])
-      ]);
-      ch.addEventListener("click", function () {
-        if (sel.lang === c.val) return;
-        sel.lang = c.val;
-        if (window.SmartCI) { window.SmartCI.setLang(c.val); window.SmartCI.applyStatic(); }
-        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        openOnboarding(sel, onDone);
+    // Scrollable body (one step at a time) + persistent footer (always-visible actions).
+    var body = el("div", { className: "onboarding__body" });
+    var backBtn = el("button", { className: "btn btn--secondary onboarding__back", type: "button" }, [t("onb.back")]);
+    var nextBtn = el("button", { className: "btn btn--primary onboarding__next", type: "button" }, [t("onb.next")]);
+    var foot = el("div", { className: "onboarding__foot" }, [backBtn, nextBtn]);
+
+    card.appendChild(head);
+    card.appendChild(body);
+    card.appendChild(foot);
+
+    // Strip the leading "N. " numbering from question strings — the stepper conveys position.
+    function stripNum(s) { return (s || "").replace(/^\s*\d+\.\s*/, ""); }
+
+    // Build a single-select grid of choice cards; selecting updates highlight in place
+    // (keeps focus, no flicker) and notifies via onSelect.
+    function radioGroup(extraGridCls, options, currentVal, onSelect) {
+      var grid = el("div", { className: "choice-grid" + (extraGridCls ? " " + extraGridCls : "") });
+      var btns = {};
+      options.forEach(function (o) {
+        var ch = el("button", { className: "choice " + o.cls, "data-val": o.val, type: "button" }, [
+          el("span", { className: "choice__title" }, o.titleNodes),
+          el("span", { className: "choice__desc" }, [o.desc])
+        ]);
+        var on = o.val === currentVal;
+        ch.classList.toggle("is-selected", on);
+        ch.setAttribute("aria-pressed", on ? "true" : "false");
+        ch.addEventListener("click", function () {
+          Object.keys(btns).forEach(function (k) {
+            var sOn = k === o.val;
+            btns[k].classList.toggle("is-selected", sOn);
+            btns[k].setAttribute("aria-pressed", sOn ? "true" : "false");
+          });
+          onSelect(o.val);
+        });
+        btns[o.val] = ch;
+        grid.appendChild(ch);
       });
-      langCards[c.val] = ch;
-      langGrid.appendChild(ch);
-    });
-    card.appendChild(langGrid);
+      return grid;
+    }
 
-    var roleCards = {};
-    card.appendChild(el("p", { className: "onboarding__q" }, [t("onb.q.role")]));
-    var roleGrid = el("div", { className: "choice-grid" });
-    [
-      { val: "csam", title: t("onb.role.csam.title"), desc: t("onb.role.csam.desc") },
-      { val: "csa", title: t("onb.role.csa.title"), desc: t("onb.role.csa.desc") }
-    ].forEach(function (c) {
-      var ch = el("button", { className: "choice choice--role", "data-val": c.val, type: "button" }, [
-        el("span", { className: "choice__title" }, [c.title]),
-        el("span", { className: "choice__desc" }, [c.desc])
-      ]);
-      ch.addEventListener("click", function () { sel.role = c.val; sync(); });
-      roleCards[c.val] = ch;
-      roleGrid.appendChild(ch);
-    });
-    card.appendChild(roleGrid);
+    function buildStep(id) {
+      if (id === "lang") {
+        // Selecting a language re-renders the wizard translated (live preview), staying here.
+        return radioGroup(null, [
+          { val: "en", cls: "choice--lang", titleNodes: [t("onb.lang.en.title")], desc: t("onb.lang.en.desc") },
+          { val: "pt-BR", cls: "choice--lang", titleNodes: [t("onb.lang.pt.title")], desc: t("onb.lang.pt.desc") }
+        ], sel.lang, function (v) {
+          if (sel.lang === v) return;
+          sel.lang = v;
+          if (window.SmartCI) { window.SmartCI.setLang(v); window.SmartCI.applyStatic(); }
+          render();
+        });
+      }
+      if (id === "role") {
+        return radioGroup(null, [
+          { val: "csam", cls: "choice--role", titleNodes: [t("onb.role.csam.title")], desc: t("onb.role.csam.desc") },
+          { val: "csa", cls: "choice--role", titleNodes: [t("onb.role.csa.title")], desc: t("onb.role.csa.desc") }
+        ], sel.role, function (v) { sel.role = v; });
+      }
+      if (id === "flow") {
+        // Changing flow can add/remove the belt step, so refresh the chrome (dots/footer).
+        return radioGroup(null, [
+          { val: "guided", cls: "choice--flow", titleNodes: [t("onb.flow.guided.title")], desc: t("onb.flow.guided.desc") },
+          { val: "concept", cls: "choice--flow", titleNodes: [t("onb.flow.concept.title")], desc: t("onb.flow.concept.desc") },
+          { val: "belt", cls: "choice--flow", titleNodes: [t("onb.flow.belt.title")], desc: t("onb.flow.belt.desc") }
+        ], sel.flow, function (v) { sel.flow = v; updateChrome(); });
+      }
+      // belt
+      return radioGroup("choice-grid--belts", BELTS.map(function (b) {
+        return {
+          val: b.key,
+          cls: "choice--belt choice--belt-" + b.key,
+          titleNodes: [el("span", { className: "belt-chip belt-chip--" + b.key }), beltName(b.key)],
+          desc: beltTagline(b.key) + " \u00b7 " + beltHoursLabel(b.key)
+        };
+      }), sel.belt, function (v) { sel.belt = v; });
+    }
 
-    var flowCards = {};
-    card.appendChild(el("p", { className: "onboarding__q" }, [t("onb.q.flow")]));
-    var flowGrid = el("div", { className: "choice-grid" });
-    [
-      { val: "guided", title: t("onb.flow.guided.title"), desc: t("onb.flow.guided.desc") },
-      { val: "concept", title: t("onb.flow.concept.title"), desc: t("onb.flow.concept.desc") },
-      { val: "belt", title: t("onb.flow.belt.title"), desc: t("onb.flow.belt.desc") }
-    ].forEach(function (c) {
-      var ch = el("button", { className: "choice choice--flow", "data-val": c.val, type: "button" }, [
-        el("span", { className: "choice__title" }, [c.title]),
-        el("span", { className: "choice__desc" }, [c.desc])
-      ]);
-      ch.addEventListener("click", function () { sel.flow = c.val; sync(); });
-      flowCards[c.val] = ch;
-      flowGrid.appendChild(ch);
-    });
-    card.appendChild(flowGrid);
+    var Q = { lang: "onb.q.lang", role: "onb.q.role", flow: "onb.q.flow", belt: "onb.q.belt" };
 
-    // Belt sub-selector — only relevant when the "Follow a belt" flow is chosen.
-    var beltCards = {};
-    var beltQ = el("p", { className: "onboarding__q onboarding__q--belt" }, [t("onb.q.belt")]);
-    var beltGrid = el("div", { className: "choice-grid choice-grid--belts" });
-    BELTS.forEach(function (b) {
-      var ch = el("button", { className: "choice choice--belt choice--belt-" + b.key, "data-val": b.key, type: "button" }, [
-        el("span", { className: "choice__title" }, [
-          el("span", { className: "belt-chip belt-chip--" + b.key }),
-          beltName(b.key)
-        ]),
-        el("span", { className: "choice__desc" }, [beltTagline(b.key) + " \u00b7 " + beltHoursLabel(b.key)])
-      ]);
-      ch.addEventListener("click", function () { sel.belt = b.key; sync(); });
-      beltCards[b.key] = ch;
-      beltGrid.appendChild(ch);
-    });
-    var beltWrap = el("div", { className: "onboarding__belts" }, [beltQ, beltGrid]);
-    card.appendChild(beltWrap);
+    function updateChrome() {
+      var st = steps();
+      if (stepIndex > st.length - 1) stepIndex = st.length - 1;
+      if (stepIndex < 0) stepIndex = 0;
+      var total = st.length;
+      // Persistent labels are refreshed here so a live language switch updates them too.
+      overlay.setAttribute("aria-label", t("onb.aria"));
+      eyebrow.textContent = t("onb.eyebrow");
+      backBtn.textContent = t("onb.back");
+      // Progress dots
+      dots.innerHTML = "";
+      for (var i = 0; i < total; i++) {
+        var d = el("span", { className: "onboarding__dot" });
+        if (i < stepIndex) d.classList.add("is-done");
+        if (i === stepIndex) d.classList.add("is-current");
+        dots.appendChild(d);
+      }
+      stepLabel.textContent = t("onb.step")
+        .replace("{n}", fmtNum(stepIndex + 1))
+        .replace("{total}", fmtNum(total));
+      // Footer
+      backBtn.disabled = stepIndex === 0;
+      var last = stepIndex === total - 1;
+      nextBtn.textContent = last ? t("onb.start") : t("onb.next");
+      nextBtn.classList.toggle("onboarding__next--final", last);
+    }
 
-    var startBtn = el("button", { className: "btn btn--primary onboarding__start", type: "button" }, [t("onb.start")]);
-    startBtn.addEventListener("click", function () {
+    function render() {
+      var st = steps();
+      if (stepIndex > st.length - 1) stepIndex = st.length - 1;
+      if (stepIndex < 0) stepIndex = 0;
+      var id = st[stepIndex];
+      body.innerHTML = "";
+      body.scrollTop = 0;
+      // The welcome line appears only on the first step, for a warm intro without clutter.
+      if (stepIndex === 0) body.appendChild(el("p", { className: "onboarding__welcome" }, [t("onb.title")]));
+      body.appendChild(el("h2", { className: "onboarding__title" }, [stripNum(t(Q[id]))]));
+      if (id === "lang") body.appendChild(el("p", { className: "onboarding__lede" }, [t("onb.lede")]));
+      body.appendChild(buildStep(id));
+      updateChrome();
+      var focusEl = body.querySelector(".choice.is-selected") || body.querySelector(".choice");
+      if (focusEl) focusEl.focus();
+    }
+
+    function finish() {
       var chosen = { role: sel.role, flow: sel.flow, belt: sel.belt, lang: sel.lang };
       if (window.SmartCI) window.SmartCI.setLang(sel.lang);
       setPrefs(chosen);
       if (window.SmartCI) window.SmartCI.applyStatic();
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
       if (onDone) onDone(chosen);
-    });
-    card.appendChild(el("div", { className: "onboarding__actions" }, [startBtn]));
-
-    function sync() {
-      Object.keys(langCards).forEach(function (k) {
-        var on = k === sel.lang;
-        langCards[k].classList.toggle("is-selected", on);
-        langCards[k].setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      Object.keys(roleCards).forEach(function (k) {
-        var on = k === sel.role;
-        roleCards[k].classList.toggle("is-selected", on);
-        roleCards[k].setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      Object.keys(flowCards).forEach(function (k) {
-        var on = k === sel.flow;
-        flowCards[k].classList.toggle("is-selected", on);
-        flowCards[k].setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      Object.keys(beltCards).forEach(function (k) {
-        var on = k === sel.belt;
-        beltCards[k].classList.toggle("is-selected", on);
-        beltCards[k].setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      beltWrap.classList.toggle("is-active", sel.flow === "belt");
     }
-    sync();
+
+    nextBtn.addEventListener("click", function () {
+      var st = steps();
+      if (stepIndex < st.length - 1) { stepIndex++; render(); }
+      else finish();
+    });
+    backBtn.addEventListener("click", function () {
+      if (stepIndex > 0) { stepIndex--; render(); }
+    });
 
     overlay.appendChild(card);
     document.body.appendChild(overlay);
-    startBtn.focus();
+    render();
   }
 
   /* ---------------- Preferences bar (index) ---------------- */
