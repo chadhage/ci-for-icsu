@@ -134,7 +134,7 @@ window.MODULES = {
     "Every CSA consumes existing playbooks (WAF, CSA Playbook Library, Advisor guidance) before starting a new engagement",
     "Contribute validated patterns back to the CoP; let peers review; merge into shared libraries; watch them compound across thousands of CSAs",
     "When the same root cause appears across 3+ accounts, escalate as a field signal (ACR blocker or ICM signature) to product groups, not as a CSA workaround",
-    "ASQ is the default belt credentialing body at Microsoft; it is tracked in the Devices DFSS Lean Six Sigma ROB alongside project graduation and mentorship",
+    "ASQ is the default belt credentialing body at Microsoft; belt progress is tracked alongside project graduation and mentorship",
     "CI@MS itself runs on CI: playbooks are versioned and refreshed each cycle; old patterns are deprecated as Azure evolves"
   ],
   questions: [
@@ -157,10 +157,10 @@ window.MODULES = {
       explanation: "When the same root cause appears across multiple accounts, that's a <strong>PG conversation, not a CSA workaround</strong>. The field-to-PG signal channels (ACR blocker tracker, ICM signature analysis) exist to turn aggregated evidence into product-level CI."
     },
     {
-      prompt: "According to the FY26 DFSS / Lean Six Sigma Rhythm of Business, which credentialing body does Microsoft&rsquo;s Lean Six Sigma program track for belt progress?",
+      prompt: "Which credentialing body does Microsoft&rsquo;s Lean Six Sigma program track for belt progress?",
       options: ["IASSC (International Association for Six Sigma Certification).", "CSSC (Council for Six Sigma Certification).", "ASQ (American Society for Quality).", "Shingo Institute."],
       correctIndex: 2,
-      explanation: "The FY26 DFSS / Lean Six Sigma ROB tracks <strong>ASQ certification progress</strong> alongside project graduation and mentorship. ASQ is the default when scoping a belt, though other Microsoft orgs may also accept IASSC or CSSC — confirm with your HR business partner before committing."
+      explanation: "Microsoft&rsquo;s Lean Six Sigma program tracks <strong>ASQ certification progress</strong> alongside project graduation and mentorship. ASQ is the default when scoping a belt, though other Microsoft orgs may also accept IASSC or CSSC — confirm with your HR business partner before committing."
     },
     {
       prompt: "What is the &ldquo;lone genius&rdquo; anti-pattern in CI@MS?",
