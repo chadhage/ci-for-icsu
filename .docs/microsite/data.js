@@ -2530,6 +2530,89 @@ window.MODULES = {
   ]
 },
 
+"limit-wip": {
+  id: "limit-wip",
+  title: "Limiting WIP: Capping Work to Accelerate Flow",
+  group: "Workplace, Flow & Standardization",
+  duration: "30 min",
+  executiveSummary: "Work-in-progress (WIP) is everything that has been started but not yet finished&mdash;tickets in flight, half-migrated workloads, features coded but not released. Limiting WIP means deliberately capping how many things can be in progress at once, so a team finishes work before it starts more. It feels backwards&mdash;starting less to deliver more&mdash;yet it is one of the highest-leverage moves in Lean. By Little's Law, lead time equals WIP divided by throughput, so for a given capacity, less WIP means faster delivery. High WIP is not harmless busyness; it is overproduction in disguise, and it drags waiting, context-switching, and hidden defects along with it. Limiting WIP is also the mechanism that makes pull real, pushes a process toward one-piece flow, and helps a team hold the pace that takt time demands. This module explains what WIP limits are, why capping work reduces waste and shortens lead time, how the idea connects to takt time, push vs pull, and one-piece flow, and how to set and use limits in practice.",
+  whatYouGain: [
+    "Define WIP and explain why capping started work actually speeds delivery",
+    "Use Little's Law (lead time = WIP / throughput) to connect WIP to speed",
+    "Name the wastes high WIP creates—overproduction, waiting, context-switching, and hidden defects",
+    "Connect WIP limits to pull, one-piece flow, and holding takt-time pace",
+    "Set practical WIP limits and know what to do when a limit is hit—stop starting and swarm to finish"
+  ],
+  explanation: "<p><strong>What WIP is, and what limiting it means.</strong> Work-in-progress is everything a team has <em>started but not finished</em>&mdash;a migration half-done, a feature coded but unreleased, a ticket parked in &ldquo;in progress.&rdquo; A <strong>WIP limit</strong> is an explicit cap on how many items may be in a given state at once. When the cap is reached, the rule is simple: you may not start anything new until something finishes and frees a slot. The counterintuitive promise of Lean is that <em>starting less makes you finish more</em>.</p><p><strong>Why capping WIP speeds delivery: Little's Law.</strong> This is not a slogan; it is arithmetic. <strong>Little's Law</strong> states that average lead time = average WIP &divide; average throughput. For a team with roughly fixed capacity (throughput), the only way to shorten lead time is to lower WIP. Doubling the number of things in flight does not double output&mdash;output is set by capacity&mdash;it simply doubles how long each item waits. Cutting WIP in half, at the same throughput, roughly halves lead time. That is why forty started-but-unfinished items deliver value far more slowly than a disciplined few worked to completion.</p><p><strong>High WIP is waste in disguise.</strong> Unfinished work feels productive&mdash;everyone is busy&mdash;but it is <strong>overproduction</strong>, the worst Lean waste, wearing a friendly mask. It drags the other wastes with it: <strong>waiting</strong> (items sit in queues between steps), <strong>motion and context-switching</strong> (people juggle many open items and pay a tax every time they swap), <strong>inventory</strong> (cash, capacity, and attention tied up in things that are not done), and <strong>hidden defects</strong> (a problem introduced early sits undiscovered inside the pile until someone finally works the item, by which time the cause is cold). The more you start, the more of all of this you accumulate.</p><p><strong>WIP limits make pull real.</strong> A WIP limit is the concrete mechanism of a <strong>pull</strong> system. When a stage is full to its limit, it stops pulling from upstream&mdash;so upstream stops producing&mdash;and work is drawn through the process by available capacity instead of shoved through by a schedule. Remove the limit and you are back to push: every step produces to plan, WIP balloons, and the system goes blind to its own bottleneck. The limit is what converts &ldquo;produce when told&rdquo; into &ldquo;produce when there is room.&rdquo;</p><p><strong>The link to one-piece flow and takt time.</strong> <strong>One-piece flow</strong> is simply the extreme case of a WIP limit&mdash;a limit of <em>one</em>&mdash;where a single item moves through the whole process before the next begins. You rarely reach a true limit of one, but every reduction in WIP moves you toward that ideal of smooth, single-item flow and away from batching. <strong>Takt time</strong> sets the pace the customer demands (available time &divide; demand); limiting WIP is how a team actually <em>holds</em> that pace, because an overloaded process buried in WIP cannot deliver at a steady rhythm&mdash;it lurches between floods and droughts. Low, stable WIP is what lets output match takt instead of swinging around it.</p><p><strong>How to set and use limits.</strong> Start near current typical load and tighten deliberately&mdash;a common starting point is roughly one or two items per person or pair, then lower it until flow is smooth but the team is not starved. The decisive behavior is what happens <em>when a limit is hit</em>: do not start new work&mdash;<strong>stop and swarm</strong> the blocked or oldest item until it moves. That moment is a gift to continuous improvement: the limit forces the bottleneck into the open instead of letting it hide under a backlog, so the team can see the constraint, fix it, and watch lead time respond. Capping WIP does not slow a team down&mdash;it trades the illusion of busyness for the reality of finished work, and hands CI a clear, fast signal to improve.</p>",
+  csamExample: "<p>A CSAM notices their customer's platform team is perpetually busy yet rarely <em>finishes</em> anything: at any moment fifteen or twenty initiatives are &ldquo;in progress&rdquo;&mdash;migrations, governance changes, cost reviews&mdash;and almost none reach done. Executives are frustrated that a year of effort shows little delivered value. The CSAM reframes the problem as WIP, not effort. Rather than asking the team to work harder, they introduce a WIP limit: no more than a handful of initiatives active at once, and nothing new starts until one finishes. The team resists at first&mdash;starting feels like progress&mdash;but within two cycles completed initiatives begin landing because attention is concentrated instead of scattered. The CSAM connects it to CI and Little's Law: 'Your throughput is fixed by capacity; the only lever you control is how much you start. Cap the WIP and lead time drops&mdash;and the limit makes your real bottleneck visible so we can improve it.' Finished outcomes, not open tickets, become the measure of progress.</p>",
+  csaExample: "<p>A CSA is coaching a delivery team whose board routinely holds three or four times as many tickets &ldquo;in progress&rdquo; as there are engineers&mdash;everyone has several things open, context-switching all day, and cycle time on any single ticket stretches for weeks because each one waits behind the others. The CSA introduces per-column WIP limits in the tracking tool and a rule the team agrees to: when a column is at its limit, you pull nothing new&mdash;you help finish what is already there. The first week is uncomfortable; engineers used to grabbing fresh work instead pair up to push stuck items through code review and testing. Cycle time falls as WIP falls (Little's Law in action), the perpetual review backlog drains, and the column that keeps hitting its limit&mdash;testing&mdash;turns out to be the true constraint, which the team then automates. The CSA frames the result: 'Limiting WIP did not make us do less&mdash;it made us finish more, and it pointed a flashlight straight at the bottleneck. That visibility is the feedback loop CI runs on.'</p>",
+  recap: [
+    "WIP is work that's been started but not finished; a WIP limit caps how many items can be in progress and blocks starting new work until something finishes",
+    "Little's Law (lead time = WIP / throughput) means that at fixed capacity, lowering WIP is the direct lever for shortening lead time",
+    "High WIP is overproduction in disguise—it drags waiting, context-switching, tied-up inventory, and hidden defects along with it",
+    "WIP limits are the concrete mechanism of pull: a full stage stops pulling from upstream, so work is drawn by capacity instead of pushed by a schedule",
+    "One-piece flow is a WIP limit of one; takt time sets the demand pace, and low, stable WIP is what lets a team actually hold that pace",
+    "When a limit is hit, stop and swarm the oldest or blocked item—this exposes the bottleneck, giving CI the fast, visible feedback it depends on"
+  ],
+  questions: [
+    {
+      prompt: "What does it mean to limit WIP?",
+      options: [
+        "To hire more people so more work can be started at once.",
+        "To cap how many items can be in progress at once, and not start new work until something finishes.",
+        "To remove all deadlines from the team's work.",
+        "To increase batch sizes so fewer handoffs are needed."
+      ],
+      correctIndex: 1,
+      explanation: "A WIP limit is an explicit cap on items in progress. When the cap is reached, no new work starts until something finishes and frees a slot&mdash;<strong>starting less to finish more</strong>."
+    },
+    {
+      prompt: "According to Little's Law, how does lowering WIP affect lead time at a fixed throughput?",
+      options: [
+        "It has no effect; lead time depends only on team size.",
+        "It increases lead time because fewer things are being worked.",
+        "It shortens lead time—lead time = WIP / throughput, so less WIP at the same throughput means faster delivery.",
+        "It increases throughput without changing lead time."
+      ],
+      correctIndex: 2,
+      explanation: "<strong>Little's Law</strong>: lead time = WIP &divide; throughput. With throughput fixed by capacity, reducing WIP is the direct way to <strong>shorten lead time</strong>."
+    },
+    {
+      prompt: "Why is high WIP considered a form of waste?",
+      options: [
+        "Because unfinished work is overproduction in disguise—it adds waiting, context-switching, tied-up inventory, and hidden defects.",
+        "Because it always means the team is understaffed.",
+        "Because it guarantees the product will ship late by contract.",
+        "Because it removes the need for any pull signals."
+      ],
+      correctIndex: 0,
+      explanation: "Lots of started-but-unfinished work feels productive but is <strong>overproduction</strong>, the worst Lean waste. It drags waiting, context-switching, inventory, and hidden defects along with it."
+    },
+    {
+      prompt: "How do WIP limits relate to pull and one-piece flow?",
+      options: [
+        "They have nothing to do with pull; they only matter for forecasting.",
+        "A WIP limit is the mechanism of pull—a full stage stops pulling upstream—and one-piece flow is simply a WIP limit of one.",
+        "They convert a pull system back into a push system.",
+        "They require abandoning takt time entirely."
+      ],
+      correctIndex: 1,
+      explanation: "A WIP limit makes <strong>pull</strong> concrete: a stage at its limit stops pulling from upstream. <strong>One-piece flow</strong> is the extreme case&mdash;a WIP limit of one item at a time."
+    },
+    {
+      prompt: "What should a team do when a stage hits its WIP limit?",
+      options: [
+        "Start additional work elsewhere to stay busy.",
+        "Raise the limit immediately so work can keep flowing in.",
+        "Stop starting new work and swarm the blocked or oldest item to finish it—exposing the bottleneck for improvement.",
+        "Ignore the limit until the end of the sprint."
+      ],
+      correctIndex: 2,
+      explanation: "Hitting the limit is the signal to <strong>stop and swarm</strong>: finish what's there before starting more. This forces the bottleneck into the open&mdash;exactly the visible, fast feedback continuous improvement needs."
+    }
+  ]
+},
+
 "kaizen": {
   id: "kaizen",
   title: "Kaizen: Focused Improvement Events That Ship in Days",
