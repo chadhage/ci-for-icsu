@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-i18n-title="index.title">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,66 +8,78 @@
 </head>
 <body>
   <main class="page">
+    <p class="internal-notice" data-i18n-html="internal.notice">
+      <strong>Internal &amp; proposed &mdash; not an official Microsoft offering.</strong>
+      &ldquo;CI-900&rdquo; and this delivery series are an internal proposal at this time, intended for an
+      internal audience only. They are not a Microsoft product, certification, or exam, and are not
+      affiliated with, endorsed by, or sponsored by Microsoft. Do not share externally.
+    </p>
     <section class="hero">
-      <p class="hero__eyebrow">iCSU &middot; Customer Success Unit</p>
-      <h1 class="hero__title">Continuous Improvement &mdash; 30-Minute Delivery Series</h1>
-      <p class="hero__lede">
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">iCSU &middot; Customer Success Unit</p>
+      <h1 class="hero__title" data-i18n="hero.title">Continuous Improvement &mdash; 30-Minute Delivery Series</h1>
+      <p class="hero__lede" data-i18n-html="hero.lede">
         Every Lean Six Sigma topic in the iCSU Smart CI library, repackaged into bite-sized
         30-minute sessions. Choose your role and pick a path &mdash; a <strong>guided progression</strong>
-        from the most basic concepts to the most advanced, or <strong>browse by concept</strong> and
-        category. Each module opens with an executive summary, states what you&rsquo;ll gain in plain
-        language, explains the concept, shows role-based examples for CSAMs and CSAs, recaps the key
-        takeaways, and closes with a Microsoft certification&ndash;style knowledge check.
+        from the most basic concepts to the most advanced, <strong>browse by concept</strong> and
+        category, or <strong>follow a belt</strong> to filter the library to the learning plan for the
+        Lean Six Sigma belt you&rsquo;re pursuing. Each module opens with an executive summary, states
+        what you&rsquo;ll gain in plain language, explains the concept, shows role-based examples for
+        CSAMs and CSAs, recaps the key takeaways, and closes with a Microsoft certification&ndash;style
+        knowledge check.
       </p>
       <div class="hero__stats">
-        <div class="hero__stat"><strong id="stat-modules">&mdash;</strong><span>30-min modules</span></div>
-        <div class="hero__stat"><strong>2</strong><span>roles: CSAM &amp; CSA</span></div>
-        <div class="hero__stat"><strong>6</strong><span>parts per module</span></div>
-        <div class="hero__stat"><strong id="stat-questions">&mdash;</strong><span>knowledge-check questions</span></div>
+        <div class="hero__stat"><strong id="stat-modules">&mdash;</strong><span data-i18n="hero.stat.modules">30-min modules</span></div>
+        <div class="hero__stat"><strong>2</strong><span data-i18n-html="hero.stat.roles">roles: CSAM &amp; CSA</span></div>
+        <div class="hero__stat"><strong>6</strong><span data-i18n="hero.stat.parts">parts per module</span></div>
+        <div class="hero__stat"><strong id="stat-questions">&mdash;</strong><span data-i18n="hero.stat.questions">knowledge-check questions</span></div>
       </div>
     </section>
 
-    <h2 class="group__title format-heading">How each 30-minute module is structured</h2>
+    <h2 class="group__title format-heading" data-i18n="format.heading">How each 30-minute module is structured</h2>
     <div class="format">
-      <div class="format__item"><div class="format__num">PART 1</div><div class="format__label">Executive Summary</div><div class="format__desc">Why the session matters, for leaders.</div></div>
-      <div class="format__item"><div class="format__num">PART 2</div><div class="format__label">What You&rsquo;ll Gain</div><div class="format__desc">Plain-language outcomes.</div></div>
-      <div class="format__item"><div class="format__num">PART 3</div><div class="format__label">The Topic</div><div class="format__desc">The concept, explained.</div></div>
-      <div class="format__item"><div class="format__num">PART 4</div><div class="format__label">Role Examples</div><div class="format__desc">CSAM &amp; CSA scenarios.</div></div>
-      <div class="format__item"><div class="format__num">PART 5</div><div class="format__label">Recap</div><div class="format__desc">Key concepts &amp; takeaways.</div></div>
-      <div class="format__item"><div class="format__num">PART 6</div><div class="format__label">Knowledge Check</div><div class="format__desc">MS cert&ndash;style quiz.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 1</div><div class="format__label" data-i18n="format.part1.label">Executive Summary</div><div class="format__desc" data-i18n="format.part1.desc">Why the session matters, for leaders.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 2</div><div class="format__label" data-i18n="format.part2.label">What You&rsquo;ll Gain</div><div class="format__desc" data-i18n="format.part2.desc">Plain-language outcomes.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 3</div><div class="format__label" data-i18n="format.part3.label">The Topic</div><div class="format__desc" data-i18n="format.part3.desc">The concept, explained.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 4</div><div class="format__label" data-i18n="format.part4.label">Role Examples</div><div class="format__desc" data-i18n-html="format.part4.desc">CSAM &amp; CSA scenarios.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 5</div><div class="format__label" data-i18n="format.part5.label">Recap</div><div class="format__desc" data-i18n-html="format.part5.desc">Key concepts &amp; takeaways.</div></div>
+      <div class="format__item"><div class="format__num"><span data-i18n="format.part">PART</span> 6</div><div class="format__label" data-i18n="format.part6.label">Knowledge Check</div><div class="format__desc" data-i18n="format.part6.desc">MS cert&ndash;style quiz.</div></div>
     </div>
 
     <section class="exam-cta">
       <div class="exam-cta__text">
-        <p class="exam-cta__eyebrow">Test your readiness</p>
-        <h2 class="exam-cta__title">CI-900: Continuous Improvement Fundamentals</h2>
-        <p class="exam-cta__desc">
-          A Microsoft certification&ndash;style practice exam over the whole library. Use
+        <p class="exam-cta__eyebrow" data-i18n="examcta.eyebrow">Test your readiness</p>
+        <h2 class="exam-cta__title" data-i18n="examcta.title">CI-900: Continuous Improvement Fundamentals</h2>
+        <p class="exam-cta__desc" data-i18n-html="examcta.desc">
+          A practice exam in the <em>style</em> of a Microsoft certification, over the whole library. Use
           <strong>Practice mode</strong> to learn with instant feedback, or
           <strong>Certification mode</strong> for a timed, scaled-scored attempt with a
-          mark-for-review screen and skill-area report &mdash; just like the real thing.
+          mark-for-review screen and skill-area report. <strong>CI-900 is a proposed, internal-only
+          concept &mdash; not a real Microsoft certification or exam.</strong>
         </p>
       </div>
-      <a class="exam-cta__btn" href="exam.html">Take the practice exam &rarr;</a>
+      <a class="exam-cta__btn" href="exam.html" data-i18n="examcta.btn">Take the practice exam &rarr;</a>
     </section>
 
     <div id="index-root"></div>
 
 
-    <footer class="page-footer">iCSU Smart CI Tools &middot; 30-Minute Delivery Series &middot; Built from the CI for iCSU knowledge base</footer>
+    <footer class="page-footer" data-i18n-html="footer.index">iCSU Smart CI Tools &middot; 30-Minute Delivery Series &middot; Internal &amp; proposed &mdash; not an official Microsoft offering &middot; Built from the CI for iCSU knowledge base</footer>
   </main>
 
   <script src="./data.js"></script>
+  <script src="./data.pt-BR.js"></script>
+  <script src="./i18n.js"></script>
   <script src="./app.js"></script>
   <script>
     (function () {
-      var modules = window.MODULES || {};
+      var modules = (window.SmartCI && window.SmartCI.getModules()) || window.MODULES || {};
+      var fmt = (window.SmartCI && window.SmartCI.fmtNumber) || function (n) { return String(n); };
       var ids = Object.keys(modules);
       var q = ids.reduce(function (acc, id) { return acc + ((modules[id].questions || []).length); }, 0);
       var sm = document.getElementById("stat-modules");
       var sq = document.getElementById("stat-questions");
-      if (sm) sm.textContent = String(ids.length);
-      if (sq) sq.textContent = String(q);
+      if (sm) sm.textContent = fmt(ids.length);
+      if (sq) sq.textContent = fmt(q);
     })();
   </script>
 </body>

@@ -8,11 +8,24 @@
  *     end-of-exam review grid, then a scaled score report (1000-point
  *     scale, 700 to pass) with a per-skill-area breakdown.
  *
- * This is an UNOFFICIAL practice assessment built from the iCSU CI
- * knowledge base. It is not a real Microsoft exam.
+ * This is an UNOFFICIAL, internal practice assessment built from the iCSU
+ * CI knowledge base. "CI-900" is a proposed, internal-only concept for an
+ * internal audience at this time. It is not a real Microsoft exam or
+ * certification and is not affiliated with or endorsed by Microsoft.
  */
 (function () {
   "use strict";
+
+  /* ---------------- i18n helpers ---------------- */
+  function t(k) { return window.SmartCI ? window.SmartCI.t(k) : k; }
+  function tf(k, params) {
+    var s = t(k);
+    if (params) Object.keys(params).forEach(function (p) { s = s.replace("{" + p + "}", params[p]); });
+    return s;
+  }
+  function fmtNum(n) { return window.SmartCI ? window.SmartCI.fmtNumber(n) : String(n); }
+  function fmtPct(frac) { return window.SmartCI ? window.SmartCI.fmtPercent(frac) : Math.round(frac * 100) + "%"; }
+  function domainName(d) { return t("domain." + d.key); }
 
   /* ----------------------------------------------------------------
    * Exam definition
@@ -93,7 +106,7 @@
    * ---------------------------------------------------------------- */
   var POOL = [];
   function buildPool() {
-    var modules = window.MODULES || {};
+    var modules = (window.SmartCI ? window.SmartCI.getModules() : window.MODULES) || {};
     POOL = [];
     Object.keys(modules).forEach(function (mid) {
       var m = modules[mid];
@@ -105,7 +118,7 @@
           moduleId: mid,
           moduleTitle: m.title,
           domainKey: d ? d.key : "foundations",
-          domainName: d ? d.name : "General",
+          domainName: d ? domainName(d) : "General",
           prompt: q.prompt,
           options: q.options.slice(),
           correctIndex: q.correctIndex,
@@ -203,19 +216,17 @@
 
     var totalQ = POOL.length;
 
+    ROOT.appendChild(el("p", { className: "internal-notice", html: t("internal.notice.exam") }));
+
     var head = el("section", { className: "exam-hero" }, [
-      el("p", { className: "exam-hero__eyebrow" }, ["Microsoft certification\u2013style practice assessment"]),
-      el("h1", { className: "exam-hero__title" }, [EXAM.code + ": " + EXAM.name]),
-      el("p", { className: "exam-hero__lede" }, [
-        "A realistic, exam-style assessment over the entire iCSU Smart CI library. Choose " +
-        "Practice mode to learn with instant feedback, or Certification mode for a timed, " +
-        "scored attempt that mirrors the real testing experience."
-      ]),
+      el("p", { className: "exam-hero__eyebrow" }, [t("exam.hero.eyebrow")]),
+      el("h1", { className: "exam-hero__title" }, [EXAM.code + ": " + t("exam.name")]),
+      el("p", { className: "exam-hero__lede" }, [t("exam.hero.lede")]),
       el("div", { className: "exam-hero__facts" }, [
-        fact(String(totalQ), "questions in the bank"),
-        fact(EXAM.length + " Q", "per certification attempt"),
-        fact(EXAM.minutes + " min", "time limit (cert mode)"),
-        fact(EXAM.passScaled + " / " + EXAM.maxScaled, "score to pass")
+        fact(fmtNum(totalQ), t("exam.fact.bank")),
+        fact(fmtNum(EXAM.length) + " " + t("exam.q.short"), t("exam.fact.perAttempt")),
+        fact(fmtNum(EXAM.minutes) + " " + t("exam.min"), t("exam.fact.timeLimit")),
+        fact(fmtNum(EXAM.passScaled) + " / " + fmtNum(EXAM.maxScaled), t("exam.fact.scoreToPass"))
       ])
     ]);
     ROOT.appendChild(head);
@@ -224,17 +235,17 @@
 
     /* Practice card */
     var lenSel = el("select", { className: "exam-field__input", id: "practice-length" }, [
-      optionEl("10", "10 questions"),
-      optionEl("25", "25 questions", true),
-      optionEl("50", "50 questions"),
-      optionEl("0", "All " + totalQ + " questions")
+      optionEl("10", fmtNum(10) + " " + t("exam.len.questions")),
+      optionEl("25", fmtNum(25) + " " + t("exam.len.questions"), true),
+      optionEl("50", fmtNum(50) + " " + t("exam.len.questions")),
+      optionEl("0", t("exam.len.all") + " " + fmtNum(totalQ) + " " + t("exam.len.allSuffix"))
     ]);
     var domSel = el("select", { className: "exam-field__input", id: "practice-domain" },
-      [optionEl("all", "All skill areas", true)].concat(DOMAINS.map(function (d) {
-        return optionEl(d.key, shortDomain(d.name));
+      [optionEl("all", t("exam.skill.all"), true)].concat(DOMAINS.map(function (d) {
+        return optionEl(d.key, shortDomain(domainName(d)));
       }))
     );
-    var startPractice = el("button", { className: "btn btn--primary exam-mode__start", type: "button" }, ["Start practice"]);
+    var startPractice = el("button", { className: "btn btn--primary exam-mode__start", type: "button" }, [t("exam.practice.start")]);
     startPractice.addEventListener("click", function () {
       var len = parseInt(lenSel.value, 10);
       if (!len) len = totalQ;
@@ -245,26 +256,23 @@
     });
 
     var practiceCard = el("div", { className: "exam-mode exam-mode--practice" }, [
-      el("div", { className: "exam-mode__badge" }, ["Practice / Prep mode"]),
-      el("h2", { className: "exam-mode__title" }, ["Learn with instant feedback"]),
-      el("p", { className: "exam-mode__desc" }, [
-        "One question at a time. Commit to an answer and the correct choice and full " +
-        "explanation appear immediately. Untimed \u2014 ideal for building knowledge before a timed run."
-      ]),
+      el("div", { className: "exam-mode__badge" }, [t("exam.practice.badge")]),
+      el("h2", { className: "exam-mode__title" }, [t("exam.practice.title")]),
+      el("p", { className: "exam-mode__desc" }, [t("exam.practice.desc")]),
       el("ul", { className: "exam-mode__list" }, [
-        el("li", null, ["Immediate answer + rationale after each item"]),
-        el("li", null, ["Focus on a single skill area or the whole bank"]),
-        el("li", null, ["No timer, retake as often as you like"])
+        el("li", null, [t("exam.practice.li1")]),
+        el("li", null, [t("exam.practice.li2")]),
+        el("li", null, [t("exam.practice.li3")])
       ]),
       el("div", { className: "exam-fields" }, [
-        field("Length", lenSel),
-        field("Skill area", domSel)
+        field(t("exam.field.length"), lenSel),
+        field(t("exam.field.skill"), domSel)
       ]),
       startPractice
     ]);
 
     /* Certification card */
-    var startExam = el("button", { className: "btn btn--primary exam-mode__start", type: "button" }, ["Start certification exam"]);
+    var startExam = el("button", { className: "btn btn--primary exam-mode__start", type: "button" }, [t("exam.cert.start")]);
     startExam.addEventListener("click", function () {
       var qs = sampleCertification(EXAM.length);
       if (!qs.length) return;
@@ -272,18 +280,16 @@
     });
 
     var examCard = el("div", { className: "exam-mode exam-mode--cert" }, [
-      el("div", { className: "exam-mode__badge exam-mode__badge--cert" }, ["Certification mode"]),
-      el("h2", { className: "exam-mode__title" }, ["Timed, scored, exam-realistic"]),
+      el("div", { className: "exam-mode__badge exam-mode__badge--cert" }, [t("exam.cert.badge")]),
+      el("h2", { className: "exam-mode__title" }, [t("exam.cert.title")]),
       el("p", { className: "exam-mode__desc" }, [
-        EXAM.length + " questions in " + EXAM.minutes + " minutes. No feedback until you submit. " +
-        "Mark items for review, revisit them from a review screen, then receive a scaled score and a " +
-        "skill-area breakdown \u2014 exactly like a Microsoft certification exam."
+        tf("exam.cert.desc", { len: fmtNum(EXAM.length), min: fmtNum(EXAM.minutes) })
       ]),
       el("ul", { className: "exam-mode__list" }, [
-        el("li", null, [EXAM.length + " questions \u00b7 " + EXAM.minutes + "-minute countdown"]),
-        el("li", null, ["Mark for review + end-of-exam review grid"]),
-        el("li", null, ["Scaled score out of " + EXAM.maxScaled + " \u00b7 pass at " + EXAM.passScaled]),
-        el("li", null, ["Per\u2013skill-area performance report"])
+        el("li", null, [tf("exam.cert.li1", { len: fmtNum(EXAM.length), min: fmtNum(EXAM.minutes) })]),
+        el("li", null, [t("exam.cert.markLi")]),
+        el("li", null, [tf("exam.cert.li3", { max: fmtNum(EXAM.maxScaled), pass: fmtNum(EXAM.passScaled) })]),
+        el("li", null, [t("exam.cert.reportLi")])
       ]),
       startExam
     ]);
@@ -294,24 +300,22 @@
 
     /* Skills measured table */
     var skills = el("section", { className: "exam-skills" }, [
-      el("h2", { className: "exam-skills__title" }, ["Skills measured"]),
-      el("p", { className: "exam-skills__note" }, [
-        "A certification attempt samples questions across these skill areas using the listed weightings."
-      ])
+      el("h2", { className: "exam-skills__title" }, [t("exam.skills.title")]),
+      el("p", { className: "exam-skills__note" }, [t("exam.skills.note")])
     ]);
     var table = el("table", { className: "exam-skills__table" });
     var thead = el("thead", null, [el("tr", null, [
-      el("th", null, ["Skill area"]),
-      el("th", null, ["Weighting"]),
-      el("th", null, ["Bank"])
+      el("th", null, [t("exam.skills.col.area")]),
+      el("th", null, [t("exam.skills.col.weight")]),
+      el("th", null, [t("exam.skills.col.bank")])
     ])]);
     var tbody = el("tbody");
     DOMAINS.forEach(function (d) {
       var n = POOL.filter(function (p) { return p.domainKey === d.key; }).length;
       tbody.appendChild(el("tr", null, [
-        el("td", null, [d.name]),
+        el("td", null, [domainName(d)]),
         el("td", { className: "exam-skills__weight" }, [d.display]),
-        el("td", { className: "exam-skills__bank" }, [String(n) + " Q"])
+        el("td", { className: "exam-skills__bank" }, [fmtNum(n) + " " + t("exam.q.short")])
       ]));
     });
     table.appendChild(thead);
@@ -319,11 +323,7 @@
     skills.appendChild(table);
     ROOT.appendChild(skills);
 
-    ROOT.appendChild(el("p", { className: "exam-disclaimer" }, [
-      "This is an unofficial practice assessment built from the iCSU Smart CI knowledge base to " +
-      "mimic the format of Microsoft certification exams. It is not affiliated with or endorsed by Microsoft, " +
-      "and " + EXAM.code + " is not a real Microsoft exam."
-    ]));
+    ROOT.appendChild(el("p", { className: "exam-disclaimer" }, [t("exam.disclaimer")]));
   }
 
   function fact(value, label) {
@@ -344,6 +344,8 @@
     return el("option", a, [label]);
   }
   function shortDomain(name) {
+    // pt-BR domain names are already concise; keep them verbatim.
+    if (window.SmartCI && window.SmartCI.getLang() === "pt-BR") return name;
     // Trim the verb prefix for a tighter dropdown label.
     return name
       .replace(/^Describe /, "")
@@ -399,17 +401,17 @@
     var bar = el("div", { className: "exam-bar" });
     bar.appendChild(el("div", { className: "exam-bar__id" }, [
       el("span", { className: "exam-bar__code" }, [EXAM.code]),
-      el("span", { className: "exam-bar__mode" }, [isExam ? "Certification mode" : "Practice mode"])
+      el("span", { className: "exam-bar__mode" }, [isExam ? t("exam.mode.cert") : t("exam.mode.practice")])
     ]));
     var status = el("div", { className: "exam-bar__status" }, [
-      el("span", { className: "exam-bar__counter" }, ["Question " + (S.index + 1) + " of " + total]),
-      el("span", { className: "exam-bar__answered" }, [answeredCount() + " answered"])
+      el("span", { className: "exam-bar__counter" }, [t("exam.bar.question") + " " + fmtNum(S.index + 1) + " " + t("exam.bar.of") + " " + fmtNum(total)]),
+      el("span", { className: "exam-bar__answered" }, [fmtNum(answeredCount()) + " " + t("exam.bar.answered")])
     ]);
     bar.appendChild(status);
     if (isExam) {
       bar.appendChild(el("div", { className: "exam-bar__timer", id: "exam-timer" }, [formatClock(S.remaining)]));
     } else {
-      var endP = el("button", { className: "exam-bar__end", type: "button" }, ["End practice"]);
+      var endP = el("button", { className: "exam-bar__end", type: "button" }, [t("exam.endPractice")]);
       endP.addEventListener("click", function () { confirmEnd(); });
       bar.appendChild(endP);
     }
@@ -423,14 +425,14 @@
     /* Question card */
     var card = el("section", { className: "exam-question" });
     var topline = el("div", { className: "exam-question__top" }, [
-      el("span", { className: "exam-question__index" }, ["Question " + (S.index + 1)])
+      el("span", { className: "exam-question__index" }, [t("exam.question") + " " + fmtNum(S.index + 1)])
     ]);
     if (!isExam) {
       topline.appendChild(el("span", { className: "exam-question__domain" }, [shortDomain(q.domainName)]));
     }
     card.appendChild(topline);
     card.appendChild(el("p", { className: "exam-question__prompt", html: q.prompt }));
-    card.appendChild(el("p", { className: "exam-question__hint" }, ["Choose the best answer."]));
+    card.appendChild(el("p", { className: "exam-question__hint" }, [t("exam.chooseBest")]));
 
     var optionsList = el("ul", { className: "options" });
     var name = "q_" + S.index;
@@ -445,10 +447,10 @@
       if (q.revealed) {
         if (i === q.answerIndex) {
           li.classList.add("option--correct");
-          li.appendChild(el("span", { className: "option__marker option__marker--correct" }, ["\u2713 Correct answer"]));
+          li.appendChild(el("span", { className: "option__marker option__marker--correct" }, [t("q.markerCorrect")]));
         } else if (i === q.chosen) {
           li.classList.add("option--incorrect");
-          li.appendChild(el("span", { className: "option__marker option__marker--incorrect" }, ["\u2715 Your answer"]));
+          li.appendChild(el("span", { className: "option__marker option__marker--incorrect" }, [t("q.markerYour")]));
         }
       } else if (q.chosen === i) {
         li.classList.add("option--selected");
@@ -464,7 +466,7 @@
         li.classList.add("option--selected");
         // update answered counter live
         var ac = bar.querySelector(".exam-bar__answered");
-        if (ac) ac.textContent = answeredCount() + " answered";
+        if (ac) ac.textContent = fmtNum(answeredCount()) + " " + t("exam.bar.answered");
         if (S.mode === "practice" && checkBtn) checkBtn.disabled = false;
       });
       inputs.push({ input: input, li: li });
@@ -477,7 +479,7 @@
     if (q.revealed) {
       var ok = q.chosen === q.answerIndex;
       feedback.className = "feedback " + (ok ? "feedback--correct" : "feedback--incorrect");
-      feedback.appendChild(el("p", { className: "feedback__title" }, [ok ? "Correct" : "Not quite"]));
+      feedback.appendChild(el("p", { className: "feedback__title" }, [ok ? t("q.fb.correct") : t("q.fb.notquite")]));
       feedback.appendChild(el("p", { className: "feedback__body", html: q.explanation }));
       feedback.style.display = "block";
     }
@@ -487,7 +489,7 @@
     /* Bottom navigation */
     var nav = el("div", { className: "exam-nav" });
 
-    var prevBtn = el("button", { className: "btn btn--secondary", type: "button" }, ["\u2190 Previous"]);
+    var prevBtn = el("button", { className: "btn btn--secondary", type: "button" }, [t("exam.prev")]);
     prevBtn.disabled = S.index === 0;
     prevBtn.addEventListener("click", function () { if (S.index > 0) { S.index -= 1; renderQuestionScreen(); } });
 
@@ -496,13 +498,13 @@
     if (q.marked) markBox.checked = true;
     markBox.addEventListener("change", function () { q.marked = markBox.checked; });
     markWrap.appendChild(markBox);
-    markWrap.appendChild(el("span", null, ["Mark for review"]));
+    markWrap.appendChild(el("span", null, [t("exam.markReview")]));
 
     var navRight = el("div", { className: "exam-nav__right" });
 
     var checkBtn = null;
     if (!isExam) {
-      checkBtn = el("button", { className: "btn btn--primary", type: "button" }, ["Check answer"]);
+      checkBtn = el("button", { className: "btn btn--primary", type: "button" }, [t("q.check")]);
       checkBtn.disabled = q.chosen == null || q.revealed;
       checkBtn.addEventListener("click", function () {
         if (q.chosen == null) return;
@@ -513,17 +515,17 @@
     }
 
     if (isExam) {
-      var reviewBtn = el("button", { className: "btn btn--secondary", type: "button" }, ["Review \u2630"]);
+      var reviewBtn = el("button", { className: "btn btn--secondary", type: "button" }, [t("exam.review.btn")]);
       reviewBtn.addEventListener("click", function () { renderReviewGrid(); });
       navRight.appendChild(reviewBtn);
     }
 
     if (S.index < total - 1) {
-      var nextBtn = el("button", { className: "btn btn--primary", type: "button" }, ["Next \u2192"]);
+      var nextBtn = el("button", { className: "btn btn--primary", type: "button" }, [t("exam.next")]);
       nextBtn.addEventListener("click", function () { S.index += 1; renderQuestionScreen(); });
       navRight.appendChild(nextBtn);
     } else {
-      var finishBtn = el("button", { className: "btn btn--primary", type: "button" }, [isExam ? "Review & submit" : "Finish"]);
+      var finishBtn = el("button", { className: "btn btn--primary", type: "button" }, [isExam ? t("exam.reviewSubmit") : t("exam.finish")]);
       finishBtn.addEventListener("click", function () {
         if (isExam) renderReviewGrid();
         else submitExam(false);
@@ -549,10 +551,10 @@
     var bar = el("div", { className: "exam-bar" }, [
       el("div", { className: "exam-bar__id" }, [
         el("span", { className: "exam-bar__code" }, [EXAM.code]),
-        el("span", { className: "exam-bar__mode" }, ["Review screen"])
+        el("span", { className: "exam-bar__mode" }, [t("exam.reviewScreen")])
       ]),
       el("div", { className: "exam-bar__status" }, [
-        el("span", { className: "exam-bar__counter" }, [answeredCount() + " of " + total + " answered"])
+        el("span", { className: "exam-bar__counter" }, [fmtNum(answeredCount()) + " " + t("exam.bar.of") + " " + fmtNum(total) + " " + t("exam.bar.answered")])
       ])
     ]);
     if (S.mode === "exam") {
@@ -561,16 +563,13 @@
     ROOT.appendChild(bar);
 
     var panel = el("section", { className: "exam-review" });
-    panel.appendChild(el("h2", { className: "exam-review__title" }, ["Review your answers"]));
-    panel.appendChild(el("p", { className: "exam-review__note" }, [
-      "Select any question to return to it. Items you flagged are marked. " +
-      "Unanswered questions are scored as incorrect."
-    ]));
+    panel.appendChild(el("h2", { className: "exam-review__title" }, [t("exam.review.title")]));
+    panel.appendChild(el("p", { className: "exam-review__note" }, [t("exam.review.note")]));
 
     var legend = el("div", { className: "exam-legend" }, [
-      legendItem("exam-cell--answered", "Answered"),
-      legendItem("exam-cell--unanswered", "Unanswered"),
-      legendItem("exam-cell--marked", "Marked for review")
+      legendItem("exam-cell--answered", t("exam.legend.answered")),
+      legendItem("exam-cell--unanswered", t("exam.legend.unanswered")),
+      legendItem("exam-cell--marked", t("exam.legend.marked"))
     ]);
     panel.appendChild(legend);
 
@@ -578,7 +577,7 @@
     S.questions.forEach(function (q, i) {
       var cls = "exam-cell " + (q.chosen != null ? "exam-cell--answered" : "exam-cell--unanswered");
       if (q.marked) cls += " exam-cell--marked";
-      var cell = el("button", { className: cls, type: "button", title: q.marked ? "Marked for review" : "" }, [String(i + 1)]);
+      var cell = el("button", { className: cls, type: "button", title: q.marked ? t("exam.legend.marked") : "" }, [fmtNum(i + 1)]);
       cell.addEventListener("click", function () { S.index = i; renderQuestionScreen(); });
       grid.appendChild(cell);
     });
@@ -587,18 +586,18 @@
     var unanswered = total - answeredCount();
     var markedCount = S.questions.filter(function (q) { return q.marked; }).length;
     panel.appendChild(el("p", { className: "exam-review__summary" }, [
-      unanswered === 0 ? "All questions answered." : (unanswered + " question" + (unanswered === 1 ? "" : "s") + " still unanswered."),
-      markedCount ? "  \u00b7  " + markedCount + " marked for review." : ""
+      unanswered === 0 ? t("exam.allAnswered") : (fmtNum(unanswered) + " " + (unanswered === 1 ? t("exam.stillUnanswered1") : t("exam.stillUnanswered2"))),
+      markedCount ? "  \u00b7  " + fmtNum(markedCount) + " " + t("exam.markedForReview") : ""
     ]));
 
     var actions = el("div", { className: "exam-review__actions" });
-    var back = el("button", { className: "btn btn--secondary", type: "button" }, ["\u2190 Return to questions"]);
+    var back = el("button", { className: "btn btn--secondary", type: "button" }, [t("exam.returnQuestions")]);
     back.addEventListener("click", function () { renderQuestionScreen(); });
-    var submit = el("button", { className: "btn btn--primary", type: "button" }, ["Submit exam"]);
+    var submit = el("button", { className: "btn btn--primary", type: "button" }, [t("exam.submit")]);
     submit.addEventListener("click", function () {
       var msg = unanswered > 0
-        ? ("You have " + unanswered + " unanswered question" + (unanswered === 1 ? "" : "s") + ". Submit anyway? Unanswered items are scored as incorrect.")
-        : "Submit your exam for scoring?";
+        ? (t("exam.confirm.unanswered1") + " " + fmtNum(unanswered) + " " + (unanswered === 1 ? t("exam.confirm.unanswered2") : t("exam.confirm.unanswered2p")) + t("exam.confirm.anyway"))
+        : t("exam.confirm.submit");
       if (window.confirm(msg)) submitExam(false);
     });
     actions.appendChild(back);
@@ -620,7 +619,7 @@
    * Scoring + report
    * ---------------------------------------------------------------- */
   function confirmEnd() {
-    if (window.confirm("End this practice session and see your results?")) submitExam(false);
+    if (window.confirm(t("exam.confirm.endPractice"))) submitExam(false);
   }
 
   function submitExam(timedOut) {
@@ -643,37 +642,40 @@
     /* Score banner */
     var banner = el("section", { className: "score-banner " + (passed ? "score-banner--pass" : "score-banner--fail") });
     banner.appendChild(el("p", { className: "score-banner__eyebrow" }, [
-      EXAM.code + ": " + EXAM.name + (isExam ? " \u00b7 Certification attempt" : " \u00b7 Practice session")
+      EXAM.code + ": " + t("exam.name") + " \u00b7 " + (isExam ? t("exam.attempt") : t("exam.session"))
     ]));
-    banner.appendChild(el("div", { className: "score-banner__result" }, [passed ? "PASS" : "DID NOT PASS"]));
+    banner.appendChild(el("div", { className: "score-banner__result" }, [passed ? t("exam.pass") : t("exam.fail")]));
     if (isExam) {
       banner.appendChild(el("div", { className: "score-banner__score" }, [
-        el("strong", null, [String(scaled)]),
-        el("span", null, [" / " + EXAM.maxScaled])
+        el("strong", null, [fmtNum(scaled)]),
+        el("span", null, [" / " + fmtNum(EXAM.maxScaled)])
       ]));
-      banner.appendChild(el("p", { className: "score-banner__bar-label" }, ["Passing score: " + EXAM.passScaled]));
+      banner.appendChild(el("p", { className: "score-banner__bar-label" }, [t("exam.passingScore") + " " + fmtNum(EXAM.passScaled)]));
       // scaled score meter with pass line
       var meter = el("div", { className: "score-meter" }, [
         el("div", { className: "score-meter__fill", html: "" }),
-        el("div", { className: "score-meter__passline" }, [el("span", null, ["pass " + EXAM.passScaled])])
+        el("div", { className: "score-meter__passline" }, [el("span", null, [t("exam.passLine") + " " + fmtNum(EXAM.passScaled)])])
       ]);
       meter.querySelector(".score-meter__fill").style.width = Math.min(100, Math.round(scaled / EXAM.maxScaled * 100)) + "%";
       meter.querySelector(".score-meter__passline").style.left = Math.round(EXAM.passScaled / EXAM.maxScaled * 100) + "%";
       banner.appendChild(meter);
     } else {
       banner.appendChild(el("div", { className: "score-banner__score" }, [
-        el("strong", null, [correct + " / " + total]),
-        el("span", null, [" correct (" + Math.round(pct * 100) + "%)"])
+        el("strong", null, [fmtNum(correct) + " / " + fmtNum(total)]),
+        el("span", null, [" " + t("exam.correctSuffix") + " (" + fmtPct(pct) + ")"])
       ]));
     }
-    var sub = correct + " of " + total + " correct \u00b7 time used " + formatClock(elapsed);
-    if (timedOut) sub = "Time expired \u00b7 " + sub;
+    var sub = fmtNum(correct) + " " + t("exam.bar.of") + " " + fmtNum(total) + " " + t("exam.ofCorrect") + " " + formatClock(elapsed);
+    if (timedOut) sub = t("exam.timeExpired") + " " + sub;
     banner.appendChild(el("p", { className: "score-banner__sub" }, [sub]));
+    if (window.SmartCI) {
+      banner.appendChild(el("p", { className: "score-banner__date" }, [t("exam.attemptedOn") + " " + window.SmartCI.fmtDate(new Date())]));
+    }
     ROOT.appendChild(banner);
 
     /* Skill-area breakdown */
     var breakdown = el("section", { className: "exam-breakdown" });
-    breakdown.appendChild(el("h2", { className: "exam-breakdown__title" }, ["Performance by skill area"]));
+    breakdown.appendChild(el("h2", { className: "exam-breakdown__title" }, [t("exam.breakdown.title")]));
     var seen = {};
     S.questions.forEach(function (q) {
       if (!seen[q.domainKey]) seen[q.domainKey] = { total: 0, correct: 0 };
@@ -686,8 +688,8 @@
       var dp = s.total ? Math.round(s.correct / s.total * 100) : 0;
       var row = el("div", { className: "skillbar" }, [
         el("div", { className: "skillbar__head" }, [
-          el("span", { className: "skillbar__name" }, [d.name]),
-          el("span", { className: "skillbar__num" }, [s.correct + " / " + s.total + " (" + dp + "%)"])
+          el("span", { className: "skillbar__name" }, [domainName(d)]),
+          el("span", { className: "skillbar__num" }, [fmtNum(s.correct) + " / " + fmtNum(s.total) + " (" + fmtPct(s.total ? s.correct / s.total : 0) + ")"])
         ]),
         el("div", { className: "skillbar__track" }, [
           el("div", { className: "skillbar__fill " + (dp >= 70 ? "is-strong" : dp >= 50 ? "is-mid" : "is-weak") })
@@ -700,14 +702,14 @@
 
     /* Answer review (collapsible) */
     var reviewWrap = el("section", { className: "exam-answers" });
-    var toggle = el("button", { className: "btn btn--secondary exam-answers__toggle", type: "button" }, ["Review all questions & explanations"]);
+    var toggle = el("button", { className: "btn btn--secondary exam-answers__toggle", type: "button" }, [t("exam.answers.review")]);
     var list = el("div", { className: "exam-answers__list", style: "display:none" });
     var built = false;
     toggle.addEventListener("click", function () {
       var open = list.style.display !== "none";
       if (!built && !open) { buildAnswerList(list); built = true; }
       list.style.display = open ? "none" : "block";
-      toggle.textContent = open ? "Review all questions & explanations" : "Hide question review";
+      toggle.textContent = open ? t("exam.answers.review") : t("exam.answers.hide");
     });
     reviewWrap.appendChild(toggle);
     reviewWrap.appendChild(list);
@@ -715,9 +717,9 @@
 
     /* Actions */
     var actions = el("div", { className: "exam-report__actions" });
-    var again = el("button", { className: "btn btn--primary", type: "button" }, [isExam ? "Retake certification exam" : "New practice session"]);
+    var again = el("button", { className: "btn btn--primary", type: "button" }, [isExam ? t("exam.retakeCert") : t("exam.newPractice")]);
     again.addEventListener("click", function () { renderStart(); });
-    var home = el("a", { className: "btn btn--secondary", href: "index.html" }, ["Back to modules"]);
+    var home = el("a", { className: "btn btn--secondary", href: "index.html" }, [t("exam.backModules")]);
     actions.appendChild(again);
     actions.appendChild(home);
     ROOT.appendChild(actions);
@@ -731,8 +733,8 @@
       var unanswered = q.chosen == null;
       var item = el("div", { className: "answer-item " + (ok ? "answer-item--correct" : "answer-item--incorrect") });
       item.appendChild(el("div", { className: "answer-item__head" }, [
-        el("span", { className: "answer-item__num" }, ["Q" + (i + 1)]),
-        el("span", { className: "answer-item__tag answer-item__tag--" + (ok ? "ok" : "no") }, [ok ? "Correct" : (unanswered ? "Unanswered" : "Incorrect")]),
+        el("span", { className: "answer-item__num" }, [t("exam.q.short") + fmtNum(i + 1)]),
+        el("span", { className: "answer-item__tag answer-item__tag--" + (ok ? "ok" : "no") }, [ok ? t("exam.answer.correct") : (unanswered ? t("exam.answer.unanswered") : t("exam.answer.incorrect"))]),
         el("span", { className: "answer-item__domain" }, [shortDomain(q.domainName)])
       ]));
       item.appendChild(el("p", { className: "answer-item__prompt", html: q.prompt }));
@@ -740,13 +742,13 @@
       q.options.forEach(function (text, oi) {
         var cls = "answer-opt";
         var tag = "";
-        if (oi === q.answerIndex) { cls += " answer-opt--correct"; tag = " \u2713 Correct answer"; }
-        if (oi === q.chosen && oi !== q.answerIndex) { cls += " answer-opt--chosen"; tag = " \u2715 Your answer"; }
-        else if (oi === q.chosen && oi === q.answerIndex) { tag = " \u2713 Your answer"; }
+        if (oi === q.answerIndex) { cls += " answer-opt--correct"; tag = t("exam.answer.markCorrect"); }
+        if (oi === q.chosen && oi !== q.answerIndex) { cls += " answer-opt--chosen"; tag = t("exam.answer.markYour"); }
+        else if (oi === q.chosen && oi === q.answerIndex) { tag = t("exam.answer.markYourCorrect"); }
         ul.appendChild(el("li", { className: cls, html: text + (tag ? "<span class='answer-opt__tag'>" + tag + "</span>" : "") }));
       });
       item.appendChild(ul);
-      item.appendChild(el("p", { className: "answer-item__exp", html: "<strong>Explanation:</strong> " + q.explanation }));
+      item.appendChild(el("p", { className: "answer-item__exp", html: "<strong>" + t("exam.answer.explanation") + "</strong> " + q.explanation }));
       container.appendChild(item);
     });
   }
@@ -759,7 +761,7 @@
     if (!ROOT) return;
     buildPool();
     if (!POOL.length) {
-      ROOT.appendChild(el("p", null, ["No questions available."]));
+      ROOT.appendChild(el("p", null, [t("exam.noQuestions")]));
       return;
     }
     renderStart();
