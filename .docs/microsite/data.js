@@ -2117,6 +2117,89 @@ window.MODULES = {
   ]
 },
 
+"heijunka": {
+  id: "heijunka",
+  title: "Heijunka: Leveling Uneven Demand",
+  group: "Workplace, Flow & Standardization",
+  duration: "30 min",
+  executiveSummary: "Takt time is the demand-set pace a process must match (takt = available time / customer demand). When demand is lumpy—spikes and lulls—the required takt swings with it, and that unevenness is mura, one of Lean's three enemies alongside muri (overburden) and muda (waste). Heijunka is the discipline of leveling: smoothing the work so the process runs at a steady, sustainable pace instead of being whipsawed by peaks and troughs. For CI, leveling matters because you cannot standardize, improve, or reliably size capacity on top of a wildly uneven flow. This module recaps takt, explains why uneven takt undermines improvement, and covers the techniques—heijunka leveling, queue-based load leveling, buffering, elastic capacity, pull/WIP limits, batch-size reduction, and demand shaping—used to mitigate it.",
+  whatYouGain: [
+    "Connect takt time to mura: see how lumpy demand makes the required pace swing and destabilizes the whole process",
+    "Explain why uneven takt blocks CI—standard work, capacity sizing, and improvement all need a stable baseline",
+    "Apply leveling techniques: heijunka by volume and by mix, queue-based load leveling, buffers, and elastic capacity",
+    "Use pull systems, WIP limits, and batch-size reduction (SMED) to smooth internal flow, not just external demand",
+    "Shape demand at the source—scheduling, staggering, rate limiting—so peaks are spread before they hit the process"
+  ],
+  explanation: "<p><strong>Quick recap of takt.</strong> Takt time is the rate at which a process must produce to meet demand: takt = available time / customer demand. If demand is steady, takt is steady and you can size capacity and design standard work around it. The problem is that real demand is rarely steady&mdash;it arrives in bursts. When demand swings, the <em>required</em> takt swings with it, and the process is alternately overwhelmed and idle.</p><p><strong>Uneven takt is mura.</strong> Lean names three enemies: <strong>muda</strong> (waste), <strong>muri</strong> (overburden), and <strong>mura</strong> (unevenness). They are linked: mura is often the root cause. An uneven arrival pattern forces <strong>muri</strong> during the spikes (people and systems overloaded past sustainable limits, causing errors, incidents, and burnout) and <strong>muda</strong> during the troughs (idle capacity you are still paying for). Sizing to the peak wastes money; sizing to the average drops work on the floor. You cannot win this trade-off by sizing alone&mdash;you have to attack the unevenness itself.</p><p><strong>Why it matters to CI.</strong> Leveling is foundation work in the House of Lean. <strong>Standard work</strong> assumes a repeatable pace; if every hour looks different, there is no stable method to standardize or improve against. Capability and control charts assume a stable process; an uneven flow is full of special-cause swings that drown the signal. And improvement gains do not hold on a process that lurches&mdash;the next spike erases them. Smoothing the flow also makes problems visible: when work moves at a steady cadence, an abnormality stands out instead of hiding inside the chaos of a spike. Level first, then standardize, then improve.</p><p><strong>Techniques to mitigate uneven takt.</strong></p><ul><li><strong>Heijunka (production leveling):</strong> deliberately level the schedule by <em>volume</em> (release work in small, regular increments rather than big batches) and by <em>mix</em> (interleave product or request types instead of running one type to exhaustion). The classic tool is the <em>heijunka box</em>, which paces released work into fixed time slots.</li><li><strong>Queue-based load leveling:</strong> put a buffer (a queue) between the spiky producer and the consumer so the consumer pulls at a steady takt while the queue absorbs the bursts. In Azure this is the Queue-Based Load Leveling pattern&mdash;Service Bus or Storage Queues feeding consumers, often with KEDA-scaled workers.</li><li><strong>Strategic buffers:</strong> small, intentional buffers of capacity, time, or inventory placed where they protect flow&mdash;not bloated inventory everywhere, but a sized cushion against normal variation.</li><li><strong>Elastic / flexible capacity:</strong> follow demand with autoscaling (HPA, KEDA, serverless) and cross-trained, flexible staff who can shift to where the load is.</li><li><strong>Pull systems and WIP limits:</strong> Kanban caps work-in-progress so the system cannot be flooded faster than it can flow, which smooths internal takt.</li><li><strong>Batch-size reduction (SMED):</strong> shrinking changeover cost lets you run smaller, more frequent batches&mdash;the prerequisite that makes volume leveling practical.</li><li><strong>Demand shaping:</strong> spread the peaks at the source&mdash;stagger or jitter scheduled jobs instead of firing them all on the hour, use appointment/scheduling systems, and apply rate limiting or throttling so a burst is metered into a steady stream.</li></ul><p>The goal of all of them is the same: convert a jagged demand signal into a level one the process can run against at a sustainable, improvable pace.</p>",
+  csamExample: "<p>A CSAM's customer runs hundreds of batch jobs that all fire at the top of each hour. The result is textbook mura: a punishing spike that overloads the platform (muri&mdash;throttling, failed jobs, paged engineers) followed by 50 minutes of near-idle, over-provisioned capacity (muda). The team's instinct is to buy more compute to survive the spike. The CSAM reframes it as a leveling problem, not a capacity problem: stagger the job schedule across the hour, route work through a queue so workers pull at a steady takt, and let KEDA scale consumers to the smoothed load. Peak demand falls dramatically, incidents during the spike disappear, and the customer cuts provisioned capacity. The CSAM ties it to CI: 'Once the flow is level, your reliability work finally has a stable process to stand on.'</p>",
+  csaExample: "<p>A CSA is hardening a customer's event-ingestion pipeline that buckles under bursty traffic. Today producers write directly to the processing service, so every burst becomes an overload. The CSA implements queue-based load leveling: producers publish to a Service Bus queue, and KEDA-scaled consumers drain it at a steady rate, turning a spiky arrival pattern into a level takt the consumers can sustain. The CSA adds WIP limits so the system can't be flooded, jitters the upstream cron triggers so they no longer fire simultaneously, and sets autoscale bounds sized to the smoothed load rather than the raw peak. The flow stabilizes, the control chart on processing latency tightens, and standard work for the pipeline finally becomes meaningful.</p>",
+  recap: [
+    "Takt swings when demand is lumpy; that unevenness is mura, which drives muri (overburden in spikes) and muda (waste in lulls)",
+    "You cannot fix uneven takt by sizing alone—peak sizing wastes money, average sizing drops work; you must attack the unevenness",
+    "Leveling is CI foundation work: standard work, control charts, and durable improvement all need a stable, level flow",
+    "Heijunka levels by volume (small regular increments) and by mix (interleave types); the heijunka box paces released work",
+    "Mitigation toolkit: queue-based load leveling, strategic buffers, elastic capacity (HPA/KEDA), pull/WIP limits, batch-size reduction (SMED), and demand shaping",
+    "Level first, then standardize, then improve—smoothing the flow also makes abnormalities visible instead of hiding them in the spike"
+  ],
+  questions: [
+    {
+      prompt: "Uneven, lumpy demand that makes the required takt swing up and down is an example of which Lean problem?",
+      options: [
+        "Muda (waste).",
+        "Mura (unevenness).",
+        "Muri (overburden).",
+        "Kaizen (improvement)."
+      ],
+      correctIndex: 1,
+      explanation: "Uneven flow is <strong>mura</strong>. It is often the root cause that then produces <strong>muri</strong> (overburden during spikes) and <strong>muda</strong> (idle waste during lulls). Heijunka attacks the mura directly."
+    },
+    {
+      prompt: "What is the core idea of heijunka (production leveling)?",
+      options: [
+        "Always run the largest possible batch of one type before switching.",
+        "Smooth the work by leveling volume (small regular increments) and mix (interleaving types) so the process runs at a steady pace.",
+        "Size capacity to the absolute peak so spikes never overwhelm the system.",
+        "Eliminate all buffers so problems surface immediately."
+      ],
+      correctIndex: 1,
+      explanation: "Heijunka levels by <strong>volume</strong> (release work in small, regular increments) and by <strong>mix</strong> (interleave types rather than running one to exhaustion), converting a jagged demand signal into a steady, sustainable pace."
+    },
+    {
+      prompt: "Producers send bursty traffic that overwhelms a processing service. Which technique turns that spiky arrival into a steady takt?",
+      options: [
+        "Remove all queues so messages are processed the instant they arrive.",
+        "Queue-based load leveling&mdash;buffer bursts in a queue so consumers pull at a steady rate.",
+        "Size the consumers to the peak burst and leave them running.",
+        "Fire all upstream jobs at the same moment to batch the work."
+      ],
+      correctIndex: 1,
+      explanation: "<strong>Queue-based load leveling</strong> places a buffer (e.g., Service Bus) between spiky producers and consumers, so consumers drain it at a steady takt while the queue absorbs the bursts&mdash;often with KEDA-scaled workers."
+    },
+    {
+      prompt: "Why does uneven takt undermine continuous improvement?",
+      options: [
+        "It makes the process too fast to measure.",
+        "Standard work, control charts, and durable improvements all need a stable baseline; a lurching flow has no steady pace to standardize or hold gains against.",
+        "It always reduces customer demand over time.",
+        "It only matters for manufacturing, never for software."
+      ],
+      correctIndex: 1,
+      explanation: "Leveling is <strong>foundation work</strong>. If every hour looks different there is no repeatable method to standardize, special-cause swings drown the control-chart signal, and the next spike erases your gains. Level first, then standardize, then improve."
+    },
+    {
+      prompt: "Which of these is a demand-shaping technique for smoothing peaks at the source?",
+      options: [
+        "Triggering all scheduled jobs simultaneously at the top of the hour.",
+        "Staggering or jittering scheduled jobs and applying rate limiting so a burst is metered into a steady stream.",
+        "Removing autoscaling so capacity stays fixed.",
+        "Increasing batch sizes to process more at once."
+      ],
+      correctIndex: 1,
+      explanation: "<strong>Demand shaping</strong> spreads peaks before they hit the process&mdash;stagger/jitter schedules instead of firing on the hour, use scheduling systems, and apply rate limiting or throttling to meter a burst into a level flow."
+    }
+  ]
+},
+
 "kaizen": {
   id: "kaizen",
   title: "Kaizen: Focused Improvement Events That Ship in Days",
