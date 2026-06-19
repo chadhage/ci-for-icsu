@@ -1,10 +1,11 @@
-name: Deploy knowledge checks to GitHub Pages
+name: Deploy CI site to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - ".docs/L6S/knowledge-checks/**"
+      - ".docs/microsite/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -30,10 +31,19 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload knowledge-checks artifact
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          # Knowledge checks stay at the site root so existing links keep working
+          cp -R .docs/L6S/knowledge-checks/. _site/
+          # Microsite is published under /microsite/
+          mkdir -p _site/microsite
+          cp -R .docs/microsite/. _site/microsite/
+
+      - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .docs/L6S/knowledge-checks
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
