@@ -1790,6 +1790,88 @@ window.MODULES = {
   ]
 },
 
+"andon-cord": {
+  id: "andon-cord",
+  title: "Andon Cord: Stop the Line, Fix the Source",
+  group: "Workplace, Flow & Standardization",
+  duration: "30 min",
+  executiveSummary: "The Andon cord is the Toyota Production System mechanism that lets any worker stop the line the moment an abnormality appears, so the team swarms the problem at its source instead of passing a defect downstream. It is jidoka in practice—build quality in by refusing to continue when something is wrong. For CSAs, the Andon cord is the 'house on fire' reflex made into a system: when a deployment is failing or a defect is escaping, the first move is to stop the line and contain it, then run root-cause analysis afterward. It only works where pulling the cord is safe, expected, and blameless.",
+  whatYouGain: [
+    "Build the reflex to stop the line and contain a problem first, before it propagates downstream to customers",
+    "Make abnormalities visible the instant they occur instead of discovering them in a postmortem",
+    "Separate the immediate stop-and-swarm response from the slower root-cause work that prevents repeats",
+    "Create a blameless culture where pulling the cord is rewarded, not punished, so problems surface early",
+    "Apply Azure-native Andon mechanisms: automated rollout gates, canary auto-pause, error-budget alerts, and stop-ship authority"
+  ],
+  explanation: "<p>The <strong>Andon cord</strong> (from the Japanese <em>andon</em>, a paper lantern used as a signal) is a physical cord or button on a Toyota assembly line. When an operator spots a defect or an abnormal condition, they pull it. A signal lights up, a supervisor comes to help, and if the problem is not resolved within the takt time, the line stops. The radical idea is that a single front-line worker is trusted to halt an entire production line rather than let a known defect move forward.</p><p>This is the working face of <strong>jidoka</strong>&mdash;autonomation, or &lsquo;automation with a human touch.&rsquo; The principle is to <strong>build quality in</strong> by stopping the moment something is wrong, instead of inspecting it out later. Stopping is not failure; it is the system working as designed. Letting a defect pass to keep the line moving is the real failure, because the cost to fix a problem grows the further downstream it travels.</p><p>The Andon cord maps directly onto the contain-first discipline: <strong>stop the line is the same instinct as &lsquo;put the fire out first.&rsquo;</strong> When something is actively going wrong, the immediate job is to halt and contain the damage&mdash;not to debate root cause while defects keep escaping. Pulling the cord is a deliberate, trained reaction to an abnormality, not premature convergence. The structured diverge-then-converge root-cause work comes <em>after</em> the line is stable, in the swarm and the postmortem, where the team finds the systemic cause and improves the current state so the same stop is less likely next time.</p><p>For the mechanism to work, three conditions must hold: pulling the cord must be <strong>safe</strong> (blameless&mdash;no punishment for a good-faith stop), <strong>expected</strong> (everyone is empowered and trained to pull it), and <strong>responsive</strong> (a pull triggers immediate help, not a shrug). Where stopping the line is implicitly punished, people stop pulling the cord, defects flow downstream, and the signal goes dark.</p><p><strong>Andon in Azure and engineering:</strong> a failing canary that auto-pauses a progressive rollout, a deployment ring that halts on health-gate failure, an error-budget burn alert that pages on-call, automated rollback on a failed smoke test, and explicit &lsquo;stop-ship&rsquo; authority for any engineer who sees a release going wrong. The digital equivalent of pulling the cord is halting the rollout and swarming&mdash;then writing the blameless postmortem.</p>",
+  csamExample: "<p>A CSAM notices the customer's engineers routinely push through deployments even when canary metrics look bad, because halting a release is treated as a personal failure. Defects reach production and the same incidents recur. The CSAM introduces an Andon model: automated canary analysis auto-pauses any progressive rollout when error rates breach a threshold, and any engineer is explicitly authorized to stop a release without seeking sign-off. Critically, the CSAM works with leadership to make pulls blameless&mdash;a stopped line is celebrated as a defect contained, not a delay caused. Within a quarter, problems surface during rollout instead of in customer incidents, and the postmortems shift from blaming individuals to fixing the system.</p>",
+  csaExample: "<p>A CSA is hardening a customer's AKS deployment pipeline. Today a bad image can roll out to all replicas before anyone notices. The CSA implements a digital Andon cord: a progressive rollout with health probes and an automated gate that halts and rolls back the moment error budgets burn, plus an alert that pages on-call the instant the gate trips. On-call has documented stop-ship authority to freeze the pipeline. When the gate fires, the team swarms to restore service first; the diverge-then-converge root-cause analysis happens afterward in a blameless postmortem, and the fix is standardized back into the pipeline so that failure mode auto-stops next time.</p>",
+  recap: [
+    "The Andon cord empowers any worker to stop the line the instant an abnormality appears, so defects are contained at the source instead of passing downstream",
+    "It is jidoka in action: build quality in by stopping when something is wrong, rather than inspecting defects out later",
+    "Stop the line is the same instinct as 'put the fire out first'\u2014contain immediately, then do root-cause analysis in the postmortem",
+    "The cord only works where pulling it is safe (blameless), expected (everyone is empowered), and responsive (a pull triggers help)",
+    "Azure-native Andon: canary auto-pause, health-gated rollouts, automated rollback, error-budget alerts, and explicit stop-ship authority"
+  ],
+  questions: [
+    {
+      prompt: "What is the core purpose of the Andon cord in the Toyota Production System?",
+      options: [
+        "To track how many units each operator completes per shift.",
+        "To let any worker stop the line the moment an abnormality appears, so the problem is fixed at its source.",
+        "To signal scheduled breaks and shift changes on the factory floor.",
+        "To rank operators by how rarely they halt production."
+      ],
+      correctIndex: 1,
+      explanation: "The Andon cord trusts a single front-line worker to <strong>stop the line</strong> when they see a defect, so the team swarms the problem at the source instead of letting it flow downstream where it costs more to fix."
+    },
+    {
+      prompt: "The Andon cord is the working face of which Lean principle?",
+      options: [
+        "Takt time &mdash; pacing production to customer demand.",
+        "Jidoka &mdash; building quality in by stopping when something is wrong.",
+        "Heijunka &mdash; leveling the production schedule.",
+        "Muda &mdash; eliminating the seven wastes."
+      ],
+      correctIndex: 1,
+      explanation: "Andon is <strong>jidoka</strong> (autonomation) in practice: <strong>build quality in</strong> by halting the moment an abnormality appears, rather than inspecting defects out later."
+    },
+    {
+      prompt: "How does the Andon cord relate to the 'put the fire out first' / contain-first discipline?",
+      options: [
+        "It replaces root-cause analysis entirely &mdash; once you stop the line, no further investigation is needed.",
+        "Stopping the line is the immediate contain-first reaction; the diverge-then-converge root-cause work happens afterward in the swarm and postmortem.",
+        "It means you should run a full Ishikawa before deciding whether to stop the line.",
+        "It applies only to planned improvement work, never to live incidents."
+      ],
+      correctIndex: 1,
+      explanation: "Pulling the cord is the same instinct as putting the fire out first: <strong>contain immediately</strong>, then find the root cause afterward. Reacting to an abnormality is a trained response, not premature convergence."
+    },
+    {
+      prompt: "Which condition is essential for an Andon system to actually work?",
+      options: [
+        "Only senior supervisors should be allowed to stop the line.",
+        "Pulling the cord must be safe and blameless, so people surface problems instead of hiding them.",
+        "Stops should be logged and counted against the operator's performance review.",
+        "The line should only ever stop at the end of a shift to avoid disruption."
+      ],
+      correctIndex: 1,
+      explanation: "If stopping the line is punished, people stop pulling the cord and defects flow downstream. A <strong>blameless</strong>, empowered, responsive culture is what keeps the signal alive."
+    },
+    {
+      prompt: "What is a good digital equivalent of an Andon cord in an Azure deployment pipeline?",
+      options: [
+        "A weekly report summarizing how many deployments failed.",
+        "An automated health gate that auto-pauses or rolls back a progressive rollout and pages on-call the instant error budgets burn.",
+        "A policy that forbids engineers from ever halting a release once it starts.",
+        "A manual sign-off meeting scheduled for the day after the rollout completes."
+      ],
+      correctIndex: 1,
+      explanation: "A canary/health-gated rollout that <strong>auto-pauses or rolls back</strong> and immediately pages on-call is the digital Andon cord: it stops the line at the first sign of an abnormality and triggers an immediate swarm."
+    }
+  ]
+},
+
 "takt-time": {
   id: "takt-time",
   title: "Takt Time: The Demand-Set Pace",
