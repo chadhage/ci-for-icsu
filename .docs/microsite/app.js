@@ -14,7 +14,7 @@
     { name: "Value & Quality Definition", ids: ["value", "voc", "ctq", "copq", "waste"] },
     { name: "Process Mapping & Analysis", ids: ["sipoc", "value-stream", "pareto-chart", "ishikawa", "5-whys", "6-ms", "fmea"] },
     { name: "Workplace, Flow & Standardization", ids: ["5s", "standard-work", "gemba", "poka-yoke", "andon-cord", "takt-time", "kaizen", "kanban"] },
-    { name: "Measurement & Control", ids: ["control-charts", "process-capability"] },
+    { name: "Measurement & Control", ids: ["control-charts", "process-capability", "p-value"] },
     { name: "Strategy & Governance", ids: ["hoshin-kanri", "project-charter"] }
   ];
 
