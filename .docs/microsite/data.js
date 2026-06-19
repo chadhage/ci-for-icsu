@@ -496,6 +496,87 @@ window.MODULES = {
       explanation: "If your A3 fits a slide deck, it&rsquo;s not an A3 &mdash; it&rsquo;s a <strong>status report wearing the label</strong>. The one-page form factor is the mechanism that forces thinking rigor."
     }
   ]
+}, "failed-hypothesis": {
+  id: "failed-hypothesis",
+  title: "When the Hypothesis Fails: Recovering the Cycle",
+  group: "Methodologies & Cycles",
+  duration: "30 min",
+  executiveSummary: "Continuous improvement is applied science: you use the data you already have to form a falsifiable hypothesis—'if we change X, metric Y will improve because [root cause]'—and then you test it before you commit. Sometimes the test disproves the hypothesis, or the experiment itself turns out to be empirically flawed. Neither is a project failure; a disproven hypothesis is a finding, and a cheap one when it is caught at pilot scale by a tollgate. This module explains how to write and test improvement hypotheses from available data, how to tell a genuinely disproven idea from an invalid test, how a practitioner should react—transparently, without torturing the data—and, crucially, how to restore the cycle after a failed attempt by looping back to the phase whose assumption broke rather than abandoning the effort.",
+  whatYouGain: [
+    "Write falsifiable, data-grounded hypothesis statements tied to a confirmed root cause and a measurable outcome",
+    "Test a hypothesis honestly: pre-registered success criteria, a stable baseline, and a real statistical check before scaling",
+    "Tell a truly disproven hypothesis (valid test, wrong idea) apart from an empirically flawed one (invalid test, inconclusive result)",
+    "React to disconfirming evidence as a finding—report it transparently instead of moving goalposts or p-hacking a win",
+    "Recover a failed cycle by looping DMAIC, DMADV, or PDCA back to the phase whose assumption broke, then re-baselining before the next test"
+  ],
+  explanation: "<p><strong>CI is the scientific method applied to work.</strong> Instead of acting on opinion, you use the data you already have&mdash;telemetry, the baseline, a Pareto of defects, VOC themes&mdash;to form a <strong>falsifiable hypothesis</strong> and then test it. A good improvement hypothesis names five things: the <em>change</em> (X), the <em>predicted effect</em> on a specific metric (Y), the <em>rationale</em> (the root cause from Analyze that makes you believe X drives Y), the <em>minimum effect that would matter</em>, and an implicit <strong>null</strong> ('the change makes no difference'). 'If we add a read-through cache, P95 latency will drop at least 30% because cache misses are the dominant cost' is testable; 'caching will make things faster' is not.</p><p><strong>Best practice for testing it.</strong> Before you run the experiment, pre-register the success criteria, the significance level (&alpha;), the sample size from a power analysis, and the minimum meaningful effect&mdash;so you cannot move the goalposts later. Validate the measurement system and confirm the process is <strong>stable</strong> on a control chart first; a test on an out-of-control process measures noise. Then <strong>pilot small</strong> so failure is cheap, and confirm the result with a statistical test (see the p-value module) before scaling. Pre-commit a rollback plan. This is exactly why DMAIC and DMADV put tollgates between phases: the gate is where a weak hypothesis is supposed to fail&mdash;cheaply, at pilot scale, before a full rollout.</p><p><strong>Two ways a hypothesis can &lsquo;not confirm.&rsquo;</strong> These demand opposite responses, so separate them before concluding anything. <strong>(1) Genuinely disproven:</strong> the test was valid and the idea was simply wrong&mdash;the change produced no improvement (or made things worse). Accept it. The method worked exactly as designed; the tollgate just saved you from scaling a dud. <strong>(2) Empirically flawed:</strong> the <em>test itself</em> was invalid, so the result is <strong>inconclusive, not disproof</strong>. Common flaws: a confounder (a traffic dip during the test window), a contaminated or unstable baseline, an underpowered sample, measurement error, or low <strong>implementation fidelity</strong> (the pilot was never actually executed as designed). Run validity checks&mdash;measurement-system trust, process stability, confounders, power, fidelity&mdash;before you decide which case you are in. A flawed test tells you about your experiment, not your idea.</p><p><strong>How a practitioner should react.</strong> Treat disconfirming evidence as data, not as a personal or team failure&mdash;the culture must be <strong>blameless</strong> so people surface negative results instead of hiding them. Report it transparently. Do <em>not</em> torture the data to manufacture a win: no p-hacking, no HARKing (inventing a new hypothesis after seeing the data and pretending it was the plan), no cherry-picking the one subgroup that looks good, no quietly switching to a one-tailed test or relaxing the threshold. Capture the learning&mdash;an A3 that documents the disconfirming evidence is a permanent asset that stops the organization from repeating the same dead end.</p><p><strong>How to restore the cycle after a failed attempt.</strong> Loop back to the phase whose assumption broke&mdash;not all the way to the start. In <strong>DMAIC</strong>, a disproven Improve hypothesis usually means the <strong>Analyze</strong> root cause was wrong or incomplete: return to Analyze, re-diverge on candidate causes, re-prioritize with the data, and form a new hypothesis. If the baseline itself was the problem, return to <strong>Measure</strong>; if the problem was mis-defined, return to <strong>Define</strong>. In <strong>DMADV</strong>, a design that fails Verify/Validate against the CTQs sends you back to <strong>Design</strong> to iterate&mdash;unless verification shows the requirements themselves were wrong, which sends you further upstream. In <strong>PDCA</strong>, a failed <strong>Check</strong> means you must <em>not</em> Act/standardize the change; you Adjust and run another cycle with a revised hypothesis&mdash;PDCA is iterative by design, and a failed loop simply feeds the next Plan. In every case: <strong>roll back the pilot</strong> to restore the baseline (the change was contained at pilot scale precisely so you could), re-confirm process stability, re-baseline, and document the negative result before the next experiment. The cycle is not broken by a failed hypothesis&mdash;it is doing its job.</p>",
+  csamExample: "<p>A customer's team is convinced that adding a caching layer will cut a slow API's P95 latency by 30%, and wants to roll it out platform-wide. The CSAM insists on a piloted, pre-registered test first. The pilot result: no statistically significant change (p = 0.6). The team's instinct is to spin it&mdash;'maybe it helps under higher load'&mdash;but the CSAM stops the goalpost-moving and treats the disconfirmation as a finding: the Analyze root cause (cache misses) was wrong. The cycle loops back to Analyze, where a fresh Pareto and 5 Whys reveal the real bottleneck is a downstream serialization lock, not cache misses. A new hypothesis is formed and tested. The failed pilot cost one sprint instead of a platform-wide rollout of a change that did nothing, and the CSAM logs the negative result so no other team re-runs it.</p>",
+  csaExample: "<p>In a reliability DMAIC, a CSA's Improve-phase hypothesis is 'doubling pod count will cut queue latency 25%.' The before/after looks like a win&mdash;until the CSA runs validity checks and finds the test is empirically flawed: the after-window coincided with a holiday traffic dip (a confounder), and the control chart shows the process had a special-cause shift mid-test, so it was never stable. This is inconclusive, not proof. Rather than declaring a false win, the CSA returns to Measure, re-baselines on a stable window with the confounder controlled, and re-runs the experiment with a pre-computed sample size. The re-test shows the pod increase actually helps only marginally; the real fix is a consumer-prefetch change. By refusing to bank an invalid result, the CSA keeps the Improve-phase evidence honest and the rollout decision sound.</p>",
+  recap: [
+    "CI is applied science: use the data you already have to write a falsifiable hypothesis (change X improves metric Y because [root cause]), then test it before committing",
+    "A disproven hypothesis is a finding, not a failure—and a cheap one when a tollgate catches it at pilot scale before a full rollout",
+    "Separate a genuinely disproven idea (valid test, wrong hypothesis—accept it) from an empirically flawed test (invalid—inconclusive, so fix the test and re-run)",
+    "React transparently and blamelessly; never p-hack, HARK, cherry-pick subgroups, or move the goalposts to manufacture a win",
+    "Recover by looping back to the phase whose assumption broke—DMAIC usually to Analyze, DMADV to Design, PDCA into another Adjust-and-retry cycle",
+    "Roll back the pilot, re-confirm stability, re-baseline, and document the negative result before the next attempt—the cycle isn't broken, it's working"
+  ],
+  questions: [
+    {
+      prompt: "An improvement hypothesis is tested with a valid, well-powered experiment and is clearly disproven. How should a CI practitioner view this?",
+      options: [
+        "As a failure of the project that should be quietly dropped from the report.",
+        "As a legitimate finding—the scientific method working as designed—that cheaply prevented scaling a change that doesn't work.",
+        "As a reason to re-run the test repeatedly until it eventually clears the threshold.",
+        "As proof that continuous improvement does not apply to this process."
+      ],
+      correctIndex: 1,
+      explanation: "A disproven hypothesis from a valid test is a <strong>finding, not a failure</strong>. The tollgate did its job&mdash;it caught a dud at pilot scale before a costly full rollout. The honest move is to accept the evidence and learn from it."
+    },
+    {
+      prompt: "What is the difference between a hypothesis that is genuinely disproven and one whose test is empirically flawed?",
+      options: [
+        "There is no difference; both mean the change should be abandoned.",
+        "A disproven hypothesis came from a valid test (the idea was wrong); an empirically flawed test is invalid—inconclusive—so you fix the test and re-run.",
+        "A disproven hypothesis means the data was faked; a flawed test means the team lacked a Black Belt.",
+        "A flawed test always proves the opposite of the hypothesis."
+      ],
+      correctIndex: 1,
+      explanation: "A <strong>disproven</strong> hypothesis comes from a <em>valid</em> test&mdash;the idea was wrong. An <strong>empirically flawed</strong> test (confounders, unstable baseline, underpowered sample, low implementation fidelity) is <em>invalid</em>, so the result is <strong>inconclusive</strong>, not disproof. Run validity checks before concluding."
+    },
+    {
+      prompt: "In DMAIC, a piloted Improve-phase hypothesis is disproven by a valid test. Which phase do you most commonly return to?",
+      options: [
+        "Define&mdash;restart the entire project from scratch.",
+        "Analyze&mdash;the root cause was likely wrong or incomplete, so re-diverge on causes and form a new hypothesis.",
+        "Control&mdash;standardize the change anyway and monitor it.",
+        "None&mdash;abandon the project, since the hypothesis failed."
+      ],
+      correctIndex: 1,
+      explanation: "Loop back to the phase whose <strong>assumption broke</strong>. A disproven Improve hypothesis usually means the <strong>Analyze</strong> root cause was wrong&mdash;return there, re-prioritize the causes with data, and generate a new hypothesis. Only go back to Measure or Define if the baseline or problem definition was the flaw."
+    },
+    {
+      prompt: "Which reaction to disconfirming evidence is a misuse to avoid?",
+      options: [
+        "Reporting the negative result transparently and documenting it in an A3.",
+        "Cherry-picking the one subgroup that looks good, or switching to a one-tailed test, to manufacture a 'win.'",
+        "Looping back to Analyze to form a new, better-grounded hypothesis.",
+        "Rolling back the pilot and re-confirming the baseline before the next test."
+      ],
+      correctIndex: 1,
+      explanation: "Torturing the data&mdash;p-hacking, HARKing, cherry-picking subgroups, or moving the goalposts&mdash;manufactures false confidence. The disciplined responses (transparent reporting, looping back, rolling back) are exactly what keeps the cycle honest."
+    },
+    {
+      prompt: "In a PDCA cycle, the Check step shows the change did not produce the expected improvement. What must you do?",
+      options: [
+        "Proceed to Act and standardize the change anyway, since you already built it.",
+        "Do not standardize it—Adjust and run another PDCA cycle with a revised hypothesis, rolling back the pilot to restore the baseline.",
+        "Declare the process incapable of improvement and stop.",
+        "Re-label the Check results as a success to keep momentum."
+      ],
+      correctIndex: 1,
+      explanation: "A failed <strong>Check</strong> means you must <em>not</em> Act/standardize. PDCA is iterative: <strong>Adjust</strong> and run another cycle with a revised hypothesis, and roll back the pilot to restore the baseline. A failed loop simply feeds the next Plan."
+    }
+  ]
 }, "control-charts": {
   id: "control-charts",
   title: "Control Charts (SPC)",
