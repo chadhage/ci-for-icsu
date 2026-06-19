@@ -13,7 +13,7 @@
     { name: "Methodologies & Cycles", ids: ["dmaic", "pdca", "a3", "failed-hypothesis"] },
     { name: "Value & Quality Definition", ids: ["value", "voc", "ctq", "copq", "waste"] },
     { name: "Process Mapping & Analysis", ids: ["sipoc", "value-stream", "pareto-chart", "ishikawa", "5-whys", "6-ms", "fmea"] },
-    { name: "Workplace, Flow & Standardization", ids: ["5s", "standard-work", "gemba", "poka-yoke", "andon-cord", "takt-time", "heijunka", "one-piece-flow", "kaizen", "kanban"] },
+    { name: "Workplace, Flow & Standardization", ids: ["5s", "standard-work", "gemba", "poka-yoke", "andon-cord", "takt-time", "heijunka", "one-piece-flow", "supermarket", "kaizen", "kanban"] },
     { name: "Measurement & Control", ids: ["control-charts", "process-capability", "p-value"] },
     { name: "Strategy & Governance", ids: ["hoshin-kanri", "project-charter"] }
   ];
@@ -27,7 +27,7 @@
     { name: "Stage 4 \u00b7 Improve in Cycles", ids: ["kaizen", "pdca", "dmaic", "a3", "project-charter"] },
     { name: "Stage 5 \u00b7 Map and Analyze the Process", ids: ["sipoc", "value-stream", "ctq", "copq"] },
     { name: "Stage 6 \u00b7 Find the Root Cause", ids: ["5-whys", "ishikawa", "6-ms", "pareto-chart", "convergent-divergent"] },
-    { name: "Stage 7 \u00b7 Balance the Flow", ids: ["takt-time", "one-piece-flow", "heijunka", "kanban"] },
+    { name: "Stage 7 \u00b7 Balance the Flow", ids: ["takt-time", "one-piece-flow", "heijunka", "supermarket", "kanban"] },
     { name: "Stage 8 \u00b7 Measure with Data", ids: ["data-types", "control-charts", "process-capability"] },
     { name: "Stage 9 \u00b7 Prove It Statistically", ids: ["p-value", "failed-hypothesis", "fmea"] },
     { name: "Stage 10 \u00b7 Lead and Govern", ids: ["hoshin-kanri"] }
