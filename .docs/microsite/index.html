@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iCSU Smart CI &mdash; 30-Minute Delivery Series</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="hero__eyebrow">iCSU &middot; Customer Success Unit</p>
+      <h1 class="hero__title">Continuous Improvement &mdash; 30-Minute Delivery Series</h1>
+      <p class="hero__lede">
+        Every Lean Six Sigma topic in the iCSU Smart CI library, repackaged into bite-sized
+        30-minute sessions. Each module opens with an executive summary, states what you&rsquo;ll
+        gain in plain language, explains the concept, shows role-based examples for CSAMs and CSAs,
+        recaps the key takeaways, and closes with a Microsoft certification&ndash;style knowledge check.
+      </p>
+      <div class="hero__stats">
+        <div class="hero__stat"><strong id="stat-modules">&mdash;</strong><span>30-min modules</span></div>
+        <div class="hero__stat"><strong>2</strong><span>roles: CSAM &amp; CSA</span></div>
+        <div class="hero__stat"><strong>6</strong><span>parts per module</span></div>
+        <div class="hero__stat"><strong id="stat-questions">&mdash;</strong><span>knowledge-check questions</span></div>
+      </div>
+    </section>
+
+    <h2 class="group__title format-heading">How each 30-minute module is structured</h2>
+    <div class="format">
+      <div class="format__item"><div class="format__num">PART 1</div><div class="format__label">Executive Summary</div><div class="format__desc">Why the session matters, for leaders.</div></div>
+      <div class="format__item"><div class="format__num">PART 2</div><div class="format__label">What You&rsquo;ll Gain</div><div class="format__desc">Plain-language outcomes.</div></div>
+      <div class="format__item"><div class="format__num">PART 3</div><div class="format__label">The Topic</div><div class="format__desc">The concept, explained.</div></div>
+      <div class="format__item"><div class="format__num">PART 4</div><div class="format__label">Role Examples</div><div class="format__desc">CSAM &amp; CSA scenarios.</div></div>
+      <div class="format__item"><div class="format__num">PART 5</div><div class="format__label">Recap</div><div class="format__desc">Key concepts &amp; takeaways.</div></div>
+      <div class="format__item"><div class="format__num">PART 6</div><div class="format__label">Knowledge Check</div><div class="format__desc">MS cert&ndash;style quiz.</div></div>
+    </div>
+
+    <div id="index-root"></div>
+
+    <footer class="page-footer">iCSU Smart CI Tools &middot; 30-Minute Delivery Series &middot; Built from the CI for iCSU knowledge base</footer>
+  </main>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    (function () {
+      var modules = window.MODULES || {};
+      var ids = Object.keys(modules);
+      var q = ids.reduce(function (acc, id) { return acc + ((modules[id].questions || []).length); }, 0);
+      var sm = document.getElementById("stat-modules");
+      var sq = document.getElementById("stat-questions");
+      if (sm) sm.textContent = String(ids.length);
+      if (sq) sq.textContent = String(q);
+    })();
+  </script>
+</body>
+</html>
