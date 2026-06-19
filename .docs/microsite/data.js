@@ -285,6 +285,88 @@ window.MODULES = {
     }
   ]
 },
+"house-of-lean": {
+  id: "house-of-lean",
+  title: "The House of Lean",
+  group: "Foundations",
+  duration: "30 min",
+  executiveSummary: "The House of Lean is the classic Toyota Production System diagram that shows how the pieces of Lean fit together as one structure: a goal on the roof, two pillars that hold it up, a stable foundation underneath, and people at the center. The roof is the goal—best quality, lowest cost, shortest lead time, with safety and morale. The two pillars are Just-in-Time (flow and pull) and Jidoka (built-in quality). The foundation is stability and standardization—standardized work, leveled demand, and kaizen. For CSAs, the house is the map that connects every other module in this series into a single system, and it explains why you cannot strengthen one part while ignoring the foundation it rests on.",
+  whatYouGain: [
+    "Read the House of Lean as a system: the goal on the roof, the Just-in-Time and Jidoka pillars, and the stable standardized foundation",
+    "Map the tools in this series onto the house—standard work and kaizen in the foundation, takt and flow under JIT, andon and poka-yoke under Jidoka",
+    "Explain why a pillar collapses without the foundation: improvements do not hold without stability and standardized work",
+    "Use the model to diagnose which part of a customer's system is weak and aim CI effort where it is missing",
+    "Place people and respect-for-people at the center as the engine that actually drives continuous improvement"
+  ],
+  explanation: "<p>The <strong>House of Lean</strong> is a teaching diagram from the Toyota Production System. The point of drawing Lean as a house is that a house is a single structure: the roof needs the pillars, the pillars need the foundation, and a weakness anywhere puts the whole building at risk. You cannot adopt one tool in isolation and expect Lean results.</p><p><strong>The roof is the goal.</strong> It states what the system is for: the highest quality, at the lowest cost, in the shortest lead time, with safety and morale included. Everything below exists to deliver that goal to the customer&mdash;not to deploy tools for their own sake.</p><p><strong>The two pillars hold up the roof.</strong> The first pillar is <strong>Just-in-Time (JIT)</strong>: produce only what is needed, when it is needed, in the amount needed. JIT is about flow and pull&mdash;continuous flow, takt time pacing work to demand, and pull systems like Kanban that replace push and overproduction. The second pillar is <strong>Jidoka</strong> (autonomation, or &lsquo;automation with a human touch&rsquo;): build quality in so defects never move downstream. Jidoka is the home of the Andon cord (stop the line on an abnormality) and poka-yoke (mistake-proofing). Both pillars are required&mdash;flow without built-in quality just moves defects faster, and quality without flow leaves the customer waiting.</p><p><strong>The foundation makes it stable.</strong> Underneath the pillars sits stability and standardization: <strong>standardized work</strong> (the current best-known method, and the baseline every improvement is measured against), <strong>heijunka</strong> (leveling demand so the system isn't whipsawed by peaks and troughs), and <strong>kaizen</strong> (continuous, incremental improvement). Without a stable foundation, the pillars have nothing solid to rest on&mdash;you cannot run reliable JIT or Jidoka on top of chaos.</p><p><strong>People are at the center.</strong> In the middle of the house are people and teamwork, continuous improvement, and the relentless elimination of waste. This is the engine: tools do not improve a system, people using the tools do. Respect for people&mdash;trusting the front line to spot problems, pull the cord, and improve their own work&mdash;is what keeps the whole structure alive.</p><p>The house also explains sequencing. You stabilize and standardize the foundation first, then build flow and built-in quality on top, all in service of the customer goal on the roof. (Note: scaled frameworks such as SAFe use their own &lsquo;House of Lean&rsquo; with different labels&mdash;value on the roof; pillars of respect for people, flow, innovation, and relentless improvement; leadership as the foundation&mdash;but the idea is the same: one connected structure, not a toolbox.)</p>",
+  csamExample: "<p>A CSAM inherits a customer who has adopted Lean tools piecemeal&mdash;a Kanban board here, a few automated quality gates there&mdash;but results are not holding. Using the House of Lean, the CSAM diagnoses the problem at the foundation: there is no standardized work, so every team does the same task differently and improvements have no stable baseline to stick to. The CSAM reframes the roadmap around the house: first stabilize and standardize (the foundation), then strengthen flow (JIT) and built-in quality (Jidoka), all pointed at the customer's stated goal of shorter lead time. Leadership finally sees why isolated tools weren't working&mdash;they were building pillars on sand&mdash;and funds the foundation work first.</p>",
+  csaExample: "<p>A CSA uses the House of Lean to structure a customer's platform-engineering uplift. The goal on the roof is the customer's own target: ship features faster with fewer incidents. Under JIT, the CSA maps continuous delivery, trunk-based flow, and pull-based work limits. Under Jidoka, the CSA maps automated quality gates, a digital Andon cord that auto-halts a bad rollout, and poka-yoke policies that make misconfigurations impossible. In the foundation, the CSA establishes infrastructure-as-code standard work and a kaizen cadence for retrospectives. Drawing it as one house gives the customer a shared mental model: every initiative has a place, and the dependencies between them are obvious.</p>",
+  recap: [
+    "The House of Lean is one connected structure: a goal on the roof, two pillars, a stable foundation, and people at the center—not a toolbox of separate techniques",
+    "The roof is the goal: best quality, lowest cost, shortest lead time, with safety and morale, delivered to the customer",
+    "The two pillars are Just-in-Time (flow and pull—takt, continuous flow, Kanban) and Jidoka (built-in quality—Andon, poka-yoke); both are required",
+    "The foundation is stability and standardization: standardized work, heijunka (leveling), and kaizen—pillars collapse without it",
+    "People and respect-for-people sit at the center as the engine of continuous improvement; tools don't improve systems, people do",
+    "Use the house to sequence work—stabilize the foundation first, then build flow and built-in quality—and to diagnose which part of a system is weak"
+  ],
+  questions: [
+    {
+      prompt: "What does the roof of the House of Lean represent?",
+      options: [
+        "The specific tools a team has adopted, such as Kanban and 5S.",
+        "The goal of the system: best quality, lowest cost, and shortest lead time delivered to the customer.",
+        "The leadership team that sponsors the Lean program.",
+        "The budget allocated to continuous improvement."
+      ],
+      correctIndex: 1,
+      explanation: "The roof states the <strong>goal</strong>&mdash;highest quality, lowest cost, shortest lead time, with safety and morale. Everything below the roof exists to deliver that goal to the customer."
+    },
+    {
+      prompt: "What are the two pillars of the classic (Toyota) House of Lean?",
+      options: [
+        "5S and Standardized Work.",
+        "Just-in-Time (flow and pull) and Jidoka (built-in quality).",
+        "DMAIC and PDCA.",
+        "Respect for People and Leadership."
+      ],
+      correctIndex: 1,
+      explanation: "The two pillars are <strong>Just-in-Time</strong> (produce only what's needed, when needed&mdash;flow and pull) and <strong>Jidoka</strong> (build quality in so defects never move downstream). Both are required to hold up the roof."
+    },
+    {
+      prompt: "Which set of elements forms the foundation of the House of Lean?",
+      options: [
+        "Andon, poka-yoke, and stop-the-line authority.",
+        "Stability and standardization: standardized work, heijunka (leveling), and kaizen.",
+        "Takt time, continuous flow, and pull systems.",
+        "Highest quality, lowest cost, and shortest lead time."
+      ],
+      correctIndex: 1,
+      explanation: "The foundation is <strong>stability and standardization</strong>&mdash;standardized work, leveled demand (heijunka), and kaizen. Without a stable foundation, the JIT and Jidoka pillars have nothing solid to rest on."
+    },
+    {
+      prompt: "Why is Lean drawn as a house rather than a list of tools?",
+      options: [
+        "Because the diagram is easier to print on a single page.",
+        "Because it is one connected structure&mdash;the roof needs the pillars and the pillars need the foundation, so a weakness anywhere risks the whole system.",
+        "Because Toyota required all diagrams to use building metaphors.",
+        "Because each tool can be adopted independently with the same result."
+      ],
+      correctIndex: 1,
+      explanation: "The house shows that Lean is a <strong>system, not a toolbox</strong>. You cannot run reliable JIT or Jidoka on an unstable foundation, and adopting one tool in isolation does not deliver Lean results."
+    },
+    {
+      prompt: "A customer has adopted Kanban and automated quality gates but improvements aren't sticking, and there is no standardized work. What does the House of Lean suggest?",
+      options: [
+        "Add more tools to the pillars until results improve.",
+        "Strengthen the foundation first&mdash;establish standardized work and stability&mdash;so the pillars have a solid base to rest on.",
+        "Remove the Kanban board because it conflicts with the quality gates.",
+        "Move directly to optimizing the roof-level cost goal."
+      ],
+      correctIndex: 1,
+      explanation: "Without standardized work, improvements have no stable baseline to hold onto&mdash;the pillars are built on sand. The house says <strong>stabilize and standardize the foundation first</strong>, then build flow and built-in quality on top."
+    }
+  ]
+},
 "dmaic": {
   id: "dmaic",
   title: "DMAIC",

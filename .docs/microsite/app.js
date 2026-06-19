@@ -9,7 +9,7 @@
 
   // Ordered groups define both the index layout and prev/next flow.
   var GROUPS = [
-    { name: "Foundations", ids: ["intro", "belts", "ms-ci-cop", "data-types", "convergent-divergent"] },
+    { name: "Foundations", ids: ["intro", "belts", "ms-ci-cop", "data-types", "convergent-divergent", "house-of-lean"] },
     { name: "Methodologies & Cycles", ids: ["dmaic", "pdca", "a3"] },
     { name: "Value & Quality Definition", ids: ["value", "voc", "ctq", "copq", "waste"] },
     { name: "Process Mapping & Analysis", ids: ["sipoc", "value-stream", "pareto-chart", "ishikawa", "5-whys", "6-ms", "fmea"] },
