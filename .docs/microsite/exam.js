@@ -250,6 +250,21 @@
       var len = parseInt(lenSel.value, 10);
       if (!len) len = totalQ;
       var dom = domSel.value;
+      // For a specific skill area, never request more than the area's bank.
+      // Force the user to accept the maximum available before starting.
+      if (dom !== "all") {
+        var avail = POOL.filter(function (p) { return p.domainKey === dom; }).length;
+        if (avail < len) {
+          var d = domainByKey(dom);
+          var msg = tf("exam.cap.msg", {
+            skill: d ? shortDomain(domainName(d)) : dom,
+            avail: fmtNum(avail),
+            req: fmtNum(len)
+          });
+          if (!window.confirm(msg)) return;
+          len = avail;
+        }
+      }
       var qs = samplePractice(dom, len);
       if (!qs.length) return;
       beginSession("practice", qs);
