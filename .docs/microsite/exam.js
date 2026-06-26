@@ -739,6 +739,16 @@
     actions.appendChild(home);
     ROOT.appendChild(actions);
 
+    /* End-of-activity survey (practice + certification) */
+    if (window.SmartCISurvey) {
+      var detailLabel = (isExam ? fmtNum(scaled) + " / " + fmtNum(EXAM.maxScaled) : fmtNum(correct) + " / " + fmtNum(total))
+        + " \u2014 " + (passed ? t("exam.pass") : t("exam.fail"));
+      ROOT.appendChild(window.SmartCISurvey.renderCard({
+        kind: isExam ? "exam" : "practice",
+        detailLabel: detailLabel
+      }));
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

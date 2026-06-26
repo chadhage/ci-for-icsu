@@ -118,7 +118,7 @@
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }
   function normRole(v) { return v === "csam" || v === "csa" ? v : null; }
   function normBelt(v) { return beltIndex(v) >= 0 ? v : null; }
-  function normLang(v) { return v === "en" || v === "pt-BR" ? v : null; }
+  function normLang(v) { return v === "en" || v === "pt-BR" || v === "es-419" ? v : null; }
   function getPrefs() {
     try {
       var p = JSON.parse(window.localStorage.getItem(PREF_KEY));
@@ -243,7 +243,8 @@
         // Selecting a language re-renders the wizard translated (live preview), staying here.
         return radioGroup(null, [
           { val: "en", cls: "choice--lang", titleNodes: [t("onb.lang.en.title")], desc: t("onb.lang.en.desc") },
-          { val: "pt-BR", cls: "choice--lang", titleNodes: [t("onb.lang.pt.title")], desc: t("onb.lang.pt.desc") }
+          { val: "pt-BR", cls: "choice--lang", titleNodes: [t("onb.lang.pt.title")], desc: t("onb.lang.pt.desc") },
+          { val: "es-419", cls: "choice--lang", titleNodes: [t("onb.lang.es.title")], desc: t("onb.lang.es.desc") }
         ], sel.lang, function (v) {
           if (sel.lang === v) return;
           sel.lang = v;
@@ -669,6 +670,17 @@
       nav.appendChild(na);
     }
     root.appendChild(nav);
+
+    // Belt completion: reaching the last module of a belt plan ends that plan.
+    // Offer a short survey so participants can reflect on the whole belt.
+    if (flow === "belt" && pos === order.length - 1 && window.SmartCISurvey) {
+      var beltLabel = beltName((BELTS[beltIndex(belt)] || BELTS[0]).key);
+      root.appendChild(window.SmartCISurvey.renderCard({
+        kind: "belt",
+        vars: { belt: beltLabel },
+        detailLabel: beltLabel
+      }));
+    }
   }
 
   /* ---------------- Knowledge check ---------------- */

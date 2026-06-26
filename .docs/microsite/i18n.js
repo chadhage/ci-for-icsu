@@ -12,7 +12,7 @@
   "use strict";
 
   var PREF_KEY = "icsuSmartCiPrefs";
-  var SUPPORTED = ["en", "pt-BR"];
+  var SUPPORTED = ["en", "pt-BR", "es-419"];
 
   function readPrefs() {
     try { return JSON.parse(window.localStorage.getItem(PREF_KEY)) || {}; }
@@ -29,10 +29,17 @@
     p.lang = normLang(l) || "en";
     writePrefs(p);
   }
-  function locale() { return getLang() === "pt-BR" ? "pt-BR" : "en-US"; }
+  function locale() {
+    var l = getLang();
+    if (l === "pt-BR") return "pt-BR";
+    if (l === "es-419") return "es-419";
+    return "en-US";
+  }
   function langName(l) {
     var key = normLang(l) || getLang();
-    return key === "pt-BR" ? "Portugu\u00eas (Brasil)" : "English";
+    if (key === "pt-BR") return "Portugu\u00eas (Brasil)";
+    if (key === "es-419") return "Espa\u00f1ol (Latinoam\u00e9rica)";
+    return "English";
   }
 
   /* ---------------- Locale-aware formatting ---------------- */
@@ -56,7 +63,9 @@
 
   /* ---------------- Module content selection ---------------- */
   function getModules() {
-    if (getLang() === "pt-BR" && window.MODULES_PT) return window.MODULES_PT;
+    var l = getLang();
+    if (l === "pt-BR" && window.MODULES_PT) return window.MODULES_PT;
+    if (l === "es-419" && window.MODULES_ES) return window.MODULES_ES;
     return window.MODULES || {};
   }
 
@@ -111,6 +120,8 @@
       "onb.lang.en.desc": "Content and interface in English (US formatting).",
       "onb.lang.pt.title": "Portugu\u00eas (Brasil)",
       "onb.lang.pt.desc": "Conte\u00fado e interface em portugu\u00eas, com formata\u00e7\u00e3o do Brasil.",
+      "onb.lang.es.title": "Espa\u00f1ol (Latinoam\u00e9rica)",
+      "onb.lang.es.desc": "Contenido e interfaz en espa\u00f1ol neutro, con formato latinoamericano.",
       "onb.q.role": "2. What is your role?",
       "onb.role.csam.title": "CSAM",
       "onb.role.csam.desc": "Customer Success Account Manager. Examples and scenarios default to the CSAM view.",
@@ -342,7 +353,30 @@
       "voc.name.ph": "So we can follow up, if needed",
       "voc.required": "Please add a summary and some details before submitting.",
       "voc.submit": "Open GitHub issue",
-      "voc.cancel": "Cancel"
+      "voc.cancel": "Cancel",
+      "survey.exam.eyebrow": "Quick survey",
+      "survey.exam.title": "How was this assessment?",
+      "survey.exam.lede": "A few quick questions help us improve the CI-900 practice exam.",
+      "survey.exam.q.label": "How did the difficulty feel?",
+      "survey.exam.q.easy": "Too easy",
+      "survey.exam.q.right": "About right",
+      "survey.exam.q.hard": "Too hard",
+      "survey.belt.eyebrow": "Belt complete \u00b7 Quick survey",
+      "survey.belt.title": "You\u2019ve reached the end of the {belt} plan",
+      "survey.belt.lede": "Congratulations! Tell us how this belt worked for you so we can improve it.",
+      "survey.belt.q.label": "How confident do you feel applying these tools?",
+      "survey.belt.q.low": "Not yet confident",
+      "survey.belt.q.mid": "Getting there",
+      "survey.belt.q.high": "Confident",
+      "survey.rating.label": "Overall, how would you rate it?",
+      "survey.comment.label": "Anything you\u2019d add? (optional)",
+      "survey.comment.ph": "What worked, what didn\u2019t, and any suggestions\u2026",
+      "survey.github.note": "Submitting opens a pre-filled GitHub issue in a new tab &mdash; review it, then click <strong>Submit new issue</strong> to send. A GitHub account with access to the repository is required.",
+      "survey.required": "Please add an overall rating before submitting.",
+      "survey.submit": "Submit survey",
+      "survey.dismiss": "No thanks",
+      "survey.thanks.title": "Thank you!",
+      "survey.thanks.body": "Your feedback helps us improve the 30-Minute Delivery Series."
     },
 
     "pt-BR": {
@@ -391,6 +425,8 @@
       "onb.lang.en.desc": "Content and interface in English (US formatting).",
       "onb.lang.pt.title": "Portugu\u00eas (Brasil)",
       "onb.lang.pt.desc": "Conte\u00fado e interface em portugu\u00eas, com formata\u00e7\u00e3o do Brasil.",
+      "onb.lang.es.title": "Espa\u00f1ol (Latinoam\u00e9rica)",
+      "onb.lang.es.desc": "Contenido e interfaz en espa\u00f1ol neutro, con formato latinoamericano.",
       "onb.q.role": "2. Qual \u00e9 a sua fun\u00e7\u00e3o?",
       "onb.role.csam.title": "CSAM",
       "onb.role.csam.desc": "Customer Success Account Manager. Exemplos e cen\u00e1rios assumem a vis\u00e3o do CSAM por padr\u00e3o.",
@@ -620,7 +656,335 @@
       "voc.name.ph": "Para retornarmos, se necess\u00e1rio",
       "voc.required": "Adicione um resumo e alguns detalhes antes de enviar.",
       "voc.submit": "Abrir issue no GitHub",
-      "voc.cancel": "Cancelar"
+      "voc.cancel": "Cancelar",
+      "survey.exam.eyebrow": "Pesquisa r\u00e1pida",
+      "survey.exam.title": "Como foi esta avalia\u00e7\u00e3o?",
+      "survey.exam.lede": "Algumas perguntas r\u00e1pidas nos ajudam a melhorar o exame pr\u00e1tico CI-900.",
+      "survey.exam.q.label": "Como foi o n\u00edvel de dificuldade?",
+      "survey.exam.q.easy": "F\u00e1cil demais",
+      "survey.exam.q.right": "No ponto certo",
+      "survey.exam.q.hard": "Dif\u00edcil demais",
+      "survey.belt.eyebrow": "Faixa conclu\u00edda \u00b7 Pesquisa r\u00e1pida",
+      "survey.belt.title": "Voc\u00ea chegou ao fim do plano {belt}",
+      "survey.belt.lede": "Parab\u00e9ns! Conte como esta faixa funcionou para voc\u00ea para que possamos melhor\u00e1-la.",
+      "survey.belt.q.label": "Qu\u00e3o confiante voc\u00ea se sente para aplicar estas ferramentas?",
+      "survey.belt.q.low": "Ainda n\u00e3o confiante",
+      "survey.belt.q.mid": "Chegando l\u00e1",
+      "survey.belt.q.high": "Confiante",
+      "survey.rating.label": "De modo geral, que nota voc\u00ea daria?",
+      "survey.comment.label": "Algo a acrescentar? (opcional)",
+      "survey.comment.ph": "O que funcionou, o que n\u00e3o funcionou e quaisquer sugest\u00f5es\u2026",
+      "survey.github.note": "Ao enviar, abre-se uma issue do GitHub pr\u00e9-preenchida em uma nova aba &mdash; revise-a e clique em <strong>Submit new issue</strong> para enviar. \u00c9 necess\u00e1ria uma conta do GitHub com acesso ao reposit\u00f3rio.",
+      "survey.required": "Adicione uma avalia\u00e7\u00e3o geral antes de enviar.",
+      "survey.submit": "Enviar pesquisa",
+      "survey.dismiss": "Agora n\u00e3o",
+      "survey.thanks.title": "Obrigado!",
+      "survey.thanks.body": "Seu retorno nos ajuda a melhorar a S\u00e9rie de Entregas de 30 Minutos."
+    },
+
+    "es-419": {
+      /* shared chrome */
+      "internal.notice": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; y esta serie de entrega son, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No son un producto, certificaci\u00f3n ni examen de Microsoft, y no est\u00e1n afiliados, avalados ni patrocinados por Microsoft. No los compartas externamente.",
+      "internal.notice.exam": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; es, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No es una certificaci\u00f3n ni examen de Microsoft y no est\u00e1 afiliado, avalado ni patrocinado por Microsoft. No lo compartas externamente.",
+      "breadcrumb.series": "iCSU Smart CI \u2014 Serie de Entregas de 30 Minutos",
+      "breadcrumb.module": "M\u00f3dulo",
+      "breadcrumb.exam": "Examen de Pr\u00e1ctica CI-900",
+      "footer.index": "iCSU Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos \u00b7 Interno y propuesto \u2014 no es una oferta oficial de Microsoft \u00b7 Construido a partir de la base de conocimiento CI for iCSU",
+      "footer.module": "iCSU Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos",
+      "footer.exam": "iCSU Smart CI Tools \u00b7 Examen de Pr\u00e1ctica CI-900 \u00b7 Concepto propuesto y solo interno \u2014 no es una oferta oficial de Microsoft \u00b7 Evaluaci\u00f3n de pr\u00e1ctica no oficial construida a partir de la base de conocimiento CI for iCSU",
+
+      /* index hero */
+      "index.title": "iCSU Smart CI \u2014 Serie de Entregas de 30 Minutos",
+      "hero.eyebrow": "iCSU \u00b7 Customer Success Unit",
+      "hero.title": "Mejora Continua \u2014 Serie de Entregas de 30 Minutos",
+      "hero.lede": "Todos los temas de Lean Six Sigma de la biblioteca iCSU Smart CI, reempaquetados en sesiones concisas de 30 minutos. Elige tu rol y selecciona un camino &mdash; una <strong>progresi\u00f3n guiada</strong> desde los conceptos m\u00e1s b\u00e1sicos hasta los m\u00e1s avanzados, <strong>navega por concepto</strong> y categor\u00eda, o <strong>sigue un cintur\u00f3n</strong> para filtrar la biblioteca seg\u00fan el plan de aprendizaje del cintur\u00f3n de Lean Six Sigma que persigues. Cada m\u00f3dulo abre con un resumen ejecutivo, describe lo que obtendr\u00e1s en lenguaje sencillo, explica el concepto, muestra ejemplos por rol para CSAM y CSA, recapitula los puntos clave y cierra con una verificaci\u00f3n de conocimiento al estilo de las certificaciones de Microsoft.",
+      "hero.stat.modules": "m\u00f3dulos de 30 min",
+      "hero.stat.roles": "roles: CSAM &amp; CSA",
+      "hero.stat.parts": "partes por m\u00f3dulo",
+      "hero.stat.questions": "preguntas de verificaci\u00f3n",
+
+      /* format section */
+      "format.heading": "C\u00f3mo se estructura cada m\u00f3dulo de 30 minutos",
+      "format.part1.label": "Resumen Ejecutivo", "format.part1.desc": "Por qu\u00e9 importa la sesi\u00f3n, para l\u00edderes.",
+      "format.part2.label": "Lo Que Obtendr\u00e1s", "format.part2.desc": "Resultados en lenguaje sencillo.",
+      "format.part3.label": "El Tema", "format.part3.desc": "El concepto, explicado.",
+      "format.part4.label": "Ejemplos por Rol", "format.part4.desc": "Escenarios de CSAM &amp; CSA.",
+      "format.part5.label": "Recapitulaci\u00f3n", "format.part5.desc": "Conceptos clave &amp; aprendizajes.",
+      "format.part6.label": "Verificaci\u00f3n de Conocimiento", "format.part6.desc": "Cuestionario estilo cert. MS.",
+      "format.part": "PARTE",
+
+      /* exam CTA on index */
+      "examcta.eyebrow": "Pon a prueba tu preparaci\u00f3n",
+      "examcta.title": "CI-900: Fundamentos de la Mejora Continua",
+      "examcta.desc": "Un examen de pr\u00e1ctica al <em>estilo</em> de una certificaci\u00f3n de Microsoft, sobre toda la biblioteca. Usa el <strong>modo Pr\u00e1ctica</strong> para aprender con retroalimentaci\u00f3n inmediata, o el <strong>modo Certificaci\u00f3n</strong> para un intento cronometrado con puntaje escalado, pantalla de marcado para revisi\u00f3n e informe por \u00e1rea de competencia. <strong>CI-900 es un concepto propuesto y solo interno &mdash; no es una certificaci\u00f3n ni examen real de Microsoft.</strong>",
+      "examcta.btn": "Realizar el examen de pr\u00e1ctica \u2192",
+
+      /* onboarding */
+      "onb.eyebrow": "iCSU Smart CI \u00b7 Configura tu camino",
+      "onb.title": "Bienvenido(a) \u2014 personalicemos esto para ti",
+      "onb.lede": "Elige tu idioma, tu rol y c\u00f3mo prefieres recorrer el material. Puedes cambiar los tres en cualquier momento.",
+      "onb.q.lang": "1. \u00bfQu\u00e9 idioma prefieres?",
+      "onb.lang.en.title": "English",
+      "onb.lang.en.desc": "Content and interface in English (US formatting).",
+      "onb.lang.pt.title": "Portugu\u00eas (Brasil)",
+      "onb.lang.pt.desc": "Conte\u00fado e interface em portugu\u00eas, com formata\u00e7\u00e3o do Brasil.",
+      "onb.lang.es.title": "Espa\u00f1ol (Latinoam\u00e9rica)",
+      "onb.lang.es.desc": "Contenido e interfaz en espa\u00f1ol neutro, con formato latinoamericano.",
+      "onb.q.role": "2. \u00bfCu\u00e1l es tu rol?",
+      "onb.role.csam.title": "CSAM",
+      "onb.role.csam.desc": "Customer Success Account Manager. Los ejemplos y escenarios toman la vista del CSAM por defecto.",
+      "onb.role.csa.title": "CSA",
+      "onb.role.csa.desc": "Cloud Solution Architect. Los ejemplos y escenarios toman la vista del CSA por defecto.",
+      "onb.q.flow": "3. \u00bfC\u00f3mo te gustar\u00eda explorar?",
+      "onb.flow.guided.title": "Camino guiado",
+      "onb.flow.guided.desc": "Una sola progresi\u00f3n, desde las ideas m\u00e1s b\u00e1sicas hasta las m\u00e1s avanzadas. Ideal si eres nuevo en Lean Six Sigma.",
+      "onb.flow.concept.title": "Navegar por concepto",
+      "onb.flow.concept.desc": "M\u00f3dulos agrupados en categor\u00edas para que vayas directo al tema que necesites.",
+      "onb.flow.belt.title": "Seguir un cintur\u00f3n",
+      "onb.flow.belt.desc": "Persigue un cintur\u00f3n de Lean Six Sigma. Elige tu cintur\u00f3n objetivo y filtramos la biblioteca seg\u00fan su plan de aprendizaje.",
+      "onb.q.belt": "4. \u00bfQu\u00e9 cintur\u00f3n persigues?",
+      "onb.start": "Comenzar a aprender",
+      "onb.next": "Siguiente",
+      "onb.back": "Atr\u00e1s",
+      "onb.step": "Paso {n} de {total}",
+      "onb.aria": "Configura tu camino",
+
+      /* prefbar */
+      "prefbar.showing": "Mostrando la vista",
+      "prefbar.for": "para",
+      "prefbar.flow.guided": "Camino guiado",
+      "prefbar.flow.concept": "Navegar por concepto",
+      "prefbar.flow.beltSuffix": "plan",
+      "prefbar.toggle.guided": "Camino guiado",
+      "prefbar.toggle.concept": "Por concepto",
+      "prefbar.toggle.belt": "Por cintur\u00f3n",
+      "prefbar.change": "Cambiar idioma / rol / camino",
+      "prefbar.targetBelt": "Cintur\u00f3n objetivo",
+      "prefbar.aria.flow": "Elegir flujo",
+      "prefbar.aria.belt": "Elegir cintur\u00f3n objetivo",
+
+      /* index listings */
+      "index.modulesEach": "30 min cada uno",
+      "index.module": "m\u00f3dulo", "index.modules": "m\u00f3dulos",
+      "card.questionCheck": " preguntas de verificaci\u00f3n",
+      "label.step": "PASO", "label.module": "M\u00d3DULO",
+
+      /* belt index */
+      "belt.plan.eyebrow": "Plan de aprendizaje del cintur\u00f3n",
+      "belt.workingToward": "Avanzando hacia tu",
+      "belt.inThisPlan": "en este plan",
+      "belt.cumulativeThrough": "acumulado hasta",
+      "belt.ofStudy": "de estudio",
+      "belt.yourTarget": "Tu meta",
+      "belt.prerequisite": "Prerrequisito",
+      "belt.beyond": "M\u00e1s all\u00e1 del",
+      "belt.moreModule": "m\u00f3dulo m\u00e1s", "belt.moreModules": "m\u00f3dulos m\u00e1s",
+      "belt.cumulativeNote": "Los cinturones son acumulativos \u2014 elegir un cintur\u00f3n superior conserva todo lo de aqu\u00ed y agrega el material m\u00e1s profundo.",
+
+      /* module page */
+      "module.titleSuffix": "iCSU Smart CI Delivery",
+      "module.delivery": "de entrega",
+      "module.questionCheck": " preguntas de verificaci\u00f3n de conocimiento",
+      "module.flow.guided": "Camino guiado",
+      "module.flow.concept": "Por concepto",
+      "module.flow.beltSuffix": "plan",
+      "module.posOf": "de",
+      "module.beyondPlan": "m\u00e1s all\u00e1 de este plan",
+      "module.notFound": "M\u00f3dulo no encontrado. ",
+      "module.returnAll": "Volver a todos los m\u00f3dulos.",
+      "sec.exec.kicker": "Resumen Ejecutivo", "sec.exec.title": "Por qu\u00e9 importan estos 30 minutos",
+      "sec.gain.kicker": "Lo Que Obtendr\u00e1s", "sec.gain.title": "Lo que te llevar\u00e1s y podr\u00e1s hacer",
+      "sec.topic.kicker": "El Tema", "sec.topic.title": "El concepto, explicado",
+      "sec.roles.kicker": "Ejemplos por Rol", "sec.roles.title": "C\u00f3mo se ve en el terreno",
+      "sec.recap.kicker": "Recapitulaci\u00f3n", "sec.recap.title": "Conceptos clave & aprendizajes",
+      "role.tab.csam": "CSAM \u2014 Customer Success Account Manager",
+      "role.tab.csa": "CSA \u2014 Cloud Solution Architect",
+      "role.panel.csam": "CSAM \u00b7 Customer Success Account Manager",
+      "role.panel.csa": "CSA \u00b7 Cloud Solution Architect",
+      "module.prev": "\u2190 M\u00f3dulo anterior",
+      "module.next": "M\u00f3dulo siguiente \u2192",
+
+      /* knowledge check */
+      "kc.kicker": "Verificaci\u00f3n de Conocimiento",
+      "kc.title": "Pon a prueba tu comprensi\u00f3n",
+      "kc.intro": "Preguntas al estilo de las certificaciones de Microsoft. Confirma una respuesta para revelar la explicaci\u00f3n.",
+      "kc.questions": "Preguntas:", "kc.pass": "Aprobaci\u00f3n:",
+      "q.indexOf1": "Pregunta", "q.indexOf2": "de",
+      "q.check": "Verificar respuesta",
+      "q.markerCorrect": "\u2713 Respuesta correcta",
+      "q.markerYour": "\u2715 Tu respuesta",
+      "q.fb.correct": "Correcto", "q.fb.notquite": "Casi",
+      "kc.summary.pass": "Verificaci\u00f3n de conocimiento completada",
+      "kc.summary.retry": "Casi lo logras",
+      "kc.summary.passed": "Aprobaste. Revisa los \u00edtems que fallaste.",
+      "kc.summary.failedPrefix": "El puntaje de aprobaci\u00f3n es",
+      "kc.summary.failedSuffix": ". Repasa el m\u00f3dulo e int\u00e9ntalo de nuevo.",
+      "kc.retry": "Reintentar verificaci\u00f3n",
+      "kc.allModules": "Todos los m\u00f3dulos",
+
+      /* exam start */
+      "exam.hero.eyebrow": "Evaluaci\u00f3n de pr\u00e1ctica al estilo de las certificaciones de Microsoft",
+      "exam.hero.lede": "Una evaluaci\u00f3n realista, al estilo de examen, sobre toda la biblioteca iCSU Smart CI. Elige el modo Pr\u00e1ctica para aprender con retroalimentaci\u00f3n inmediata, o el modo Certificaci\u00f3n para un intento cronometrado y puntuado que refleja la experiencia real de examen.",
+      "exam.fact.bank": "preguntas en el banco",
+      "exam.fact.perAttempt": "por intento de certificaci\u00f3n",
+      "exam.fact.timeLimit": "l\u00edmite de tiempo (modo cert.)",
+      "exam.fact.scoreToPass": "puntaje para aprobar",
+      "exam.q.short": "P", "exam.min": "min",
+      "exam.practice.badge": "Modo Pr\u00e1ctica / Preparaci\u00f3n",
+      "exam.practice.title": "Aprende con retroalimentaci\u00f3n inmediata",
+      "exam.practice.desc": "Una pregunta a la vez. Confirma una respuesta y la opci\u00f3n correcta y la explicaci\u00f3n completa aparecen de inmediato. Sin cron\u00f3metro \u2014 ideal para construir conocimiento antes de un intento cronometrado.",
+      "exam.practice.li1": "Respuesta + justificaci\u00f3n inmediatas en cada \u00edtem",
+      "exam.practice.li2": "Enf\u00f3cate en una sola \u00e1rea de competencia o en todo el banco",
+      "exam.practice.li3": "Sin cron\u00f3metro, repite cuantas veces quieras",
+      "exam.practice.start": "Iniciar pr\u00e1ctica",
+      "exam.field.length": "Cantidad", "exam.field.skill": "\u00c1rea de competencia",
+      "exam.len.questions": "preguntas",
+      "exam.len.all": "Todas las", "exam.len.allSuffix": "preguntas",
+      "exam.skill.all": "Todas las \u00e1reas",
+      "exam.cap.msg": "El \u00e1rea de competencia \u201c{skill}\u201d tiene solo {avail} pregunta(s) disponible(s) \u2014 menos que las {req} que seleccionaste. \u00bfIniciar con el m\u00e1ximo de {avail} disponible(s)?",
+      "exam.cert.badge": "Modo Certificaci\u00f3n",
+      "exam.cert.title": "Cronometrado, puntuado, realista",
+      "exam.cert.start": "Iniciar examen de certificaci\u00f3n",
+      "exam.name": "Fundamentos de la Mejora Continua",
+      "exam.cert.desc": "{len} preguntas en {min} minutos. Sin retroalimentaci\u00f3n hasta que env\u00edes. Marca \u00edtems para revisi\u00f3n, vu\u00e9lvelos a ver desde una pantalla de revisi\u00f3n y recibe un puntaje escalado y un desglose por \u00e1rea de competencia \u2014 exactamente como un examen de certificaci\u00f3n de Microsoft.",
+      "exam.cert.li1": "{len} preguntas \u00b7 cuenta regresiva de {min} minutos",
+      "exam.cert.li3": "Puntaje escalado de hasta {max} \u00b7 aprobaci\u00f3n en {pass}",
+      "exam.cert.markLi": "Marcar para revisi\u00f3n + cuadr\u00edcula de revisi\u00f3n al final",
+      "exam.cert.reportLi": "Informe de desempe\u00f1o por \u00e1rea de competencia",
+      "exam.skills.title": "Competencias evaluadas",
+      "exam.skills.note": "Un intento de certificaci\u00f3n toma preguntas de estas \u00e1reas de competencia usando las ponderaciones indicadas.",
+      "exam.skills.col.area": "\u00c1rea de competencia", "exam.skills.col.weight": "Ponderaci\u00f3n", "exam.skills.col.bank": "Banco",
+      "exam.disclaimer": "Esta es una evaluaci\u00f3n de pr\u00e1ctica no oficial e interna, construida a partir de la base de conocimiento iCSU Smart CI para imitar el formato de los ex\u00e1menes de certificaci\u00f3n de Microsoft. CI-900 es, por ahora, un concepto propuesto y solo interno, para audiencia interna \u00fanicamente. No est\u00e1 afiliado ni avalado por Microsoft, y no es un examen ni certificaci\u00f3n real de Microsoft.",
+
+      /* exam session */
+      "exam.mode.cert": "Modo Certificaci\u00f3n", "exam.mode.practice": "Modo Pr\u00e1ctica",
+      "exam.bar.question": "Pregunta", "exam.bar.of": "de", "exam.bar.answered": "respondidas",
+      "exam.endPractice": "Finalizar pr\u00e1ctica",
+      "exam.question": "Pregunta",
+      "exam.chooseBest": "Elige la mejor respuesta.",
+      "exam.prev": "\u2190 Anterior", "exam.next": "Siguiente \u2192",
+      "exam.markReview": "Marcar para revisi\u00f3n",
+      "exam.review.btn": "Revisi\u00f3n \u2630",
+      "exam.reviewSubmit": "Revisar y enviar", "exam.finish": "Finalizar",
+      "exam.reviewScreen": "Pantalla de revisi\u00f3n",
+      "exam.review.title": "Revisa tus respuestas",
+      "exam.review.note": "Selecciona cualquier pregunta para volver a ella. Los \u00edtems que marcaste aparecen se\u00f1alados. Las preguntas sin responder se puntan como incorrectas.",
+      "exam.legend.answered": "Respondida", "exam.legend.unanswered": "Sin responder", "exam.legend.marked": "Marcada para revisi\u00f3n",
+      "exam.allAnswered": "Todas las preguntas respondidas.",
+      "exam.stillUnanswered1": "pregunta a\u00fan sin responder.", "exam.stillUnanswered2": "preguntas a\u00fan sin responder.",
+      "exam.markedForReview": "marcadas para revisi\u00f3n.",
+      "exam.returnQuestions": "\u2190 Volver a las preguntas",
+      "exam.submit": "Enviar examen",
+      "exam.confirm.unanswered1": "Tienes", "exam.confirm.unanswered2": "pregunta sin responder",
+      "exam.confirm.unanswered2p": "preguntas sin responder",
+      "exam.confirm.anyway": ". \u00bfEnviar de todos modos? Los \u00edtems sin responder se puntan como incorrectos.",
+      "exam.confirm.submit": "\u00bfEnviar tu examen para puntuaci\u00f3n?",
+      "exam.confirm.endPractice": "\u00bfFinalizar esta sesi\u00f3n de pr\u00e1ctica y ver tus resultados?",
+
+      /* exam report */
+      "exam.attempt": "Intento de certificaci\u00f3n", "exam.session": "Sesi\u00f3n de pr\u00e1ctica",
+      "exam.pass": "APROBADO", "exam.fail": "NO APROBADO",
+      "exam.passingScore": "Puntaje de aprobaci\u00f3n:",
+      "exam.passLine": "aprobaci\u00f3n",
+      "exam.correctSuffix": "correctas",
+      "exam.ofCorrect": "correctas \u00b7 tiempo usado",
+      "exam.timeExpired": "Tiempo agotado \u00b7",
+      "exam.attemptedOn": "Realizado el",
+      "exam.breakdown.title": "Desempe\u00f1o por \u00e1rea de competencia",
+      "exam.answers.review": "Revisar todas las preguntas y explicaciones",
+      "exam.answers.hide": "Ocultar revisi\u00f3n de preguntas",
+      "exam.retakeCert": "Repetir examen de certificaci\u00f3n", "exam.newPractice": "Nueva sesi\u00f3n de pr\u00e1ctica",
+      "exam.backModules": "Volver a los m\u00f3dulos",
+      "exam.answer.correct": "Correcta", "exam.answer.incorrect": "Incorrecta", "exam.answer.unanswered": "Sin responder",
+      "exam.answer.markCorrect": " \u2713 Respuesta correcta", "exam.answer.markYour": " \u2715 Tu respuesta", "exam.answer.markYourCorrect": " \u2713 Tu respuesta",
+      "exam.answer.explanation": "Explicaci\u00f3n:",
+      "exam.noQuestions": "No hay preguntas disponibles.",
+
+      /* group / stage / belt display names */
+      "group.Foundations": "Fundamentos",
+      "group.Methodologies & Cycles": "Metodolog\u00edas & Ciclos",
+      "group.Value & Quality Definition": "Definici\u00f3n de Valor & Calidad",
+      "group.Process Mapping & Analysis": "Mapeo & An\u00e1lisis de Procesos",
+      "group.Workplace, Flow & Standardization": "Lugar de Trabajo, Flujo & Estandarizaci\u00f3n",
+      "group.Measurement & Control": "Medici\u00f3n & Control",
+      "group.Strategy & Governance": "Estrategia & Gobernanza",
+
+      "stage.1": "Etapa 1 \u00b7 Empieza Aqu\u00ed \u2014 Qu\u00e9 es la MC",
+      "stage.2": "Etapa 2 \u00b7 Ver el Valor y el Desperdicio",
+      "stage.3": "Etapa 3 \u00b7 Organizar y Estandarizar",
+      "stage.4": "Etapa 4 \u00b7 Mejorar en Ciclos",
+      "stage.5": "Etapa 5 \u00b7 Mapear y Analizar el Proceso",
+      "stage.6": "Etapa 6 \u00b7 Encontrar la Causa Ra\u00edz",
+      "stage.7": "Etapa 7 \u00b7 Equilibrar el Flujo",
+      "stage.8": "Etapa 8 \u00b7 Medir con Datos",
+      "stage.9": "Etapa 9 \u00b7 Comprobarlo Estad\u00edsticamente",
+      "stage.10": "Etapa 10 \u00b7 Liderar y Gobernar",
+
+      "belt.white.name": "Cintur\u00f3n Blanco", "belt.white.tagline": "Conciencia & vocabulario",
+      "belt.white.goal": "Conoce el lenguaje de la mejora continua y reconoce las herramientas centrales \u2014 entiendes qu\u00e9 son y por qu\u00e9 importan, incluso antes de aplicarlas.",
+      "belt.yellow.name": "Cintur\u00f3n Amarillo", "belt.yellow.tagline": "Practicante \u2014 contribuye a las mejoras",
+      "belt.yellow.goal": "Participa en eventos de mejora: aplica los 5 Porqu\u00e9s a un problema confirmado, contribuye a un Ishikawa y apoya el trabajo est\u00e1ndar y la prueba de errores.",
+      "belt.green.name": "Cintur\u00f3n Verde", "belt.green.tagline": "Lidera proyectos peque\u00f1os a medianos",
+      "belt.green.goal": "Lleva proyectos DMAIC de principio a fin con mapeo de procesos, equilibrado de flujo y estad\u00edstica b\u00e1sica.",
+      "belt.black.name": "Cintur\u00f3n Negro", "belt.black.tagline": "Lidera programas, mentorea & gobierna",
+      "belt.black.goal": "Lidera programas multifuncionales con estad\u00edstica avanzada, an\u00e1lisis de riesgo y estrategia de MC \u2014 y mentorea a los Cinturones Verdes.",
+      "belt.hoursSuffix": "horas",
+
+      "domain.foundations": "Describir los fundamentos y conceptos de la mejora continua",
+      "domain.methods": "Aplicar metodolog\u00edas y ciclos de mejora",
+      "domain.value": "Definir el valor y la calidad para el cliente",
+      "domain.mapping": "Mapear y analizar procesos y causas ra\u00edz",
+      "domain.flow": "Optimizar el lugar de trabajo, el flujo y la estandarizaci\u00f3n",
+      "domain.measure": "Medir y controlar procesos estad\u00edsticamente",
+      "domain.govern": "Liderar la estrategia y gobernanza de MC",
+
+      /* feedback (Voice of Customer) */
+      "voc.button": "Comentarios",
+      "voc.aria": "Comparte tus comentarios",
+      "voc.title": "Comparte tus comentarios",
+      "voc.lede": "Ay\u00fadanos a mejorar la Serie de Entregas de 30 Minutos. Tus comentarios se recopilan como una incidencia de Voz del Cliente (VOC) en el repositorio de GitHub del proyecto.",
+      "voc.github.note": "Al enviar, se abre una incidencia de GitHub ya rellenada en una pesta\u00f1a nueva &mdash; rev\u00edsala y haz clic en <strong>Submit new issue</strong> para enviarla. Se requiere una cuenta de GitHub con acceso al repositorio.",
+      "voc.type.label": "\u00bfQu\u00e9 tipo de comentario es este?",
+      "voc.type.content": "Exactitud del contenido",
+      "voc.type.suggestion": "Sugerencia o mejora",
+      "voc.type.bug": "Error o enlace roto",
+      "voc.type.question": "Pregunta",
+      "voc.type.praise": "Elogio",
+      "voc.type.other": "Otro",
+      "voc.rating.label": "Calificaci\u00f3n general (opcional)",
+      "voc.rating.clear": "Borrar calificaci\u00f3n",
+      "voc.subject.label": "Resumen",
+      "voc.subject.ph": "Un t\u00edtulo corto para tu comentario",
+      "voc.details.label": "Detalles",
+      "voc.details.ph": "Qu\u00e9 funcion\u00f3, qu\u00e9 no y cualquier sugerencia\u2026",
+      "voc.name.label": "Tu nombre (opcional)",
+      "voc.name.ph": "Para dar seguimiento, si es necesario",
+      "voc.required": "Agrega un resumen y algunos detalles antes de enviar.",
+      "voc.submit": "Abrir incidencia en GitHub",
+      "voc.cancel": "Cancelar",
+      "survey.exam.eyebrow": "Encuesta r\u00e1pida",
+      "survey.exam.title": "\u00bfQu\u00e9 te pareci\u00f3 esta evaluaci\u00f3n?",
+      "survey.exam.lede": "Unas preguntas r\u00e1pidas nos ayudan a mejorar el examen de pr\u00e1ctica CI-900.",
+      "survey.exam.q.label": "\u00bfC\u00f3mo sentiste la dificultad?",
+      "survey.exam.q.easy": "Demasiado f\u00e1cil",
+      "survey.exam.q.right": "En su punto",
+      "survey.exam.q.hard": "Demasiado dif\u00edcil",
+      "survey.belt.eyebrow": "Cintur\u00f3n completado \u00b7 Encuesta r\u00e1pida",
+      "survey.belt.title": "Llegaste al final del plan {belt}",
+      "survey.belt.lede": "\u00a1Felicidades! Cu\u00e9ntanos c\u00f3mo te result\u00f3 este cintur\u00f3n para poder mejorarlo.",
+      "survey.belt.q.label": "\u00bfQu\u00e9 tan seguro(a) te sientes para aplicar estas herramientas?",
+      "survey.belt.q.low": "A\u00fan sin confianza",
+      "survey.belt.q.mid": "En camino",
+      "survey.belt.q.high": "Con confianza",
+      "survey.rating.label": "En general, \u00bfqu\u00e9 calificaci\u00f3n le dar\u00edas?",
+      "survey.comment.label": "\u00bfAlgo que quieras agregar? (opcional)",
+      "survey.comment.ph": "Qu\u00e9 funcion\u00f3, qu\u00e9 no y cualquier sugerencia\u2026",
+      "survey.github.note": "Al enviar se abre una incidencia de GitHub previamente rellenada en una pesta\u00f1a nueva &mdash; rev\u00edsala y haz clic en <strong>Submit new issue</strong> para enviarla. Se requiere una cuenta de GitHub con acceso al repositorio.",
+      "survey.required": "Agrega una calificaci\u00f3n general antes de enviar.",
+      "survey.submit": "Enviar encuesta",
+      "survey.dismiss": "Ahora no",
+      "survey.thanks.title": "\u00a1Gracias!",
+      "survey.thanks.body": "Tus comentarios nos ayudan a mejorar la Serie de Entregas de 30 Minutos."
     }
   };
 
@@ -635,7 +999,8 @@
   /* ---------------- Static HTML population ---------------- */
   function applyStatic(scope) {
     var root = scope || document;
-    document.documentElement.lang = getLang() === "pt-BR" ? "pt-BR" : "en";
+    var lang = getLang();
+    document.documentElement.lang = lang === "pt-BR" ? "pt-BR" : (lang === "es-419" ? "es-419" : "en");
     Array.prototype.forEach.call(root.querySelectorAll("[data-i18n]"), function (node) {
       var v = t(node.getAttribute("data-i18n"));
       if (v != null) node.textContent = v;
