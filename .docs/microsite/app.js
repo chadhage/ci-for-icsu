@@ -112,6 +112,80 @@
     return out;
   }
 
+  /* ---------------- Points / scoring ----------------
+     Every module is worth a fixed number of points. Passing (or simply
+     completing) a module's knowledge check awards points in proportion to the
+     score achieved: e.g. an 80% result on a 100-point module earns 80 points.
+     The best result per module is kept, so re-taking a check can only raise a
+     score, never lower it. Earned points are persisted per module in
+     localStorage and rolled up into per-belt and overall totals. */
+  var POINTS_KEY = "icsuSmartCiPoints";
+  var POINTS_PER_MODULE = 100;
+
+  function moduleWorth(/* id */) { return POINTS_PER_MODULE; }
+
+  function getPointsStore() {
+    try { return JSON.parse(window.localStorage.getItem(POINTS_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function savePointsStore(store) {
+    try { window.localStorage.setItem(POINTS_KEY, JSON.stringify(store)); }
+    catch (e) { /* ignore */ }
+  }
+  function earnedFor(id) {
+    var rec = getPointsStore()[id];
+    return rec && typeof rec.points === "number" ? rec : null;
+  }
+  // Record a knowledge-check result; keeps the best points earned for the module.
+  function recordScore(id, correct, total) {
+    var worth = moduleWorth(id);
+    var pct = total > 0 ? correct / total : 0;
+    var points = Math.round(pct * worth);
+    var store = getPointsStore();
+    var prev = store[id];
+    var prevPoints = prev && typeof prev.points === "number" ? prev.points : 0;
+    var improved = !prev || points > prevPoints;
+    if (improved) {
+      store[id] = { points: points, correct: correct, total: total, pct: pct, ts: new Date().toISOString() };
+      savePointsStore(store);
+    }
+    return { points: points, best: improved ? points : prevPoints, prev: prevPoints, improved: improved, worth: worth };
+  }
+  function resetPoints() { savePointsStore({}); }
+
+  // Roll up earned points by belt tier and overall. Belt tiers partition every
+  // module exactly once, so the per-belt figures sum to the grand total.
+  function pointsTotals() {
+    var modules = M();
+    var store = getPointsStore();
+    var byBelt = BELTS.map(function (b) {
+      var ids = b.ids.filter(function (id) { return modules[id]; });
+      var earned = 0, done = 0;
+      ids.forEach(function (id) {
+        var rec = store[id];
+        if (rec && typeof rec.points === "number") { earned += rec.points; done += 1; }
+      });
+      return {
+        key: b.key,
+        available: ids.length * POINTS_PER_MODULE,
+        earned: earned,
+        count: ids.length,
+        earnedCount: done
+      };
+    });
+    var totalAvailable = byBelt.reduce(function (a, x) { return a + x.available; }, 0);
+    var totalEarned = byBelt.reduce(function (a, x) { return a + x.earned; }, 0);
+    var modulesScored = byBelt.reduce(function (a, x) { return a + x.earnedCount; }, 0);
+    var modulesTotal = byBelt.reduce(function (a, x) { return a + x.count; }, 0);
+    return {
+      byBelt: byBelt,
+      totalAvailable: totalAvailable,
+      totalEarned: totalEarned,
+      modulesScored: modulesScored,
+      modulesTotal: modulesTotal
+    };
+  }
+
   // ---- User preferences (role + flow + belt + language) persisted in localStorage ----
   var PREF_KEY = "icsuSmartCiPrefs";
   var DEFAULT_PREFS = { role: "csam", flow: "guided", belt: "white", lang: "en" };
@@ -406,9 +480,19 @@
     card.appendChild(el("span", { className: "card__num" }, [numLabel]));
     card.appendChild(el("h3", { className: "card__title" }, [m.title]));
     card.appendChild(el("p", { className: "card__summary" }, [plainText(m.executiveSummary)]));
+    var earned = earnedFor(id);
+    var worth = moduleWorth(id);
+    var pointsBadge = earned
+      ? el("span", { className: "card__points is-earned" }, [
+          "\u2605 " + fmtNum(earned.points) + "/" + fmtNum(worth) + " " + t("points.pts")
+        ])
+      : el("span", { className: "card__points" }, [
+          "\u2606 " + fmtNum(worth) + " " + t("points.pts")
+        ]);
     card.appendChild(el("div", { className: "card__footer" }, [
       el("span", { className: "pill" }, [m.duration || "30 min"]),
-      el("span", null, [(m.questions ? m.questions.length : 0) + t("card.questionCheck")])
+      el("span", null, [(m.questions ? m.questions.length : 0) + t("card.questionCheck")]),
+      pointsBadge
     ]));
     return card;
   }
@@ -533,6 +617,79 @@
     }
   }
 
+  // Points tally panel for the index. Shows the running total plus a per-belt
+  // breakdown so a learner can see, at a glance, how many points they have
+  // earned toward each belt as they move between modules and learning paths.
+  function renderPointsPanel(onReset) {
+    var totals = pointsTotals();
+    var panel = el("section", { className: "points-panel" });
+
+    var head = el("div", { className: "points-panel__head" }, [
+      el("div", null, [
+        el("p", { className: "points-panel__kicker" }, [el("span", { className: "dot" }), t("points.kicker")]),
+        el("h2", { className: "points-panel__title" }, [t("points.title")])
+      ])
+    ]);
+    if (totals.totalEarned > 0) {
+      var reset = el("button", { className: "points-panel__reset", type: "button" }, [t("points.reset")]);
+      reset.addEventListener("click", function () {
+        if (window.confirm(t("points.reset.confirm"))) {
+          resetPoints();
+          if (onReset) onReset();
+        }
+      });
+      head.appendChild(reset);
+    }
+    panel.appendChild(head);
+
+    panel.appendChild(el("p", { className: "points-panel__subtitle" }, [t("points.subtitle")]));
+
+    // Headline total.
+    var pctFrac = totals.totalAvailable > 0 ? totals.totalEarned / totals.totalAvailable : 0;
+    var total = el("div", { className: "points-total" }, [
+      el("div", { className: "points-total__figure" }, [
+        el("strong", { className: "points-total__earned" }, [fmtNum(totals.totalEarned)]),
+        el("span", { className: "points-total__of" }, [" / " + fmtNum(totals.totalAvailable) + " " + t("points.pts")])
+      ]),
+      el("p", { className: "points-total__meta" }, [
+        fmtPct(pctFrac) + " \u00b7 " + fmtNum(totals.modulesScored) + " / " + fmtNum(totals.modulesTotal) + " " + t("points.modulesScored")
+      ])
+    ]);
+    panel.appendChild(total);
+
+    if (totals.totalEarned === 0) {
+      panel.appendChild(el("p", { className: "points-panel__empty" }, [t("points.empty")]));
+    }
+
+    // Per-belt breakdown.
+    panel.appendChild(el("p", { className: "points-belt__heading" }, [t("points.byBelt")]));
+    var list = el("div", { className: "points-belt-list" });
+    totals.byBelt.forEach(function (b) {
+      var frac = b.available > 0 ? b.earned / b.available : 0;
+      var row = el("div", { className: "points-belt points-belt--" + b.key }, [
+        el("div", { className: "points-belt__top" }, [
+          el("span", { className: "points-belt__name" }, [
+            el("span", { className: "belt-chip belt-chip--" + b.key }),
+            beltName(b.key)
+          ]),
+          el("span", { className: "points-belt__score" }, [
+            fmtNum(b.earned) + " / " + fmtNum(b.available) + " " + t("points.pts")
+          ])
+        ]),
+        el("div", { className: "points-belt__bar" }, [
+          el("div", { className: "points-belt__fill points-belt__fill--" + b.key, style: "width:" + Math.round(frac * 100) + "%" })
+        ]),
+        el("p", { className: "points-belt__meta" }, [
+          fmtNum(b.earnedCount) + " / " + fmtNum(b.count) + " " + t("points.modules")
+        ])
+      ]);
+      list.appendChild(row);
+    });
+    panel.appendChild(list);
+
+    return panel;
+  }
+
   function bootIndex(indexRoot) {
     function render(prefs) {
       indexRoot.innerHTML = "";
@@ -540,6 +697,7 @@
         setPrefs(next);
         render(next);
       }));
+      indexRoot.appendChild(renderPointsPanel(function () { render(prefs); }));
       renderIndex(indexRoot, prefs.flow, prefs.belt, function (next) {
         setPrefs(next);
         render(next);
@@ -593,10 +751,24 @@
     var header = el("div", { className: "module-header" });
     header.appendChild(el("p", { className: "module-eyebrow" }, [m.group]));
     header.appendChild(el("h1", { className: "module-title" }, [m.title]));
+    var earned = earnedFor(id);
+    var worth = moduleWorth(id);
+    var pointsPill = earned
+      ? el("span", { className: "pill pill--points is-earned" }, [
+          "\u2605 " + fmtNum(earned.points) + " / " + fmtNum(worth) + " " + t("points.pts")
+        ])
+      : el("span", { className: "pill pill--points" }, [
+          "\u2606 " + t("points.worth") + " " + fmtNum(worth) + " " + t("points.pts")
+        ]);
+    var grandTotal = pointsTotals().totalEarned;
     var meta = el("div", { className: "module-meta" }, [
       el("span", { className: "pill" }, ["\u23f1 " + (m.duration || "30 min") + " " + t("module.delivery")]),
       el("span", null, [positionLabel]),
-      el("span", null, [(m.questions ? m.questions.length : 0) + t("module.questionCheck")])
+      el("span", null, [(m.questions ? m.questions.length : 0) + t("module.questionCheck")]),
+      pointsPill,
+      el("span", { className: "pill pill--points-total" }, [
+        t("points.total") + ": " + fmtNum(grandTotal) + " " + t("points.pts")
+      ])
     ]);
     header.appendChild(meta);
     root.appendChild(header);
@@ -709,7 +881,7 @@
         answered += 1;
         if (isCorrect) correct += 1;
         fill.style.width = Math.round((answered / total) * 100) + "%";
-        if (answered === total) renderSummary(container, correct, total, passingScore);
+        if (answered === total) renderSummary(container, correct, total, passingScore, m);
       }));
     });
     return wrap;
@@ -777,7 +949,7 @@
     return card;
   }
 
-  function renderSummary(container, correct, total, passingScore) {
+  function renderSummary(container, correct, total, passingScore, m) {
     var frac = correct / total;
     var passed = (frac * 100) >= passingScore;
     var summary = el("div", { className: "summary " + (passed ? "summary--pass" : "summary--retry") });
@@ -786,6 +958,21 @@
     summary.appendChild(el("p", { className: "summary__detail" }, [
       fmtPct(frac) + " \u00b7 " + (passed ? t("kc.summary.passed") : t("kc.summary.failedPrefix") + " " + fmtPct(passingScore / 100) + t("kc.summary.failedSuffix"))
     ]));
+
+    // Award points in proportion to the score and surface the result.
+    if (m && m.id) {
+      var result = recordScore(m.id, correct, total);
+      var pointsLine = el("div", { className: "summary__points" }, [
+        el("span", { className: "summary__points-figure" }, [
+          "\u2605 " + t("points.summary.earned") + ": " + fmtNum(result.points) + " / " + fmtNum(result.worth) + " " + t("points.pts")
+        ])
+      ]);
+      if (result.improved && result.prev > 0) {
+        pointsLine.appendChild(el("span", { className: "summary__points-best" }, [t("points.newBest")]));
+      }
+      summary.appendChild(pointsLine);
+    }
+
     var retry = el("button", { className: "btn btn--primary", type: "button" }, [t("kc.retry")]);
     retry.addEventListener("click", function () { window.location.reload(); });
     var back = el("a", { className: "btn btn--secondary", href: "index.html" }, [t("kc.allModules")]);

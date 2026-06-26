@@ -214,7 +214,21 @@
       "kc.retry": "Retry knowledge check",
       "kc.allModules": "All modules",
 
-      /* exam start */
+      /* points */
+      "points.kicker": "Progress",
+      "points.title": "Your points",
+      "points.subtitle": "Every module is worth 100 points. Pass a knowledge check and you earn points in proportion to your score \u2014 80% earns 80 points.",
+      "points.total": "Total points",
+      "points.byBelt": "Points by belt",
+      "points.modulesScored": "modules scored",
+      "points.modules": "modules",
+      "points.pts": "pts",
+      "points.worth": "Worth",
+      "points.newBest": "New best",
+      "points.summary.earned": "Points earned",
+      "points.empty": "No points yet \u2014 pass a knowledge check to start earning toward your belts.",
+      "points.reset": "Reset points",
+      "points.reset.confirm": "Reset all earned points? This can\u2019t be undone.",
       "exam.hero.eyebrow": "Microsoft certification\u2013style practice assessment",
       "exam.hero.lede": "A realistic, exam-style assessment over the entire iCSU Smart CI library. Choose Practice mode to learn with instant feedback, or Certification mode for a timed, scored attempt that mirrors the real testing experience.",
       "exam.fact.bank": "questions in the bank",
@@ -519,6 +533,22 @@
       "kc.retry": "Refazer verifica\u00e7\u00e3o",
       "kc.allModules": "Todos os m\u00f3dulos",
 
+      /* points */
+      "points.kicker": "Progresso",
+      "points.title": "Seus pontos",
+      "points.subtitle": "Cada m\u00f3dulo vale 100 pontos. Ao passar em uma verifica\u00e7\u00e3o de conhecimento, voc\u00ea ganha pontos proporcionais \u00e0 sua nota \u2014 80% rende 80 pontos.",
+      "points.total": "Total de pontos",
+      "points.byBelt": "Pontos por faixa",
+      "points.modulesScored": "m\u00f3dulos pontuados",
+      "points.modules": "m\u00f3dulos",
+      "points.pts": "pts",
+      "points.worth": "Vale",
+      "points.newBest": "Novo recorde",
+      "points.summary.earned": "Pontos ganhos",
+      "points.empty": "Ainda sem pontos \u2014 passe em uma verifica\u00e7\u00e3o de conhecimento para come\u00e7ar a acumular pontos rumo \u00e0s suas faixas.",
+      "points.reset": "Zerar pontos",
+      "points.reset.confirm": "Zerar todos os pontos ganhos? Isso n\u00e3o pode ser desfeito.",
+
       /* exam start */
       "exam.hero.eyebrow": "Avalia\u00e7\u00e3o pr\u00e1tica no estilo das certifica\u00e7\u00f5es da Microsoft",
       "exam.hero.lede": "Uma avalia\u00e7\u00e3o realista, no estilo de exame, sobre toda a biblioteca iCSU Smart CI. Escolha o modo Pr\u00e1tica para aprender com feedback imediato, ou o modo Certifica\u00e7\u00e3o para uma tentativa cronometrada e pontuada que espelha a experi\u00eancia real de exame.",
@@ -821,6 +851,22 @@
       "kc.summary.failedSuffix": ". Repasa el m\u00f3dulo e int\u00e9ntalo de nuevo.",
       "kc.retry": "Reintentar verificaci\u00f3n",
       "kc.allModules": "Todos los m\u00f3dulos",
+
+      /* points */
+      "points.kicker": "Progreso",
+      "points.title": "Tus puntos",
+      "points.subtitle": "Cada m\u00f3dulo vale 100 puntos. Al aprobar una verificaci\u00f3n de conocimientos, ganas puntos en proporci\u00f3n a tu resultado \u2014 80% otorga 80 puntos.",
+      "points.total": "Puntos totales",
+      "points.byBelt": "Puntos por cintur\u00f3n",
+      "points.modulesScored": "m\u00f3dulos puntuados",
+      "points.modules": "m\u00f3dulos",
+      "points.pts": "pts",
+      "points.worth": "Vale",
+      "points.newBest": "Nuevo r\u00e9cord",
+      "points.summary.earned": "Puntos ganados",
+      "points.empty": "A\u00fan sin puntos \u2014 aprueba una verificaci\u00f3n de conocimientos para empezar a acumular puntos hacia tus cinturones.",
+      "points.reset": "Restablecer puntos",
+      "points.reset.confirm": "\u00bfRestablecer todos los puntos ganados? Esto no se puede deshacer.",
 
       /* exam start */
       "exam.hero.eyebrow": "Evaluaci\u00f3n de pr\u00e1ctica al estilo de las certificaciones de Microsoft",
