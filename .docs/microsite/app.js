@@ -190,7 +190,7 @@
   var PREF_KEY = "icsuSmartCiPrefs";
   var DEFAULT_PREFS = { role: "csam", flow: "guided", belt: "white", lang: "en" };
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }
-  function normRole(v) { return v === "csam" || v === "csa" ? v : null; }
+  function normRole(v) { return v === "csam" || v === "csa" || v === "customer" ? v : null; }
   function normBelt(v) { return beltIndex(v) >= 0 ? v : null; }
   function normLang(v) { return v === "en" || v === "pt-BR" || v === "es-419" ? v : null; }
   function getPrefs() {
@@ -237,6 +237,17 @@
     var d = document.createElement("div");
     d.innerHTML = html || "";
     return (d.textContent || "").trim();
+  }
+
+  // Customer-persona examples are stored per language + module id in the shared
+  // window.CUSTOMER_EXAMPLES lookup (data.customer.js). Fall back to English so a
+  // missing translation still shows the customer view rather than dropping the tab.
+  function customerExampleFor(id) {
+    var store = window.CUSTOMER_EXAMPLES;
+    if (!store) return null;
+    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
+    var byLang = store[lang] || store.en || {};
+    return byLang[id] || (store.en && store.en[id]) || null;
   }
 
   /* ---------------- Onboarding wizard (language + role + flow + belt) ---------------- */
@@ -329,7 +340,8 @@
       if (id === "role") {
         return radioGroup(null, [
           { val: "csam", cls: "choice--role", titleNodes: [t("onb.role.csam.title")], desc: t("onb.role.csam.desc") },
-          { val: "csa", cls: "choice--role", titleNodes: [t("onb.role.csa.title")], desc: t("onb.role.csa.desc") }
+          { val: "csa", cls: "choice--role", titleNodes: [t("onb.role.csa.title")], desc: t("onb.role.csa.desc") },
+          { val: "customer", cls: "choice--role", titleNodes: [t("onb.role.customer.title")], desc: t("onb.role.customer.desc") }
         ], sel.role, function (v) { sel.role = v; });
       }
       if (id === "flow") {
@@ -422,7 +434,7 @@
 
   /* ---------------- Preferences bar (index) ---------------- */
   function renderPrefBar(prefs, onChange) {
-    var roleLabel = prefs.role === "csa" ? "CSA" : "CSAM";
+    var roleLabel = prefs.role === "csa" ? "CSA" : prefs.role === "customer" ? t("role.short.customer") : "CSAM";
     var bar = el("div", { className: "prefbar" });
 
     var flowName = prefs.flow === "guided" ? t("prefbar.flow.guided")
@@ -786,34 +798,48 @@
     root.appendChild(section(t("sec.topic.kicker"), t("sec.topic.title"),
       [el("div", { html: m.explanation })]));
 
-    // 4. Role-based examples (CSAM / CSA) — defaults to the reader's chosen role
-    var tabs = el("div", { className: "role-tabs" });
-    var csamBtn = el("button", { className: "role-tab", "data-role": "csam", type: "button" }, [t("role.tab.csam")]);
-    var csaBtn = el("button", { className: "role-tab", "data-role": "csa", type: "button" }, [t("role.tab.csa")]);
-    tabs.appendChild(csamBtn);
-    tabs.appendChild(csaBtn);
+    // 4. Role-based examples (CSAM / CSA / Customer) — defaults to the reader's chosen role.
+    // Panels are built generically so personas can be added by supplying another example
+    // field in the module data; a persona whose example is missing is simply skipped.
+    // The customer example may live either on the module (m.customerExample) or, by
+    // default, in the shared window.CUSTOMER_EXAMPLES lookup keyed by language + id.
+    var customerExample = m.customerExample || customerExampleFor(id);
+    var roleDefs = [
+      { key: "csam", example: m.csamExample },
+      { key: "csa", example: m.csaExample },
+      { key: "customer", example: customerExample }
+    ].filter(function (rd) { return rd.example; });
 
-    var csamPanel = el("div", { className: "role-panel role-panel--csam" }, [
-      el("p", { className: "role-panel__role" }, [t("role.panel.csam")]),
-      el("div", { html: m.csamExample })
-    ]);
-    var csaPanel = el("div", { className: "role-panel role-panel--csa" }, [
-      el("p", { className: "role-panel__role" }, [t("role.panel.csa")]),
-      el("div", { html: m.csaExample })
-    ]);
+    var tabs = el("div", { className: "role-tabs" });
+    var btnByRole = {};
+    var panelByRole = {};
+    var panels = [];
+    roleDefs.forEach(function (rd) {
+      var btn = el("button", { className: "role-tab", "data-role": rd.key, type: "button" }, [t("role.tab." + rd.key)]);
+      var panel = el("div", { className: "role-panel role-panel--" + rd.key }, [
+        el("p", { className: "role-panel__role" }, [t("role.panel." + rd.key)]),
+        el("div", { html: rd.example })
+      ]);
+      btn.addEventListener("click", function () { selectRole(rd.key); });
+      tabs.appendChild(btn);
+      btnByRole[rd.key] = btn;
+      panelByRole[rd.key] = panel;
+      panels.push(panel);
+    });
 
     function selectRole(r) {
-      var isCsam = r === "csam";
-      csamBtn.setAttribute("aria-selected", isCsam ? "true" : "false");
-      csaBtn.setAttribute("aria-selected", isCsam ? "false" : "true");
-      csamPanel.classList.toggle("is-active", isCsam);
-      csaPanel.classList.toggle("is-active", !isCsam);
+      if (!btnByRole[r]) r = roleDefs.length ? roleDefs[0].key : null;
+      roleDefs.forEach(function (rd) {
+        var on = rd.key === r;
+        btnByRole[rd.key].setAttribute("aria-selected", on ? "true" : "false");
+        panelByRole[rd.key].classList.toggle("is-active", on);
+      });
     }
-    csamBtn.addEventListener("click", function () { selectRole("csam"); });
-    csaBtn.addEventListener("click", function () { selectRole("csa"); });
     selectRole(role);
 
-    root.appendChild(section(t("sec.roles.kicker"), t("sec.roles.title"), [tabs, csamPanel, csaPanel]));
+    if (roleDefs.length) {
+      root.appendChild(section(t("sec.roles.kicker"), t("sec.roles.title"), [tabs].concat(panels)));
+    }
 
     // 5. Recap
     var recap = el("ul", { className: "recap-list" });
