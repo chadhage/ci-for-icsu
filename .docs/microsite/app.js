@@ -112,6 +112,21 @@
     return out;
   }
 
+  // Belt required-knowledge map, derived directly from the BELTS learning plans
+  // (the single source of truth). Belts are cumulative and each module is
+  // introduced at exactly one tier, so a module maps 1:1 to the belt at which it
+  // first becomes required knowledge (it is therefore required for that belt and
+  // every belt above it). Built once from BELTS so the badge can never drift out
+  // of sync with the belt plans.
+  var MODULE_BELT = (function () {
+    var map = {};
+    BELTS.forEach(function (b) {
+      b.ids.forEach(function (id) { if (!(id in map)) map[id] = b.key; });
+    });
+    return map;
+  })();
+  function beltForModule(id) { return MODULE_BELT[id] || null; }
+
   /* ---------------- Points / scoring ----------------
      Every module is worth a fixed number of points. Passing (or simply
      completing) a module's knowledge check awards points in proportion to the
@@ -512,12 +527,33 @@
   }
 
   /* ---------------- Index page ---------------- */
+  // A belt "required-for" badge for a topic card: the belt colour chip plus the
+  // belt name, so a reader browsing by concept can see at a glance which belt
+  // this topic is required knowledge for (and, since belts are cumulative, every
+  // belt above it). Returns null for any topic not mapped to a belt plan.
+  function cardBeltBadge(id) {
+    var key = beltForModule(id);
+    if (!key) return null;
+    return el("span", {
+      className: "card__belt card__belt--" + key,
+      title: t("card.beltReq") + " " + beltName(key),
+      "aria-label": t("card.beltReq") + " " + beltName(key)
+    }, [
+      el("span", { className: "belt-chip belt-chip--" + key }),
+      el("span", { className: "card__belt-name" }, [beltName(key)])
+    ]);
+  }
+
   function moduleCard(id, numLabel, flow, belt) {
     var m = M()[id];
     var href = "module.html?id=" + encodeURIComponent(id) + "&flow=" + flow;
     if (flow === "belt") href += "&belt=" + encodeURIComponent(belt);
     var card = el("a", { className: "card", href: href });
-    card.appendChild(el("span", { className: "card__num" }, [numLabel]));
+    var beltBadge = cardBeltBadge(id);
+    card.appendChild(el("div", { className: "card__head" }, [
+      el("span", { className: "card__num" }, [numLabel]),
+      beltBadge
+    ]));
     card.appendChild(el("h3", { className: "card__title" }, [m.title]));
     card.appendChild(el("p", { className: "card__summary" }, [plainText(m.executiveSummary)]));
     var earned = earnedFor(id);
@@ -801,7 +837,18 @@
           "\u2606 " + t("points.worth") + " " + fmtNum(worth) + " " + t("points.pts")
         ]);
     var grandTotal = pointsTotals().totalEarned;
+    var beltKeyForModule = beltForModule(id);
+    var beltPill = beltKeyForModule
+      ? el("span", {
+          className: "pill pill--belt card__belt--" + beltKeyForModule,
+          title: t("card.beltReq") + " " + beltName(beltKeyForModule)
+        }, [
+          el("span", { className: "belt-chip belt-chip--" + beltKeyForModule }),
+          t("card.beltReq") + " " + beltName(beltKeyForModule)
+        ])
+      : null;
     var meta = el("div", { className: "module-meta" }, [
+      beltPill,
       el("span", { className: "pill" }, ["\u23f1 " + (m.duration || "30 min") + " " + t("module.delivery")]),
       el("span", null, [positionLabel]),
       el("span", null, [(m.questions ? m.questions.length : 0) + t("module.questionCheck")]),

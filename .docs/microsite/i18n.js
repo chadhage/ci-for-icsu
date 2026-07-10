@@ -169,6 +169,7 @@
       "index.modulesEach": "30 min each",
       "index.module": "module", "index.modules": "modules",
       "card.questionCheck": "-question check",
+      "card.beltReq": "Required knowledge for",
       "label.step": "STEP", "label.module": "MODULE",
 
       /* belt index */
@@ -513,6 +514,7 @@
       "index.modulesEach": "30 min cada",
       "index.module": "m\u00f3dulo", "index.modules": "m\u00f3dulos",
       "card.questionCheck": " quest\u00f5es de verifica\u00e7\u00e3o",
+      "card.beltReq": "Conhecimento exigido para",
       "label.step": "PASSO", "label.module": "M\u00d3DULO",
 
       /* belt index */
@@ -857,6 +859,7 @@
       "index.modulesEach": "30 min cada uno",
       "index.module": "m\u00f3dulo", "index.modules": "m\u00f3dulos",
       "card.questionCheck": " preguntas de verificaci\u00f3n",
+      "card.beltReq": "Conocimiento requerido para",
       "label.step": "PASO", "label.module": "M\u00d3DULO",
 
       /* belt index */

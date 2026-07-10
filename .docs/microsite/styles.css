@@ -192,6 +192,47 @@ a { color: var(--ms-accent); }
   color: var(--ms-accent);
   letter-spacing: 0.04em;
 }
+.card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card__belt {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 3px 9px 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ms-border-strong);
+  background: var(--ms-surface-alt);
+  color: var(--ms-text-muted);
+}
+.card__belt .belt-chip {
+  width: 11px;
+  height: 11px;
+  margin-right: 6px;
+  vertical-align: 0;
+}
+.card__belt--white { background: var(--belt-white-soft); border-color: var(--belt-white); color: #6f6656; }
+.card__belt--yellow { background: var(--belt-yellow-soft); border-color: var(--belt-yellow); color: #8a6d00; }
+.card__belt--green { background: var(--belt-green-soft); border-color: var(--belt-green); color: var(--belt-green); }
+.card__belt--black { background: var(--belt-black-soft); border-color: var(--belt-black); color: var(--belt-black); }
+.pill--belt {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ms-border-strong);
+}
+.pill--belt .belt-chip {
+  width: 11px;
+  height: 11px;
+  margin-right: 6px;
+  vertical-align: 0;
+}
 .card__title {
   font-size: 16.5px;
   font-weight: 600;
