@@ -22,6 +22,14 @@
   --ms-csa-soft: #e0f3f3;
   --ms-customer: #ca5010;
   --ms-customer-soft: #fdf0e9;
+  --ms-practitioner: #498205;
+  --ms-practitioner-soft: #eef6e6;
+  --ms-sss: #2564cf;
+  --ms-sss-soft: #eaf1fc;
+  --ms-sae: #b83280;
+  --ms-sae-soft: #f9e9f2;
+  --ms-tas: #7a5901;
+  --ms-tas-soft: #f6efd9;
   --belt-white: #9a8f80;
   --belt-white-soft: #f4f1ec;
   --belt-yellow: #c19c00;
@@ -522,6 +530,7 @@ a { color: var(--ms-accent); }
 /* Role examples */
 .role-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
 }
@@ -552,6 +561,26 @@ a { color: var(--ms-accent); }
   border-color: var(--ms-customer);
   color: var(--ms-customer);
 }
+.role-tab[aria-selected="true"][data-role="practitioner"] {
+  background: var(--ms-practitioner-soft);
+  border-color: var(--ms-practitioner);
+  color: var(--ms-practitioner);
+}
+.role-tab[aria-selected="true"][data-role="sss"] {
+  background: var(--ms-sss-soft);
+  border-color: var(--ms-sss);
+  color: var(--ms-sss);
+}
+.role-tab[aria-selected="true"][data-role="sae"] {
+  background: var(--ms-sae-soft);
+  border-color: var(--ms-sae);
+  color: var(--ms-sae);
+}
+.role-tab[aria-selected="true"][data-role="tas"] {
+  background: var(--ms-tas-soft);
+  border-color: var(--ms-tas);
+  color: var(--ms-tas);
+}
 .role-panel { display: none; }
 .role-panel.is-active { display: block; }
 .role-panel {
@@ -562,6 +591,10 @@ a { color: var(--ms-accent); }
 .role-panel--csam { background: var(--ms-csam-soft); border: 1px solid #d9cdef; }
 .role-panel--csa { background: var(--ms-csa-soft); border: 1px solid #b9e3e3; }
 .role-panel--customer { background: var(--ms-customer-soft); border: 1px solid #f2d4c2; }
+.role-panel--practitioner { background: var(--ms-practitioner-soft); border: 1px solid #cfe3b6; }
+.role-panel--sss { background: var(--ms-sss-soft); border: 1px solid #bcd2f0; }
+.role-panel--sae { background: var(--ms-sae-soft); border: 1px solid #ecc4dc; }
+.role-panel--tas { background: var(--ms-tas-soft); border: 1px solid #e4d4a3; }
 .role-panel__role {
   font-size: 12.5px;
   font-weight: 700;
@@ -572,6 +605,10 @@ a { color: var(--ms-accent); }
 .role-panel--csam .role-panel__role { color: var(--ms-csam); }
 .role-panel--csa .role-panel__role { color: var(--ms-csa); }
 .role-panel--customer .role-panel__role { color: var(--ms-customer); }
+.role-panel--practitioner .role-panel__role { color: var(--ms-practitioner); }
+.role-panel--sss .role-panel__role { color: var(--ms-sss); }
+.role-panel--sae .role-panel__role { color: var(--ms-sae); }
+.role-panel--tas .role-panel__role { color: var(--ms-tas); }
 
 /* Recap */
 .recap-list {
@@ -890,6 +927,30 @@ footer.page-footer {
   box-shadow: inset 0 0 0 1px var(--ms-customer);
 }
 .choice--role[data-val="customer"].is-selected .choice__title { color: var(--ms-customer); }
+.choice--role[data-val="practitioner"].is-selected {
+  border-color: var(--ms-practitioner);
+  background: var(--ms-practitioner-soft);
+  box-shadow: inset 0 0 0 1px var(--ms-practitioner);
+}
+.choice--role[data-val="practitioner"].is-selected .choice__title { color: var(--ms-practitioner); }
+.choice--role[data-val="sss"].is-selected {
+  border-color: var(--ms-sss);
+  background: var(--ms-sss-soft);
+  box-shadow: inset 0 0 0 1px var(--ms-sss);
+}
+.choice--role[data-val="sss"].is-selected .choice__title { color: var(--ms-sss); }
+.choice--role[data-val="sae"].is-selected {
+  border-color: var(--ms-sae);
+  background: var(--ms-sae-soft);
+  box-shadow: inset 0 0 0 1px var(--ms-sae);
+}
+.choice--role[data-val="sae"].is-selected .choice__title { color: var(--ms-sae); }
+.choice--role[data-val="tas"].is-selected {
+  border-color: var(--ms-tas);
+  background: var(--ms-tas-soft);
+  box-shadow: inset 0 0 0 1px var(--ms-tas);
+}
+.choice--role[data-val="tas"].is-selected .choice__title { color: var(--ms-tas); }
 
 /* ---------- Preferences bar (index) ---------- */
 .prefbar {
@@ -923,6 +984,10 @@ footer.page-footer {
 .prefbar__role--csam { background: var(--ms-csam-soft); color: var(--ms-csam); }
 .prefbar__role--csa { background: var(--ms-csa-soft); color: var(--ms-csa); }
 .prefbar__role--customer { background: var(--ms-customer-soft); color: var(--ms-customer); }
+.prefbar__role--practitioner { background: var(--ms-practitioner-soft); color: var(--ms-practitioner); }
+.prefbar__role--sss { background: var(--ms-sss-soft); color: var(--ms-sss); }
+.prefbar__role--sae { background: var(--ms-sae-soft); color: var(--ms-sae); }
+.prefbar__role--tas { background: var(--ms-tas-soft); color: var(--ms-tas); }
 .prefbar__controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .flow-toggle {
   display: inline-flex;

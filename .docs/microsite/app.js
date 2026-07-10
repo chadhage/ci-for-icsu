@@ -190,7 +190,7 @@
   var PREF_KEY = "icsuSmartCiPrefs";
   var DEFAULT_PREFS = { role: "csam", flow: "guided", belt: "white", lang: "en" };
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }
-  function normRole(v) { return v === "csam" || v === "csa" || v === "customer" ? v : null; }
+  function normRole(v) { return v === "csam" || v === "csa" || v === "customer" || v === "practitioner" || v === "sss" || v === "sae" || v === "tas" ? v : null; }
   function normBelt(v) { return beltIndex(v) >= 0 ? v : null; }
   function normLang(v) { return v === "en" || v === "pt-BR" || v === "es-419" ? v : null; }
   function getPrefs() {
@@ -249,6 +249,30 @@
     var byLang = store[lang] || store.en || {};
     return byLang[id] || (store.en && store.en[id]) || null;
   }
+
+  // General CI practitioner-persona examples live in window.PRACTITIONER_EXAMPLES
+  // (data.practitioner.js), keyed by language + module id, with English as the
+  // fallback so a missing translation still shows the practitioner view.
+  function practitionerExampleFor(id) {
+    var store = window.PRACTITIONER_EXAMPLES;
+    if (!store) return null;
+    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
+    var byLang = store[lang] || store.en || {};
+    return byLang[id] || (store.en && store.en[id]) || null;
+  }
+
+  // Services-role persona examples (Services Solutions Seller, Services Account
+  // Executive, Technical Account Strategist) follow the same language + module id
+  // lookup with English fallback. Each reads from its own global store.
+  function personaExampleFrom(store, id) {
+    if (!store) return null;
+    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
+    var byLang = store[lang] || store.en || {};
+    return byLang[id] || (store.en && store.en[id]) || null;
+  }
+  function sssExampleFor(id) { return personaExampleFrom(window.SSS_EXAMPLES, id); }
+  function saeExampleFor(id) { return personaExampleFrom(window.SAE_EXAMPLES, id); }
+  function tasExampleFor(id) { return personaExampleFrom(window.TAS_EXAMPLES, id); }
 
   /* ---------------- Onboarding wizard (language + role + flow + belt) ---------------- */
   // A guided, one-question-per-step flow. The primary action is always visible in a
@@ -341,7 +365,11 @@
         return radioGroup(null, [
           { val: "csam", cls: "choice--role", titleNodes: [t("onb.role.csam.title")], desc: t("onb.role.csam.desc") },
           { val: "csa", cls: "choice--role", titleNodes: [t("onb.role.csa.title")], desc: t("onb.role.csa.desc") },
-          { val: "customer", cls: "choice--role", titleNodes: [t("onb.role.customer.title")], desc: t("onb.role.customer.desc") }
+          { val: "customer", cls: "choice--role", titleNodes: [t("onb.role.customer.title")], desc: t("onb.role.customer.desc") },
+          { val: "practitioner", cls: "choice--role", titleNodes: [t("onb.role.practitioner.title")], desc: t("onb.role.practitioner.desc") },
+          { val: "sss", cls: "choice--role", titleNodes: [t("onb.role.sss.title")], desc: t("onb.role.sss.desc") },
+          { val: "sae", cls: "choice--role", titleNodes: [t("onb.role.sae.title")], desc: t("onb.role.sae.desc") },
+          { val: "tas", cls: "choice--role", titleNodes: [t("onb.role.tas.title")], desc: t("onb.role.tas.desc") }
         ], sel.role, function (v) { sel.role = v; });
       }
       if (id === "flow") {
@@ -434,7 +462,7 @@
 
   /* ---------------- Preferences bar (index) ---------------- */
   function renderPrefBar(prefs, onChange) {
-    var roleLabel = prefs.role === "csa" ? "CSA" : prefs.role === "customer" ? t("role.short.customer") : "CSAM";
+    var roleLabel = prefs.role === "csa" ? "CSA" : prefs.role === "customer" ? t("role.short.customer") : prefs.role === "practitioner" ? t("role.short.practitioner") : prefs.role === "sss" ? t("role.short.sss") : prefs.role === "sae" ? t("role.short.sae") : prefs.role === "tas" ? t("role.short.tas") : "CSAM";
     var bar = el("div", { className: "prefbar" });
 
     var flowName = prefs.flow === "guided" ? t("prefbar.flow.guided")
@@ -804,10 +832,15 @@
     // The customer example may live either on the module (m.customerExample) or, by
     // default, in the shared window.CUSTOMER_EXAMPLES lookup keyed by language + id.
     var customerExample = m.customerExample || customerExampleFor(id);
+    var practitionerExample = m.practitionerExample || practitionerExampleFor(id);
     var roleDefs = [
       { key: "csam", example: m.csamExample },
       { key: "csa", example: m.csaExample },
-      { key: "customer", example: customerExample }
+      { key: "customer", example: customerExample },
+      { key: "practitioner", example: practitionerExample },
+      { key: "sss", example: m.sssExample || sssExampleFor(id) },
+      { key: "sae", example: m.saeExample || saeExampleFor(id) },
+      { key: "tas", example: m.tasExample || tasExampleFor(id) }
     ].filter(function (rd) { return rd.example; });
 
     var tabs = el("div", { className: "role-tabs" });
