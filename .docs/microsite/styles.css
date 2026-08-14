@@ -569,58 +569,29 @@ a { color: var(--ms-accent); }
 }
 
 /* Role examples */
-.role-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.role-tab {
-  font-family: inherit;
+.role-select { max-width: 520px; margin-bottom: 14px; }
+.persona-select-wrap { margin-top: 14px; }
+.persona-select {
+  width: 100%;
+  min-height: 42px;
+  font: inherit;
   font-size: 14px;
   font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--ms-border-strong);
+  color: var(--ms-text);
   background: var(--ms-surface);
-  color: var(--ms-text-muted);
+  border: 1px solid var(--ms-border-strong);
+  border-radius: var(--ms-radius);
+  padding: 8px 36px 8px 12px;
   cursor: pointer;
-  transition: all 120ms ease;
 }
-.role-tab[aria-selected="true"][data-role="csam"] {
-  background: var(--ms-csam-soft);
-  border-color: var(--ms-csam);
-  color: var(--ms-csam);
-}
-.role-tab[aria-selected="true"][data-role="csa"] {
-  background: var(--ms-csa-soft);
-  border-color: var(--ms-csa);
-  color: var(--ms-csa);
-}
-.role-tab[aria-selected="true"][data-role="customer"] {
-  background: var(--ms-customer-soft);
-  border-color: var(--ms-customer);
-  color: var(--ms-customer);
-}
-.role-tab[aria-selected="true"][data-role="practitioner"] {
-  background: var(--ms-practitioner-soft);
-  border-color: var(--ms-practitioner);
-  color: var(--ms-practitioner);
-}
-.role-tab[aria-selected="true"][data-role="sss"] {
-  background: var(--ms-sss-soft);
-  border-color: var(--ms-sss);
-  color: var(--ms-sss);
-}
-.role-tab[aria-selected="true"][data-role="sae"] {
-  background: var(--ms-sae-soft);
-  border-color: var(--ms-sae);
-  color: var(--ms-sae);
-}
-.role-tab[aria-selected="true"][data-role="tas"] {
-  background: var(--ms-tas-soft);
-  border-color: var(--ms-tas);
-  color: var(--ms-tas);
+.persona-select:hover,
+.persona-select:focus { border-color: var(--ms-accent); }
+.persona-select:focus { outline: 2px solid var(--ms-accent-soft); outline-offset: 1px; }
+.persona-select__description {
+  margin: 8px 0 0;
+  color: var(--ms-text-muted);
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 .role-panel { display: none; }
 .role-panel.is-active { display: block; }
@@ -950,48 +921,6 @@ footer.page-footer {
   background: var(--ms-accent-soft);
   box-shadow: inset 0 0 0 1px var(--ms-accent);
 }
-.choice--role[data-val="csam"].is-selected {
-  border-color: var(--ms-csam);
-  background: var(--ms-csam-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-csam);
-}
-.choice--role[data-val="csam"].is-selected .choice__title { color: var(--ms-csam); }
-.choice--role[data-val="csa"].is-selected {
-  border-color: var(--ms-csa);
-  background: var(--ms-csa-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-csa);
-}
-.choice--role[data-val="csa"].is-selected .choice__title { color: var(--ms-csa); }
-.choice--role[data-val="customer"].is-selected {
-  border-color: var(--ms-customer);
-  background: var(--ms-customer-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-customer);
-}
-.choice--role[data-val="customer"].is-selected .choice__title { color: var(--ms-customer); }
-.choice--role[data-val="practitioner"].is-selected {
-  border-color: var(--ms-practitioner);
-  background: var(--ms-practitioner-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-practitioner);
-}
-.choice--role[data-val="practitioner"].is-selected .choice__title { color: var(--ms-practitioner); }
-.choice--role[data-val="sss"].is-selected {
-  border-color: var(--ms-sss);
-  background: var(--ms-sss-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-sss);
-}
-.choice--role[data-val="sss"].is-selected .choice__title { color: var(--ms-sss); }
-.choice--role[data-val="sae"].is-selected {
-  border-color: var(--ms-sae);
-  background: var(--ms-sae-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-sae);
-}
-.choice--role[data-val="sae"].is-selected .choice__title { color: var(--ms-sae); }
-.choice--role[data-val="tas"].is-selected {
-  border-color: var(--ms-tas);
-  background: var(--ms-tas-soft);
-  box-shadow: inset 0 0 0 1px var(--ms-tas);
-}
-.choice--role[data-val="tas"].is-selected .choice__title { color: var(--ms-tas); }
 
 /* ---------- Preferences bar (index) ---------- */
 .prefbar {
@@ -1016,6 +945,7 @@ footer.page-footer {
   color: var(--ms-text-muted);
 }
 .prefbar__flow { font-weight: 700; color: var(--ms-text); }
+.persona-select--compact { width: auto; min-width: 0; max-width: 100%; min-height: 34px; font-size: 12.5px; padding-top: 5px; padding-bottom: 5px; }
 .prefbar__role {
   font-weight: 700;
   font-size: 12.5px;
@@ -1193,7 +1123,10 @@ footer.page-footer {
 @media (max-width: 600px) {
   .choice-grid { grid-template-columns: 1fr; }
   .prefbar { flex-direction: column; align-items: stretch; }
+  .prefbar__info,
+  .prefbar__controls { width: 100%; min-width: 0; }
   .prefbar__controls { justify-content: space-between; }
+  .persona-select--compact { width: 100%; }
   .onboarding__card { padding: 24px 20px; }
 }
 

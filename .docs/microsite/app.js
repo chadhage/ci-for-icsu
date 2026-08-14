@@ -203,9 +203,10 @@
 
   // ---- User preferences (role + flow + belt + language) persisted in localStorage ----
   var PREF_KEY = "icsuSmartCiPrefs";
-  var DEFAULT_PREFS = { role: "csam", flow: "guided", belt: "white", lang: "en" };
+  var DEFAULT_PREFS = { role: "practitioner", flow: "guided", belt: "white", lang: "en" };
+  var ROLES = ["csam", "csa", "customer", "practitioner", "sss", "sae", "tas"];
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }
-  function normRole(v) { return v === "csam" || v === "csa" || v === "customer" || v === "practitioner" || v === "sss" || v === "sae" || v === "tas" ? v : null; }
+  function normRole(v) { return ROLES.indexOf(v) >= 0 ? v : null; }
   function normBelt(v) { return beltIndex(v) >= 0 ? v : null; }
   function normLang(v) { return v === "en" || v === "pt-BR" || v === "es-419" ? v : null; }
   function getPrefs() {
@@ -252,6 +253,20 @@
     var d = document.createElement("div");
     d.innerHTML = html || "";
     return (d.textContent || "").trim();
+  }
+
+  function roleSelect(roleKeys, currentRole, onChange, className) {
+    var select = el("select", {
+      className: className || "persona-select",
+      "aria-label": t("onb.q.role")
+    });
+    roleKeys.forEach(function (key) {
+      var option = el("option", { value: key }, [t("role.tab." + key)]);
+      if (key === currentRole) option.selected = true;
+      select.appendChild(option);
+    });
+    select.addEventListener("change", function () { onChange(select.value); });
+    return select;
   }
 
   // Customer-persona examples are stored per language + module id in the shared
@@ -377,15 +392,12 @@
         });
       }
       if (id === "role") {
-        return radioGroup(null, [
-          { val: "csam", cls: "choice--role", titleNodes: [t("onb.role.csam.title")], desc: t("onb.role.csam.desc") },
-          { val: "csa", cls: "choice--role", titleNodes: [t("onb.role.csa.title")], desc: t("onb.role.csa.desc") },
-          { val: "customer", cls: "choice--role", titleNodes: [t("onb.role.customer.title")], desc: t("onb.role.customer.desc") },
-          { val: "practitioner", cls: "choice--role", titleNodes: [t("onb.role.practitioner.title")], desc: t("onb.role.practitioner.desc") },
-          { val: "sss", cls: "choice--role", titleNodes: [t("onb.role.sss.title")], desc: t("onb.role.sss.desc") },
-          { val: "sae", cls: "choice--role", titleNodes: [t("onb.role.sae.title")], desc: t("onb.role.sae.desc") },
-          { val: "tas", cls: "choice--role", titleNodes: [t("onb.role.tas.title")], desc: t("onb.role.tas.desc") }
-        ], sel.role, function (v) { sel.role = v; });
+        var roleDescription = el("p", { className: "persona-select__description" }, [t("onb.role." + sel.role + ".desc")]);
+        var select = roleSelect(ROLES, sel.role, function (v) {
+          sel.role = v;
+          roleDescription.textContent = t("onb.role." + v + ".desc");
+        });
+        return el("div", { className: "persona-select-wrap" }, [select, roleDescription]);
       }
       if (id === "flow") {
         // Changing flow can add/remove the belt step, so refresh the chrome (dots/footer).
@@ -448,7 +460,7 @@
       if (id === "lang") body.appendChild(el("p", { className: "onboarding__lede" }, [t("onb.lede")]));
       body.appendChild(buildStep(id));
       updateChrome();
-      var focusEl = body.querySelector(".choice.is-selected") || body.querySelector(".choice");
+      var focusEl = body.querySelector(".persona-select") || body.querySelector(".choice.is-selected") || body.querySelector(".choice");
       if (focusEl) focusEl.focus();
     }
 
@@ -477,7 +489,6 @@
 
   /* ---------------- Preferences bar (index) ---------------- */
   function renderPrefBar(prefs, onChange) {
-    var roleLabel = prefs.role === "csa" ? "CSA" : prefs.role === "customer" ? t("role.short.customer") : prefs.role === "practitioner" ? t("role.short.practitioner") : prefs.role === "sss" ? t("role.short.sss") : prefs.role === "sae" ? t("role.short.sae") : prefs.role === "tas" ? t("role.short.tas") : "CSAM";
     var bar = el("div", { className: "prefbar" });
 
     var flowName = prefs.flow === "guided" ? t("prefbar.flow.guided")
@@ -487,7 +498,9 @@
       el("span", { className: "prefbar__label" }, [t("prefbar.showing")]),
       el("span", { className: "prefbar__flow" }, [flowName]),
       el("span", { className: "prefbar__label" }, [t("prefbar.for")]),
-      el("span", { className: "prefbar__role prefbar__role--" + prefs.role }, [roleLabel])
+      roleSelect(ROLES, prefs.role, function (role) {
+        if (role !== prefs.role) onChange({ role: role, flow: prefs.flow, belt: prefs.belt });
+      }, "persona-select persona-select--compact")
     ]));
 
     var toggle = el("div", { className: "flow-toggle", role: "group", "aria-label": t("prefbar.aria.flow") });
@@ -810,7 +823,7 @@
     var params = new URLSearchParams(window.location.search);
     var prefs = getPrefs() || DEFAULT_PREFS;
     var flow = normFlow(params.get("flow")) || prefs.flow || "concept";
-    var role = normRole(params.get("role")) || prefs.role || "csam";
+    var role = normRole(params.get("role")) || prefs.role || DEFAULT_PREFS.role;
     var belt = normBelt(params.get("belt")) || prefs.belt || "white";
     var flowLabel = flow === "guided" ? t("module.flow.guided")
       : flow === "belt" ? (beltName((BELTS[beltIndex(belt)] || BELTS[0]).key) + " " + t("module.flow.beltSuffix"))
@@ -890,35 +903,35 @@
       { key: "tas", example: m.tasExample || tasExampleFor(id) }
     ].filter(function (rd) { return rd.example; });
 
-    var tabs = el("div", { className: "role-tabs" });
-    var btnByRole = {};
     var panelByRole = {};
     var panels = [];
     roleDefs.forEach(function (rd) {
-      var btn = el("button", { className: "role-tab", "data-role": rd.key, type: "button" }, [t("role.tab." + rd.key)]);
       var panel = el("div", { className: "role-panel role-panel--" + rd.key }, [
         el("p", { className: "role-panel__role" }, [t("role.panel." + rd.key)]),
         el("div", { html: rd.example })
       ]);
-      btn.addEventListener("click", function () { selectRole(rd.key); });
-      tabs.appendChild(btn);
-      btnByRole[rd.key] = btn;
       panelByRole[rd.key] = panel;
       panels.push(panel);
     });
 
     function selectRole(r) {
-      if (!btnByRole[r]) r = roleDefs.length ? roleDefs[0].key : null;
+      if (!panelByRole[r]) r = roleDefs.length ? roleDefs[0].key : null;
       roleDefs.forEach(function (rd) {
         var on = rd.key === r;
-        btnByRole[rd.key].setAttribute("aria-selected", on ? "true" : "false");
         panelByRole[rd.key].classList.toggle("is-active", on);
       });
+      return r;
     }
-    selectRole(role);
+    role = selectRole(role);
 
     if (roleDefs.length) {
-      root.appendChild(section(t("sec.roles.kicker"), t("sec.roles.title"), [tabs].concat(panels)));
+      var moduleRoleSelect = roleSelect(roleDefs.map(function (rd) { return rd.key; }), role, function (nextRole) {
+        selectRole(nextRole);
+        setPrefs({ role: nextRole, flow: flow, belt: belt, lang: prefs.lang });
+      });
+      root.appendChild(section(t("sec.roles.kicker"), t("sec.roles.title"), [
+        el("div", { className: "role-select" }, [moduleRoleSelect])
+      ].concat(panels)));
     }
 
     // 5. Recap
