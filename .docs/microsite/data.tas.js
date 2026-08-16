@@ -1,4 +1,4 @@
-/* iCSU Smart CI - Technical Account Strategist (TAS) persona examples.
+/* Smart CI - Technical Account Strategist (TAS) persona examples.
    Reframes each module from the point of view of a Technical Account Strategist:
    the trusted technical advisor who owns the customer's technical health and
    roadmap, runs proactive risk management, drives architecture and reliability

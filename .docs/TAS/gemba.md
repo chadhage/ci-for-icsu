@@ -96,4 +96,4 @@ Gemba is especially valuable in **Measure and Analyze** to anchor the baseline i
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

@@ -97,4 +97,4 @@ CI is **not** a one-time transformation, a tool purchase, a certification, or a 
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

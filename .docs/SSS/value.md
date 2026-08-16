@@ -94,4 +94,4 @@ Value thinking is **context-sensitive**. A dashboard that leads to $1.2M of fund
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

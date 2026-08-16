@@ -94,4 +94,4 @@ The **one-time FMEA** ships with the project and never updates. Risk models deca
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

@@ -100,4 +100,4 @@ Tollgates and the diverge-then-converge rhythm exist to stop teams locking onto 
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

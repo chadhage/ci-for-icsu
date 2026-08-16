@@ -95,4 +95,4 @@ Master Black Belt is rare and usually held by the head of a CI / operational-exc
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

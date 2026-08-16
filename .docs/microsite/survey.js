@@ -1,5 +1,5 @@
 /*
- * iCSU Smart CI — end-of-activity survey.
+ * Smart CI — end-of-activity survey.
  * Renders a short, structured survey card shown after completing a practice
  * test, a CI-900 certification exam attempt, or a belt learning plan. Responses
  * are submitted as a pre-filled GitHub issue (the same no-backend pattern used
@@ -26,7 +26,7 @@
    * -------------------------------------------------------------------- */
   var CONFIG = {
     OWNER: "chadhage",
-    REPO: "ci-for-icsu",
+    REPO: "smart-tools",
     LABELS: "survey"
   };
 
@@ -103,7 +103,7 @@
     lines.push(answers.comment ? answers.comment : "(none)");
     lines.push("");
     lines.push("---");
-    lines.push("_Submitted via the iCSU Smart CI microsite survey._");
+    lines.push("_Submitted via the Smart CI microsite survey._");
     var body = lines.join("\n");
 
     var url = "https://github.com/" + CONFIG.OWNER + "/" + CONFIG.REPO + "/issues/new"

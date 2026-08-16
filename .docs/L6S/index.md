@@ -1,4 +1,4 @@
-# iCSU - Smart CI Tools
+# Smart CI Tools
 
 ## Table of Contents
 

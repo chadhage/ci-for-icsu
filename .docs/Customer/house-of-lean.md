@@ -101,4 +101,4 @@ Without standardized work, improvements have no stable baseline to hold onto—t
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

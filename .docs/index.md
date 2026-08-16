@@ -1,4 +1,4 @@
-# CI for CSU
+# Smart CI Tools
 
 ## BPI
 

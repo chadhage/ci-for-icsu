@@ -17,7 +17,7 @@ Kaizen — Japanese for "change for the better" — is the practice of focused, 
 - [Where Kaizen shows up](#where-kaizen-shows-up)
 - [Who should run Kaizen](#who-should-run-kaizen)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/kaizen.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/kaizen.html)
 
 ## Why Kaizen
 
@@ -121,7 +121,7 @@ Common CSA surfaces:
 - **Reliability uplift sprints** — Pareto identifies the signature; a Kaizen ships the eliminator.
 - **Cost optimization sprints** — Pareto by $; Kaizen on top spenders.
 - **Customer skilling programs** — embed Yellow / Green Belt project work inside a Kaizen.
-- **iCSU CoP delivery** — CSAs can use Kaizen on their own practice (intake design, playbook refresh).
+- **CI CoP delivery** — CSAs can use Kaizen on their own practice (intake design, playbook refresh).
 - **EBR / QBR follow-up** — turning EBR commitments into specific Kaizen calendar slots.
 
 **Real example:** A CSA's customer ran 6 Kaizens over a quarter — one per WAF pillar's top finding. Each Friday's readout was a customer-leadership-attended demo with before/after data. The QBR at quarter-end was 90% built from the 6 Kaizen reports. The engagement's narrative changed from "CSA brings recommendations" to "we shipped 6 measured improvements."

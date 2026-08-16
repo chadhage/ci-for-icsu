@@ -93,4 +93,4 @@ Don't use SIPOC when a detailed VSM already exists and scope is agreed, when the
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

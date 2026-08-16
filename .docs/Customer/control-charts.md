@@ -94,4 +94,4 @@ Nine consecutive points on one side of the center line is a **special-cause sign
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

@@ -1,4 +1,4 @@
-/* iCSU Smart CI - Services Account Executive (SAE) persona examples.
+/* Smart CI - Services Account Executive (SAE) persona examples.
    Reframes each module from the point of view of a Services Account Executive:
    the owner of the commercial account relationship who plans the portfolio of
    engagements, manages executive stakeholders, protects scope and margin, and

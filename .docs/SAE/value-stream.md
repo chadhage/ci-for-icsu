@@ -94,4 +94,4 @@ A VSM is a **working artifact**, not a one-time poster. If it isn't open during 
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

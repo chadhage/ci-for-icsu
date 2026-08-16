@@ -1,7 +1,7 @@
 # Continuous Improvement for CI Practitioners
 
 > **Persona:** CI Practitioner · continuous improvement in practice  
-> A single-file compilation of all 40 Continuous Improvement modules, each framed for this persona. Everything is inline — no links out. Source: iCSU Smart CI 30-Minute Delivery microsite.
+> A single-file compilation of all 40 Continuous Improvement modules, each framed for this persona. Everything is inline — no links out. Source: Smart CI 30-Minute Delivery microsite.
 
 ## Table of Contents
 
@@ -257,7 +257,7 @@ _Foundations · 30 min delivery_
 
 #### Executive Summary
 
-Continuous Improvement at Microsoft is the connective tissue between the customer-facing CSA practice and the engineering groups that build Azure. It shows up as the iCSU CI Community of Practice, the WAF and Advisor feedback loops, the CSA playbook repositories, and the cross-team rituals that compound learnings across the org. For a CSA it is both a resource (skilling, playbooks, peers) and a responsibility (contribute the patterns you validate, escalate systemic issues to product groups). Done well, CI@MS turns every customer engagement into both an outcome for that customer and a reusable asset for every CSA that follows.
+Continuous Improvement at Microsoft is the connective tissue between the customer-facing CSA practice and the engineering groups that build Azure. It shows up as the CI Community of Practice, the WAF and Advisor feedback loops, the CSA playbook repositories, and the cross-team rituals that compound learnings across the org. For a CSA it is both a resource (skilling, playbooks, peers) and a responsibility (contribute the patterns you validate, escalate systemic issues to product groups). Done well, CI@MS turns every customer engagement into both an outcome for that customer and a reusable asset for every CSA that follows.
 
 #### What You'll Gain
 
@@ -271,7 +271,7 @@ Continuous Improvement at Microsoft is the connective tissue between the custome
 
 CI@MS exists to solve a scale problem: a single CSA owns a handful of accounts, but Microsoft has thousands of CSAs and tens of thousands of customers. Without a CI practice that aggregates learnings, every CSA re-discovers the same patterns, every customer relives the same incidents, and product groups do not hear the signal clearly enough to fix root causes. CI@MS is the feedback loop that turns field observations into product improvements.
 
-What distinguishes CI@MS structures is that they are **measured, versioned, owned, and reusable**. Every published pattern carries the evidence that it worked. Playbooks evolve cycle over cycle; old versions are deprecated, not deleted. Each playbook has a named maintainer and a refresh cadence. Patterns are written for the next CSA to apply, not as anecdotes. The major surfaces include the iCSU CI Community of Practice, the WAF assessment framework, Azure Advisor and Defender for Cloud as per-account baselines, versioned CSA / CSE / FastTrack playbooks, MS Learn curriculum, and structured field-to-PG escalation channels (ACR blockers, ICM signature analysis).
+What distinguishes CI@MS structures is that they are **measured, versioned, owned, and reusable**. Every published pattern carries the evidence that it worked. Playbooks evolve cycle over cycle; old versions are deprecated, not deleted. Each playbook has a named maintainer and a refresh cadence. Patterns are written for the next CSA to apply, not as anecdotes. The major surfaces include the CI Community of Practice, the WAF assessment framework, Azure Advisor and Defender for Cloud as per-account baselines, versioned CSA / CSE / FastTrack playbooks, MS Learn curriculum, and structured field-to-PG escalation channels (ACR blockers, ICM signature analysis).
 
 The rhythm of community participation is simple: consume existing playbooks before designing a new engagement; run PDCA on real customer work; document measured outcomes; bring patterns to the monthly CoP call; let peers review and critique; merge validated patterns into shared libraries. CSAs both consume and contribute. Skipping either side breaks the loop. When the same root cause appears across 3+ accounts, that is a PG conversation, not a CSA workaround. Use the ACR blocker or ICM signature channels to escalate systemic signals so engineering can prioritize fixes.
 
@@ -4009,4 +4009,4 @@ Signatures convert a draft into a **commitment**. The sponsor agrees to clear bl
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

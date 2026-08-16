@@ -98,4 +98,4 @@ Sizing to absolute peak wastes money; sizing to average misses peak. Use a **def
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

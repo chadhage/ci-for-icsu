@@ -94,4 +94,4 @@ Running all phases in a week without real gates is not DMAIC — it’s a **Kaiz
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

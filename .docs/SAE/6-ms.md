@@ -94,4 +94,4 @@ Blaming the engineer is not a root cause. The systemic cause is the absence of a
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

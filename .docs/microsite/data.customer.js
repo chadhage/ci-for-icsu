@@ -1,8 +1,8 @@
-/* iCSU Smart CI - Customer-persona examples.
+/* Smart CI - Customer-persona examples.
    A third persona (alongside CSAM and CSA) that reframes each module from the
    end customer's point of view: how continuous improvement lands for the
    customer's own team, what they do, and what they gain — while the content
-   stays CSU / iCSU focused. Keyed by module id, per language. app.js merges
+   stays team / CI focused. Keyed by module id, per language. app.js merges
    these into the module's role-based examples at render time, so a module's
    own `customerExample` field (if ever added to a data file) still takes
    precedence. Keep each entry a single <p> paragraph, consistent in length

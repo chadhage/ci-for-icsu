@@ -1,17 +1,17 @@
 /*
- * iCSU Smart CI — internationalization (i18n) layer.
+ * Smart CI — internationalization (i18n) layer.
  * Provides language selection (English / Brazilian Portuguese), a UI string
  * dictionary, locale-aware number/date formatting, and module-content
  * selection. Loaded BEFORE app.js / exam.js on every page.
  *
  * Language preference is persisted inside the existing prefs object
- * (localStorage key "icsuSmartCiPrefs") under the "lang" field so it travels
+ * (localStorage key "CISmartCiPrefs") under the "lang" field so it travels
  * with the role/flow/belt choices set in onboarding.
  */
 (function () {
   "use strict";
 
-  var PREF_KEY = "icsuSmartCiPrefs";
+  var PREF_KEY = "CISmartCiPrefs";
   var SUPPORTED = ["en", "pt-BR", "es-419"];
 
   function readPrefs() {
@@ -78,18 +78,18 @@
       /* shared chrome */
       "internal.notice": "<strong>Internal &amp; proposed &mdash; not an official Microsoft offering.</strong> &ldquo;CI-900&rdquo; and this delivery series are an internal proposal at this time, intended for an internal audience only. They are not a Microsoft product, certification, or exam, and are not affiliated with, endorsed by, or sponsored by Microsoft. Do not share externally.",
       "internal.notice.exam": "<strong>Internal &amp; proposed &mdash; not an official Microsoft offering.</strong> &ldquo;CI-900&rdquo; is an internal proposal at this time, intended for an internal audience only. It is not a Microsoft certification or exam and is not affiliated with, endorsed by, or sponsored by Microsoft. Do not share externally.",
-      "breadcrumb.series": "iCSU Smart CI \u2014 30-Minute Delivery Series",
+      "breadcrumb.series": "Smart CI \u2014 30-Minute Delivery Series",
       "breadcrumb.module": "Module",
       "breadcrumb.exam": "CI-900 Practice Exam",
-      "footer.index": "iCSU Smart CI Tools \u00b7 30-Minute Delivery Series \u00b7 Internal &amp; proposed \u2014 not an official Microsoft offering \u00b7 Built from the CI for iCSU knowledge base",
-      "footer.module": "iCSU Smart CI Tools \u00b7 30-Minute Delivery Series",
-      "footer.exam": "iCSU Smart CI Tools \u00b7 CI-900 Practice Exam \u00b7 Proposed, internal-only concept \u2014 not an official Microsoft offering \u00b7 Unofficial practice assessment built from the CI for iCSU knowledge base",
+      "footer.index": "Smart CI Tools \u00b7 30-Minute Delivery Series \u00b7 Internal &amp; proposed \u2014 not an official Microsoft offering \u00b7 Built from the CI for CI knowledge base",
+      "footer.module": "Smart CI Tools \u00b7 30-Minute Delivery Series",
+      "footer.exam": "Smart CI Tools \u00b7 CI-900 Practice Exam \u00b7 Proposed, internal-only concept \u2014 not an official Microsoft offering \u00b7 Unofficial practice assessment built from the CI for CI knowledge base",
 
       /* index hero */
-      "index.title": "iCSU Smart CI \u2014 30-Minute Delivery Series",
-      "hero.eyebrow": "iCSU \u00b7 Customer Success Unit",
+      "index.title": "Smart CI \u2014 30-Minute Delivery Series",
+      "hero.eyebrow": "CI \u00b7 Customer Success Unit",
       "hero.title": "Continuous Improvement \u2014 30-Minute Delivery Series",
-      "hero.lede": "Every Lean Six Sigma topic in the iCSU Smart CI library, repackaged into bite-sized 30-minute sessions. Choose your role and pick a path &mdash; a <strong>guided progression</strong> from the most basic concepts to the most advanced, <strong>browse by concept</strong> and category, or <strong>follow a belt</strong> to filter the library to the learning plan for the Lean Six Sigma belt you&rsquo;re pursuing. Each module opens with an executive summary, states what you&rsquo;ll gain in plain language, explains the concept, shows role-based examples for CSAMs and CSAs, recaps the key takeaways, and closes with a Microsoft certification&ndash;style knowledge check.",
+      "hero.lede": "Every Lean Six Sigma topic in the Smart CI library, repackaged into bite-sized 30-minute sessions. Choose your role and pick a path &mdash; a <strong>guided progression</strong> from the most basic concepts to the most advanced, <strong>browse by concept</strong> and category, or <strong>follow a belt</strong> to filter the library to the learning plan for the Lean Six Sigma belt you&rsquo;re pursuing. Each module opens with an executive summary, states what you&rsquo;ll gain in plain language, explains the concept, shows role-based examples for CSAMs and CSAs, recaps the key takeaways, and closes with a Microsoft certification&ndash;style knowledge check.",
       "hero.stat.modules": "30-min modules",
       "hero.stat.roles": "roles: CSAM &amp; CSA",
       "hero.stat.parts": "parts per module",
@@ -112,7 +112,7 @@
       "examcta.btn": "Take the practice exam \u2192",
 
       /* onboarding */
-      "onb.eyebrow": "iCSU Smart CI \u00b7 Set up your path",
+      "onb.eyebrow": "Smart CI \u00b7 Set up your path",
       "onb.title": "Welcome \u2014 let\u2019s tailor this to you",
       "onb.lede": "Choose your language, your role, and how you\u2019d like to move through the material. You can change all three at any time.",
       "onb.q.lang": "1. Which language would you like?",
@@ -185,7 +185,7 @@
       "belt.cumulativeNote": "Belts are cumulative \u2014 selecting a higher belt keeps everything here and adds the deeper material.",
 
       /* module page */
-      "module.titleSuffix": "iCSU Smart CI Delivery",
+      "module.titleSuffix": "Smart CI Delivery",
       "module.delivery": "delivery",
       "module.questionCheck": "-question knowledge check",
       "module.flow.guided": "Guided path",
@@ -256,7 +256,7 @@
       "points.reset": "Reset points",
       "points.reset.confirm": "Reset all earned points? This can\u2019t be undone.",
       "exam.hero.eyebrow": "Microsoft certification\u2013style practice assessment",
-      "exam.hero.lede": "A realistic, exam-style assessment over the entire iCSU Smart CI library. Choose Practice mode to learn with instant feedback, or Certification mode for a timed, scored attempt that mirrors the real testing experience.",
+      "exam.hero.lede": "A realistic, exam-style assessment over the entire Smart CI library. Choose Practice mode to learn with instant feedback, or Certification mode for a timed, scored attempt that mirrors the real testing experience.",
       "exam.fact.bank": "questions in the bank",
       "exam.fact.perAttempt": "per certification attempt",
       "exam.fact.timeLimit": "time limit (cert mode)",
@@ -286,7 +286,7 @@
       "exam.skills.title": "Skills measured",
       "exam.skills.note": "A certification attempt samples questions across these skill areas using the listed weightings.",
       "exam.skills.col.area": "Skill area", "exam.skills.col.weight": "Weighting", "exam.skills.col.bank": "Bank",
-      "exam.disclaimer": "This is an unofficial, internal practice assessment built from the iCSU Smart CI knowledge base to mimic the format of Microsoft certification exams. CI-900 is a proposed, internal-only concept at this time, for an internal audience only. It is not affiliated with or endorsed by Microsoft, and is not a real Microsoft exam or certification.",
+      "exam.disclaimer": "This is an unofficial, internal practice assessment built from the Smart CI knowledge base to mimic the format of Microsoft certification exams. CI-900 is a proposed, internal-only concept at this time, for an internal audience only. It is not affiliated with or endorsed by Microsoft, and is not a real Microsoft exam or certification.",
 
       /* exam session */
       "exam.mode.cert": "Certification mode", "exam.mode.practice": "Practice mode",
@@ -423,18 +423,18 @@
       /* shared chrome */
       "internal.notice": "<strong>Interno e proposto &mdash; n\u00e3o \u00e9 uma oferta oficial da Microsoft.</strong> &ldquo;CI-900&rdquo; e esta s\u00e9rie de entrega s\u00e3o, neste momento, uma proposta interna destinada apenas a um p\u00fablico interno. N\u00e3o s\u00e3o um produto, certifica\u00e7\u00e3o ou exame da Microsoft e n\u00e3o s\u00e3o afiliados, endossados ou patrocinados pela Microsoft. N\u00e3o compartilhe externamente.",
       "internal.notice.exam": "<strong>Interno e proposto &mdash; n\u00e3o \u00e9 uma oferta oficial da Microsoft.</strong> &ldquo;CI-900&rdquo; \u00e9, neste momento, uma proposta interna destinada apenas a um p\u00fablico interno. N\u00e3o \u00e9 uma certifica\u00e7\u00e3o ou exame da Microsoft e n\u00e3o \u00e9 afiliada, endossada ou patrocinada pela Microsoft. N\u00e3o compartilhe externamente.",
-      "breadcrumb.series": "iCSU Smart CI \u2014 S\u00e9rie de Entregas de 30 Minutos",
+      "breadcrumb.series": "Smart CI \u2014 S\u00e9rie de Entregas de 30 Minutos",
       "breadcrumb.module": "M\u00f3dulo",
       "breadcrumb.exam": "Exame Pr\u00e1tico CI-900",
-      "footer.index": "iCSU Smart CI Tools \u00b7 S\u00e9rie de Entregas de 30 Minutos \u00b7 Interno e proposto \u2014 n\u00e3o \u00e9 uma oferta oficial da Microsoft \u00b7 Constru\u00eddo a partir da base de conhecimento CI for iCSU",
-      "footer.module": "iCSU Smart CI Tools \u00b7 S\u00e9rie de Entregas de 30 Minutos",
-      "footer.exam": "iCSU Smart CI Tools \u00b7 Exame Pr\u00e1tico CI-900 \u00b7 Conceito proposto e somente interno \u2014 n\u00e3o \u00e9 uma oferta oficial da Microsoft \u00b7 Avalia\u00e7\u00e3o pr\u00e1tica n\u00e3o oficial constru\u00edda a partir da base de conhecimento CI for iCSU",
+      "footer.index": "Smart CI Tools \u00b7 S\u00e9rie de Entregas de 30 Minutos \u00b7 Interno e proposto \u2014 n\u00e3o \u00e9 uma oferta oficial da Microsoft \u00b7 Constru\u00eddo a partir da base de conhecimento CI for CI",
+      "footer.module": "Smart CI Tools \u00b7 S\u00e9rie de Entregas de 30 Minutos",
+      "footer.exam": "Smart CI Tools \u00b7 Exame Pr\u00e1tico CI-900 \u00b7 Conceito proposto e somente interno \u2014 n\u00e3o \u00e9 uma oferta oficial da Microsoft \u00b7 Avalia\u00e7\u00e3o pr\u00e1tica n\u00e3o oficial constru\u00edda a partir da base de conhecimento CI for CI",
 
       /* index hero */
-      "index.title": "iCSU Smart CI \u2014 S\u00e9rie de Entregas de 30 Minutos",
-      "hero.eyebrow": "iCSU \u00b7 Customer Success Unit",
+      "index.title": "Smart CI \u2014 S\u00e9rie de Entregas de 30 Minutos",
+      "hero.eyebrow": "CI \u00b7 Customer Success Unit",
       "hero.title": "Melhoria Cont\u00ednua \u2014 S\u00e9rie de Entregas de 30 Minutos",
-      "hero.lede": "Todos os t\u00f3picos de Lean Six Sigma da biblioteca iCSU Smart CI, reempacotados em sess\u00f5es objetivas de 30 minutos. Escolha sua fun\u00e7\u00e3o e um caminho &mdash; uma <strong>progress\u00e3o guiada</strong> dos conceitos mais b\u00e1sicos aos mais avan\u00e7ados, <strong>navegue por conceito</strong> e categoria, ou <strong>siga uma faixa</strong> para filtrar a biblioteca pelo plano de aprendizado da faixa de Lean Six Sigma que voc\u00ea busca. Cada m\u00f3dulo abre com um resumo executivo, descreve o que voc\u00ea vai ganhar em linguagem simples, explica o conceito, mostra exemplos por fun\u00e7\u00e3o para CSAMs e CSAs, recapitula os pontos-chave e encerra com uma verifica\u00e7\u00e3o de conhecimento no estilo das certifica\u00e7\u00f5es da Microsoft.",
+      "hero.lede": "Todos os t\u00f3picos de Lean Six Sigma da biblioteca Smart CI, reempacotados em sess\u00f5es objetivas de 30 minutos. Escolha sua fun\u00e7\u00e3o e um caminho &mdash; uma <strong>progress\u00e3o guiada</strong> dos conceitos mais b\u00e1sicos aos mais avan\u00e7ados, <strong>navegue por conceito</strong> e categoria, ou <strong>siga uma faixa</strong> para filtrar a biblioteca pelo plano de aprendizado da faixa de Lean Six Sigma que voc\u00ea busca. Cada m\u00f3dulo abre com um resumo executivo, descreve o que voc\u00ea vai ganhar em linguagem simples, explica o conceito, mostra exemplos por fun\u00e7\u00e3o para CSAMs e CSAs, recapitula os pontos-chave e encerra com uma verifica\u00e7\u00e3o de conhecimento no estilo das certifica\u00e7\u00f5es da Microsoft.",
       "hero.stat.modules": "m\u00f3dulos de 30 min",
       "hero.stat.roles": "fun\u00e7\u00f5es: CSAM &amp; CSA",
       "hero.stat.parts": "partes por m\u00f3dulo",
@@ -457,7 +457,7 @@
       "examcta.btn": "Fazer o exame pr\u00e1tico \u2192",
 
       /* onboarding */
-      "onb.eyebrow": "iCSU Smart CI \u00b7 Configure seu caminho",
+      "onb.eyebrow": "Smart CI \u00b7 Configure seu caminho",
       "onb.title": "Bem-vindo(a) \u2014 vamos personalizar isto para voc\u00ea",
       "onb.lede": "Escolha seu idioma, sua fun\u00e7\u00e3o e como prefere percorrer o material. Voc\u00ea pode alterar os tr\u00eas a qualquer momento.",
       "onb.q.lang": "1. Qual idioma voc\u00ea prefere?",
@@ -530,7 +530,7 @@
       "belt.cumulativeNote": "As faixas s\u00e3o cumulativas \u2014 escolher uma faixa superior mant\u00e9m tudo aqui e acrescenta o material mais aprofundado.",
 
       /* module page */
-      "module.titleSuffix": "iCSU Smart CI Delivery",
+      "module.titleSuffix": "Smart CI Delivery",
       "module.delivery": "de entrega",
       "module.questionCheck": " quest\u00f5es de verifica\u00e7\u00e3o de conhecimento",
       "module.flow.guided": "Caminho guiado",
@@ -603,7 +603,7 @@
 
       /* exam start */
       "exam.hero.eyebrow": "Avalia\u00e7\u00e3o pr\u00e1tica no estilo das certifica\u00e7\u00f5es da Microsoft",
-      "exam.hero.lede": "Uma avalia\u00e7\u00e3o realista, no estilo de exame, sobre toda a biblioteca iCSU Smart CI. Escolha o modo Pr\u00e1tica para aprender com feedback imediato, ou o modo Certifica\u00e7\u00e3o para uma tentativa cronometrada e pontuada que espelha a experi\u00eancia real de exame.",
+      "exam.hero.lede": "Uma avalia\u00e7\u00e3o realista, no estilo de exame, sobre toda a biblioteca Smart CI. Escolha o modo Pr\u00e1tica para aprender com feedback imediato, ou o modo Certifica\u00e7\u00e3o para uma tentativa cronometrada e pontuada que espelha a experi\u00eancia real de exame.",
       "exam.fact.bank": "quest\u00f5es no banco",
       "exam.fact.perAttempt": "por tentativa de certifica\u00e7\u00e3o",
       "exam.fact.timeLimit": "limite de tempo (modo cert.)",
@@ -631,7 +631,7 @@
       "exam.skills.title": "Compet\u00eancias avaliadas",
       "exam.skills.note": "Uma tentativa de certifica\u00e7\u00e3o seleciona quest\u00f5es entre estas \u00e1reas de compet\u00eancia usando os pesos indicados.",
       "exam.skills.col.area": "\u00c1rea de compet\u00eancia", "exam.skills.col.weight": "Peso", "exam.skills.col.bank": "Banco",
-      "exam.disclaimer": "Esta \u00e9 uma avalia\u00e7\u00e3o pr\u00e1tica n\u00e3o oficial e interna, constru\u00edda a partir da base de conhecimento iCSU Smart CI para imitar o formato dos exames de certifica\u00e7\u00e3o da Microsoft. O CI-900 \u00e9, neste momento, um conceito proposto e somente interno, para p\u00fablico interno apenas. N\u00e3o \u00e9 afiliado nem endossado pela Microsoft e n\u00e3o \u00e9 um exame ou certifica\u00e7\u00e3o real da Microsoft.",
+      "exam.disclaimer": "Esta \u00e9 uma avalia\u00e7\u00e3o pr\u00e1tica n\u00e3o oficial e interna, constru\u00edda a partir da base de conhecimento Smart CI para imitar o formato dos exames de certifica\u00e7\u00e3o da Microsoft. O CI-900 \u00e9, neste momento, um conceito proposto e somente interno, para p\u00fablico interno apenas. N\u00e3o \u00e9 afiliado nem endossado pela Microsoft e n\u00e3o \u00e9 um exame ou certifica\u00e7\u00e3o real da Microsoft.",
 
       /* exam session */
       "exam.mode.cert": "Modo Certifica\u00e7\u00e3o", "exam.mode.practice": "Modo Pr\u00e1tica",
@@ -768,18 +768,18 @@
       /* shared chrome */
       "internal.notice": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; y esta serie de entrega son, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No son un producto, certificaci\u00f3n ni examen de Microsoft, y no est\u00e1n afiliados, avalados ni patrocinados por Microsoft. No los compartas externamente.",
       "internal.notice.exam": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; es, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No es una certificaci\u00f3n ni examen de Microsoft y no est\u00e1 afiliado, avalado ni patrocinado por Microsoft. No lo compartas externamente.",
-      "breadcrumb.series": "iCSU Smart CI \u2014 Serie de Entregas de 30 Minutos",
+      "breadcrumb.series": "Smart CI \u2014 Serie de Entregas de 30 Minutos",
       "breadcrumb.module": "M\u00f3dulo",
       "breadcrumb.exam": "Examen de Pr\u00e1ctica CI-900",
-      "footer.index": "iCSU Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos \u00b7 Interno y propuesto \u2014 no es una oferta oficial de Microsoft \u00b7 Construido a partir de la base de conocimiento CI for iCSU",
-      "footer.module": "iCSU Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos",
-      "footer.exam": "iCSU Smart CI Tools \u00b7 Examen de Pr\u00e1ctica CI-900 \u00b7 Concepto propuesto y solo interno \u2014 no es una oferta oficial de Microsoft \u00b7 Evaluaci\u00f3n de pr\u00e1ctica no oficial construida a partir de la base de conocimiento CI for iCSU",
+      "footer.index": "Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos \u00b7 Interno y propuesto \u2014 no es una oferta oficial de Microsoft \u00b7 Construido a partir de la base de conocimiento CI for CI",
+      "footer.module": "Smart CI Tools \u00b7 Serie de Entregas de 30 Minutos",
+      "footer.exam": "Smart CI Tools \u00b7 Examen de Pr\u00e1ctica CI-900 \u00b7 Concepto propuesto y solo interno \u2014 no es una oferta oficial de Microsoft \u00b7 Evaluaci\u00f3n de pr\u00e1ctica no oficial construida a partir de la base de conocimiento CI for CI",
 
       /* index hero */
-      "index.title": "iCSU Smart CI \u2014 Serie de Entregas de 30 Minutos",
-      "hero.eyebrow": "iCSU \u00b7 Customer Success Unit",
+      "index.title": "Smart CI \u2014 Serie de Entregas de 30 Minutos",
+      "hero.eyebrow": "CI \u00b7 Customer Success Unit",
       "hero.title": "Mejora Continua \u2014 Serie de Entregas de 30 Minutos",
-      "hero.lede": "Todos los temas de Lean Six Sigma de la biblioteca iCSU Smart CI, reempaquetados en sesiones concisas de 30 minutos. Elige tu rol y selecciona un camino &mdash; una <strong>progresi\u00f3n guiada</strong> desde los conceptos m\u00e1s b\u00e1sicos hasta los m\u00e1s avanzados, <strong>navega por concepto</strong> y categor\u00eda, o <strong>sigue un cintur\u00f3n</strong> para filtrar la biblioteca seg\u00fan el plan de aprendizaje del cintur\u00f3n de Lean Six Sigma que persigues. Cada m\u00f3dulo abre con un resumen ejecutivo, describe lo que obtendr\u00e1s en lenguaje sencillo, explica el concepto, muestra ejemplos por rol para CSAM y CSA, recapitula los puntos clave y cierra con una verificaci\u00f3n de conocimiento al estilo de las certificaciones de Microsoft.",
+      "hero.lede": "Todos los temas de Lean Six Sigma de la biblioteca Smart CI, reempaquetados en sesiones concisas de 30 minutos. Elige tu rol y selecciona un camino &mdash; una <strong>progresi\u00f3n guiada</strong> desde los conceptos m\u00e1s b\u00e1sicos hasta los m\u00e1s avanzados, <strong>navega por concepto</strong> y categor\u00eda, o <strong>sigue un cintur\u00f3n</strong> para filtrar la biblioteca seg\u00fan el plan de aprendizaje del cintur\u00f3n de Lean Six Sigma que persigues. Cada m\u00f3dulo abre con un resumen ejecutivo, describe lo que obtendr\u00e1s en lenguaje sencillo, explica el concepto, muestra ejemplos por rol para CSAM y CSA, recapitula los puntos clave y cierra con una verificaci\u00f3n de conocimiento al estilo de las certificaciones de Microsoft.",
       "hero.stat.modules": "m\u00f3dulos de 30 min",
       "hero.stat.roles": "roles: CSAM &amp; CSA",
       "hero.stat.parts": "partes por m\u00f3dulo",
@@ -802,7 +802,7 @@
       "examcta.btn": "Realizar el examen de pr\u00e1ctica \u2192",
 
       /* onboarding */
-      "onb.eyebrow": "iCSU Smart CI \u00b7 Configura tu camino",
+      "onb.eyebrow": "Smart CI \u00b7 Configura tu camino",
       "onb.title": "Bienvenido(a) \u2014 personalicemos esto para ti",
       "onb.lede": "Elige tu idioma, tu rol y c\u00f3mo prefieres recorrer el material. Puedes cambiar los tres en cualquier momento.",
       "onb.q.lang": "1. \u00bfQu\u00e9 idioma prefieres?",
@@ -875,7 +875,7 @@
       "belt.cumulativeNote": "Los cinturones son acumulativos \u2014 elegir un cintur\u00f3n superior conserva todo lo de aqu\u00ed y agrega el material m\u00e1s profundo.",
 
       /* module page */
-      "module.titleSuffix": "iCSU Smart CI Delivery",
+      "module.titleSuffix": "Smart CI Delivery",
       "module.delivery": "de entrega",
       "module.questionCheck": " preguntas de verificaci\u00f3n de conocimiento",
       "module.flow.guided": "Camino guiado",
@@ -948,7 +948,7 @@
 
       /* exam start */
       "exam.hero.eyebrow": "Evaluaci\u00f3n de pr\u00e1ctica al estilo de las certificaciones de Microsoft",
-      "exam.hero.lede": "Una evaluaci\u00f3n realista, al estilo de examen, sobre toda la biblioteca iCSU Smart CI. Elige el modo Pr\u00e1ctica para aprender con retroalimentaci\u00f3n inmediata, o el modo Certificaci\u00f3n para un intento cronometrado y puntuado que refleja la experiencia real de examen.",
+      "exam.hero.lede": "Una evaluaci\u00f3n realista, al estilo de examen, sobre toda la biblioteca Smart CI. Elige el modo Pr\u00e1ctica para aprender con retroalimentaci\u00f3n inmediata, o el modo Certificaci\u00f3n para un intento cronometrado y puntuado que refleja la experiencia real de examen.",
       "exam.fact.bank": "preguntas en el banco",
       "exam.fact.perAttempt": "por intento de certificaci\u00f3n",
       "exam.fact.timeLimit": "l\u00edmite de tiempo (modo cert.)",
@@ -978,7 +978,7 @@
       "exam.skills.title": "Competencias evaluadas",
       "exam.skills.note": "Un intento de certificaci\u00f3n toma preguntas de estas \u00e1reas de competencia usando las ponderaciones indicadas.",
       "exam.skills.col.area": "\u00c1rea de competencia", "exam.skills.col.weight": "Ponderaci\u00f3n", "exam.skills.col.bank": "Banco",
-      "exam.disclaimer": "Esta es una evaluaci\u00f3n de pr\u00e1ctica no oficial e interna, construida a partir de la base de conocimiento iCSU Smart CI para imitar el formato de los ex\u00e1menes de certificaci\u00f3n de Microsoft. CI-900 es, por ahora, un concepto propuesto y solo interno, para audiencia interna \u00fanicamente. No est\u00e1 afiliado ni avalado por Microsoft, y no es un examen ni certificaci\u00f3n real de Microsoft.",
+      "exam.disclaimer": "Esta es una evaluaci\u00f3n de pr\u00e1ctica no oficial e interna, construida a partir de la base de conocimiento Smart CI para imitar el formato de los ex\u00e1menes de certificaci\u00f3n de Microsoft. CI-900 es, por ahora, un concepto propuesto y solo interno, para audiencia interna \u00fanicamente. No est\u00e1 afiliado ni avalado por Microsoft, y no es un examen ni certificaci\u00f3n real de Microsoft.",
 
       /* exam session */
       "exam.mode.cert": "Modo Certificaci\u00f3n", "exam.mode.practice": "Modo Pr\u00e1ctica",

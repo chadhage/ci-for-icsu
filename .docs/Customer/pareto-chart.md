@@ -94,4 +94,4 @@ Validation is **re-measurement**. Re-run the same query post-remediation. If the
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

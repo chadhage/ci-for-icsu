@@ -99,4 +99,4 @@ The **bowler chart** is a per-KPI table of planned vs. actual each month with re
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

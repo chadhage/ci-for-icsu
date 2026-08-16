@@ -17,7 +17,7 @@ Lean / Six Sigma certifications use a martial-arts belt metaphor (White → Yell
 - [Where the belts show up](#where-the-belts-show-up)
 - [Who should pursue which belt](#who-should-pursue-which-belt)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/belts.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/belts.html)
 
 ## Why belts and certification
 
@@ -106,7 +106,7 @@ Common surfaces:
 - **CSA bios and LinkedIn** — Green / Black Belt is a credibility marker in many verticals.
 - **RFP / SoW responses** — customer procurement may require named belts on the engagement team.
 - **Customer program offices** — enterprises with a formal CI function often require belt-matched participation.
-- **Internal MS skilling tracks** — Microsoft has internal Lean Six Sigma training; the iCSU CI CoP is one path.
+- **Internal MS skilling tracks** — Microsoft has internal Lean Six Sigma training; the CI CoP is one path.
 - **Industry events and certification bodies** — ASQ, IASSC, Shingo Institute, Toyota Production System Support Center.
 - **Customer-facing artifacts** — a Pareto authored by a Green Belt CSA reviewed by a customer Black Belt has different standing than the same chart with no credentialed authorship.
 - **CSA performance frameworks** — some CSA orgs include belt progression as part of career ladder rubrics.

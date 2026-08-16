@@ -17,7 +17,7 @@ Hoshin Kanri (Japanese: *hōshin* "compass," *kanri* "management") — also call
 - [Where Hoshin Kanri shows up](#where-hoshin-kanri-shows-up)
 - [Who runs Hoshin Kanri](#who-runs-hoshin-kanri)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/hoshin-kanri.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/hoshin-kanri.html)
 
 ## Why Hoshin Kanri
 
@@ -84,7 +84,7 @@ Hoshin is **not** for early-stage CI programs — establish [PDCA](./pdca.md) di
 - Annual strategy artifacts.
 - QBR / EBR review packs.
 - Customer transformation programs.
-- iCSU CoP planning at scale (see [ms-ci-cop.md](./ms-ci-cop.md)).
+- CI CoP planning at scale (see [ms-ci-cop.md](./ms-ci-cop.md)).
 
 ## Who runs Hoshin Kanri
 

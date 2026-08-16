@@ -17,7 +17,7 @@ Kanban — Japanese for "signboard" — is a visual workflow management system t
 - [Where Kanban shows up](#where-kanban-shows-up)
 - [Who should use Kanban](#who-should-use-kanban)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/kanban.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/kanban.html)
 
 ## Why Kanban
 
@@ -216,7 +216,7 @@ Cumulative Flow Diagram showed a steadily widening band in the "Review" column o
 
 Action: policy change. No new "Doing" pull while own item is in Review aging > 2 days. CFD band narrowed within 2 weeks; lead time dropped by 4 days end-to-end.
 
-### Example 9 — Kanban for the iCSU CI CoP itself
+### Example 9 — Kanban for the CI CoP itself
 
 The CoP runs its playbook contribution flow as Kanban (see [ms-ci-cop.md](ms-ci-cop.md)):
 

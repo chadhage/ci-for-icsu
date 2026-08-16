@@ -1,5 +1,5 @@
 /*
- * iCSU Smart CI — CI-900 Practice Certification Exam runtime.
+ * Smart CI — CI-900 Practice Certification Exam runtime.
  * Consumes window.MODULES (keyed object) from data.js.
  *
  * Mimics the Microsoft Certification (Pearson VUE) exam experience:
@@ -8,7 +8,7 @@
  *     end-of-exam review grid, then a scaled score report (1000-point
  *     scale, 700 to pass) with a per-skill-area breakdown.
  *
- * This is an UNOFFICIAL, internal practice assessment built from the iCSU
+ * This is an UNOFFICIAL, internal practice assessment built from the CI
  * CI knowledge base. "CI-900" is a proposed, internal-only concept for an
  * internal audience at this time. It is not a real Microsoft exam or
  * certification and is not affiliated with or endorsed by Microsoft.

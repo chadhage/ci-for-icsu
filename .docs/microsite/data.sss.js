@@ -1,4 +1,4 @@
-/* iCSU Smart CI - Services Solutions Seller (SSS) persona examples.
+/* Smart CI - Services Solutions Seller (SSS) persona examples.
    Reframes each module from the point of view of a Services Solutions Seller:
    how continuous-improvement thinking helps qualify, shape, position and close
    Microsoft services engagements, tie work to measurable business value, and

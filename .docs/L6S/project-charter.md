@@ -17,7 +17,7 @@ A Project Charter is a one-page document that authorizes an improvement project 
 - [Where Project Charters show up](#where-project-charters-show-up)
 - [Who writes Project Charters](#who-writes-project-charters)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/project-charter.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/project-charter.html)
 
 ## Why Project Charters
 
@@ -83,7 +83,7 @@ Charters are usually overkill for:
 - DMAIC Define tollgate.
 - Kaizen day-0 wall.
 - Belt program portfolios.
-- iCSU CoP project registry.
+- CI CoP project registry.
 - Customer engagement deliverables.
 
 ## Who writes Project Charters

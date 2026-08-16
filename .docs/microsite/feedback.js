@@ -1,5 +1,5 @@
 /*
- * iCSU Smart CI — Voice-of-Customer (VOC) feedback widget.
+ * Smart CI — Voice-of-Customer (VOC) feedback widget.
  * Adds a floating "Feedback" button to every page. Submitting builds a
  * pre-filled GitHub "new issue" URL and opens it in a new tab, so participant
  * feedback is collected as triageable issues in the project repository — with
@@ -12,18 +12,18 @@
 
   /* ----------------------------------------------------------------------
    * CONFIG — repository that receives feedback issues.
-   * The microsite + content live in chadhage/ci-for-icsu, so VOC issues are
+   * The microsite + content live in chadhage/smart-tools, so VOC issues are
    * filed there. Change OWNER/REPO to retarget. LABELS is a comma-separated
    * list applied to each issue; create the "feedback" label once in the repo
    * so VOC submissions are easy to filter. Set LABELS to "" to disable.
    * -------------------------------------------------------------------- */
   var CONFIG = {
     OWNER: "chadhage",
-    REPO: "ci-for-icsu",
+    REPO: "smart-tools",
     LABELS: "feedback"
   };
 
-  var NAME_KEY = "icsuSmartCiVocName";
+  var NAME_KEY = "CISmartCiVocName";
   var TYPES = ["content", "suggestion", "bug", "question", "praise", "other"];
 
   function t(k) { return window.SmartCI ? window.SmartCI.t(k) : k; }
@@ -94,7 +94,7 @@
     lines.push(data.details);
     lines.push("");
     lines.push("---");
-    lines.push("_Submitted via the iCSU Smart CI microsite feedback form._");
+    lines.push("_Submitted via the Smart CI microsite feedback form._");
     var body = lines.join("\n");
 
     var url = "https://github.com/" + CONFIG.OWNER + "/" + CONFIG.REPO + "/issues/new"

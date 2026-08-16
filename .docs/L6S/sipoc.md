@@ -17,7 +17,7 @@ SIPOC — **S**uppliers, **I**nputs, **P**rocess, **O**utputs, **C**ustomers —
 - [Where SIPOC shows up](#where-sipoc-shows-up)
 - [Who should use SIPOC](#who-should-use-sipoc)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/sipoc.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/sipoc.html)
 
 ## Why SIPOC
 

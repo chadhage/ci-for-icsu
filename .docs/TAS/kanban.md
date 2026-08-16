@@ -101,4 +101,4 @@ Aging WIP is the **leading indicator**. High utilization can hide bottlenecks â€
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

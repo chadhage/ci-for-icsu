@@ -1,5 +1,5 @@
 /*
- * iCSU Smart CI — 30-Minute Delivery Microsite runtime.
+ * Smart CI — 30-Minute Delivery Microsite runtime.
  * Consumes window.MODULES (keyed object) from data.js.
  * Renders the landing index and individual module delivery pages,
  * including the Microsoft Learn-style knowledge check.
@@ -134,7 +134,7 @@
      The best result per module is kept, so re-taking a check can only raise a
      score, never lower it. Earned points are persisted per module in
      localStorage and rolled up into per-belt and overall totals. */
-  var POINTS_KEY = "icsuSmartCiPoints";
+  var POINTS_KEY = "CISmartCiPoints";
   var POINTS_PER_MODULE = 100;
 
   function moduleWorth(/* id */) { return POINTS_PER_MODULE; }
@@ -202,7 +202,7 @@
   }
 
   // ---- User preferences (role + flow + belt + language) persisted in localStorage ----
-  var PREF_KEY = "icsuSmartCiPrefs";
+  var PREF_KEY = "CISmartCiPrefs";
   var DEFAULT_PREFS = { role: "practitioner", flow: "guided", belt: "white", lang: "en" };
   var ROLES = ["csam", "csa", "customer", "practitioner", "sss", "sae", "tas"];
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }

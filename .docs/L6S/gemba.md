@@ -17,7 +17,7 @@
 - [Where Gemba shows up](#where-gemba-shows-up)
 - [Who does Gemba Walks](#who-does-gemba-walks)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/gemba.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/gemba.html)
 
 ## Why Gemba
 

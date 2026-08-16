@@ -111,4 +111,4 @@ You can't replenish a stock of items that are never reordered, and perishable or
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

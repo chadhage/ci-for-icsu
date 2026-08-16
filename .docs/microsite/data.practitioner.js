@@ -1,4 +1,4 @@
-/* iCSU Smart CI - General CI Practitioner-persona examples.
+/* Smart CI - General CI Practitioner-persona examples.
    A fourth persona (alongside CSAM, CSA and Customer) that reframes each module
    from the point of view of a general continuous-improvement practitioner — an
    individual applying Lean Six Sigma and CI discipline inside their own team,

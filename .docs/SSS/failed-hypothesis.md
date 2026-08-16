@@ -99,4 +99,4 @@ A failed **Check** means you must *not* Act/standardize. PDCA is iterative: **Ad
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

@@ -101,4 +101,4 @@ Hitting the limit is the signal to **stop and swarm**: finish what's there befor
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._

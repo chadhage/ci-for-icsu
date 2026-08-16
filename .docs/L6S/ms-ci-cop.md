@@ -6,7 +6,7 @@
 
 ## TL;DR
 
-Continuous Improvement at Microsoft is the connective tissue between the customer-facing CSA practice and the engineering / product groups that build Azure. It shows up as the iCSU CI Community of Practice, the WAF / Advisor / Defender feedback loops, the CSE / FastTrack playbook repositories, and the cross-team rituals (retrospectives, monthly CoP meetings, shared standard work) that compound learnings across the org. For a CSA it is both a *resource* (skilling, playbooks, peers) and a *responsibility* (contribute the patterns you validate, escalate the systemic ones to PG). Done well, CI@MS turns every customer engagement into both an outcome for that customer and a reusable asset for every CSA that follows.
+Continuous Improvement at Microsoft is the connective tissue between the customer-facing CSA practice and the engineering / product groups that build Azure. It shows up as the CI Community of Practice, the WAF / Advisor / Defender feedback loops, the CSE / FastTrack playbook repositories, and the cross-team rituals (retrospectives, monthly CoP meetings, shared standard work) that compound learnings across the org. For a CSA it is both a *resource* (skilling, playbooks, peers) and a *responsibility* (contribute the patterns you validate, escalate the systemic ones to PG). Done well, CI@MS turns every customer engagement into both an outcome for that customer and a reusable asset for every CSA that follows.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ Continuous Improvement at Microsoft is the connective tissue between the custome
 - [Where CI at Microsoft shows up](#where-ci-at-microsoft-shows-up)
 - [Who participates](#who-participates)
 - [Examples](#examples)
-- [Knowledge check](https://chadhage.github.io/ci-for-icsu/ms-ci-cop.html)
+- [Knowledge check](https://chadhage.github.io/smart-tools/ms-ci-cop.html)
 
 ## Why CI at Microsoft
 
@@ -32,13 +32,13 @@ CI@MS exists to:
 - Run skilling and onboarding on validated curriculum, not on whoever happens to be available.
 - Build a feedback channel from field to product that is data-driven (incident Pareto across accounts), not anecdotal.
 
-**Real example:** A CSA observed `MaxDeliveryCountExceeded` dead-lettering on Service Bus across 4 of their 7 accounts. Posting the Pareto to the iCSU CI CoP surfaced 11 more CSAs seeing the same pattern across ~60 accounts. Aggregated evidence went to the Service Bus PG; the SDK guidance and the portal warning were both updated the next quarter. A single CSA's observation became a product-level improvement.
+**Real example:** A CSA observed `MaxDeliveryCountExceeded` dead-lettering on Service Bus across 4 of their 7 accounts. Posting the Pareto to the CI CoP surfaced 11 more CSAs seeing the same pattern across ~60 accounts. Aggregated evidence went to the Service Bus PG; the SDK guidance and the portal warning were both updated the next quarter. A single CSA's observation became a product-level improvement.
 
 ## What CI at Microsoft Looks Like
 
 CI@MS is a set of structures, not a single program:
 
-- **iCSU CI Community of Practice** — the cross-CSA forum for sharing patterns, running retrospectives, and curating standard work (this repo's parent).
+- **CI Community of Practice** — the cross-CSA forum for sharing patterns, running retrospectives, and curating standard work (this repo's parent).
 - **WAF (Well-Architected Framework)** — the standardized assessment that produces a measurable baseline customers can re-assess against. CI@MS is what keeps WAF guidance current as Azure evolves.
 - **Azure Advisor & Defender for Cloud** — the always-on telemetry layer that surfaces per-customer improvement opportunities, used as the input to per-account CI cycles.
 - **CSA / CSE / FastTrack playbook libraries** — versioned, peer-reviewed engagement patterns. Each playbook is itself the output of many CI cycles.
@@ -69,7 +69,7 @@ What that means in practice for a CSA:
 A couple of caveats worth surfacing up front so you do not overreach:
 
 - The explicit ASQ tracking lives in **Microsoft's Lean Six Sigma program rhythm of business**. Other Microsoft orgs run their own CI programs and may also accept **IASSC** or **CSSC** credentials, particularly for tuition reimbursement or career-framework crediting.
-- For company-wide questions — reimbursement, career ladder credit, or which provider HR will fund — confirm with your **HR business partner** or the **iCSU CI CoP lead** before committing to a program. The accredited-body landscape ([belts.md](belts.md#what-the-belt-levels-are)) is broader than what any single org tracks.
+- For company-wide questions — reimbursement, career ladder credit, or which provider HR will fund — confirm with your **HR business partner** or the **CI CoP lead** before committing to a program. The accredited-body landscape ([belts.md](belts.md#what-the-belt-levels-are)) is broader than what any single org tracks.
 
 The short version: if you do not have a reason to choose otherwise, **pick ASQ**. It is the credential Microsoft's Lean Six Sigma cadence already speaks the language of.
 
@@ -114,7 +114,7 @@ Do **not** treat CI@MS as:
 
 In practical CSA surfaces:
 
-- **iCSU CI CoP repository / docs** — this site; the canonical tools and templates.
+- **CI CoP repository / docs** — this site; the canonical tools and templates.
 - **CSA Playbook Library** — versioned engagement patterns (intake, assessment, modernization, escalation).
 - **WAF assessment tooling** — standardized scoring + remediation backlog format.
 - **Azure Advisor exports & Defender for Cloud recommendations** — per-account improvement inputs.
@@ -217,7 +217,7 @@ A "lift and shift to App Service Classic" playbook had not been updated in 18 mo
 
 ### Example 7 — CoP retrospective on itself
 
-The iCSU CI CoP ran a 5 Whys on its own attendance decline.
+The CI CoP ran a 5 Whys on its own attendance decline.
 
 - Why is attendance down? → Calendars too full.
 - Why are calendars full of conflicting recurring calls? → No clear "default" CSA cadence.

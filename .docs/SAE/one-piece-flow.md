@@ -107,4 +107,4 @@ Little's Law: lead time = WIP / throughput. Holding throughput steady, **cutting
 
 ---
 
-_Source: iCSU Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
+_Source: Smart CI 30-Minute Delivery microsite. Content extracted verbatim from the module data._
