@@ -1335,7 +1335,7 @@ footer.page-footer {
   box-shadow: var(--ms-shadow);
 }
 .exam-nav__right { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; }
-.exam-mark { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; user-select: none; }
+.exam-mark { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; -webkit-user-select: none; user-select: none; }
 .exam-mark input { accent-color: var(--ms-warning); width: 16px; height: 16px; cursor: pointer; }
 
 /* ---------- Review grid ---------- */
@@ -1515,6 +1515,22 @@ footer.page-footer {
   .exam-nav__right { width: 100%; }
   .score-banner__result { font-size: 30px; }
 }
+
+/* ---------- Telemetry consent ---------- */
+.telemetry-consent {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 950;
+  width: min(440px, calc(100vw - 40px));
+  padding: 16px;
+  background: var(--ms-surface);
+  border: 1px solid var(--ms-border-strong);
+  border-radius: var(--ms-radius);
+  box-shadow: var(--ms-shadow-lg);
+}
+.telemetry-consent p { margin: 0 0 12px; font-size: 14px; }
+.telemetry-consent div { display: flex; justify-content: flex-end; gap: 8px; }
 
 /* ---------- Feedback (Voice of Customer) ---------- */
 .voc-fab {

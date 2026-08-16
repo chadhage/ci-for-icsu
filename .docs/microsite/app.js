@@ -10,6 +10,7 @@
   // i18n shorthands (i18n.js loads before this script).
   function t(k) { return window.SmartCI ? window.SmartCI.t(k) : k; }
   function M() { return (window.SmartCI ? window.SmartCI.getModules() : window.MODULES) || {}; }
+  function track(name, properties) { if (window.SmartCITelemetry) window.SmartCITelemetry.track(name, properties); }
   function fmtNum(n) { return window.SmartCI ? window.SmartCI.fmtNumber(n) : String(n); }
   function fmtPct(frac) { return window.SmartCI ? window.SmartCI.fmtPercent(frac) : Math.round(frac * 100) + "%"; }
   function groupName(name) { return t("group." + name); }
@@ -203,10 +204,14 @@
 
   // ---- User preferences (role + flow + belt + language) persisted in localStorage ----
   var PREF_KEY = "CISmartCiPrefs";
-  var DEFAULT_PREFS = { role: "practitioner", flow: "guided", belt: "white", lang: "en" };
-  var ROLES = ["csam", "csa", "customer", "practitioner", "sss", "sae", "tas"];
+  var personaRegistry = window.SmartCIPersonas;
+  if (!personaRegistry) throw new Error("Smart CI persona registry is unavailable.");
+  var defaultPersona = personaRegistry.defaultPersona();
+  if (!defaultPersona) throw new Error("Exactly one active default persona is required.");
+  var DEFAULT_PREFS = { role: defaultPersona.id, flow: "guided", belt: "white", lang: "en" };
+  function roleKeys() { return personaRegistry.activePersonas().map(function (persona) { return persona.id; }); }
   function normFlow(v) { return v === "guided" || v === "concept" || v === "belt" ? v : null; }
-  function normRole(v) { return ROLES.indexOf(v) >= 0 ? v : null; }
+  function normRole(v) { return roleKeys().indexOf(v) >= 0 ? v : null; }
   function normBelt(v) { return beltIndex(v) >= 0 ? v : null; }
   function normLang(v) { return v === "en" || v === "pt-BR" || v === "es-419" ? v : null; }
   function getPrefs() {
@@ -261,54 +266,32 @@
       "aria-label": t("onb.q.role")
     });
     roleKeys.forEach(function (key) {
-      var option = el("option", { value: key }, [t("role.tab." + key)]);
+      var display = personaRegistry.displayFor(key, (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang);
+      var option = el("option", { value: key }, [display.name + " - " + display.tagline]);
       if (key === currentRole) option.selected = true;
       select.appendChild(option);
     });
-    select.addEventListener("change", function () { onChange(select.value); });
+    select.addEventListener("change", function () {
+      var previousRole = currentRole;
+      var result = personaRegistry.validatePersona(select.value, Object.keys(M()), (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang);
+      if (!result.valid) {
+        select.value = currentRole;
+        return;
+      }
+      currentRole = select.value;
+      track("persona_changed", { fromPersonaId: previousRole, toPersonaId: currentRole });
+      onChange(select.value);
+    });
     return select;
   }
-
-  // Customer-persona examples are stored per language + module id in the shared
-  // window.CUSTOMER_EXAMPLES lookup (data.customer.js). Fall back to English so a
-  // missing translation still shows the customer view rather than dropping the tab.
-  function customerExampleFor(id) {
-    var store = window.CUSTOMER_EXAMPLES;
-    if (!store) return null;
-    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
-    var byLang = store[lang] || store.en || {};
-    return byLang[id] || (store.en && store.en[id]) || null;
-  }
-
-  // General CI practitioner-persona examples live in window.PRACTITIONER_EXAMPLES
-  // (data.practitioner.js), keyed by language + module id, with English as the
-  // fallback so a missing translation still shows the practitioner view.
-  function practitionerExampleFor(id) {
-    var store = window.PRACTITIONER_EXAMPLES;
-    if (!store) return null;
-    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
-    var byLang = store[lang] || store.en || {};
-    return byLang[id] || (store.en && store.en[id]) || null;
-  }
-
-  // Services-role persona examples (Services Solutions Seller, Services Account
-  // Executive, Technical Account Strategist) follow the same language + module id
-  // lookup with English fallback. Each reads from its own global store.
-  function personaExampleFrom(store, id) {
-    if (!store) return null;
-    var lang = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
-    var byLang = store[lang] || store.en || {};
-    return byLang[id] || (store.en && store.en[id]) || null;
-  }
-  function sssExampleFor(id) { return personaExampleFrom(window.SSS_EXAMPLES, id); }
-  function saeExampleFor(id) { return personaExampleFrom(window.SAE_EXAMPLES, id); }
-  function tasExampleFor(id) { return personaExampleFrom(window.TAS_EXAMPLES, id); }
 
   /* ---------------- Onboarding wizard (language + role + flow + belt) ---------------- */
   // A guided, one-question-per-step flow. The primary action is always visible in a
   // sticky footer (no scrolling to find it), and new settings can be added simply by
   // adding another step — the layout scales without growing a single long form.
   function openOnboarding(initial, onDone) {
+    var startedAt = Date.now();
+    track("onboarding_started", { hasExistingPreferences: !!initial });
     var sel = {
       lang: (initial && normLang(initial.lang)) || (window.SmartCI ? window.SmartCI.getLang() : DEFAULT_PREFS.lang),
       role: (initial && normRole(initial.role)) || DEFAULT_PREFS.role,
@@ -392,10 +375,11 @@
         });
       }
       if (id === "role") {
-        var roleDescription = el("p", { className: "persona-select__description" }, [t("onb.role." + sel.role + ".desc")]);
-        var select = roleSelect(ROLES, sel.role, function (v) {
+        var currentDisplay = personaRegistry.displayFor(sel.role, sel.lang);
+        var roleDescription = el("p", { className: "persona-select__description" }, [currentDisplay.description]);
+        var select = roleSelect(roleKeys(), sel.role, function (v) {
           sel.role = v;
-          roleDescription.textContent = t("onb.role." + v + ".desc");
+          roleDescription.textContent = personaRegistry.displayFor(v, sel.lang).description;
         });
         return el("div", { className: "persona-select-wrap" }, [select, roleDescription]);
       }
@@ -470,6 +454,13 @@
       setPrefs(chosen);
       if (window.SmartCI) window.SmartCI.applyStatic();
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      track("onboarding_completed", {
+        personaId: chosen.role,
+        flow: chosen.flow,
+        belt: chosen.belt,
+        locale: chosen.lang,
+        durationMs: Date.now() - startedAt
+      });
       if (onDone) onDone(chosen);
     }
 
@@ -498,7 +489,7 @@
       el("span", { className: "prefbar__label" }, [t("prefbar.showing")]),
       el("span", { className: "prefbar__flow" }, [flowName]),
       el("span", { className: "prefbar__label" }, [t("prefbar.for")]),
-      roleSelect(ROLES, prefs.role, function (role) {
+      roleSelect(roleKeys(), prefs.role, function (role) {
         if (role !== prefs.role) onChange({ role: role, flow: prefs.flow, belt: prefs.belt });
       }, "persona-select persona-select--compact")
     ]));
@@ -825,6 +816,7 @@
     var flow = normFlow(params.get("flow")) || prefs.flow || "concept";
     var role = normRole(params.get("role")) || prefs.role || DEFAULT_PREFS.role;
     var belt = normBelt(params.get("belt")) || prefs.belt || "white";
+    track("module_viewed", { moduleId: id, personaId: role, flow: flow, belt: belt });
     var flowLabel = flow === "guided" ? t("module.flow.guided")
       : flow === "belt" ? (beltName((BELTS[beltIndex(belt)] || BELTS[0]).key) + " " + t("module.flow.beltSuffix"))
         : t("module.flow.concept");
@@ -886,28 +878,18 @@
     root.appendChild(section(t("sec.topic.kicker"), t("sec.topic.title"),
       [el("div", { html: m.explanation })]));
 
-    // 4. Role-based examples (CSAM / CSA / Customer) — defaults to the reader's chosen role.
-    // Panels are built generically so personas can be added by supplying another example
-    // field in the module data; a persona whose example is missing is simply skipped.
-    // The customer example may live either on the module (m.customerExample) or, by
-    // default, in the shared window.CUSTOMER_EXAMPLES lookup keyed by language + id.
-    var customerExample = m.customerExample || customerExampleFor(id);
-    var practitionerExample = m.practitionerExample || practitionerExampleFor(id);
-    var roleDefs = [
-      { key: "csam", example: m.csamExample },
-      { key: "csa", example: m.csaExample },
-      { key: "customer", example: customerExample },
-      { key: "practitioner", example: practitionerExample },
-      { key: "sss", example: m.sssExample || sssExampleFor(id) },
-      { key: "sae", example: m.saeExample || saeExampleFor(id) },
-      { key: "tas", example: m.tasExample || tasExampleFor(id) }
-    ].filter(function (rd) { return rd.example; });
+    // 4. Role-based examples are resolved entirely through active persona bindings.
+    var currentLocale = (window.SmartCI && window.SmartCI.getLang()) || DEFAULT_PREFS.lang;
+    var roleDefs = roleKeys().map(function (key) {
+      return { key: key, example: personaRegistry.contentFor(key, currentLocale, id) };
+    }).filter(function (roleDefinition) { return roleDefinition.example; });
 
     var panelByRole = {};
     var panels = [];
     roleDefs.forEach(function (rd) {
+      var display = personaRegistry.displayFor(rd.key, currentLocale);
       var panel = el("div", { className: "role-panel role-panel--" + rd.key }, [
-        el("p", { className: "role-panel__role" }, [t("role.panel." + rd.key)]),
+        el("p", { className: "role-panel__role" }, [display.name + " - " + display.tagline]),
         el("div", { html: rd.example })
       ]);
       panelByRole[rd.key] = panel;
@@ -993,14 +975,21 @@
     var container = el("div");
     wrap.appendChild(container);
 
-    var answered = 0, correct = 0, total = questions.length;
+    var answered = 0, correct = 0, total = questions.length, startedAt = 0;
 
     questions.forEach(function (q, i) {
       container.appendChild(renderQuestion(q, i, total, function (isCorrect) {
+        if (!startedAt) {
+          startedAt = Date.now();
+          track("quiz_started", { moduleId: m.id, questionCount: total });
+        }
         answered += 1;
         if (isCorrect) correct += 1;
         fill.style.width = Math.round((answered / total) * 100) + "%";
-        if (answered === total) renderSummary(container, correct, total, passingScore, m);
+        if (answered === total) {
+          track("quiz_completed", { moduleId: m.id, correct: correct, total: total, durationMs: Date.now() - startedAt });
+          renderSummary(container, correct, total, passingScore, m);
+        }
       }));
     });
     return wrap;

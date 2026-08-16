@@ -216,6 +216,7 @@
     }
 
     dismissBtn.addEventListener("click", function () {
+      if (window.SmartCITelemetry) window.SmartCITelemetry.track("survey_dismissed", { kind: kind });
       if (card.parentNode) card.parentNode.removeChild(card);
     });
 
@@ -229,6 +230,14 @@
         choice: choice,
         comment: commentInput.value.trim()
       });
+      if (window.SmartCITelemetry) {
+        window.SmartCITelemetry.track("survey_submitted", {
+          kind: kind,
+          rating: rating,
+          choice: choice || null,
+          hasComment: commentInput.value.trim().length > 0
+        });
+      }
       var win = window.open(url, "_blank", "noopener");
       if (win) {
         showThanks();

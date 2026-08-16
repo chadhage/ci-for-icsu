@@ -108,6 +108,7 @@
   var lastFocused = null;
 
   function openModal() {
+    if (window.SmartCITelemetry) window.SmartCITelemetry.track("feedback_opened", { pageType: pageContext().module ? "module" : "other" });
     lastFocused = document.activeElement;
 
     var overlay = el("div", { className: "voc", role: "dialog", "aria-modal": "true", "aria-label": t("voc.aria") });
@@ -232,6 +233,15 @@
         details: detailsInput.value.trim(),
         name: name
       });
+      if (window.SmartCITelemetry) {
+        window.SmartCITelemetry.track("feedback_submitted", {
+          feedbackType: typeSelect.value,
+          rating: rating,
+          hasName: !!name,
+          subjectLength: subjectInput.value.trim().length,
+          detailsLength: detailsInput.value.trim().length
+        });
+      }
       var win = window.open(url, "_blank", "noopener");
       if (win) {
         close();

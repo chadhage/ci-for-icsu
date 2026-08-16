@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smart-ci.local/contracts/telemetry-event.schema.json",
+  "title": "Smart CI Telemetry Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "eventId", "eventName", "occurredAt", "anonymousUserId", "sessionId", "context", "properties"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "eventId": { "type": "string", "pattern": "^evt_" },
+    "eventName": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "maxLength": 80 },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "anonymousUserId": { "type": "string", "pattern": "^usr_" },
+    "sessionId": { "type": "string", "pattern": "^ses_" },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "personaId": { "type": ["string", "null"] },
+        "moduleId": { "type": ["string", "null"] },
+        "locale": { "type": ["string", "null"] },
+        "flow": { "type": ["string", "null"] },
+        "belt": { "type": ["string", "null"] },
+        "pageType": { "enum": ["index", "module", "exam"] }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "maxProperties": 20,
+      "additionalProperties": { "type": ["string", "number", "boolean", "null"] }
+    }
+  }
+}

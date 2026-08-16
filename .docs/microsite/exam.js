@@ -18,6 +18,7 @@
 
   /* ---------------- i18n helpers ---------------- */
   function t(k) { return window.SmartCI ? window.SmartCI.t(k) : k; }
+  function track(name, properties) { if (window.SmartCITelemetry) window.SmartCITelemetry.track(name, properties); }
   function tf(k, params) {
     var s = t(k);
     if (params) Object.keys(params).forEach(function (p) { s = s.replace("{" + p + "}", params[p]); });
@@ -386,6 +387,7 @@
       S.remaining = EXAM.minutes * 60;
       S.timerId = window.setInterval(tick, 1000);
     }
+    track("exam_started", { mode: mode, questionCount: questions.length });
     renderQuestionScreen();
   }
 
@@ -653,6 +655,15 @@
     var passed = scaled >= EXAM.passScaled;
     var isExam = S.mode === "exam";
     var elapsed = Math.max(0, Math.round((Date.now() - S.startedAt) / 1000));
+    track("exam_completed", {
+      mode: S.mode,
+      correct: correct,
+      total: total,
+      scaledScore: scaled,
+      passed: passed,
+      timedOut: !!timedOut,
+      durationSeconds: elapsed
+    });
 
     /* Score banner */
     var banner = el("section", { className: "score-banner " + (passed ? "score-banner--pass" : "score-banner--fail") });
