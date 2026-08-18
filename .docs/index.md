@@ -2,4 +2,4 @@
 
 ## BPI
 
-- [Lean 6ix Sigma](./L6S/index.md)
+- [Lean 6ix Sigma](./knowledge-base/index.md)

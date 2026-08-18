@@ -2,9 +2,9 @@
 
 ## Boundaries
 
-The delivery shell renders modules and learning workflows. It does not contain persona IDs, role labels, content locations, default-role rules, or role-specific lookup functions.
+The delivery shell in `microsite/shell/` renders modules and learning workflows. It does not contain persona IDs, role labels, content locations, default-role rules, or role-specific lookup functions.
 
-`persona-registry.js` owns generic contracts and invariants. `persona-catalog.js` is the deployable catalog of persona metadata, content-package bindings, and locks. Existing datasets are adapted as versioned packages so the migration does not rewrite curriculum content.
+`microsite/platform/persona-registry.js` owns generic contracts and invariants. `microsite/catalog/persona-catalog.js` is the deployable catalog of persona metadata, content-package bindings, and locks. Versioned curriculum and persona datasets live under `microsite/content/`.
 
 ## Adding Content or a Persona
 

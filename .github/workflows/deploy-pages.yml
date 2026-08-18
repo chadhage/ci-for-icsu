@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - ".docs/L6S/knowledge-checks/**"
+      - ".docs/knowledge-base/knowledge-checks/**"
       - ".docs/microsite/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
         run: |
           mkdir -p _site
           # Knowledge checks stay at the site root so existing links keep working
-          cp -R .docs/L6S/knowledge-checks/. _site/
+          cp -R .docs/knowledge-base/knowledge-checks/. _site/
           # Microsite is published under /microsite/
           mkdir -p _site/microsite
           cp -R .docs/microsite/. _site/microsite/

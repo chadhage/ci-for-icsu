@@ -8,9 +8,16 @@ const vm = require("node:vm");
 
 const site = path.resolve(__dirname, "..", ".docs", "microsite");
 const files = [
-  "data.js", "data.pt-BR.js", "data.es-419.js", "data.customer.js",
-  "data.practitioner.js", "data.sss.js", "data.sae.js", "data.tas.js",
-  "persona-registry.js", "persona-catalog.js"
+  "content/curriculum/v1/modules.js",
+  "content/curriculum/v1/locales/pt-BR.js",
+  "content/curriculum/v1/locales/es-419.js",
+  "content/personas/customer/v1/package.js",
+  "content/personas/practitioner/v1/package.js",
+  "content/personas/sss/v1/package.js",
+  "content/personas/sae/v1/package.js",
+  "content/personas/tas/v1/package.js",
+  "platform/persona-registry.js",
+  "catalog/persona-catalog.js"
 ];
 
 function load() {
