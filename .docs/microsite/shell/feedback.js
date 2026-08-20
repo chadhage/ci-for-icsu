@@ -265,7 +265,7 @@
     var icon = '<svg class="voc-fab__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">'
       + '<path fill="currentColor" d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm3 5v2h10V8H7zm0 4v2h7v-2H7z"/>'
       + '</svg>';
-    var fab = el("button", { className: "voc-fab", type: "button", "aria-haspopup": "dialog" }, [
+    var fab = el("button", { className: "voc-fab", type: "button", "aria-haspopup": "dialog", title: t("voc.button") }, [
       el("span", { className: "voc-fab__icon-wrap", html: icon }),
       el("span", { className: "voc-fab__label", "data-i18n": "voc.button" }, [t("voc.button")])
     ]);

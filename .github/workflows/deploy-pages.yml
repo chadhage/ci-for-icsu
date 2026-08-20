@@ -2,12 +2,11 @@ name: Deploy CI site to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [microsite-only]
     paths:
       - ".docs/knowledge-base/knowledge-checks/**"
       - ".docs/microsite/**"
       - ".github/workflows/deploy-pages.yml"
-  workflow_dispatch:
 
 permissions:
   contents: read

@@ -111,6 +111,10 @@
     var data = window.KC_DATA;
     if (!data || !Array.isArray(data.questions)) return;
 
+    var moduleId = window.location.pathname.split("/").pop().replace(/\.html$/, "");
+    data.sourceFile = "./microsite/module.html?id=" + encodeURIComponent(moduleId) + "&flow=concept";
+    data.sourceLabel = "Smart CI 30-minute module";
+
     var titleEl = document.getElementById("kc-title");
     var subtitleEl = document.getElementById("kc-subtitle");
     var sourceEl = document.getElementById("kc-source");

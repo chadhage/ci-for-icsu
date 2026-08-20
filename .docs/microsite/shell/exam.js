@@ -217,8 +217,6 @@
 
     var totalQ = POOL.length;
 
-    ROOT.appendChild(el("p", { className: "internal-notice", html: t("internal.notice.exam") }));
-
     var head = el("section", { className: "exam-hero" }, [
       el("p", { className: "exam-hero__eyebrow" }, [t("exam.hero.eyebrow")]),
       el("h1", { className: "exam-hero__title" }, [EXAM.code + ": " + t("exam.name")]),

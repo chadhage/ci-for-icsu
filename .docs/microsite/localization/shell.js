@@ -75,6 +75,11 @@
      back to English so the site never renders a blank string. */
   var DICT = {
     en: {
+      "telemetry.aria": "Usage data preference",
+      "telemetry.message": "Allow anonymous usage data to help improve this learning experience. No names, answers, or feedback text are collected.",
+      "telemetry.deny": "No thanks",
+      "telemetry.allow": "Allow",
+
       /* shared chrome */
       "internal.notice": "<strong>Internal &amp; proposed &mdash; not an official Microsoft offering.</strong> &ldquo;CI-900&rdquo; and this delivery series are an internal proposal at this time, intended for an internal audience only. They are not a Microsoft product, certification, or exam, and are not affiliated with, endorsed by, or sponsored by Microsoft. Do not share externally.",
       "internal.notice.exam": "<strong>Internal &amp; proposed &mdash; not an official Microsoft offering.</strong> &ldquo;CI-900&rdquo; is an internal proposal at this time, intended for an internal audience only. It is not a Microsoft certification or exam and is not affiliated with, endorsed by, or sponsored by Microsoft. Do not share externally.",
@@ -420,6 +425,11 @@
     },
 
     "pt-BR": {
+      "telemetry.aria": "Preferência de dados de uso",
+      "telemetry.message": "Permita a coleta de dados de uso anônimos para ajudar a melhorar esta experiência de aprendizagem. Nenhum nome, resposta ou texto de comentário é coletado.",
+      "telemetry.deny": "Agora não",
+      "telemetry.allow": "Permitir",
+
       /* shared chrome */
       "internal.notice": "<strong>Interno e proposto &mdash; n\u00e3o \u00e9 uma oferta oficial da Microsoft.</strong> &ldquo;CI-900&rdquo; e esta s\u00e9rie de entrega s\u00e3o, neste momento, uma proposta interna destinada apenas a um p\u00fablico interno. N\u00e3o s\u00e3o um produto, certifica\u00e7\u00e3o ou exame da Microsoft e n\u00e3o s\u00e3o afiliados, endossados ou patrocinados pela Microsoft. N\u00e3o compartilhe externamente.",
       "internal.notice.exam": "<strong>Interno e proposto &mdash; n\u00e3o \u00e9 uma oferta oficial da Microsoft.</strong> &ldquo;CI-900&rdquo; \u00e9, neste momento, uma proposta interna destinada apenas a um p\u00fablico interno. N\u00e3o \u00e9 uma certifica\u00e7\u00e3o ou exame da Microsoft e n\u00e3o \u00e9 afiliada, endossada ou patrocinada pela Microsoft. N\u00e3o compartilhe externamente.",
@@ -765,6 +775,11 @@
     },
 
     "es-419": {
+      "telemetry.aria": "Preferencia de datos de uso",
+      "telemetry.message": "Permite recopilar datos de uso anónimos para ayudarnos a mejorar esta experiencia de aprendizaje. No se recopilan nombres, respuestas ni texto de comentarios.",
+      "telemetry.deny": "Ahora no",
+      "telemetry.allow": "Permitir",
+
       /* shared chrome */
       "internal.notice": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; y esta serie de entrega son, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No son un producto, certificaci\u00f3n ni examen de Microsoft, y no est\u00e1n afiliados, avalados ni patrocinados por Microsoft. No los compartas externamente.",
       "internal.notice.exam": "<strong>Interno y propuesto &mdash; no es una oferta oficial de Microsoft.</strong> &ldquo;CI-900&rdquo; es, por ahora, una propuesta interna dirigida \u00fanicamente a una audiencia interna. No es una certificaci\u00f3n ni examen de Microsoft y no est\u00e1 afiliado, avalado ni patrocinado por Microsoft. No lo compartas externamente.",
@@ -1132,6 +1147,10 @@
     Array.prototype.forEach.call(root.querySelectorAll("[data-i18n-html]"), function (node) {
       var v = t(node.getAttribute("data-i18n-html"));
       if (v != null) node.innerHTML = v;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-i18n-aria-label]"), function (node) {
+      var v = t(node.getAttribute("data-i18n-aria-label"));
+      if (v != null) node.setAttribute("aria-label", v);
     });
     var titleKey = document.documentElement.getAttribute("data-i18n-title");
     if (titleKey) { var tv = t(titleKey); if (tv != null) document.title = tv; }

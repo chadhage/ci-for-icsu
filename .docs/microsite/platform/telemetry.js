@@ -137,12 +137,24 @@
 
   function mountConsent() {
     if (config.enabled === false || config.consentRequired === false || consent() !== "pending") return;
+    var translate = window.SmartCI && window.SmartCI.t
+      ? window.SmartCI.t
+      : function (key) {
+        var fallback = {
+          "telemetry.aria": "Usage data preference",
+          "telemetry.message": "Allow anonymous usage data to help improve this learning experience. No names, answers, or feedback text are collected.",
+          "telemetry.deny": "No thanks",
+          "telemetry.allow": "Allow"
+        };
+        return fallback[key] || key;
+      };
     var banner = document.createElement("aside");
     banner.className = "telemetry-consent";
-    banner.setAttribute("aria-label", "Usage data preference");
-    banner.innerHTML = '<p>Allow anonymous usage data to help improve this learning experience. No names, answers, or feedback text are collected.</p>'
-      + '<div><button type="button" class="btn btn--secondary" data-consent="denied">No thanks</button>'
-      + '<button type="button" class="btn btn--primary" data-consent="granted">Allow</button></div>';
+    banner.setAttribute("aria-label", translate("telemetry.aria"));
+    banner.setAttribute("data-i18n-aria-label", "telemetry.aria");
+    banner.innerHTML = '<p data-i18n="telemetry.message">' + translate("telemetry.message") + '</p>'
+      + '<div><button type="button" class="btn btn--secondary" data-consent="denied" data-i18n="telemetry.deny">' + translate("telemetry.deny") + '</button>'
+      + '<button type="button" class="btn btn--primary" data-consent="granted" data-i18n="telemetry.allow">' + translate("telemetry.allow") + '</button></div>';
     banner.addEventListener("click", function (event) {
       var value = event.target && event.target.getAttribute("data-consent");
       if (!value) return;
