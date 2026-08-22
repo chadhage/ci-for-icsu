@@ -6,6 +6,7 @@ on:
     paths:
       - ".docs/knowledge-base/knowledge-checks/**"
       - ".docs/microsite/**"
+      - "media/ci-practitioner/**"
       - ".github/workflows/deploy-pages.yml"
 
 permissions:
@@ -46,6 +47,9 @@ jobs:
           # Microsite is published under /microsite/
           mkdir -p _site/microsite
           cp -R .docs/microsite/. _site/microsite/
+          # Optional module audio is kept outside the content packages
+          mkdir -p _site/microsite/media/ci-practitioner
+          cp -R media/ci-practitioner/. _site/microsite/media/ci-practitioner/
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3

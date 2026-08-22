@@ -6,6 +6,7 @@ const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 const site = path.join(root, ".docs", "microsite");
+const practitionerIntroAudio = path.join(root, "media", "ci-practitioner", "The_six_week_PDCA_improvement_cadence.m4a");
 const runtimeFiles = [
   "content/curriculum/v1/modules.js",
   "content/curriculum/v1/locales/pt-BR.js",
@@ -39,6 +40,8 @@ if (context.window.SmartCIPersonas && context.window.MODULES) {
   if (!result.valid) result.errors.forEach(fail);
   if (moduleIds.length !== 40) fail("Expected 40 canonical modules, found " + moduleIds.length + ".");
 }
+
+if (!fs.existsSync(practitionerIntroAudio)) fail("Missing CI Practitioner intro audio asset.");
 
 for (const page of fs.readdirSync(site).filter((file) => file.endsWith(".html"))) {
   const html = fs.readFileSync(path.join(site, page), "utf8");

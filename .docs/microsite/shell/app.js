@@ -888,10 +888,29 @@
     var panels = [];
     roleDefs.forEach(function (rd) {
       var display = personaRegistry.displayFor(rd.key, currentLocale);
-      var panel = el("div", { className: "role-panel role-panel--" + rd.key }, [
+      var panelBody = [
         el("p", { className: "role-panel__role" }, [display.name + " - " + display.tagline]),
         el("div", { html: rd.example })
-      ]);
+      ];
+      if (id === "intro" && rd.key === "practitioner") {
+        var audioUrl = "./media/ci-practitioner/The_six_week_PDCA_improvement_cadence.m4a";
+        panelBody.push(el("div", { className: "module-audio" }, [
+          el("p", { className: "module-audio__kicker" }, [t("audio.kicker")]),
+          el("h3", { className: "module-audio__title" }, [t("audio.intro.title")]),
+          el("p", { className: "module-audio__description" }, [t("audio.intro.description")]),
+          el("p", { className: "module-audio__meta" }, [t("audio.intro.meta")]),
+          el("audio", {
+            className: "module-audio__player",
+            controls: "controls",
+            preload: "metadata",
+            "aria-label": t("audio.intro.aria")
+          }, [
+            el("source", { src: audioUrl, type: "audio/mp4" }),
+            el("a", { href: audioUrl }, [t("audio.fallback")])
+          ])
+        ]));
+      }
+      var panel = el("div", { className: "role-panel role-panel--" + rd.key }, panelBody);
       panelByRole[rd.key] = panel;
       panels.push(panel);
     });

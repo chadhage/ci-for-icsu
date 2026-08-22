@@ -622,6 +622,39 @@ a { color: var(--ms-accent); }
 .role-panel--sae .role-panel__role { color: var(--ms-sae); }
 .role-panel--tas .role-panel__role { color: var(--ms-tas); }
 
+.module-audio {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ms-border-strong);
+}
+.module-audio__kicker {
+  margin: 0 0 4px;
+  color: var(--ms-practitioner);
+  font-size: 12px;
+  font-weight: 600;
+}
+.module-audio__title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 650;
+}
+.module-audio__description {
+  margin: 0 0 6px;
+  color: var(--ms-text-muted);
+}
+.module-audio__meta {
+  margin: 0 0 12px;
+  color: var(--ms-text-subtle);
+  font-size: 12px;
+  font-weight: 600;
+}
+.module-audio__player {
+  display: block;
+  width: min(100%, 560px);
+  height: 40px;
+}
+
 /* Recap */
 .recap-list {
   list-style: none;
