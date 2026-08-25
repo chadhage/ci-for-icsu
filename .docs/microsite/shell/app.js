@@ -552,14 +552,25 @@
     var m = M()[id];
     var href = "module.html?id=" + encodeURIComponent(id) + "&flow=" + flow;
     if (flow === "belt") href += "&belt=" + encodeURIComponent(belt);
-    var card = el("a", { className: "card", href: href });
+    var card = el("article", { className: "card" });
     var beltBadge = cardBeltBadge(id);
     card.appendChild(el("div", { className: "card__head" }, [
       el("span", { className: "card__num" }, [numLabel]),
       beltBadge
     ]));
-    card.appendChild(el("h3", { className: "card__title" }, [m.title]));
+    card.appendChild(el("h3", { className: "card__title" }, [
+      el("a", { className: "card__primary-link", href: href }, [m.title])
+    ]));
     card.appendChild(el("p", { className: "card__summary" }, [plainText(m.executiveSummary)]));
+    if (id === "intro") {
+      card.appendChild(el("a", {
+        className: "audio-jump audio-jump--card",
+        href: href + "&role=practitioner#intro-audio"
+      }, [
+        el("span", { className: "audio-jump__icon", "aria-hidden": "true" }, ["\u25b6"]),
+        t("audio.intro.link")
+      ]));
+    }
     var earned = earnedFor(id);
     var worth = moduleWorth(id);
     var pointsBadge = earned
@@ -832,6 +843,14 @@
     var header = el("div", { className: "module-header" });
     header.appendChild(el("p", { className: "module-eyebrow" }, [m.group]));
     header.appendChild(el("h1", { className: "module-title" }, [m.title]));
+    var audioJump = null;
+    if (id === "intro") {
+      audioJump = el("a", { className: "audio-jump audio-jump--header", href: "#intro-audio" }, [
+        el("span", { className: "audio-jump__icon", "aria-hidden": "true" }, ["\u25b6"]),
+        t("audio.intro.link")
+      ]);
+      header.appendChild(audioJump);
+    }
     var earned = earnedFor(id);
     var worth = moduleWorth(id);
     var pointsPill = earned
@@ -894,7 +913,7 @@
       ];
       if (id === "intro" && rd.key === "practitioner") {
         var audioUrl = "./media/ci-practitioner/The_six_week_PDCA_improvement_cadence.m4a";
-        panelBody.push(el("div", { className: "module-audio" }, [
+        panelBody.push(el("div", { className: "module-audio", id: "intro-audio" }, [
           el("p", { className: "module-audio__kicker" }, [t("audio.kicker")]),
           el("h3", { className: "module-audio__title" }, [t("audio.intro.title")]),
           el("p", { className: "module-audio__description" }, [t("audio.intro.description")]),
@@ -924,6 +943,19 @@
       return r;
     }
     role = selectRole(role);
+    if (id === "intro" && window.location.hash === "#intro-audio") {
+      role = selectRole("practitioner");
+      window.requestAnimationFrame(function () {
+        var audioTarget = document.getElementById("intro-audio");
+        if (audioTarget) audioTarget.scrollIntoView();
+      });
+    }
+    if (audioJump) {
+      audioJump.addEventListener("click", function () {
+        role = selectRole("practitioner");
+        setPrefs({ role: role, flow: flow, belt: belt, lang: prefs.lang });
+      });
+    }
 
     if (roleDefs.length) {
       var moduleRoleSelect = roleSelect(roleDefs.map(function (rd) { return rd.key; }), role, function (nextRole) {
